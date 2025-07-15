@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AutoFlow AI - Premium AI Automation Solutions</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(15, 15, 35, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #00d4ff;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #00d4ff;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(0, 212, 255, 0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 70% 60%, rgba(138, 43, 226, 0.1) 0%, transparent 50%);
+            animation: pulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; }
+            100% { opacity: 0.6; }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            padding: 0 2rem;
+            z-index: 1;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: #fff;
+            margin-bottom: 1rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #00d4ff, #8a2be2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: #b0b0b0;
+            margin-bottom: 2rem;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #00d4ff, #8a2be2);
+            color: white;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease-out 0.4s both;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.5);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 5rem 0;
+            background: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1a1a2e;
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(45deg, #00d4ff, #8a2be2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1a1a2e;
+            margin-bottom: 1rem;
+        }
+
+        .service-item {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #00d4ff;
+        }
+
+        .service-item h4 {
+            font-size: 1.1rem;
+            color: #1a1a2e;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .service-item p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* WhatsApp Button */
+        .whatsapp-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: #25d366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
+            transition: all 0.3s;
+            z-index: 1000;
+            animation: bounce 2s infinite;
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        /* Contact Section */
+        .contact {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f23 100%);
+            color: white;
+        }
+
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #00d4ff, #8a2be2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-item a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .contact-item a:hover {
+            color: #8a2be2;
+        }
+
+        /* Footer */
+        footer {
+            background: #0f0f23;
+            color: #b0b0b0;
+            text-align: center;
+            padding: 2rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">AutoFlow AI</a>
+            <ul class="nav-links">
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AI Automation That Transforms Your Business</h1>
+            <p>Streamline operations, boost productivity, and scale your business with our cutting-edge AI automation solutions. From lead generation to customer service, we automate it all.</p>
+            <a href="#contact" class="cta-button">Get Started Today</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <h2 class="section-title">Our Automation Services</h2>
+            <div class="services-grid">
+                <!-- Business & Marketing Automations -->
+                <div class="service-card">
+                    <span class="service-icon">📈</span>
+                    <h3>Business & Marketing Automations</h3>
+                    
+                    <div class="service-item">
+                        <h4>Lead Enrichment & Follow-up</h4>
+                        <p>Scrape leads from Google Maps/LinkedIn → enrich with Hunter.io, Clearbit → auto add to CRM → send welcome emails or WhatsApp.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Cold Outreach</h4>
+                        <p>Read lists from Google Sheets → use GPT to write personalized emails or WhatsApp → send via Gmail/SMTP or Twilio.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Social Media Posting</h4>
+                        <p>Schedule & auto-post to LinkedIn, Twitter, Facebook, Instagram using RSS feeds or Google Sheets as source.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Social Listening</h4>
+                        <p>Use Apify to scrape mentions → sentiment analysis (DeepSeek/GPT) → alert team on Slack or email.</p>
+                    </div>
+                </div>
+
+                <!-- E-commerce & Sales -->
+                <div class="service-card">
+                    <span class="service-icon">🛒</span>
+                    <h3>E-commerce & Sales</h3>
+                    
+                    <div class="service-item">
+                        <h4>Abandoned Cart Recovery</h4>
+                        <p>Pull data from Shopify/WooCommerce → send WhatsApp or email reminders.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Stock & Price Monitoring</h4>
+                        <p>Scrape competitor prices or supplier sites → alert via Telegram or email if price drops.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Auto Invoice & Receipt Creation</h4>
+                        <p>New order triggers → generate PDF invoice → email to customer.</p>
+                    </div>
+                </div>
+
+                <!-- Internal & Operations -->
+                <div class="service-card">
+                    <span class="service-icon">⚙️</span>
+                    <h3>Internal & Operations</h3>
+                    
+                    <div class="service-item">
+                        <h4>Automated Reporting</h4>
+                        <p>Pull data from Google Analytics, Google Ads, Facebook Ads → compile in Google Sheets → send weekly summary via email.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Inventory & Procurement Automation</h4>
+                        <p>Low stock triggers auto-create Google Sheet RFQ → send WhatsApp or email to suppliers.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Ticket Auto-escalation</h4>
+                        <p>If open > 48h in Zendesk/Freshdesk → escalate to manager on Slack.</p>
+                    </div>
+                </div>
+
+                <!-- AI & NLP Integrations -->
+                <div class="service-card">
+                    <span class="service-icon">🤖</span>
+                    <h3>AI & NLP Integrations</h3>
+                    
+                    <div class="service-item">
+                        <h4>AI Content Generation</h4>
+                        <p>Use OpenAI, DeepSeek, or Qwen to write LinkedIn posts, emails, or marketing copy based on topics in Google Sheets.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Chat Summarization</h4>
+                        <p>Fetch chat transcripts from WhatsApp/Slack → summarize using GPT → email or store summary.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Sentiment Analysis</h4>
+                        <p>Scrape reviews → analyze sentiment → update dashboard or alert on negatives.</p>
+                    </div>
+                </div>
+
+                <!-- Finance & Accounting -->
+                <div class="service-card">
+                    <span class="service-icon">💰</span>
+                    <h3>Finance & Accounting</h3>
+                    
+                    <div class="service-item">
+                        <h4>Expense Tracking</h4>
+                        <p>Parse email receipts (Gmail) → extract data → add to Google Sheets or Airtable.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Bank Statement Parsing</h4>
+                        <p>Read PDFs or emails → extract transactions → auto-categorize with GPT → send report.</p>
+                    </div>
+                </div>
+
+                <!-- HR & Recruitment -->
+                <div class="service-card">
+                    <span class="service-icon">👥</span>
+                    <h3>HR & Recruitment</h3>
+                    
+                    <div class="service-item">
+                        <h4>CV Screening & Scoring</h4>
+                        <p>New CVs in Google Drive → parse text → GPT ranks based on job description → alert recruiter.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Interview Scheduling</h4>
+                        <p>Form submission → auto-schedule Google Calendar slot → send confirmation email.</p>
+                    </div>
+                </div>
+
+                <!-- Personal Automations -->
+                <div class="service-card">
+                    <span class="service-icon">🎯</span>
+                    <h3>Personal & Custom Automations</h3>
+                    
+                    <div class="service-item">
+                        <h4>Content & Media Automation</h4>
+                        <p>Auto-download YouTube videos when new channel video published.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Smart Alerts</h4>
+                        <p>Weather alerts every morning on WhatsApp, crypto/stock price alerts when hitting thresholds.</p>
+                    </div>
+                    
+                    <div class="service-item">
+                        <h4>Content Monitoring</h4>
+                        <p>Monitor favorite sites for new articles → send digest via Telegram.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="contact-content">
+                <h2>Ready to Automate Your Business?</h2>
+                <p>Let's discuss how our AI automation solutions can transform your operations and drive growth. Get in touch today!</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span>📞</span>
+                        <a href="tel:0797970257">0797970257</a>
+                    </div>
+                    <div class="contact-item">
+                        <span>💼</span>
+                        <a href="https://linkedin.com/in/salem-rub" target="_blank">LinkedIn Profile</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 AutoFlow AI. All rights reserved. | Transforming businesses through intelligent automation.</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/962797970257?text=Hi! I'm interested in your AI automation services. Can you tell me more?" class="whatsapp-btn" target="_blank">
+        📱
+    </a>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll effect to header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(15, 15, 35, 0.98)';
+            } else {
+                header.style.background = 'rgba(15, 15, 35, 0.95)';
+            }
+        });
+
+        // Animate service cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = 'all 0.6s ease-out';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>
