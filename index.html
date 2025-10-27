@@ -365,6 +365,7 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 1.5rem;
+            justify-items: center;
         }
 
         .industry-card {
@@ -381,6 +382,8 @@
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            width: 100%;
+            max-width: 350px;
         }
 
         .industry-card::before {
@@ -709,7 +712,7 @@
         <div class="hero-content">
             <h1 id="heroTitle">Transform Your Business with AI & Automation</h1>
             <p id="heroSubtitle">We deliver end-to-end digital transformation solutions—from workflow automation to AI-powered systems—tailored to your industry.</p>
-            <a href="#contact" class="cta-button" id="heroCta">Get Started Today</a>
+            <a href="https://wa.me/962797970257?text=Hello%2C%20I%27d%20like%20a%20free%20consultation%20about%20your%20AI%20automation%20services" class="cta-button" id="heroCta">Get Free Consultation</a>
         </div>
     </section>
 
@@ -730,9 +733,9 @@
         <h2 id="ctaTitle">Ready to Transform Your Business?</h2>
         <p id="ctaSubtitle">Let's discuss how our solutions can optimize your operations and accelerate growth.</p>
         <div class="contact-info">
-            <a href="tel:0797970257" class="contact-item">
-                <span>📞</span>
-                <span>0797970257</span>
+            <a href="https://wa.me/962797970257?text=Hello%2C%20I%27m%20interested%20in%20your%20AI%20automation%20services" target="_blank" class="contact-item">
+                <span>💬</span>
+                <span id="whatsapp">WhatsApp</span>
             </a>
             <a href="https://www.linkedin.com/in/salem-rub/" target="_blank" class="contact-item">
                 <span>💼</span>
@@ -766,12 +769,13 @@
                 themeDark: 'Dark',
                 heroTitle: 'Transform Your Business with AI & Automation',
                 heroSubtitle: 'We deliver end-to-end digital transformation solutions—from workflow automation to AI-powered systems—tailored to your industry.',
-                heroCta: 'Get Started Today',
+                heroCta: 'Get Free Consultation',
                 domainsTitle: 'Our Core Services',
                 industriesTitle: 'Industries We Serve',
                 industriesSubtitle: 'Delivering specialized solutions across 10+ sectors',
                 ctaTitle: 'Ready to Transform Your Business?',
                 ctaSubtitle: "Let's discuss how our solutions can optimize your operations and accelerate growth.",
+                whatsapp: 'WhatsApp',
                 linkedin: 'LinkedIn Profile',
                 footer: '© 2024 TechServJo. All rights reserved. | Transforming businesses through intelligent automation.',
                 domains: [
@@ -1033,12 +1037,13 @@
                 themeDark: 'داكن',
                 heroTitle: 'حوّل عملك بالذكاء الاصطناعي والأتمتة',
                 heroSubtitle: 'نقدم حلول التحول الرقمي المتكاملة - من أتمتة سير العمل إلى الأنظمة المدعومة بالذكاء الاصطناعي - مصممة خصيصاً لقطاعك.',
-                heroCta: 'ابدأ اليوم',
+                heroCta: 'احصل على استشارة مجانية',
                 domainsTitle: 'خدماتنا الأساسية',
                 industriesTitle: 'القطاعات التي نخدمها',
                 industriesSubtitle: 'تقديم حلول متخصصة عبر أكثر من 10 قطاعات',
                 ctaTitle: 'هل أنت مستعد لتحويل عملك؟',
                 ctaSubtitle: 'دعنا نناقش كيف يمكن لحلولنا تحسين عملياتك وتسريع النمو.',
+                whatsapp: 'واتساب',
                 linkedin: 'ملف لينكد إن',
                 footer: '© 2024 تك سيرف جو. جميع الحقوق محفوظة. | تحويل الأعمال من خلال الأتمتة الذكية.',
                 domains: [
@@ -1336,6 +1341,7 @@
             document.getElementById('industriesSubtitle').textContent = t.industriesSubtitle;
             document.getElementById('ctaTitle').textContent = t.ctaTitle;
             document.getElementById('ctaSubtitle').textContent = t.ctaSubtitle;
+            document.getElementById('whatsapp').textContent = t.whatsapp;
             document.getElementById('linkedin').textContent = t.linkedin;
             document.getElementById('footer').textContent = t.footer;
 
