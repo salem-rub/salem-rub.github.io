@@ -3,42 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechServJo - AI Automation & Business Consultation</title>
+    <title>TechServJo - Digital Transformation & AI Automation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --gradient-start: #14b8a6;
+            --gradient-mid: #06b6d4;
+            --gradient-end: #0891b2;
+            --accent-glow: rgba(20, 184, 166, 0.15);
+            --shadow: rgba(0, 0, 0, 0.05);
+            --shadow-hover: rgba(20, 184, 166, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0a0f1e;
+            --bg-secondary: #0f1729;
+            --bg-card: #1a2332;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #1e293b;
+            --gradient-start: #14b8a6;
+            --gradient-mid: #06b6d4;
+            --gradient-end: #0891b2;
+            --accent-glow: rgba(20, 184, 166, 0.2);
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(20, 184, 166, 0.3);
+            --glass-bg: rgba(26, 35, 50, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             line-height: 1.6;
-            color: #fff;
-            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #2d1b69 100%);
-            min-height: 100vh;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: background 0.3s, color 0.3s;
             overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+        [lang="ar"] body,
+        [dir="rtl"] body,
+        [lang="ar"] *,
+        [dir="rtl"] * {
+            font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
         }
 
-        /* Header */
         header {
-            position: fixed;
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
             top: 0;
-            width: 100%;
-            background: rgba(10, 14, 39, 0.95);
-            backdrop-filter: blur(20px);
             z-index: 1000;
-            padding: 1rem 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        [data-theme="dark"] header {
+            background: var(--glass-bg);
         }
 
         nav {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.25rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -47,553 +94,1340 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            background: linear-gradient(45deg, #14b8a6, #06b6d4, #3b82f6);
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo span:first-child {
+            -webkit-text-fill-color: inherit;
+            background: none;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
         }
 
         .nav-links {
             display: flex;
             gap: 2rem;
-            list-style: none;
             align-items: center;
         }
 
         .nav-links a {
-            color: #fff;
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .nav-links a:hover {
-            color: #14b8a6;
-        }
-
-        /* Language dropdown */
-        .lang-dropdown {
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.2s;
             position: relative;
         }
 
-        .lang-btn {
-            background: rgba(20, 184, 166, 0.1);
-            border: 1px solid rgba(20, 184, 166, 0.3);
-            color: white;
+        .nav-links a:hover {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+            align-items: center;
+        }
+
+        .control-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
             padding: 0.5rem 1rem;
-            border-radius: 8px;
+            border-radius: 0.5rem;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
             font-size: 0.9rem;
-        }
-
-        .lang-btn:hover {
-            background: rgba(20, 184, 166, 0.2);
-        }
-
-        .lang-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: rgba(10, 14, 39, 0.95);
-            border: 1px solid rgba(20, 184, 166, 0.3);
-            border-radius: 8px;
-            backdrop-filter: blur(20px);
-            min-width: 120px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-
-        .lang-menu.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .lang-option {
-            padding: 0.75rem 1rem;
-            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s;
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            transition: background 0.3s ease;
         }
 
-        .lang-option:hover {
-            background: rgba(20, 184, 166, 0.1);
+        .control-btn:hover {
+            background: var(--bg-secondary);
+            border-color: var(--gradient-start);
+            box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        /* Hero Section */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: var(--bg-secondary);
+            padding: 6rem 2rem 4rem;
             text-align: center;
-            padding-top: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle at center, var(--accent-glow), transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.5; transform: translateX(-50%) scale(1.1); }
+        }
+
+        .hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
         }
 
         .hero h1 {
             font-size: 3.5rem;
             font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(45deg, #14b8a6, #06b6d4, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            line-height: 1.2;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
         }
 
         .hero p {
             font-size: 1.25rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            max-width: 600px;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
         }
 
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
+        .cta-button {
             display: inline-block;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.125rem;
+            transition: all 0.3s;
+            box-shadow: 0 8px 24px var(--shadow-hover);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px var(--shadow-hover), 0 0 40px var(--accent-glow);
+        }
+
+        .domains {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .domains h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        .domain-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+            justify-items: center;
+        }
+
+        .domain-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
             cursor: pointer;
-            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+            max-width: 400px;
         }
 
-        .btn-primary {
-            background: linear-gradient(45deg, #14b8a6, #06b6d4);
-            color: white;
-            box-shadow: 0 10px 30px rgba(20, 184, 166, 0.3);
+        .domain-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, var(--accent-glow), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 40px rgba(20, 184, 166, 0.4);
+        .domain-card:hover::before {
+            opacity: 1;
         }
 
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid rgba(255, 255, 255, 0.3);
+        .domain-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gradient-start);
+            box-shadow: 0 20px 40px var(--shadow-hover), 0 0 60px var(--accent-glow);
         }
 
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.1);
+        .domain-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 4px 12px var(--accent-glow));
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s;
         }
 
-        /* Services Section */
-        .services {
-            padding: 5rem 0;
+        .domain-card:hover .domain-icon {
+            transform: scale(1.1);
         }
 
-        .section-title {
+        .domain-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .domain-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .industries {
+            background: var(--bg-secondary);
+            padding: 4rem 2rem;
+        }
+
+        .industries-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .industries h2 {
             text-align: center;
             font-size: 2.5rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            background: linear-gradient(45deg, #14b8a6, #06b6d4);
+            color: var(--text-primary);
+        }
+
+        .industries-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 3rem;
+        }
+
+        .industry-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .industry-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1rem;
+            padding: 1.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .industry-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, var(--accent-glow), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .industry-card:hover::before {
+            opacity: 1;
+        }
+
+        .industry-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--gradient-start);
+            box-shadow: 0 12px 24px var(--shadow-hover), 0 0 40px var(--accent-glow);
+        }
+
+        .industry-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            filter: drop-shadow(0 2px 8px var(--accent-glow));
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s;
+        }
+
+        .industry-card:hover .industry-icon {
+            transform: scale(1.15);
+        }
+
+        .industry-card h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            padding: 4rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 60%);
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-20px, -20px); }
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.125rem;
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 0.75rem;
+            transition: all 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .contact-item:hover {
+            background: rgba(255,255,255,0.25);
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            font-size: 0.95rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 1.25rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            color: white;
+            padding: 2rem;
+            border-radius: 1.25rem 1.25rem 0 0;
+            position: relative;
+        }
+
+        .modal-header h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-body h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.1rem;
-            opacity: 0.8;
-            margin-bottom: 3rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .packages {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-            gap: 3rem;
-            margin-top: 4rem;
-        }
-
-        .package {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .package:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(20, 184, 166, 0.2);
-            border-color: rgba(20, 184, 166, 0.3);
-        }
-
-        .package-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .package-icon {
-            font-size: 3rem;
             margin-bottom: 1rem;
+            margin-top: 1.5rem;
         }
 
-        .package-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #14b8a6;
+        .modal-body h4:first-child {
+            margin-top: 0;
         }
 
-        .package-subtitle {
-            opacity: 0.8;
+        .modal-body ul {
+            list-style: none;
+            padding: 0;
         }
 
-        .service-cards {
-            display: grid;
-            gap: 1rem;
+        .modal-body li {
+            color: var(--text-secondary);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
         }
 
-        .service-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 15px;
-            padding: 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.3s ease;
+        .modal-body li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
         }
 
-        .service-card:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(20, 184, 166, 0.2);
+        [dir="rtl"] .logo,
+        [dir="rtl"] .nav-links,
+        [dir="rtl"] .controls,
+        [dir="rtl"] .contact-info {
+            flex-direction: row-reverse;
         }
 
-        .service-card h4 {
-            color: #06b6d4;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
+        [dir="rtl"] .control-btn,
+        [dir="rtl"] .industry-card {
+            flex-direction: row-reverse;
         }
 
-        .service-card p {
-            opacity: 0.8;
-            font-size: 0.9rem;
+        [dir="rtl"] .modal-close {
+            right: auto;
+            left: 1rem;
         }
 
-        /* Footer */
-        footer {
-            padding: 3rem 0 1rem;
-            background: rgba(0, 0, 0, 0.3);
-            text-align: center;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        [dir="rtl"] .modal-body li {
+            padding-left: 0;
+            padding-right: 1.5rem;
         }
 
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
+        [dir="rtl"] .modal-body li::before {
+            left: auto;
+            right: 0;
         }
 
-        .footer-section h3 {
-            color: #14b8a6;
-            margin-bottom: 1rem;
-        }
-
-        .footer-section p, .footer-section a {
-            opacity: 0.8;
-            text-decoration: none;
-            color: inherit;
-        }
-
-        .whatsapp-btn {
-            display: inline-block;
-            background: linear-gradient(45deg, #25d366, #128c7e);
-            color: white !important;
-            padding: 0.75rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            margin-top: 0.5rem;
-            transition: all 0.3s ease;
-        }
-
-        .whatsapp-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Language display */
-        .lang-ar { display: none; }
-        body[dir="rtl"] .lang-en { display: none; }
-        body[dir="rtl"] .lang-ar { display: block; }
-        body[dir="rtl"] .nav-links .lang-ar { display: inline; }
-        body[dir="rtl"] .cta-buttons .lang-ar { display: inline-block; }
-
-        /* Mobile */
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .packages { grid-template-columns: 1fr; }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .domain-grid {
+                grid-template-columns: 1fr;
+            }
+            .industry-grid {
+                grid-template-columns: 1fr;
+            }
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .nav-right {
+                width: 100%;
+                justify-content: space-between;
+            }
+            .modal {
+                padding: 1rem;
+            }
+            .modal-header h3 {
+                font-size: 1.5rem;
+            }
+            .modal-body {
+                padding: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
-        <nav class="container">
-            <div class="logo">TechServJo</div>
-            <ul class="nav-links">
-                <li><a href="#services" class="lang-en">Services</a><a href="#services" class="lang-ar">الخدمات</a></li>
-                <li><a href="#contact" class="lang-en">Contact</a><a href="#contact" class="lang-ar">تواصل</a></li>
-                <li>
-                    <div class="lang-dropdown">
-                        <button class="lang-btn" onclick="toggleLangMenu()">
-                            <span id="currentFlag">🇺🇸</span>
-                            <span id="currentLang">EN</span>
-                            <span>▼</span>
-                        </button>
-                        <div class="lang-menu" id="langMenu">
-                            <div class="lang-option" onclick="setLanguage('en')">
-                                <span>🇺🇸</span>
-                                <span>English</span>
-                            </div>
-                            <div class="lang-option" onclick="setLanguage('ar')">
-                                <span>🇯🇴</span>
-                                <span>العربية</span>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
+        <nav>
+            <div class="logo">
+                <span>⚡</span>
+                <span id="logo">TechServJo</span>
+            </div>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#services" id="navServices">Services</a>
+                    <a href="#industries" id="navIndustries">Industries</a>
+                    <a href="#contact" id="navContact">Contact</a>
+                </div>
+                <div class="controls">
+                    <button class="control-btn" id="themeToggle">
+                        <span id="themeIcon">🌙</span>
+                        <span id="themeText">Dark</span>
+                    </button>
+                    <button class="control-btn" id="langToggle">
+                        <span id="langFlag">🇺🇸</span>
+                        <span id="langText">EN</span>
+                    </button>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
-            <h1 class="lang-en">Transform Your Business with AI Automation</h1>
-            <h1 class="lang-ar">حول شركتك بالذكاء الاصطناعي والأتمتة</h1>
-            
-            <p class="lang-en">Streamline operations, boost productivity, and scale your business with cutting-edge automation solutions.</p>
-            <p class="lang-ar">بسّط عملياتك، زود إنتاجيتك، وطور شركتك بحلول الأتمتة المتقدمة.</p>
-            
-            <div class="cta-buttons">
-                <a href="#services" class="btn btn-primary lang-en">Explore Services</a>
-                <a href="#services" class="btn btn-primary lang-ar">استكشف الخدمات</a>
-                
-                <a href="#contact" class="btn btn-secondary lang-en">Get Consultation</a>
-                <a href="#contact" class="btn btn-secondary lang-ar">احصل على استشارة</a>
-            </div>
+        <div class="hero-content">
+            <h1 id="heroTitle">Transform Your Business with AI & Automation</h1>
+            <p id="heroSubtitle">We deliver end-to-end digital transformation solutions—from workflow automation to AI-powered systems—tailored to your industry.</p>
+            <a href="#contact" class="cta-button" id="heroCta">Get Started Today</a>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title lang-en">Our Service Packages</h2>
-            <h2 class="section-title lang-ar">حزم خدماتنا</h2>
-            
-            <p class="section-subtitle lang-en">Choose the perfect package tailored to your business needs</p>
-            <p class="section-subtitle lang-ar">اختر الحزمة المثالية المصممة لاحتياجات شركتك</p>
+    <section class="domains" id="services">
+        <h2 id="domainsTitle">Our Core Services</h2>
+        <div class="domain-grid" id="domainGrid"></div>
+    </section>
 
-            <div class="packages">
-                <!-- Package 1 -->
-                <div class="package">
-                    <div class="package-header">
-                        <div class="package-icon">🏢</div>
-                        <h3 class="package-title lang-en">Organize & Develop Your Company</h3>
-                        <h3 class="package-title lang-ar">نظم شركتك وطورها</h3>
-                        <p class="package-subtitle lang-en">For established companies needing systems organization</p>
-                        <p class="package-subtitle lang-ar">للشركات القائمة التي تحتاج لتنظيم الأنظمة</p>
-                    </div>
-                    
-                    <div class="service-cards">
-                        <div class="service-card">
-                            <h4 class="lang-en">No System? No Problem</h4>
-                            <h4 class="lang-ar">ما عندك نظام؟ ولا يهمك</h4>
-                            <p class="lang-en">Complete CRM and management systems implementation</p>
-                            <p class="lang-ar">تطبيق أنظمة CRM وإدارة شاملة من الصفر</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h4 class="lang-en">Automation Works for You</h4>
-                            <h4 class="lang-ar">الأتمتة تشتغل عنك</h4>
-                            <p class="lang-en">Advanced automation workflows with n8n</p>
-                            <p class="lang-ar">تدفقات عمل أتمتة متقدمة بـ n8n</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h4 class="lang-en">AI Inside Your Company</h4>
-                            <h4 class="lang-ar">الذكاء الاصطناعي جوّا شركتك</h4>
-                            <p class="lang-en">OCR, RAG systems, and chatbots integration</p>
-                            <p class="lang-ar">تكامل أنظمة OCR و RAG والدردشة الذكية</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h4 class="lang-en">Your Company... But Smarter</h4>
-                            <h4 class="lang-ar">شركتك.. بس أذكى</h4>
-                            <p class="lang-en">Systems integration + training + process design</p>
-                            <p class="lang-ar">تكامل الأنظمة + التدريب + تصميم العمليات</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h4 class="lang-en">Start Small... Scale Big</h4>
-                            <h4 class="lang-ar">ابدأ صغير.. وكبّر شغلك</h4>
-                            <p class="lang-en">Simple solutions with gradual scaling</p>
-                            <p class="lang-ar">حلول بسيطة مع نهج التوسع التدريجي</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Package 2 -->
-                <div class="package">
-                    <div class="package-header">
-                        <div class="package-icon">🚀</div>
-                        <h3 class="package-title lang-en">Launch Your Project & Develop Yourself</h3>
-                        <h3 class="package-title lang-ar">ابدأ مشروعك وطور نفسك</h3>
-                        <p class="package-subtitle lang-en">For entrepreneurs, managers, and new business ideas</p>
-                        <p class="package-subtitle lang-ar">لرواد الأعمال والمدراء وأصحاب الأفكار الجديدة</p>
-                    </div>
-                    
-                    <div class="service-cards">
-                        <div class="service-card">
-                            <h4 class="lang-en">From Idea → MVP in Weeks</h4>
-                            <h4 class="lang-ar">من فكرة → MVP خلال أسابيع</h4>
-                            <p class="lang-en">Rapid No-Code + AI MVP development</p>
-                            <p class="lang-ar">تطوير سريع لـ MVP بدون برمجة + ذكاء اصطناعي</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h4 class="lang-en">Train Your Team</h4>
-                            <h4 class="lang-ar">تدريب فريقك</h4>
-                            <p class="lang-en">AI and productivity training programs</p>
-                            <p class="lang-ar">برامج تدريب الذكاء الاصطناعي والإنتاجية</p>
-                        </div>
-                        
-                        <div class="service-card">
-                            <h4 class="lang-en">Personal Coaching for Leaders</h4>
-                            <h4 class="lang-ar">تدريب خاص للمدير/المالك</h4>
-                            <p class="lang-en">One-on-one executive coaching</p>
-                            <p class="lang-ar">توجيه تنفيذي فردي وإرشاد استراتيجي</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <section class="industries" id="industries">
+        <div class="industries-content">
+            <h2 id="industriesTitle">Industries We Serve</h2>
+            <p class="industries-subtitle" id="industriesSubtitle">Delivering specialized solutions across 10+ sectors</p>
+            <div class="industry-grid" id="industryGrid"></div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3 class="lang-en">Contact Us</h3>
-                    <h3 class="lang-ar">تواصل معنا</h3>
-                    <!-- <p>Email: hello@TechServJo.com</p> -->
-                    <p class="lang-en">Phone: 00962797970257</p>
-                    <p class="lang-ar">الهاتف: 00962797970257</p>
-                    <a href="https://wa.me/962797970257" target="_blank" class="whatsapp-btn lang-en">💬 WhatsApp</a>
-                    <a href="https://wa.me/962797970257" target="_blank" class="whatsapp-btn lang-ar">💬 واتساب</a>
-                </div>
-                
-                <div class="footer-section">
-                    <h3 class="lang-en">About TechServJo</h3>
-                    <h3 class="lang-ar">عن TechServJo</h3>
-                    <p class="lang-en">We transform businesses through AI automation and expert consultation.</p>
-                    <p class="lang-ar">نحول الشركات من خلال أتمتة الذكاء الاصطناعي والاستشارة المتخصصة.</p>
-                </div>
-            </div>
-            
-            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1rem; opacity: 0.6;">
-                <p class="lang-en">&copy; 2025 TechServJo. All rights reserved.</p>
-                <p class="lang-ar">&copy; 2025 TechServJo. جميع الحقوق محفوظة.</p>
-            </div>
+    <section class="cta-section" id="contact">
+        <h2 id="ctaTitle">Ready to Transform Your Business?</h2>
+        <p id="ctaSubtitle">Let's discuss how our solutions can optimize your operations and accelerate growth.</p>
+        <div class="contact-info">
+            <a href="tel:0797970257" class="contact-item">
+                <span>📞</span>
+                <span>0797970257</span>
+            </a>
+            <a href="https://www.linkedin.com/in/salem-rub/" target="_blank" class="contact-item">
+                <span>💼</span>
+                <span id="linkedin">LinkedIn Profile</span>
+            </a>
         </div>
+    </section>
+
+    <footer>
+        <p id="footer">© 2024 TechServJo. All rights reserved. | Transforming businesses through intelligent automation.</p>
     </footer>
 
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">×</button>
+                <h3 id="modalTitle"></h3>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
     <script>
-        let currentLanguage = 'en';
+        const translations = {
+            en: {
+                logo: 'TechServJo',
+                navServices: 'Services',
+                navIndustries: 'Industries',
+                navContact: 'Contact',
+                themeLight: 'Light',
+                themeDark: 'Dark',
+                heroTitle: 'Transform Your Business with AI & Automation',
+                heroSubtitle: 'We deliver end-to-end digital transformation solutions—from workflow automation to AI-powered systems—tailored to your industry.',
+                heroCta: 'Get Started Today',
+                domainsTitle: 'Our Core Services',
+                industriesTitle: 'Industries We Serve',
+                industriesSubtitle: 'Delivering specialized solutions across 10+ sectors',
+                ctaTitle: 'Ready to Transform Your Business?',
+                ctaSubtitle: "Let's discuss how our solutions can optimize your operations and accelerate growth.",
+                linkedin: 'LinkedIn Profile',
+                footer: '© 2024 TechServJo. All rights reserved. | Transforming businesses through intelligent automation.',
+                domains: [
+                    {
+                        icon: '⚙️',
+                        title: 'Business Operations & Management',
+                        desc: 'Workflow optimization, process automation, ERP/CRM integration, and AI-powered business intelligence.',
+                        details: [
+                            'Workflow mapping and optimization',
+                            'Process automation using n8n or Make',
+                            'ERP/CRM setup and integration',
+                            'Cost and resource tracking dashboards',
+                            'KPI and OKR implementation',
+                            'Digital forms and approval systems',
+                            'Document and task automation',
+                            'AI assistants for repetitive operations',
+                            'Data-driven decision frameworks',
+                            'Reporting and performance reviews'
+                        ]
+                    },
+                    {
+                        icon: '📊',
+                        title: 'Project Management',
+                        desc: 'Complete PM system implementation, real-time dashboards, and automated reporting workflows.',
+                        details: [
+                            'ClickUp / Notion / Asana full implementation',
+                            'Timeline and dependency automation',
+                            'Budget vs actual cost dashboards',
+                            'AI-based risk and delay prediction',
+                            'Smart document control and versioning',
+                            'Real-time progress dashboards',
+                            'Automated client reporting',
+                            'Task priority and workload balance',
+                            'Template libraries for project lifecycle',
+                            'Integrated feedback and issue tracking'
+                        ]
+                    },
+                    {
+                        icon: '🏭',
+                        title: 'Production Management',
+                        desc: 'Smart scheduling, predictive maintenance, quality control automation, and production KPI tracking.',
+                        details: [
+                            'Smart scheduling and capacity planning',
+                            'Machine or workstation performance dashboards',
+                            'Digital work orders and material requisitions',
+                            'Predictive maintenance alerts',
+                            'Quality control data automation',
+                            'Real-time inventory visibility',
+                            'Barcode and IoT data integration',
+                            'Cost efficiency analysis',
+                            'AI forecasting for demand and raw materials',
+                            'Production KPI dashboards'
+                        ]
+                    },
+                    {
+                        icon: '🚚',
+                        title: 'Logistics & Supply Chain',
+                        desc: 'Route optimization, inventory synchronization, automated procurement, and smart replenishment.',
+                        details: [
+                            'Route and delivery optimization',
+                            'Warehouse digitalization',
+                            'Purchase order automation',
+                            'Inventory synchronization across systems',
+                            'Supplier performance dashboards',
+                            'Automated demand forecasting',
+                            'Shipment tracking integrations',
+                            'AI chat assistant for suppliers and clients',
+                            'Procurement approval workflows',
+                            'Smart replenishment triggers'
+                        ]
+                    },
+                    {
+                        icon: '🚀',
+                        title: 'Digital Transformation',
+                        desc: 'End-to-end automation blueprints, AI adoption roadmaps, and scalable system architecture.',
+                        details: [
+                            'Automation blueprint for entire organization',
+                            'AI adoption roadmap per department',
+                            'Integration between legacy and new tools',
+                            'Data centralization and analytics pipelines',
+                            'Custom AI agents for internal processes',
+                            'Training teams on automation tools',
+                            'KPI dashboards for transformation impact',
+                            'Cloud migration of core operations',
+                            'Process documentation & SOPs in digital form',
+                            'Scalable system architecture for growth'
+                        ]
+                    }
+                ],
+                industries: [
+                    { 
+                        icon: '🏭', 
+                        name: 'Manufacturing',
+                        solutions: [
+                            'Automate production scheduling and material planning',
+                            'Implement digital work order systems with live status',
+                            'Use AI for predictive maintenance and downtime analysis',
+                            'Real-time dashboards for OEE and efficiency tracking',
+                            'Automate quality reports via Google Sheets or Power BI',
+                            'Create procurement automation workflows',
+                            'Integrate CRM, ERP, and inventory databases',
+                            'AI assistant for supplier communication and reorders',
+                            'Use IoT or barcode tracking for production flow',
+                            'Forecast demand using AI predictive models'
+                        ]
+                    },
+                    { 
+                        icon: '🏥', 
+                        name: 'Healthcare',
+                        solutions: [
+                            'Automate patient intake and appointment scheduling',
+                            'Use AI chatbots for triage and FAQ',
+                            'Set up digital patient records synced with cloud storage',
+                            'Automate billing and claim processing',
+                            'Build dashboards for patient load and doctor performance',
+                            'AI-based reminders for medication or follow-ups',
+                            'Workflow automation between departments (lab, pharmacy)',
+                            'Secure document sharing and HIPAA-compliant systems',
+                            'Predictive analytics for resource allocation',
+                            'Patient satisfaction surveys and AI sentiment analysis'
+                        ]
+                    },
+                    { 
+                        icon: '🎓', 
+                        name: 'Education',
+                        solutions: [
+                            'Automate student registration and class scheduling',
+                            'Build AI tutor chatbots for learning support',
+                            'Automate grading and attendance tracking',
+                            'Performance dashboards for teachers and admin',
+                            'Integrate LMS with CRM and finance tools',
+                            'AI for content generation and course recommendations',
+                            'Workflow automation for certificate issuing',
+                            'Parent communication via WhatsApp or email automation',
+                            'Data insights on student performance trends',
+                            'Digital document management and approvals'
+                        ]
+                    },
+                    { 
+                        icon: '🏗️', 
+                        name: 'Construction',
+                        solutions: [
+                            'Digital site progress tracking via mobile forms',
+                            'AI-based project risk prediction',
+                            'Budget and cost tracking dashboards',
+                            'Workflow automation for material requests',
+                            'Smart approvals for purchase and change orders',
+                            'Cloud-based document and drawing control',
+                            'KPI dashboards for subcontractor performance',
+                            'Integration with accounting and inventory systems',
+                            'Predictive cash flow and project forecasting',
+                            'On-site issue tracking with instant reporting'
+                        ]
+                    },
+                    { 
+                        icon: '🛍️', 
+                        name: 'Retail & E-Commerce',
+                        solutions: [
+                            'WhatsApp automation for customer service',
+                            'Inventory sync with online stores (Shopify, Salla)',
+                            'AI chatbot for product recommendations',
+                            'Automated order tracking and notifications',
+                            'CRM setup with customer segmentation',
+                            'Dashboard for sales trends and performance',
+                            'Workflow automation for refunds and returns',
+                            'Predictive restocking system',
+                            'Digital marketing automation flows',
+                            'Loyalty and retention automation'
+                        ]
+                    },
+                    { 
+                        icon: '🏨', 
+                        name: 'Hospitality & Tourism',
+                        solutions: [
+                            'AI booking and concierge chatbot',
+                            'Smart guest feedback analysis',
+                            'Housekeeping and maintenance automation',
+                            'Workflow for check-in/out coordination',
+                            'Staff scheduling optimization',
+                            'Predictive occupancy and revenue dashboards',
+                            'Integration with POS and booking systems',
+                            'Guest communication automation (WhatsApp, email)',
+                            'Cost control and supplier performance dashboards',
+                            'Centralized document management for operations'
+                        ]
+                    },
+                    { 
+                        icon: '🔬', 
+                        name: 'Laboratories',
+                        solutions: [
+                            'AI-powered data entry for test results',
+                            'Workflow automation from sample intake to delivery',
+                            'Automated report generation and sharing',
+                            'Equipment maintenance schedule automation',
+                            'Real-time dashboards for sample tracking',
+                            'AI agent for internal communication and reminders',
+                            'Integration with ERP and CRM systems',
+                            'Digital forms for approvals and results',
+                            'Predictive analysis for resource planning',
+                            'Compliance and documentation automation'
+                        ]
+                    },
+                    { 
+                        icon: '🏢', 
+                        name: 'Real Estate',
+                        solutions: [
+                            'Maintenance request automation',
+                            'Tenant and lease management dashboards',
+                            'Digital inspection and checklist tools',
+                            'Workflow for contract renewals and follow-ups',
+                            'Integration with accounting and CRM',
+                            'Predictive maintenance using IoT data',
+                            'Smart occupancy and utilization dashboards',
+                            'AI assistant for client inquiries',
+                            'Supplier and contractor coordination via automation',
+                            'Performance reports for each property or project'
+                        ]
+                    },
+                    { 
+                        icon: '🚛', 
+                        name: 'Transportation',
+                        solutions: [
+                            'Route optimization and delivery tracking automation',
+                            'Integration of GPS data with dashboards',
+                            'Smart scheduling for drivers and shifts',
+                            'AI-based delay and cost prediction',
+                            'Automated invoicing and proof of delivery',
+                            'Fleet maintenance scheduling',
+                            'Supplier and warehouse data integration',
+                            'KPI dashboards for logistics performance',
+                            'Workflow automation for shipment documentation',
+                            'AI assistant for shipment updates and queries'
+                        ]
+                    },
+                    { 
+                        icon: '💼', 
+                        name: 'Consulting Services',
+                        solutions: [
+                            'Client onboarding and proposal automation',
+                            'CRM setup for tracking leads and clients',
+                            'Automated report generation and document handling',
+                            'Project management dashboards',
+                            'AI-powered research and summarization tools',
+                            'Time tracking and invoice automation',
+                            'Feedback collection and analysis',
+                            'Digital templates for SOPs and proposals',
+                            'Workflow automation for deliverables and approvals',
+                            'Centralized document and version control'
+                        ]
+                    }
+                ]
+            },
+            ar: {
+                logo: 'تك سيرف جو',
+                navServices: 'الخدمات',
+                navIndustries: 'القطاعات',
+                navContact: 'اتصل بنا',
+                themeLight: 'فاتح',
+                themeDark: 'داكن',
+                heroTitle: 'حوّل عملك بالذكاء الاصطناعي والأتمتة',
+                heroSubtitle: 'نقدم حلول التحول الرقمي المتكاملة - من أتمتة سير العمل إلى الأنظمة المدعومة بالذكاء الاصطناعي - مصممة خصيصاً لقطاعك.',
+                heroCta: 'ابدأ اليوم',
+                domainsTitle: 'خدماتنا الأساسية',
+                industriesTitle: 'القطاعات التي نخدمها',
+                industriesSubtitle: 'تقديم حلول متخصصة عبر أكثر من 10 قطاعات',
+                ctaTitle: 'هل أنت مستعد لتحويل عملك؟',
+                ctaSubtitle: 'دعنا نناقش كيف يمكن لحلولنا تحسين عملياتك وتسريع النمو.',
+                linkedin: 'ملف لينكد إن',
+                footer: '© 2024 تك سيرف جو. جميع الحقوق محفوظة. | تحويل الأعمال من خلال الأتمتة الذكية.',
+                domains: [
+                    {
+                        icon: '⚙️',
+                        title: 'إدارة العمليات التجارية',
+                        desc: 'تحسين سير العمل، أتمتة العمليات، تكامل أنظمة ERP/CRM، والذكاء التجاري المدعوم بالذكاء الاصطناعي.',
+                        details: [
+                            'رسم وتحسين سير العمل',
+                            'أتمتة العمليات باستخدام n8n أو Make',
+                            'إعداد وتكامل أنظمة ERP/CRM',
+                            'لوحات معلومات لتتبع التكاليف والموارد',
+                            'تنفيذ مؤشرات الأداء الرئيسية والأهداف',
+                            'نماذج رقمية وأنظمة الموافقات',
+                            'أتمتة المستندات والمهام',
+                            'مساعدين ذكاء اصطناعي للعمليات المتكررة',
+                            'أطر اتخاذ القرارات المبنية على البيانات',
+                            'التقارير ومراجعات الأداء'
+                        ]
+                    },
+                    {
+                        icon: '📊',
+                        title: 'إدارة المشاريع',
+                        desc: 'تطبيق كامل لنظام إدارة المشاريع، لوحات معلومات فورية، وسير عمل تقارير آلية.',
+                        details: [
+                            'تطبيق كامل لـ ClickUp / Notion / Asana',
+                            'أتمتة الجدول الزمني والتبعيات',
+                            'لوحات معلومات الميزانية مقابل التكلفة الفعلية',
+                            'التنبؤ بالمخاطر والتأخيرات باستخدام الذكاء الاصطناعي',
+                            'التحكم الذكي في المستندات والإصدارات',
+                            'لوحات معلومات التقدم في الوقت الفعلي',
+                            'إعداد تقارير العملاء تلقائيًا',
+                            'توازن أولويات المهام وعبء العمل',
+                            'مكتبات القوالب لدورة حياة المشروع',
+                            'تتبع متكامل للملاحظات والمشكلات'
+                        ]
+                    },
+                    {
+                        icon: '🏭',
+                        title: 'إدارة الإنتاج',
+                        desc: 'جدولة ذكية، صيانة تنبؤية، أتمتة مراقبة الجودة، وتتبع مؤشرات أداء الإنتاج.',
+                        details: [
+                            'الجدولة الذكية وتخطيط القدرات',
+                            'لوحات معلومات أداء الآلات أو محطات العمل',
+                            'أوامر العمل الرقمية وطلبات المواد',
+                            'تنبيهات الصيانة التنبؤية',
+                            'أتمتة بيانات مراقبة الجودة',
+                            'رؤية المخزون في الوقت الفعلي',
+                            'تكامل بيانات الباركود وإنترنت الأشياء',
+                            'تحليل كفاءة التكلفة',
+                            'التنبؤ بالطلب والمواد الخام باستخدام الذكاء الاصطناعي',
+                            'لوحات معلومات مؤشرات الأداء الرئيسية للإنتاج'
+                        ]
+                    },
+                    {
+                        icon: '🚚',
+                        title: 'الخدمات اللوجستية وسلسلة التوريد',
+                        desc: 'تحسين المسارات، مزامنة المخزون، مشتريات آلية، وتجديد ذكي.',
+                        details: [
+                            'تحسين المسار والتسليم',
+                            'رقمنة المستودعات',
+                            'أتمتة أوامر الشراء',
+                            'مزامنة المخزون عبر الأنظمة',
+                            'لوحات معلومات أداء الموردين',
+                            'التنبؤ التلقائي بالطلب',
+                            'تكاملات تتبع الشحنات',
+                            'مساعد دردشة ذكاء اصطناعي للموردين والعملاء',
+                            'سير عمل الموافقات على المشتريات',
+                            'محفزات التجديد الذكية'
+                        ]
+                    },
+                    {
+                        icon: '🚀',
+                        title: 'التحول الرقمي',
+                        desc: 'مخططات أتمتة شاملة، خرائط طريق اعتماد الذكاء الاصطناعي، وبنية نظام قابلة للتوسع.',
+                        details: [
+                            'مخطط أتمتة للمؤسسة بأكملها',
+                            'خريطة طريق اعتماد الذكاء الاصطناعي لكل قسم',
+                            'التكامل بين الأدوات القديمة والجديدة',
+                            'مركزية البيانات وخطوط التحليلات',
+                            'وكلاء ذكاء اصطناعي مخصصون للعمليات الداخلية',
+                            'تدريب الفرق على أدوات الأتمتة',
+                            'لوحات معلومات مؤشرات الأداء لتأثير التحول',
+                            'الترحيل السحابي للعمليات الأساسية',
+                            'توثيق العمليات وإجراءات التشغيل القياسية بشكل رقمي',
+                            'بنية نظام قابلة للتوسع للنمو'
+                        ]
+                    }
+                ],
+                industries: [
+                    { 
+                        icon: '🏭', 
+                        name: 'التصنيع',
+                        solutions: [
+                            'أتمتة جدولة الإنتاج وتخطيط المواد',
+                            'تطبيق أنظمة أوامر العمل الرقمية بحالة مباشرة',
+                            'استخدام الذكاء الاصطناعي للصيانة التنبؤية وتحليل التوقف',
+                            'لوحات معلومات في الوقت الفعلي لتتبع OEE والكفاءة',
+                            'أتمتة تقارير الجودة عبر Google Sheets أو Power BI',
+                            'إنشاء سير عمل أتمتة المشتريات',
+                            'تكامل قواعد بيانات CRM و ERP والمخزون',
+                            'مساعد ذكاء اصطناعي لتواصل الموردين وإعادة الطلبات',
+                            'استخدام إنترنت الأشياء أو تتبع الباركود لتدفق الإنتاج',
+                            'التنبؤ بالطلب باستخدام نماذج الذكاء الاصطناعي التنبؤية'
+                        ]
+                    },
+                    { 
+                        icon: '🏥', 
+                        name: 'الرعاية الصحية',
+                        solutions: [
+                            'أتمتة استقبال المرضى وجدولة المواعيد',
+                            'استخدام روبوتات الدردشة بالذكاء الاصطناعي للفرز والأسئلة الشائعة',
+                            'إعداد سجلات المرضى الرقمية المتزامنة مع التخزين السحابي',
+                            'أتمتة الفواتير ومعالجة المطالبات',
+                            'بناء لوحات معلومات لحمل المرضى وأداء الأطباء',
+                            'تذكيرات قائمة على الذكاء الاصطناعي للأدوية أو المتابعات',
+                            'أتمتة سير العمل بين الأقسام (المختبر، الصيدلية)',
+                            'مشاركة آمنة للمستندات وأنظمة متوافقة مع HIPAA',
+                            'التحليلات التنبؤية لتخصيص الموارد',
+                            'استبيانات رضا المرضى وتحليل المشاعر بالذكاء الاصطناعي'
+                        ]
+                    },
+                    { 
+                        icon: '🎓', 
+                        name: 'التعليم',
+                        solutions: [
+                            'أتمتة تسجيل الطلاب وجدولة الفصول',
+                            'بناء روبوتات دردشة معلم ذكاء اصطناعي لدعم التعلم',
+                            'أتمتة التقييم وتتبع الحضور',
+                            'لوحات معلومات الأداء للمعلمين والإدارة',
+                            'تكامل نظام إدارة التعلم مع أدوات CRM والمالية',
+                            'الذكاء الاصطناعي لإنشاء المحتوى وتوصيات الدورات',
+                            'أتمتة سير العمل لإصدار الشهادات',
+                            'التواصل مع أولياء الأمور عبر واتساب أو أتمتة البريد الإلكتروني',
+                            'رؤى البيانات حول اتجاهات أداء الطلاب',
+                            'إدارة المستندات الرقمية والموافقات'
+                        ]
+                    },
+                    { 
+                        icon: '🏗️', 
+                        name: 'البناء والمقاولات',
+                        solutions: [
+                            'تتبع تقدم الموقع الرقمي عبر النماذج المحمولة',
+                            'التنبؤ بمخاطر المشروع بالذكاء الاصطناعي',
+                            'لوحات معلومات تتبع الميزانية والتكلفة',
+                            'أتمتة سير العمل لطلبات المواد',
+                            'الموافقات الذكية لأوامر الشراء والتغيير',
+                            'التحكم السحابي في المستندات والرسومات',
+                            'لوحات معلومات مؤشرات الأداء الرئيسية لأداء المقاولين الفرعيين',
+                            'التكامل مع أنظمة المحاسبة والمخزون',
+                            'التنبؤ بالتدفق النقدي والمشروع',
+                            'تتبع المشكلات في الموقع مع التقارير الفورية'
+                        ]
+                    },
+                    { 
+                        icon: '🛍️', 
+                        name: 'التجزئة والتجارة الإلكترونية',
+                        solutions: [
+                            'أتمتة واتساب لخدمة العملاء',
+                            'مزامنة المخزون مع المتاجر الإلكترونية (Shopify، Salla)',
+                            'روبوت دردشة ذكاء اصطناعي لتوصيات المنتجات',
+                            'تتبع الطلبات والإشعارات التلقائية',
+                            'إعداد CRM مع تقسيم العملاء',
+                            'لوحة معلومات لاتجاهات المبيعات والأداء',
+                            'أتمتة سير العمل للمرتجعات والاستردادات',
+                            'نظام إعادة التخزين التنبؤي',
+                            'تدفقات أتمتة التسويق الرقمي',
+                            'أتمتة الولاء والاحتفاظ'
+                        ]
+                    },
+                    { 
+                        icon: '🏨', 
+                        name: 'الضيافة والسياحة',
+                        solutions: [
+                            'روبوت دردشة حجز وخدمة نزلاء بالذكاء الاصطناعي',
+                            'تحليل ذكي لملاحظات الضيوف',
+                            'أتمتة خدمة التدبير المنزلي والصيانة',
+                            'سير العمل لتنسيق تسجيل الوصول/المغادرة',
+                            'تحسين جدولة الموظفين',
+                            'لوحات معلومات تنبؤية للإشغال والإيرادات',
+                            'التكامل مع نقاط البيع وأنظمة الحجز',
+                            'أتمتة التواصل مع الضيوف (واتساب، البريد الإلكتروني)',
+                            'لوحات معلومات التحكم في التكاليف وأداء الموردين',
+                            'إدارة مركزية للمستندات للعمليات'
+                        ]
+                    },
+                    { 
+                        icon: '🔬', 
+                        name: 'المختبرات',
+                        solutions: [
+                            'إدخال بيانات بالذكاء الاصطناعي لنتائج الاختبارات',
+                            'أتمتة سير العمل من استلام العينة إلى التسليم',
+                            'إنشاء التقارير ومشاركتها تلقائيًا',
+                            'أتمتة جدولة صيانة المعدات',
+                            'لوحات معلومات في الوقت الفعلي لتتبع العينات',
+                            'وكيل ذكاء اصطناعي للتواصل الداخلي والتذكيرات',
+                            'التكامل مع أنظمة ERP و CRM',
+                            'نماذج رقمية للموافقات والنتائج',
+                            'التحليل التنبؤي لتخطيط الموارد',
+                            'أتمتة الامتثال والتوثيق'
+                        ]
+                    },
+                    { 
+                        icon: '🏢', 
+                        name: 'العقارات وإدارة المرافق',
+                        solutions: [
+                            'أتمتة طلبات الصيانة',
+                            'لوحات معلومات إدارة المستأجرين والإيجارات',
+                            'أدوات الفحص والقائمة الرقمية',
+                            'سير العمل لتجديدات العقود والمتابعات',
+                            'التكامل مع المحاسبة و CRM',
+                            'الصيانة التنبؤية باستخدام بيانات إنترنت الأشياء',
+                            'لوحات معلومات الإشغال والاستخدام الذكية',
+                            'مساعد ذكاء اصطناعي لاستفسارات العملاء',
+                            'تنسيق الموردين والمقاولين عبر الأتمتة',
+                            'تقارير الأداء لكل عقار أو مشروع'
+                        ]
+                    },
+                    { 
+                        icon: '🚛', 
+                        name: 'النقل والخدمات اللوجستية',
+                        solutions: [
+                            'تحسين المسار وأتمتة تتبع التسليم',
+                            'تكامل بيانات GPS مع لوحات المعلومات',
+                            'الجدولة الذكية للسائقين والورديات',
+                            'التنبؤ بالتأخير والتكلفة باستخدام الذكاء الاصطناعي',
+                            'الفواتير التلقائية وإثبات التسليم',
+                            'جدولة صيانة الأسطول',
+                            'تكامل بيانات الموردين والمستودعات',
+                            'لوحات معلومات مؤشرات الأداء الرئيسية للخدمات اللوجستية',
+                            'أتمتة سير العمل لوثائق الشحن',
+                            'مساعد ذكاء اصطناعي لتحديثات الشحنات والاستفسارات'
+                        ]
+                    },
+                    { 
+                        icon: '💼', 
+                        name: 'الخدمات الاستشارية',
+                        solutions: [
+                            'أتمتة إعداد العملاء والمقترحات',
+                            'إعداد CRM لتتبع العملاء المحتملين والعملاء',
+                            'إنشاء التقارير ومعالجة المستندات تلقائيًا',
+                            'لوحات معلومات إدارة المشاريع',
+                            'أدوات البحث والتلخيص بالذكاء الاصطناعي',
+                            'تتبع الوقت وأتمتة الفواتير',
+                            'جمع وتحليل الملاحظات',
+                            'القوالب الرقمية لإجراءات التشغيل القياسية والمقترحات',
+                            'أتمتة سير العمل للتسليمات والموافقات',
+                            'التحكم المركزي في المستندات والإصدارات'
+                        ]
+                    }
+                ]
+            }
+        };
 
-        function toggleLangMenu() {
-            const menu = document.getElementById('langMenu');
-            menu.classList.toggle('show');
+        let currentLang = 'en';
+        let currentTheme = 'light';
+
+        function openModal(title, content, icon = '') {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.innerHTML = icon ? `<span>${icon}</span> ${title}` : title;
+            modalBody.innerHTML = content;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
-        function setLanguage(lang) {
-            if (lang === currentLanguage) return;
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        function updateContent() {
+            const t = translations[currentLang];
+            document.getElementById('logo').textContent = t.logo;
+            document.getElementById('navServices').textContent = t.navServices;
+            document.getElementById('navIndustries').textContent = t.navIndustries;
+            document.getElementById('navContact').textContent = t.navContact;
+            document.getElementById('heroTitle').textContent = t.heroTitle;
+            document.getElementById('heroSubtitle').textContent = t.heroSubtitle;
+            document.getElementById('heroCta').textContent = t.heroCta;
+            document.getElementById('domainsTitle').textContent = t.domainsTitle;
+            document.getElementById('industriesTitle').textContent = t.industriesTitle;
+            document.getElementById('industriesSubtitle').textContent = t.industriesSubtitle;
+            document.getElementById('ctaTitle').textContent = t.ctaTitle;
+            document.getElementById('ctaSubtitle').textContent = t.ctaSubtitle;
+            document.getElementById('linkedin').textContent = t.linkedin;
+            document.getElementById('footer').textContent = t.footer;
+
+            const domainGrid = document.getElementById('domainGrid');
+            domainGrid.innerHTML = t.domains.map((domain, index) => `
+                <div class="domain-card" onclick="showDomainDetails(${index})">
+                    <div class="domain-icon">${domain.icon}</div>
+                    <h3>${domain.title}</h3>
+                    <p>${domain.desc}</p>
+                </div>
+            `).join('');
+
+            const industryGrid = document.getElementById('industryGrid');
+            industryGrid.innerHTML = t.industries.map((industry, index) => `
+                <div class="industry-card" onclick="showIndustryDetails(${index})">
+                    <div class="industry-icon">${industry.icon}</div>
+                    <h4>${industry.name}</h4>
+                </div>
+            `).join('');
+
+            document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', currentLang);
+        }
+
+        function showDomainDetails(index) {
+            const t = translations[currentLang];
+            const domain = t.domains[index];
+            const detailsLabel = currentLang === 'ar' ? 'ما نقدمه' : 'What We Deliver';
             
-            currentLanguage = lang;
-            const flag = document.getElementById('currentFlag');
-            const langText = document.getElementById('currentLang');
+            const content = `
+                <h4>${detailsLabel}:</h4>
+                <ul>
+                    ${domain.details.map(detail => `<li>${detail}</li>`).join('')}
+                </ul>
+            `;
             
-            if (lang === 'ar') {
-                // Switch to Arabic
-                document.body.dir = 'rtl';
-                document.documentElement.dir = 'rtl';
-                flag.textContent = '🇯🇴';
-                langText.textContent = 'AR';
-                
-                // Show Arabic, hide English
-                document.querySelectorAll('.lang-en').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.lang-ar').forEach(el => {
-                    if (el.tagName === 'A' || el.classList.contains('btn')) {
-                        el.style.display = 'inline-block';
-                    } else {
-                        el.style.display = 'block';
-                    }
-                });
+            openModal(domain.title, content, domain.icon);
+        }
+
+        function showIndustryDetails(index) {
+            const t = translations[currentLang];
+            const industry = t.industries[index];
+            const solutionsLabel = currentLang === 'ar' ? 'الحلول المتخصصة' : 'Specialized Solutions';
+            
+            const content = `
+                <h4>${solutionsLabel}:</h4>
+                <ul>
+                    ${industry.solutions.map(solution => `<li>${solution}</li>`).join('')}
+                </ul>
+            `;
+            
+            openModal(industry.name, content, industry.icon);
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const t = translations[currentLang];
+            
+            if (currentTheme === 'dark') {
+                themeIcon.textContent = '☀️';
+                themeText.textContent = t.themeLight;
             } else {
-                // Switch to English
-                document.body.dir = 'ltr';
-                document.documentElement.dir = 'ltr';
-                flag.textContent = '🇺🇸';
-                langText.textContent = 'EN';
-                
-                // Show English, hide Arabic
-                document.querySelectorAll('.lang-ar').forEach(el => el.style.display = 'none');
-                document.querySelectorAll('.lang-en').forEach(el => {
-                    if (el.tagName === 'A' || el.classList.contains('btn')) {
-                        el.style.display = 'inline-block';
-                    } else {
-                        el.style.display = 'block';
-                    }
-                });
+                themeIcon.textContent = '🌙';
+                themeText.textContent = t.themeDark;
             }
-            
-            // Close menu
-            document.getElementById('langMenu').classList.remove('show');
         }
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!e.target.closest('.lang-dropdown')) {
-                document.getElementById('langMenu').classList.remove('show');
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            
+            const langFlag = document.getElementById('langFlag');
+            const langText = document.getElementById('langText');
+            
+            if (currentLang === 'ar') {
+                langFlag.textContent = '🇯🇴';
+                langText.textContent = 'AR';
+            } else {
+                langFlag.textContent = '🇺🇸';
+                langText.textContent = 'EN';
             }
-        });
+            
+            updateContent();
+        }
 
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
+        document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+        document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+
+        updateContent();
     </script>
 </body>
 </html>
