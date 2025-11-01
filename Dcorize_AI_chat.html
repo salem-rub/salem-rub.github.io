@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inspire Hub - Interior Design Image Generator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f9fc;
+            min-height: 100vh;
+        }
+        .container-shadow {
+            box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+        }
+        .generate-btn {
+            background-color: #10b981; /* Emerald 500 */
+            transition: background-color 0.2s, transform 0.1s;
+        }
+        .generate-btn:hover:not(:disabled) {
+            background-color: #059669; /* Emerald 600 */
+            transform: translateY(-1px);
+        }
+        .generate-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        /* Style for the file input button */
+        .file-upload-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            color: #4b5563; /* Gray 700 */
+            background-color: #f3f4f6; /* Gray 100 */
+            border: 1px solid #d1d5db; /* Gray 300 */
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+        }
+        .file-upload-button:hover {
+            background-color: #e5e7eb; /* Gray 200 */
+            border-color: #9ca3af; /* Gray 400 */
+        }
+        .file-upload-button:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2); /* Emerald 500 with opacity */
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <!-- Header / Navigation --><header class="mb-8 p-4 bg-white rounded-xl container-shadow">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+            <h1 class="text-3xl font-extrabold text-gray-800 tracking-tight mb-4 md:mb-0">Inspire Hub MVP</h1>
+            <nav class="flex space-x-4 text-sm font-medium">
+                <a href="#" class="text-emerald-600 border-b-2 border-emerald-600 pb-1">1. Inspiration Gallery</a>
+                <span class="text-gray-400">2. Find Professionals</span>
+                <span class="text-gray-400">3. Marketplace</span>
+            </nav>
+        </div>
+        <p class="text-xs mt-2 text-gray-500 font-mono">User ID: <span id="user-id">Loading...</span></p>
+    </header>
+
+    <!-- Main Content Grid --><main class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- 1. Image Generator Section --><section class="lg:col-span-2 p-6 bg-white rounded-xl container-shadow h-fit">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Generate Your Dream Space</h2>
+            <p class="text-sm text-gray-500 mb-6">Describe the interior design, furniture, or renovation concept you want to visualize</p>
+
+            <div class="space-y-4">
+                <!-- Image Upload --><div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Upload or Generate</label>
+                    <input type="file" id="image-upload" accept="image/*" class="hidden">
+                    <button id="upload-button" class="file-upload-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-4 3 3 5-5V15z" clip-rule="evenodd" />
+                        </svg>
+                        Upload Image
+                    </button>
+                    <button id="clear-upload-button" class="ml-2 text-red-600 hover:text-red-800 text-sm font-medium hidden">Clear Upload</button>
+                    <span id="uploaded-file-name" class="ml-2 text-gray-500 text-sm italic"></span>
+                </div>
+
+                <!-- Prompt Input --><div>
+                    <label for="prompt-input" class="block text-sm font-medium text-gray-700 mb-2">Detailed Prompt (e.g., "Add a modern sofa", "Change to minimalist style")</label>
+                    <textarea id="prompt-input" rows="3" placeholder="Describe your vision or edits for the image..."
+                        class="w-full p-3 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 transition duration-150"></textarea>
+                </div>
+
+                <!-- Style/Specialization Dropdown --><div>
+                    <label for="specialization-select" class="block text-sm font-medium text-gray-700 mb-2">Specialization</label>
+                    <select id="specialization-select" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-emerald-500 focus:border-emerald-500 transition duration-150 bg-white appearance-none">
+                        <option value="Interior Design">Interior Design - Living Room</option>
+                        <option value="Modern Furniture">Modern Furniture - Bedroom</option>
+                        <option value="Renovation Concept">Renovation Concept - Bathroom</option>
+                        <option value="Exterior Architectural Style">Exterior Architectural Style</option>
+                        <option value="Commercial Office Space">Commercial Office Space</option>
+                    </select>
+                </div>
+
+                <!-- Generate Button --><button id="generate-button" class="generate-btn w-full text-white font-semibold py-3 px-4 rounded-xl flex items-center justify-center shadow-lg hover:shadow-xl">
+                    <span id="button-text">Generate Image</span>
+                    <div id="loading-spinner" class="spinner hidden ml-3"></div>
+                </button>
+            </div>
+
+            <!-- Generated Image Display & Share --><div class="mt-8 border-t pt-6">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">Your Visualization</h3>
+                <div id="image-container" class="min-h-64 bg-gray-100 flex items-center justify-center rounded-xl overflow-hidden relative">
+                    <img id="generated-image" src="" alt="Generated design image" class="hidden w-full h-auto object-cover max-h-96">
+                    <p id="image-placeholder" class="text-gray-400 text-center p-6">Upload an image or enter a prompt and click 'Generate Image' to see your visualization here.</p>
+                </div>
+
+                <div id="advisor-results" class="mt-4 p-4 bg-purple-50 border border-purple-200 rounded-xl hidden">
+                    <h4 class="font-bold text-gray-700 mb-2 flex items-center">✨ Design Advisor Critique:</h4>
+                    <p id="advisor-text" class="text-sm text-gray-600 italic">Critique will appear here...</p>
+                    <div id="advisor-loading" class="text-sm text-gray-500 hidden flex items-center mt-2">
+                        <div class="spinner w-4 h-4 mr-2 !border-gray-400 !border-t-gray-700"></div>
+                        Analyzing design...
+                    </div>
+                </div>
+
+                <div id="share-controls" class="mt-4 hidden flex justify-between items-center">
+                    <button id="critique-button" class="bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 px-4 rounded-lg transition duration-150 shadow-md flex items-center">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5l4 4L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+                        Get Design Advice
+                    </button>
+                    <button id="share-button" class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition duration-150 shadow-md">
+                        Share to Gallery
+                    </button>
+                </div>
+            </div>
+
+            <!-- Custom Modal/Notification Area --><div id="notification-area" class="mt-4 p-3 rounded-lg text-sm hidden"></div>
+
+        </section>
+
+        <!-- 2. Inspiration Gallery Section --><section class="lg:col-span-1 p-6 bg-white rounded-xl container-shadow">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                Inspiration Gallery
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="ml-2 text-pink-500">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M12 16v-4"></path>
+                    <path d="M12 8h.01"></path>
+                </svg>
+            </h2>
+            <p class="text-sm text-gray-500 mb-4">Real-time feed of designs shared by the community.</p>
+            <div id="gallery-feed" class="space-y-4 max-h-[calc(100vh-250px)] overflow-y-auto pr-2">
+                <!-- Gallery items will be injected here --><p id="gallery-loading" class="text-center text-gray-400 p-4">Loading gallery feed...</p>
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Firebase/Gemini Integration Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, onSnapshot, collection, query, addDoc, serverTimestamp, orderBy, limit } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // --- GLOBAL CONFIGURATION AND VARIABLES ---
+        setLogLevel('Debug');
+
+        // ====================================================================================
+        // === CONFIGURATION REQUIRED FOR INDEPENDENT USE (VPS/LOCAL) =========================
+        // ====================================================================================
+        const MANUAL_CONFIG = {
+            // 1. YOUR GEMINI API KEY (for image generation and critique)
+            // You MUST replace "YOUR_GEMINI_API_KEY_HERE" with your actual key.
+            GEMINI_API_KEY: "AIzaSyA8rwDZAWqj3sDT0rqa3AuMTkVVQcN_eO4", 
+
+            // 2. YOUR FIREBASE PROJECT CONFIG
+            // Replace all fields with your actual Firebase Web App config (from Project Settings).
+            FIREBASE_CONFIG: {
+                apiKey: "AIzaSyC2oIjnTXhiIK3NQ-aDv5x4TWw3k9mjZ_Q",
+                authDomain: "dcorize-mvp-ai-gen.firebaseapp.com",
+                projectId: "dcorize-mvp-ai-gen",
+                storageBucket: "dcorize-mvp-ai-gen.firebasestorage.app",
+                messagingSenderId: "157700598263",
+                appId: "1:157700598263:web:b7070f077e5c5a4bdbe6f2",
+                measurementId: "G-HKC41XQEF8"
+            },
+            
+            // 3. STATIC APP IDENTIFIER 
+            // This is used for Firestore path: /artifacts/{STATIC_APP_ID}/public/data/...
+            STATIC_APP_ID: "inspire-hub-vps-production",
+        };
+        // ====================================================================================
+        // === END OF REQUIRED CONFIGURATION ==================================================
+        // ====================================================================================
+
+
+        // The script now uses the MANUAL_CONFIG object for independent operation
+        const appId = MANUAL_CONFIG.STATIC_APP_ID;
+        const firebaseConfig = MANUAL_CONFIG.FIREBASE_CONFIG;
+        const geminiApiKey = MANUAL_CONFIG.GEMINI_API_KEY;
+
+        const MODEL_NAME = 'gemini-2.5-flash-image-preview'; // Image model
+        const TEXT_MODEL_NAME = 'gemini-2.5-flash-preview-09-2025'; // LLM model
+
+        let app, db, auth, userId = null;
+
+        // --- DOM Elements ---
+        const promptInput = document.getElementById('prompt-input');
+        const specializationSelect = document.getElementById('specialization-select');
+        const generateButton = document.getElementById('generate-button');
+        const buttonText = document.getElementById('button-text');
+        const loadingSpinner = document.getElementById('loading-spinner');
+        const generatedImage = document.getElementById('generated-image');
+        const imagePlaceholder = document.getElementById('image-placeholder');
+        const shareControls = document.getElementById('share-controls');
+        const shareButton = document.getElementById('share-button');
+        const galleryFeed = document.getElementById('gallery-feed');
+        const notificationArea = document.getElementById('notification-area');
+        const userIdDisplay = document.getElementById('user-id');
+        const imageUploadInput = document.getElementById('image-upload');
+        const uploadButton = document.getElementById('upload-button');
+        const clearUploadButton = document.getElementById('clear-upload-button');
+        const uploadedFileNameSpan = document.getElementById('uploaded-file-name');
+        const critiqueButton = document.getElementById('critique-button');
+        const advisorResultsDiv = document.getElementById('advisor-results');
+        const advisorText = document.getElementById('advisor-text');
+        const advisorLoading = document.getElementById('advisor-loading');
+
+
+        // --- STATE ---
+        let lastGeneratedBase64 = null;
+        let uploadedImageBase64 = null;
+
+
+        // --- FIREBASE SETUP AND AUTHENTICATION ---
+
+        async function setupFirebase() {
+            try {
+                // Initialize Firebase with the manual configuration
+                app = initializeApp(firebaseConfig);
+                db = getFirestore(app);
+                auth = getAuth(app);
+
+                // Use standard anonymous sign-in for independent operation
+                await signInAnonymously(auth);
+
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        userId = user.uid;
+                        userIdDisplay.textContent = userId;
+                        console.log("Firebase initialized and user signed in:", userId);
+                        loadGallery();
+                    } else {
+                        userIdDisplay.textContent = 'Anonymous (not ready)';
+                        console.warn("User signed out or auth state loading.");
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error setting up Firebase:", error);
+                userIdDisplay.textContent = 'Error!';
+                showNotification(`Firebase Error: ${error.message}`, 'bg-red-100 text-red-700');
+            }
+        }
+
+        // --- UTILITY FUNCTIONS ---
+
+        function showNotification(message, className) {
+            notificationArea.textContent = message;
+            notificationArea.className = `mt-4 p-3 rounded-lg text-sm ${className}`;
+            notificationArea.classList.remove('hidden');
+            setTimeout(() => {
+                notificationArea.classList.add('hidden');
+            }, 5000);
+        }
+
+        function setGeneratingState(isGenerating) {
+            generateButton.disabled = isGenerating;
+            if (isGenerating) {
+                buttonText.textContent = 'Generating...';
+                loadingSpinner.classList.remove('hidden');
+                imagePlaceholder.textContent = 'Generating image... this may take a moment.';
+                imagePlaceholder.classList.remove('hidden');
+                generatedImage.classList.add('hidden');
+                shareControls.classList.add('hidden');
+                lastGeneratedBase64 = null;
+            } else {
+                buttonText.textContent = 'Generate Image';
+                loadingSpinner.classList.add('hidden');
+            }
+        }
+
+        function getGalleryCollectionRef() {
+            if (!db) return null;
+            const collectionPath = `/artifacts/${appId}/public/data/inspiration_gallery`;
+            return collection(db, collectionPath);
+        }
+
+        // --- IMAGE GENERATION LOGIC ---
+
+        async function generateImage() {
+            if (!geminiApiKey || geminiApiKey === "YOUR_GEMINI_API_KEY_HERE") {
+                 showNotification("GEMINI API KEY is missing. Please edit the script to add your key.", 'bg-red-100 text-red-700');
+                return;
+            }
+            if (!userId) {
+                showNotification("Authentication not ready. Please wait a moment.", 'bg-yellow-100 text-yellow-700');
+                return;
+            }
+
+            const prompt = promptInput.value.trim();
+            const specialization = specializationSelect.value;
+
+            if (!prompt && !uploadedImageBase64) {
+                showNotification("Please enter a detailed prompt or upload an image.", 'bg-yellow-100 text-yellow-700');
+                return;
+            }
+
+            setGeneratingState(true);
+            advisorResultsDiv.classList.add('hidden');
+
+            const parts = [];
+
+            if (uploadedImageBase64) {
+                parts.push({
+                    inlineData: {
+                        mimeType: 'image/png',
+                        data: uploadedImageBase64
+                    }
+                });
+            }
+
+            if (prompt) {
+                const fullPrompt = `${prompt}, high detail, 8k, photorealistic, specialized in ${specialization}`;
+                parts.push({ text: fullPrompt });
+            } else if (uploadedImageBase64) {
+                parts.push({ text: `Analyze this ${specialization} image and suggest improvements or stylistic changes. High detail, 8k, photorealistic.` });
+            }
+
+
+            const payload = {
+                contents: [{ parts: parts }],
+                generationConfig: {
+                    responseModalities: ['TEXT', 'IMAGE']
+                },
+            };
+
+            const apiKey = geminiApiKey; // Use the configured key
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${MODEL_NAME}:generateContent?key=${apiKey}`;
+            const MAX_RETRIES = 5;
+            let attempt = 0;
+
+            try {
+                while (attempt < MAX_RETRIES) {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.status === 429 && attempt < MAX_RETRIES - 1) {
+                        const delay = Math.pow(2, attempt) * 1000 + Math.random() * 1000;
+                        console.warn(`Rate limit exceeded (429). Retrying in ${delay / 1000}s...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        attempt++;
+                        continue;
+                    }
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(`API request failed with status: ${response.status}. Details: ${JSON.stringify(errorData)}`);
+                    }
+
+                    const result = await response.json();
+                    const base64Data = result?.candidates?.[0]?.content?.parts?.find(p => p.inlineData)?.inlineData?.data;
+
+                    if (!base64Data) {
+                        throw new Error("Image data was not found in the response.");
+                    }
+
+                    lastGeneratedBase64 = base64Data;
+                    const imageUrl = `data:image/png;base64,${base64Data}`;
+
+                    generatedImage.src = imageUrl;
+                    generatedImage.classList.remove('hidden');
+                    imagePlaceholder.classList.add('hidden');
+                    shareControls.classList.remove('hidden');
+
+                    showNotification("Image generated successfully! Now get some advice or share it.", 'bg-green-100 text-green-700');
+                    break;
+
+                }
+
+            } catch (error) {
+                console.error("Image generation failed:", error);
+                imagePlaceholder.textContent = `Generation failed: ${error.message}. Please try a different prompt or image.`;
+                imagePlaceholder.classList.remove('hidden');
+                generatedImage.classList.add('hidden');
+                shareControls.classList.add('hidden');
+                showNotification(`Image generation error: ${error.message}`, 'bg-red-100 text-red-700');
+            } finally {
+                setGeneratingState(false);
+            }
+        }
+
+        // --- TEXT GENERATION (CRITIQUE) LOGIC ---
+
+        function setCritiqueState(isLoading) {
+            critiqueButton.disabled = isLoading;
+            critiqueButton.classList.toggle('opacity-50', isLoading);
+            advisorLoading.classList.toggle('hidden', !isLoading);
+            advisorResultsDiv.classList.remove('hidden');
+
+            if (isLoading) {
+                advisorText.textContent = '';
+                advisorText.classList.add('hidden');
+            } else {
+                advisorText.classList.remove('hidden');
+            }
+        }
+
+        async function getDesignCritique() {
+            if (!geminiApiKey || geminiApiKey === "YOUR_GEMINI_API_KEY_HERE") {
+                 showNotification("GEMINI API KEY is missing. Please edit the script to add your key.", 'bg-red-100 text-red-700');
+                return;
+            }
+
+            const imageBase64 = lastGeneratedBase64 || uploadedImageBase64;
+
+            if (!imageBase64) {
+                showNotification("Please generate or upload an image first to get a design critique.", 'bg-yellow-100 text-yellow-700');
+                return;
+            }
+
+            setCritiqueState(true);
+
+            const userPrompt = promptInput.value.trim();
+            const specialization = specializationSelect.value;
+
+            const systemPrompt = "You are a professional interior design consultant. Analyze the provided image based on color palette, lighting, composition, and style. Give a concise, professional critique in 3-4 bullet points, followed by a one-sentence suggestion for the next improvement.";
+
+            const critiqueQuery = `Analyze this image, which is a ${specialization}. The user's goal was: "${userPrompt || 'A new design concept'}". Provide a brief, actionable critique.`;
+
+            const parts = [
+                {
+                    inlineData: {
+                        mimeType: 'image/png',
+                        data: imageBase64
+                    }
+                },
+                { text: critiqueQuery }
+            ];
+
+            const payload = {
+                contents: [{ parts: parts }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            const apiKey = geminiApiKey; // Use the configured key
+            const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${TEXT_MODEL_NAME}:generateContent?key=${apiKey}`;
+            const MAX_RETRIES = 3;
+            let attempt = 0;
+
+            try {
+                while (attempt < MAX_RETRIES) {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+
+                    if (response.status === 429 && attempt < MAX_RETRIES - 1) {
+                        const delay = Math.pow(2, attempt) * 1000 + Math.random() * 500;
+                        console.warn(`Rate limit exceeded (429) for critique. Retrying in ${delay / 1000}s...`);
+                        await new Promise(resolve => setTimeout(resolve, delay));
+                        attempt++;
+                        continue;
+                    }
+
+                    if (!response.ok) {
+                        const errorData = await response.json();
+                        throw new Error(`Critique API request failed: ${response.status}. Details: ${JSON.stringify(errorData)}`);
+                    }
+
+                    const result = await response.json();
+                    const text = result?.candidates?.[0]?.content?.parts?.[0]?.text || "Critique failed to generate content.";
+
+                    // Format text from Markdown bullet points to HTML list items
+                    const formattedText = text
+                        .split('\n')
+                        .map(line => line.trim())
+                        .filter(line => line.startsWith('*') || line.startsWith('-'))
+                        .map(line => `<li>${line.substring(1).trim()}</li>`)
+                        .join('');
+
+                    if (formattedText) {
+                        advisorText.innerHTML = `<ul class="list-disc ml-4 space-y-1 text-sm">${text.replace(/^-/gm, '<li>').replace(/^-/gm, '<li>').replace(/$/gm, '</li>').replace(/<\/li>\n/g, '</li>')}</ul>`;
+                    } else {
+                         advisorText.innerHTML = `<p class="text-sm">${text}</p>`;
+                    }
+
+                    showNotification("Design advice received!", 'bg-purple-100 text-purple-700');
+                    break;
+                }
+
+            } catch (error) {
+                console.error("Critique generation failed:", error);
+                advisorText.textContent = `Advice failed: ${error.message}`;
+                showNotification(`Advice error: ${error.message}`, 'bg-red-100 text-red-700');
+            } finally {
+                setCritiqueState(false);
+            }
+        }
+
+
+        // --- GALLERY (FIRESTORE) LOGIC ---
+
+        async function saveImageToGallery() {
+            if (!lastGeneratedBase64 || !userId || !db) {
+                showNotification("Cannot share: No generated image or user not authenticated.", 'bg-red-100 text-red-700');
+                return;
+            }
+
+            const prompt = promptInput.value.trim();
+            const specialization = specializationSelect.value;
+            const galleryRef = getGalleryCollectionRef();
+
+            if (!galleryRef) return;
+
+            shareButton.disabled = true;
+            shareButton.textContent = 'Sharing...';
+
+            try {
+                await addDoc(galleryRef, {
+                    prompt: prompt,
+                    specialization: specialization,
+                    imageBase64: lastGeneratedBase64,
+                    userId: userId,
+                    createdAt: serverTimestamp(),
+                    originalImageBase64: uploadedImageBase64 || null
+                });
+
+                showNotification("Design successfully shared to the gallery!", 'bg-emerald-100 text-emerald-700');
+                lastGeneratedBase64 = null; 
+                shareControls.classList.add('hidden');
+                advisorResultsDiv.classList.add('hidden');
+
+            } catch (error) {
+                console.error("Error saving image to Firestore:", error);
+                showNotification(`Error sharing: ${error.message}`, 'bg-red-100 text-red-700');
+            } finally {
+                shareButton.disabled = false;
+                shareButton.textContent = 'Share to Gallery';
+            }
+        }
+
+        function loadGallery() {
+            if (!db) {
+                return;
+            }
+
+            const galleryRef = getGalleryCollectionRef();
+            if (!galleryRef) return;
+
+            const q = query(galleryRef, orderBy("createdAt", "desc"), limit(20));
+
+            onSnapshot(q, (snapshot) => {
+                galleryFeed.innerHTML = '';
+
+                if (snapshot.empty) {
+                    galleryFeed.innerHTML = '<p class="text-center text-gray-400 p-4">The gallery is empty. Be the first to share!</p>';
+                    return;
+                }
+
+                snapshot.forEach((doc) => {
+                    const design = doc.data();
+                    const imageUrl = `data:image/png;base64,${design.imageBase64}`;
+                    const time = design.createdAt ? new Date(design.createdAt.toMillis()).toLocaleDateString() : 'Just now';
+
+                    const card = `
+                        <div class="p-3 bg-gray-50 rounded-xl border border-gray-200 hover:border-emerald-400 transition duration-150">
+                            <img src="${imageUrl}" alt="Shared Design" class="w-full h-32 object-cover rounded-lg mb-2">
+                            <p class="text-sm font-medium text-gray-800 line-clamp-2">${design.prompt}</p>
+                            <p class="text-xs text-gray-500 mt-1">
+                                <span class="font-semibold">${design.specialization}</span> | Shared by: <span class="font-mono text-emerald-600">${design.userId.substring(0, 6)}...</span> on ${time}
+                            </p>
+                        </div>
+                    `;
+                    galleryFeed.innerHTML += card;
+                });
+            }, (error) => {
+                console.error("Error listening to gallery feed:", error);
+                galleryFeed.innerHTML = '<p class="text-center text-red-500 p-4">Error loading gallery.</p>';
+            });
+        }
+
+        // --- IMAGE UPLOAD LOGIC ---
+        function handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (!file) {
+                return;
+            }
+
+            if (!file.type.startsWith('image/')) {
+                showNotification("Please upload an image file (e.g., JPEG, PNG).", 'bg-red-100 text-red-700');
+                clearUploadedImage();
+                return;
+            }
+
+            uploadedFileNameSpan.textContent = file.name;
+            clearUploadButton.classList.remove('hidden');
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const base64String = e.target.result.split(',')[1];
+                uploadedImageBase64 = base64String;
+
+                generatedImage.src = e.target.result;
+                generatedImage.classList.remove('hidden');
+                imagePlaceholder.classList.add('hidden');
+                shareControls.classList.add('hidden');
+                advisorResultsDiv.classList.add('hidden');
+
+                showNotification("Image uploaded successfully! Now describe how you want to modify it or get inspired.", 'bg-blue-100 text-blue-700');
+            };
+            reader.onerror = (error) => {
+                console.error("Error reading file:", error);
+                showNotification("Error uploading image. Please try again.", 'bg-red-100 text-red-700');
+                clearUploadedImage();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function clearUploadedImage() {
+            uploadedImageBase64 = null;
+            imageUploadInput.value = '';
+            uploadedFileNameSpan.textContent = '';
+            clearUploadButton.classList.add('hidden');
+
+            generatedImage.src = '';
+            generatedImage.classList.add('hidden');
+            imagePlaceholder.classList.remove('hidden');
+            imagePlaceholder.textContent = 'Upload an image or enter a prompt and click \'Generate Image\' to see your visualization here.';
+            shareControls.classList.add('hidden');
+            advisorResultsDiv.classList.add('hidden');
+            showNotification("Uploaded image cleared.", 'bg-yellow-100 text-yellow-700');
+        }
+
+
+        // --- EVENT LISTENERS AND INITIALIZATION ---
+        window.onload = () => {
+            setupFirebase();
+            generateButton.addEventListener('click', generateImage);
+            shareButton.addEventListener('click', saveImageToGallery);
+            uploadButton.addEventListener('click', () => imageUploadInput.click());
+            imageUploadInput.addEventListener('change', handleImageUpload);
+            clearUploadButton.addEventListener('click', clearUploadedImage);
+            critiqueButton.addEventListener('click', getDesignCritique);
+        };
+
+    </script>
+</body>
+</html>
