@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دورة n8n الاحترافية - أتمتة وذكاء اصطناعي</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #0F172A;
+            color: #F1F5F9;
+            overflow-x: hidden;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 50% 50%, rgba(45, 212, 191, 0.1) 0%, transparent 50%);
+        }
+        
+        .hero-content {
+            max-width: 1200px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 4em;
+            font-weight: 700;
+            color: #2DD4BF;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.8em;
+            color: #CBD5E1;
+            margin-bottom: 40px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #A78BFA 0%, #2DD4BF 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin: 20px 10px;
+        }
+        
+        .cta-button {
+            background: #2DD4BF;
+            color: #0F172A;
+            padding: 18px 50px;
+            border-radius: 12px;
+            font-size: 1.5em;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            margin: 30px 10px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .cta-button:hover {
+            background: #FFFFFF;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(45, 212, 191, 0.5);
+        }
+        
+        .cta-secondary {
+            background: transparent;
+            border: 2px solid #2DD4BF;
+            color: #2DD4BF;
+        }
+        
+        /* Stats Section */
+        .stats {
+            background: #1E293B;
+            padding: 60px 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: 700;
+            color: #2DD4BF;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 1.2em;
+            color: #CBD5E1;
+            margin-top: 10px;
+        }
+        
+        /* Features Section */
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-size: 3em;
+            color: #2DD4BF;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background: #1E293B;
+            border: 1px solid #334155;
+            border-radius: 15px;
+            padding: 40px;
+            transition: all 0.3s;
+        }
+        
+        .feature-card:hover {
+            border-color: #2DD4BF;
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(45, 212, 191, 0.2);
+        }
+        
+        .feature-icon {
+            font-size: 3.5em;
+            color: #2DD4BF;
+            margin-bottom: 20px;
+        }
+        
+        .feature-title {
+            font-size: 1.8em;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+        
+        .feature-desc {
+            font-size: 1.2em;
+            color: #CBD5E1;
+            line-height: 1.8;
+        }
+        
+        /* Sessions Timeline */
+        .timeline {
+            position: relative;
+            padding: 40px 0;
+        }
+        
+        .timeline-item {
+            background: #1E293B;
+            border-right: 5px solid #2DD4BF;
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .timeline-number {
+            position: absolute;
+            right: -20px;
+            top: 30px;
+            background: #2DD4BF;
+            color: #0F172A;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5em;
+        }
+        
+        .timeline-title {
+            font-size: 1.8em;
+            color: #2DD4BF;
+            margin-bottom: 10px;
+            padding-right: 40px;
+        }
+        
+        .timeline-desc {
+            color: #CBD5E1;
+            font-size: 1.2em;
+            line-height: 1.8;
+        }
+        
+        /* Pricing */
+        .pricing-card {
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            border: 2px solid #2DD4BF;
+            border-radius: 20px;
+            padding: 50px;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .price {
+            font-size: 4em;
+            color: #2DD4BF;
+            font-weight: 700;
+            margin: 20px 0;
+        }
+        
+        .price-features {
+            text-align: right;
+            margin: 30px 0;
+        }
+        
+        .price-features li {
+            font-size: 1.2em;
+            color: #F1F5F9;
+            margin: 15px 0;
+            padding-right: 30px;
+            position: relative;
+        }
+        
+        .price-features li::before {
+            content: "✓";
+            position: absolute;
+            right: 0;
+            color: #2DD4BF;
+            font-weight: 700;
+            font-size: 1.3em;
+        }
+        
+        /* Testimonials */
+        .testimonial {
+            background: #1E293B;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-right: 5px solid #2DD4BF;
+        }
+        
+        .testimonial-text {
+            font-size: 1.3em;
+            color: #CBD5E1;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+        
+        .testimonial-author {
+            font-size: 1.1em;
+            color: #2DD4BF;
+            font-weight: 700;
+        }
+        
+        /* Footer CTA */
+        .footer-cta {
+            background: linear-gradient(135deg, #2DD4BF 0%, #A78BFA 100%);
+            padding: 80px 20px;
+            text-align: center;
+        }
+        
+        .footer-cta h2 {
+            font-size: 3em;
+            color: #0F172A;
+            margin-bottom: 30px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero h1 { font-size: 3em; }
+            .stats { grid-template-columns: repeat(2, 1fr); }
+            .features-grid { grid-template-columns: 1fr; }
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5em; }
+            .hero .subtitle { font-size: 1.3em; }
+            .stats { grid-template-columns: 1fr; }
+            .cta-button { padding: 15px 30px; font-size: 1.2em; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>🚀 إتقان n8n والذكاء الاصطناعي</h1>
+            <p class="subtitle">دورة عملية شاملة لبناء أنظمة أتمتة ذكية بدون كتابة كود</p>
+            
+            <div>
+                <span class="badge"><i class="fa-solid fa-certificate"></i> شهادة معتمدة</span>
+                <span class="badge"><i class="fa-solid fa-users"></i> +500 متدرب</span>
+                <span class="badge"><i class="fa-solid fa-star"></i> تقييم 4.9/5</span>
+            </div>
+            
+            <div style="margin-top: 40px;">
+                <a href="https://n8n.techservjo.com/form/e2bbcb9b-452f-4fce-81a3-87161bf6f773" class="cta-button">
+                    <i class="fa-solid fa-rocket"></i> سجل الآن
+                </a>
+                <a href="#details" class="cta-button cta-secondary">
+                    <i class="fa-solid fa-info-circle"></i> تفاصيل الدورة
+                </a>
+            </div>
+            
+            <p style="margin-top: 30px; font-size: 1.2em; color: #94A3B8;">
+                <i class="fa-solid fa-clock"></i> 5 جلسات تدريبية | <i class="fa-solid fa-calendar"></i> 10-12 ساعة | <i class="fa-solid fa-laptop-code"></i> تطبيق عملي
+            </p>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stat-item">
+            <span class="stat-number">67</span>
+            <span class="stat-label">شريحة تعليمية</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">5</span>
+            <span class="stat-label">جلسات مكثفة</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">10+</span>
+            <span class="stat-label">مشاريع عملية</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">100%</span>
+            <span class="stat-label">عملي وتطبيقي</span>
+        </div>
+    </section>
+
+    <!-- What You'll Learn -->
+    <section class="section" id="details">
+        <h2 class="section-title">🎯 ماذا ستتعلم؟</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-robot"></i></div>
+                <h3 class="feature-title">أساسيات الأتمتة</h3>
+                <p class="feature-desc">فهم عميق لمفاهيم n8n، العقد، والاتصالات، وبناء أول Workflow احترافي</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-project-diagram"></i></div>
+                <h3 class="feature-title">مشاريع حقيقية</h3>
+                <p class="feature-desc">نظام إدارة العملاء المحتملين المتكامل مع Google Sheets و Telegram و Gmail</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-brain"></i></div>
+                <h3 class="feature-title">الذكاء الاصطناعي</h3>
+                <p class="feature-desc">بناء وكيل مبيعات ذكي باستخدام OpenAI و Whisper و Text-to-Speech</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-database"></i></div>
+                <h3 class="feature-title">نظام RAG</h3>
+                <p class="feature-desc">تقنية متقدمة لإنشاء مساعد ذكي يفهم مستنداتك الخاصة</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-link"></i></div>
+                <h3 class="feature-title">التكامل</h3>
+                <p class="feature-desc">ربط أكثر من 400 خدمة وتطبيق بدون كتابة سطر برمجي واحد</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h3 class="feature-title">شهادة إتمام</h3>
+                <p class="feature-desc">شهادة معتمدة من TechServJo تثبت إتقانك للأتمتة والذكاء الاصطناعي</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Course Timeline -->
+    <section class="section">
+        <h2 class="section-title">📚 محتوى الدورة</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-number">1</div>
+                <h3 class="timeline-title">الجلسة الأولى: مقدمة في n8n</h3>
+                <p class="timeline-desc">• ما هي الأتمتة ولماذا n8n؟<br>• الواجهة الأساسية وأول Workflow<br>• Webhook و Gmail و Telegram<br>• 90-120 دقيقة</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-number">2</div>
+                <h3 class="timeline-title">الجلسة الثانية: العقد والاتصالات</h3>
+                <p class="timeline-desc">• أنواع العقد والـ Credentials<br>• التعامل مع APIs و JSON<br>• Function Node ومعالجة البيانات<br>• مشروع: نظام الطقس التلقائي</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-number">3</div>
+                <h3 class="timeline-title">الجلسة الثالثة: تطبيق عملي متكامل</h3>
+                <p class="timeline-desc">• نظام Lead Management كامل<br>• Google Form → Sheets → Telegram → Gmail<br>• Error Handling و Best Practices<br>• مشروع من أرض الواقع</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-number">4</div>
+                <h3 class="timeline-title">الجلسة الرابعة: وكيل مبيعات بالذكاء الاصطناعي</h3>
+                <p class="timeline-desc">• دمج OpenAI مع n8n<br>• STT و TTS و LLM<br>• حجز المواعيد تلقائياً<br>• مساعد ذكي يعمل 24/7</p>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-number">5</div>
+                <h3 class="timeline-title">الجلسة الخامسة: نظام RAG المتقدم</h3>
+                <p class="timeline-desc">• Embeddings و Vector Databases<br>• Supabase Integration<br>• مساعد يفهم مستنداتك<br>• المشروع النهائي والشهادة</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="section">
+        <h2 class="section-title">💰 الاستثمار في مستقبلك</h2>
+        <div class="pricing-card">
+            <h3 style="font-size: 2em; color: #FFFFFF;">الباقة الشاملة</h3>
+            <div class="price">$299</div>
+            <p style="color: #94A3B8; font-size: 1.1em; margin-bottom: 30px;">أو أقساط شهرية مرنة</p>
+            
+            <ul class="price-features" style="list-style: none;">
+                <li>5 جلسات تدريبية مباشرة</li>
+                <li>67 شريحة تعليمية احترافية</li>
+                <li>10+ مشاريع عملية</li>
+                <li>وصول مدى الحياة للمحتوى</li>
+                <li>مجموعة Telegram خاصة</li>
+                <li>دعم فني لمدة 6 أشهر</li>
+                <li>شهادة إتمام معتمدة</li>
+                <li>تسجيلات الجلسات</li>
+            </ul>
+            
+            <a href="#register" class="cta-button" style="width: 100%; margin: 30px 0;">
+                <i class="fa-solid fa-shopping-cart"></i> اشترك الآن
+            </a>
+            
+            <p style="color: #2DD4BF; font-size: 1.1em; margin-top: 20px;">
+                <i class="fa-solid fa-shield-alt"></i> ضمان استرجاع المبلغ خلال 14 يوم
+            </p>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section">
+        <h2 class="section-title">⭐ آراء المتدربين</h2>
+        <div class="testimonial">
+            <p class="testimonial-text">"دورة رائعة! استطعت أتمتة عمليات شركتي بالكامل ووفرت أكثر من 20 ساعة أسبوعياً. المحتوى عملي جداً والمدرب محترف."</p>
+            <p class="testimonial-author">— أحمد محمد، مدير تقني</p>
+        </div>
+        <div class="testimonial">
+            <p class="testimonial-text">"أفضل استثمار قمت به هذا العام. تعلمت كيف أبني أنظمة ذكاء اصطناعي بدون خبرة برمجية. الآن أقدم خدمات أتمتة لعملائي."</p>
+            <p class="testimonial-author">— سارة العلي، مستقلة</p>
+        </div>
+        <div class="testimonial">
+            <p class="testimonial-text">"المشاريع العملية كانت قيّمة جداً. طبقت ما تعلمته مباشرة في عملي وحصلت على ترقية بفضل المهارات الجديدة."</p>
+            <p class="testimonial-author">— خالد حسن، موظف IT</p>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="footer-cta">
+        <h2>🎯 ابدأ رحلتك في الأتمتة والذكاء الاصطناعي اليوم!</h2>
+        <p style="font-size: 1.4em; color: #0F172A; margin-bottom: 30px;">
+            انضم إلى مئات المتدربين الذين حولوا مسارهم المهني
+        </p>
+        <a href="#register" class="cta-button" style="background: #0F172A; color: #2DD4BF;">
+            <i class="fa-solid fa-rocket"></i> سجل الآن واحصل على خصم 20%
+        </a>
+        <p style="margin-top: 30px; color: #0F172A; font-size: 1.1em;">
+            <i class="fa-solid fa-clock"></i> العرض ساري لـ 48 ساعة فقط
+        </p>
+    </section>
+
+    <footer style="background: #0F172A; padding: 40px 20px; text-align: center; border-top: 2px solid #2DD4BF;">
+        <p style="font-size: 1.2em; color: #CBD5E1;">
+            <strong>TechServJo</strong> | Salem Abu Alrub<br/>
+            <i class="fa-solid fa-envelope"></i> salem@techservjo.com | 
+            <i class="fa-solid fa-phone"></i> +962 797970257<br/>
+            <i class="fa-solid fa-globe"></i> https://techservjo.com
+        </p>
+    </footer>
+</body>
+</html>
