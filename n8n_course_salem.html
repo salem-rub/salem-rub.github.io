@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دورة n8n المتكاملة: الأتمتة والذكاء الاصطناعي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Change 1: Updated font to Tajawal -->
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            /* Change 1: Apply Tajawal font */
+            font-family: 'Tajawal', sans-serif;
+            background-color: #f7f9fc;
+            direction: rtl;
+            text-align: right;
+        }
+        .card {
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3), 0 4px 6px -4px rgba(37, 99, 235, 0.1);
+        }
+        .bg-primary { background-color: #1e3a8a; } /* Dark Blue */
+        .text-primary { color: #1e3a8a; }
+        .border-primary { border-color: #1e3a8a; }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-2xl overflow-hidden">
+        
+        <!-- Header & Title Section -->
+        <header class="bg-primary text-white p-6 sm:p-10 text-center space-y-3">
+            <h1 class="text-3xl sm:text-4xl font-extrabold border-b-2 border-white/50 pb-3 mb-4">دورة n8n المتكاملة</h1>
+            <p class="text-xl sm:text-2xl font-light">بناء أنظمة الأتمتة والذكاء الاصطناعي بخطوات عملية</p>
+            <div class="mt-4 pt-4 border-t border-white/30 text-lg font-semibold">
+                <p>إعداد وتقديم: م.سالم أبو الرب | <span class="font-normal opacity-90">TechServJo</span></p>
+            </div>
+        </header>
+
+        <main class="p-6 sm:p-10 space-y-12">
+            
+            <!-- Course Goal -->
+            <section class="text-center">
+                <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-4">🎯 هدف الدورة</h2>
+                <div class="bg-indigo-50 p-6 rounded-lg border-r-4 border-primary shadow-inner">
+                    <p class="text-xl font-medium text-gray-700">
+                        تأهيلك لاستخدام **n8n** في بناء أنظمة أتمتة وذكاء اصطناعي متكاملة، تشمل الفهم، التطبيق، والتكامل الفعّال مع خدمات <span class="text-blue-600 font-semibold">Google</span> و <span class="text-red-600 font-semibold">OpenAI</span>.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Key Features / Outcomes -->
+            <section>
+                <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-6 text-center">✅ ما ستحققه بنهاية الدورة</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="card p-5 bg-white rounded-lg border-t-4 border-green-500">
+                        <span class="text-green-500 text-2xl mb-2 block">
+                            <!-- SVG: Workflow Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 inline-block">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75" />
+                            </svg>
+                        </span>
+                        <h3 class="text-xl font-semibold mb-2">احتراف الـ Workflows</h3>
+                        <p class="text-gray-600">إنشاء وتنفيذ Workflows (سير عمل) احترافية ومتقدمة للتعامل مع أي سيناريو تجاري.</p>
+                    </div>
+                    <div class="card p-5 bg-white rounded-lg border-t-4 border-yellow-500">
+                        <span class="text-yellow-500 text-2xl mb-2 block">
+                            <!-- SVG: AI Brain Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 inline-block">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846m4.823 0 1.259 3.655 1.26-3.655m-2.519 0h2.518m-2.517 0-1.26-3.655 1.257 3.655m1.26-3.655-.813 2.846m-2.435-1.127H5.474a2.25 2.25 0 0 1-2.243-2.122V8.471m0 0a2.25 2.25 0 0 1 2.243-2.122h13.111a2.25 2.25 0 0 1 2.243 2.122v7.359a2.25 2.25 0 0 1-2.243 2.122H5.474m0-5.122m3.676-3.676 1.838 1.838-1.838 1.838M14.25 10.5h.008v.008h-.008V10.5Z" />
+                            </svg>
+                        </span>
+                        <h3 class="text-xl font-semibold mb-2">بناء أنظمة AI متقدمة</h3>
+                        <p class="text-gray-600">القدرة على بناء وكلاء مبيعات ذكية وأنظمة RAG تعتمد على قاعدة معرفة لتوليد إجابات دقيقة.</p>
+                    </div>
+                    <div class="card p-5 bg-white rounded-lg border-t-4 border-red-500">
+                        <span class="text-red-500 text-2xl mb-2 block">
+                             <!-- SVG: Database/Connection Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 inline-block">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 16.5V10.5M10.5 16.5V10.5M7.5 16.5V10.5M4.5 16.5V10.5M19.5 10.5h-15M19.5 7.5h-15M19.5 4.5h-15M19.5 19.5h-15M19.5 22.5h-15M21 4.5H3a1.5 1.5 0 0 0-1.5 1.5v15a1.5 1.5 0 0 0 1.5 1.5h18a1.5 1.5 0 0 0 1.5-1.5v-15a1.5 1.5 0 0 0-1.5-1.5Z" />
+                            </svg>
+                        </span>
+                        <h3 class="text-xl font-semibold mb-2">التكامل والربط الفعّال</h3>
+                        <p class="text-gray-600">ربط n8n بأدواتك اليومية (Gmail, Telegram, Google Sheets, Calendar) وتحويل الحلول إلى استخدام تجاري.</p>
+                    </div>
+                     <div class="card p-5 bg-white rounded-lg border-t-4 border-indigo-500">
+                        <span class="text-indigo-500 text-2xl mb-2 block">
+                            <!-- SVG: Time Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 inline-block">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z" />
+                            </svg>
+                        </span>
+                        <h3 class="text-xl font-semibold mb-2">تقليل الجهد وزيادة الكفاءة</h3>
+                        <p class="text-gray-600">استبدال المهام الروتينية المتكررة بأتمتة متكاملة، مما يوفر وقتك وطاقتك للتركيز على الإبداع والنمو.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Session Overview -->
+            <section>
+                <h2 class="text-2xl sm:text-3xl font-bold text-primary mb-6 text-center">🗓️ محاور الدورة (5 جلسات مكثفة)</h2>
+                <div class="space-y-4">
+                    
+                    <!-- Session Card 1 -->
+                    <div class="card bg-gray-50 p-5 rounded-lg border-r-4 border-blue-400 flex items-start space-x-4 sm:space-x-6">
+                        <span class="flex-shrink-0 bg-blue-400 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">1</span>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-semibold text-gray-800">مقدمة في n8n وأساسيات الأتمتة</h3>
+                            <p class="text-gray-600 mt-1">التعرف على الواجهة، إنشاء أول سير عمل، تطبيق عملي: Webhook → Gmail.</p>
+                            <span class="mt-2 inline-block text-sm font-medium text-blue-600">المستوى: مبتدئ</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Session Card 2 -->
+                    <div class="card bg-gray-50 p-5 rounded-lg border-r-4 border-teal-400 flex items-start space-x-4 sm:space-x-6">
+                        <span class="flex-shrink-0 bg-teal-400 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">2</span>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-semibold text-gray-800">العقد (Nodes) والاتصالات المتقدمة</h3>
+                            <p class="text-gray-600 mt-1">فهم أنواع العقد، معالجة هياكل JSON، واستخدام التعبيرات (Expressions) لجلب وتخزين البيانات (مثال: API الطقس و Google Sheets).</p>
+                             <span class="mt-2 inline-block text-sm font-medium text-teal-600">المستوى: مبتدئ – متوسط</span>
+                        </div>
+                    </div>
+
+                    <!-- Session Card 3 -->
+                    <div class="card bg-gray-50 p-5 rounded-lg border-r-4 border-orange-400 flex items-start space-x-4 sm:space-x-6">
+                        <span class="flex-shrink-0 bg-orange-400 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">3</span>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-semibold text-gray-800">مشروع متكامل وحقيقي</h3>
+                            <p class="text-gray-600 mt-1">تنفيذ مشروع يربط Google Form بـ Telegram (للفريق) و Gmail (للعميل) بشكل آلي ومتسلسل.</p>
+                             <span class="mt-2 inline-block text-sm font-medium text-orange-600">المستوى: متوسط</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Session Card 4 -->
+                    <div class="card bg-gray-50 p-5 rounded-lg border-r-4 border-purple-400 flex items-start space-x-4 sm:space-x-6">
+                        <span class="flex-shrink-0 bg-purple-400 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">4</span>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-semibold text-gray-800">بناء وكيل مبيعات ذكي (AI Sales Agent)</h3>
+                            <p class="text-gray-600 mt-1">استخدام OpenAI, STT, TTS لإنشاء وكيل يتفاعل صوتيًا أو نصيًا، ويقوم بحجز المواعيد في Google Calendar.</p>
+                             <span class="mt-2 inline-block text-sm font-medium text-purple-600">المستوى: متوسط – متقدم</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Session Card 5 -->
+                    <div class="card bg-gray-50 p-5 rounded-lg border-r-4 border-red-500 flex items-start space-x-4 sm:space-x-6">
+                        <span class="flex-shrink-0 bg-red-500 text-white rounded-full h-8 w-8 flex items-center justify-center font-bold">5</span>
+                        <div class="flex-grow">
+                            <h3 class="text-xl font-semibold text-gray-800">نظام RAG لقاعدة المعرفة الذكية</h3>
+                            <p class="text-gray-600 mt-1">تصميم نظام استرجاع معزز (RAG) لتحميل الملفات (PDF) وإنشاء Embeddings وتخزينها في Supabase للحصول على إجابات دقيقة وموثوقة من الذكاء الاصطناعي.</p>
+                             <span class="mt-2 inline-block text-sm font-medium text-red-600">المستوى: متقدم</span>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </main>
+        
+        <!-- Footer & Call to Action (CTA) -->
+        <footer class="bg-gray-100 p-6 sm:p-10 text-center border-t-4 border-indigo-600">
+            <h3 class="text-2xl font-bold text-gray-800 mb-4">لا تفوّت فرصتك لتطوير مهارات الأتمتة والذكاء الاصطناعي!</h3>
+            
+            <!-- Change 2: Updated link and button text -->
+            <a href="https://n8n.techservjo.com/form/e2bbcb9b-452f-4fce-81a3-87161bf6f773" target="_blank" class="inline-block bg-indigo-600 hover:bg-indigo-700 text-white text-xl font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105">
+                للتسجيل والاستفسار
+            </a>
+            
+            <!-- Change 2: Updated link descriptive text -->
+            <p class="text-sm text-gray-500 mt-4">
+                زوروا موقعنا: <span class="ltr:inline-block">https://techservjo.com</span>
+            </p>
+        </footer>
+
+    </div>
+</body>
+</html>
