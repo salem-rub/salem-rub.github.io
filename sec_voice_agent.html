@@ -407,10 +407,9 @@
 
 
 
-    <script type="module">
-        import Vapi from 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.3/dist/index.js';
-
-        const vapi = new Vapi('1f2432da-8fee-4c9e-af48-674fa145d001');
+    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.3/dist/index.umd.js"></script>
+    <script>
+        const vapi = new window.Vapi('1f2432da-8fee-4c9e-af48-674fa145d001');
         
         let isCallActive = false;
         const startButton = document.getElementById('startButton');
