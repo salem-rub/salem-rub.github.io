@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المساعد الذكي - الشركة السعودية للكهرباء</title>
+    <!-- Vapi SDK Import: Must be included before the script block that uses it -->
+    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.3/dist/index.js"></script>
     <style>
         * {
             margin: 0;
@@ -390,26 +392,76 @@
         <p>© 2024 الشركة السعودية للكهرباء - جميع الحقوق محفوظة</p>
     </div>
 
-    <!-- The Vapi Widget is no longer included, only the SDK script is needed for custom UI -->
     
-    <script type="module">
-        // Import Vapi SDK from CDN
-        import Vapi from 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.3/dist/index.js';
+    <script>
+        // Use a standard script block to ensure global scope for onclick attributes
 
-        // Initialize Vapi with the provided public key
+        // Vapi configuration constants
         const VAPI_PUBLIC_KEY = '1f2432da-8fee-4c9e-af48-674fa145d001';
         const VAPI_ASSISTANT_ID = 'e2a656f8-5bfc-4cb1-993d-9db82a69bd79';
         
-        // Safety check (optional, but good practice)
-        if (typeof Vapi === 'undefined') {
-            console.error("Vapi SDK failed to load. Please check the import script.");
-        }
-        
-        const vapi = new Vapi(VAPI_PUBLIC_KEY);
-        
-        let isCallActive = false;
+        // UI element references
         const startButton = document.getElementById('startButton');
         const statusEl = document.getElementById('status');
+        
+        let vapi;
+        let isCallActive = false;
+
+        /**
+         * Initializes the Vapi client and sets up event listeners.
+         * This function runs once when the page loads.
+         */
+        function initializeVapi() {
+            // Check if Vapi object is globally available (from the CDN script tag)
+            if (typeof Vapi !== 'undefined') {
+                vapi = new Vapi(VAPI_PUBLIC_KEY);
+                console.log('Vapi SDK initialized.');
+
+                // --- Vapi Event Listeners ---
+                vapi.on('call-start', () => {
+                    console.log('Vapi Call started');
+                    isCallActive = true;
+                    updateButton(true);
+                    updateStatus('connected', 'متصل - تحدث الآن');
+                });
+
+                vapi.on('call-end', () => {
+                    console.log('Vapi Call ended');
+                    isCallActive = false;
+                    updateButton(false);
+                    updateStatus('disconnected', 'غير متصل');
+                });
+
+                vapi.on('speech-start', () => {
+                    console.log('Assistant started speaking');
+                    updateStatus('speaking', 'المساعد يتحدث...');
+                });
+
+                vapi.on('speech-end', () => {
+                    console.log('Assistant stopped speaking');
+                    // If the call is still active, return to listening state
+                    if (isCallActive) {
+                        updateStatus('connected', 'متصل - تحدث الآن');
+                    }
+                });
+                
+                vapi.on('message', (message) => {
+                    // Logs messages from the assistant
+                    if (message.message.role === 'assistant' && message.message.content) {
+                        console.log('Assistant message:', message.message.content);
+                    }
+                });
+
+                vapi.on('error', (error) => {
+                    console.error('Vapi Error:', error);
+                    isCallActive = false;
+                    updateButton(false);
+                    updateStatus('disconnected', 'خطأ: ' + (error.message || 'فشل الاتصال.'));
+                });
+            } else {
+                 console.error("Vapi SDK is not available. Check the CDN link in the header.");
+            }
+        }
 
         /**
          * Updates the connection status indicator on the UI.
@@ -426,7 +478,6 @@
             } else if (status === 'speaking') {
                  statusEl.classList.add('speaking');
             }
-            // For 'disconnected' status, only the default class remains
 
             statusEl.innerHTML = `<span class="status-dot"></span><span>${text}</span>`;
         }
@@ -448,9 +499,15 @@
         }
 
         /**
-         * Starts or stops the Vapi conversation.
+         * Starts or stops the Vapi conversation. This function is exposed globally.
          */
-        async function startConversation() {
+        window.startConversation = async function() {
+            if (!vapi) {
+                console.error("Vapi SDK not initialized.");
+                updateStatus('disconnected', 'خطأ في التهيئة.');
+                return;
+            }
+
             if (isCallActive) {
                 // End the call
                 vapi.stop();
@@ -458,93 +515,51 @@
                 // Start the call
                 try {
                     updateStatus('connecting', 'جاري الاتصال...');
-                    // Start without a custom message to allow the Assistant ID's greeting to take effect
                     await vapi.start(VAPI_ASSISTANT_ID); 
-                    isCallActive = true; 
-                    updateButton(true);
+                    // Success updates are handled by the 'call-start' event listener
                 } catch (error) {
-                    // Log the error for debugging
                     console.error('Error starting Vapi call:', error); 
-                    
-                    // Display a user-friendly error message in the console (or a custom message box)
                     updateStatus('disconnected', 'فشل الاتصال. تحقق من أذونات الميكروفون أو سجل الأخطاء.');
                     updateButton(false);
                     isCallActive = false;
                 }
             }
         }
-
-        // --- Vapi Event Listeners ---
-        vapi.on('call-start', () => {
-            console.log('Vapi Call started');
-            isCallActive = true;
-            updateButton(true);
-            updateStatus('connected', 'متصل - تحدث الآن');
-        });
-
-        vapi.on('call-end', () => {
-            console.log('Vapi Call ended');
-            isCallActive = false;
-            updateButton(false);
-            updateStatus('disconnected', 'غير متصل');
-        });
-
-        vapi.on('speech-start', () => {
-            console.log('Assistant started speaking');
-            updateStatus('speaking', 'المساعد يتحدث...');
-        });
-
-        vapi.on('speech-end', () => {
-            console.log('Assistant stopped speaking');
-            // If the call is still active, return to listening state
-            if (isCallActive) {
-                updateStatus('connected', 'متصل - تحدث الآن');
-            }
-        });
         
-        vapi.on('message', (message) => {
-             // Logs messages from the assistant
-             if (message.message.role === 'assistant' && message.message.content) {
-                 console.log('Assistant message:', message.message.content);
-             }
-        });
-
-        vapi.on('error', (error) => {
-            console.error('Vapi Error:', error);
-            isCallActive = false;
-            updateButton(false);
-            updateStatus('disconnected', 'خطأ: ' + (error.message || 'فشل الاتصال.'));
-        });
-
-        // Initialize status text on load
-        updateStatus('disconnected', 'غير متصل');
-        
-        // Make startConversation available globally via the button's onclick attribute
-        window.startConversation = startConversation;
-
-        // Add click handlers for quick action cards
-        document.querySelectorAll('.quick-action-card').forEach(card => {
-            card.addEventListener('click', async function() {
-                const promptText = this.getAttribute('data-prompt');
-                
-                if (!isCallActive) {
-                    await startConversation();
-                }
-                
-                // If the call successfully started, send the prompt
-                // A small delay might be needed here to ensure connection is fully established
-                setTimeout(() => {
-                    if (isCallActive && promptText) {
-                        vapi.send({
-                            message: {
-                                role: 'user',
-                                content: promptText
-                            }
-                        });
-                        console.log('Sent quick prompt:', promptText);
+        /**
+         * Attaches event listeners to the quick action cards.
+         */
+        function setupQuickActions() {
+            document.querySelectorAll('.quick-action-card').forEach(card => {
+                card.addEventListener('click', async function() {
+                    const promptText = this.getAttribute('data-prompt');
+                    
+                    if (!isCallActive) {
+                        // Start conversation if not active
+                        await window.startConversation();
                     }
-                }, 500); // 500ms delay to allow Vapi to initialize audio streams
+                    
+                    // Send the prompt after a slight delay to ensure connection
+                    setTimeout(() => {
+                        if (isCallActive && promptText && vapi) {
+                            vapi.send({
+                                message: {
+                                    role: 'user',
+                                    content: promptText
+                                }
+                            });
+                            console.log('Sent quick prompt:', promptText);
+                        }
+                    }, 800); // Increased delay slightly for reliability
+                });
             });
+        }
+
+        // Run initialization when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeVapi();
+            setupQuickActions();
+            updateStatus('disconnected', 'غير متصل');
         });
     </script>
 </body>
