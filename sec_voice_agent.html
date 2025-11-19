@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المساعد الذكي - الشركة السعودية للكهرباء</title>
-    <!-- Vapi SDK CDN for Module Import -->
-    <!-- The Vapi SDK is imported inside the <script type="module"> block -->
+    <!-- Vapi SDK Global Import (Standard method to expose Vapi globally) -->
+    <script src="https://unpkg.com/@vapi-ai/web@2.3.3/dist/index.umd.js"></script>
 
     <style>
+        /* [CSS styles remain unchanged from previous versions] */
         * {
             margin: 0;
             padding: 0;
@@ -419,10 +420,7 @@
     </div>
 
 
-    <script type="module">
-        // Vapi SDK Import
-        import Vapi from 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.3/dist/index.js';
-
+    <script>
         // Vapi Configuration
         const VAPI_PUBLIC_KEY = '1f2432da-8fee-4c9e-af48-674fa145d001';
         const ASSISTANT_ID = 'e2a656f8-5bfc-4cb1-993d-9db82a69bd79';
@@ -436,9 +434,8 @@
         let isVapiInitialized = false;
 
         // --- UI Update Functions ---
-        function updateStatus(state, text = '') {
+        function updateStatus(state) {
             statusEl.classList.remove('connected', 'connecting', 'speaking');
-            statusEl.innerHTML = `<span class="status-dot"></span><span>${text}</span>`;
 
             switch (state) {
                 case 'connecting':
@@ -453,8 +450,8 @@
                     statusEl.classList.add('speaking');
                     statusEl.innerHTML = `<span class="status-dot"></span><span>المساعد يتحدث...</span>`;
                     break;
-                case 'initializing_error':
-                    statusEl.innerHTML = `<span class="status-dot" style="background: red;"></span><span>فشل التهيئة. يرجى مراجعة Console.</span>`;
+                case 'error':
+                    statusEl.innerHTML = `<span class="status-dot" style="background: red;"></span><span>فشل الاتصال.</span>`;
                     break;
                 case 'idle':
                 default:
@@ -479,6 +476,14 @@
         // --- Vapi Initialization and Event Listeners ---
         function initializeVapiAndListeners() {
             if (isVapiInitialized) return;
+
+            // Check if Vapi object is globally available (should be due to CDN script tag)
+            if (typeof Vapi === 'undefined') {
+                updateStatus('error');
+                console.error("Vapi SDK is not available. Please check the CDN link.");
+                startButton.disabled = true;
+                return;
+            }
 
             try {
                 // Instantiate Vapi only once
@@ -508,8 +513,7 @@
                     console.error('Vapi error:', error);
                     isCallActive = false;
                     updateButton(false);
-                    updateStatus('idle');
-                    // Use custom UI for error message if needed, avoiding alert()
+                    updateStatus('error');
                 });
 
                 isVapiInitialized = true;
@@ -517,12 +521,12 @@
 
             } catch (error) {
                 console.error('Error during Vapi SDK instantiation:', error);
-                updateStatus('initializing_error');
+                updateStatus('error');
                 startButton.disabled = true;
             }
         }
 
-        // --- Main Conversation Toggler ---
+        // --- Main Conversation Toggler (Exposed to Global Scope) ---
         async function startConversation(prompt = null) {
             startButton.disabled = true;
 
@@ -556,32 +560,36 @@
                             },
                         };
                     }
-
+                    
+                    // The vapi object is guaranteed to be initialized here
                     await vapi.start(ASSISTANT_ID, callConfig.config);
 
                     // Call start event listener will handle UI update
                 } catch (error) {
                     console.error('Error starting call:', error);
-                    updateStatus('idle');
+                    updateStatus('error');
                     updateButton(false);
-                    // Handle error visually
                 }
             }
             startButton.disabled = false;
         }
 
         // --- Quick Action Setup ---
-        document.querySelectorAll('.quick-action-card').forEach(card => {
-            card.addEventListener('click', function() {
-                if (!isCallActive) {
-                    const prompt = this.getAttribute('data-prompt');
-                    startConversation(prompt);
-                }
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quick-action-card').forEach(card => {
+                card.addEventListener('click', function() {
+                    if (!isCallActive) {
+                        const prompt = this.getAttribute('data-prompt');
+                        startConversation(prompt);
+                    }
+                });
             });
+
+            // Attempt initialization immediately after DOM content loads (optional, but good practice)
+            // initializeVapiAndListeners(); // Let's keep it lazy (on button click) for max compatibility
         });
 
-        // Expose startConversation globally so the inline onclick in the button works
-        window.startConversation = startConversation;
+        // The function is globally available because it's in a standard <script> tag now.
     </script>
 </body>
 </html>
