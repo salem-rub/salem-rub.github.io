@@ -181,6 +181,23 @@
             }
         }
 
+        .pulse-ring.active {
+            animation: pulse 1s infinite;
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(192, 57, 43, 0.1) 100%);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(0, 71, 171, 0.4);
+            }
+            70% {
+                box-shadow: 0 0 0 30px rgba(0, 71, 171, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(0, 71, 171, 0);
+            }
+        }
+
         /* Status */
         .status {
             display: flex;
@@ -231,6 +248,15 @@
 
         .action-button:active {
             transform: translateY(0);
+        }
+
+        .action-button.active {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.3);
+        }
+
+        .action-button.active:hover {
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
         }
 
         /* Quick Actions */
@@ -297,6 +323,11 @@
             margin-top: 2rem;
         }
 
+        /* Hide vapi widget */
+        vapi-widget {
+            display: none !important;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .header-content {
@@ -320,11 +351,6 @@
             .quick-actions-grid {
                 grid-template-columns: 1fr;
             }
-        }
-
-        /* Hide default vapi widget button */
-        vapi-widget {
-            display: none !important;
         }
     </style>
 </head>
@@ -357,7 +383,7 @@
             </div>
 
             <div class="voice-container">
-                <div class="pulse-ring">
+                <div class="pulse-ring" id="pulseRing">
                     <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
                         <circle cx="50" cy="50" r="40" fill="url(#gradient)" />
                         <path d="M50 30 C50 30 42 35 42 45 L42 55 C42 65 50 70 50 70 C50 70 58 65 58 55 L58 45 C58 35 50 30 50 30 Z" fill="white"/>
@@ -405,90 +431,122 @@
         <p>© 2024 الشركة السعودية للكهرباء - جميع الحقوق محفوظة</p>
     </div>
 
+    <!-- Vapi Widget (Hidden but functional) -->
+    <vapi-widget
+        id="vapiWidget"
+        public-key="1f2432da-8fee-4c9e-af48-674fa145d001"
+        assistant-id="e2a656f8-5bfc-4cb1-993d-9db82a69bd79"
+        mode="voice"
+        theme="dark"
+        base-bg-color="#0047AB"
+        accent-color="#FF8C42"
+        cta-button-color="#0047AB"
+        cta-button-text-color="#ffffff"
+        border-radius="large"
+        size="full"
+        position="bottom-right"
+        title="تحدث مع المساعد الذكي"
+        start-button-text="ابدأ"
+        end-button-text="إنهاء المكالمة"
+        chat-first-message="مرحباً، كيف يمكنني مساعدتك اليوم؟"
+        chat-placeholder="اكتب رسالتك..."
+        voice-show-transcript="true"
+        consent-required="true"
+        consent-title="الشروط والأحكام"
+        consent-content="بالنقر على 'موافق'، وفي كل مرة أتفاعل فيها مع هذا الوكيل الذكي، أوافق على تسجيل وتخزين ومشاركة اتصالاتي مع مزودي خدمات خارجيين، وكما هو موضح في شروط الخدمة."
+        consent-storage-key="vapi_widget_consent"
+    ></vapi-widget>
+    <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js"></script>
 
-
-    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.3/dist/index.umd.js"></script>
     <script>
-        const vapi = new window.Vapi('1f2432da-8fee-4c9e-af48-674fa145d001');
-        
         let isCallActive = false;
         const startButton = document.getElementById('startButton');
         const statusEl = document.getElementById('status');
+        const pulseRing = document.getElementById('pulseRing');
+        let vapiWidget = null;
+        let widgetButton = null;
 
-        function updateStatus(connected, text) {
-            if (connected) {
+        // Wait for widget to load
+        function initializeWidget() {
+            vapiWidget = document.getElementById('vapiWidget');
+            
+            // Try to access the shadow DOM button
+            const checkWidget = setInterval(() => {
+                if (vapiWidget && vapiWidget.shadowRoot) {
+                    widgetButton = vapiWidget.shadowRoot.querySelector('button');
+                    if (widgetButton) {
+                        clearInterval(checkWidget);
+                        console.log('Widget initialized successfully');
+                        
+                        // Listen to widget button changes to sync state
+                        observeWidgetState();
+                    }
+                }
+            }, 100);
+        }
+
+        function observeWidgetState() {
+            // Create a MutationObserver to watch for changes in the widget
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === 'attributes' || mutation.type === 'childList') {
+                        checkWidgetState();
+                    }
+                });
+            });
+
+            if (vapiWidget && vapiWidget.shadowRoot) {
+                observer.observe(vapiWidget.shadowRoot, {
+                    attributes: true,
+                    childList: true,
+                    subtree: true
+                });
+            }
+        }
+
+        function checkWidgetState() {
+            // Check if call is active by looking at widget state
+            if (vapiWidget && vapiWidget.shadowRoot) {
+                const activeIndicator = vapiWidget.shadowRoot.querySelector('[data-call-active]');
+                const newState = activeIndicator !== null;
+                
+                if (newState !== isCallActive) {
+                    isCallActive = newState;
+                    updateUI(isCallActive);
+                }
+            }
+        }
+
+        function updateUI(active) {
+            if (active) {
+                startButton.textContent = '⏹️ إنهاء المكالمة';
+                startButton.classList.add('active');
+                pulseRing.classList.add('active');
                 statusEl.classList.add('connected');
-                statusEl.innerHTML = `<span class="status-dot"></span><span>${text || 'متصل'}</span>`;
+                statusEl.innerHTML = '<span class="status-dot"></span><span>متصل - تحدث الآن</span>';
             } else {
+                startButton.textContent = '🎙️ ابدأ المحادثة';
+                startButton.classList.remove('active');
+                pulseRing.classList.remove('active');
                 statusEl.classList.remove('connected');
                 statusEl.innerHTML = '<span class="status-dot"></span><span>غير متصل</span>';
             }
         }
 
-        function updateButton(isActive) {
-            if (isActive) {
-                startButton.textContent = '⏹️ إنهاء المكالمة';
-                startButton.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
+        function startConversation() {
+            if (widgetButton) {
+                widgetButton.click();
+                
+                // Update UI immediately for better UX
+                setTimeout(() => {
+                    isCallActive = !isCallActive;
+                    updateUI(isCallActive);
+                }, 100);
             } else {
-                startButton.textContent = '🎙️ ابدأ المحادثة';
-                startButton.style.background = 'linear-gradient(135deg, #0047AB 0%, #1E5BA8 100%)';
+                alert('جاري تحميل المساعد الذكي... يرجى المحاولة مرة أخرى خلال ثانية.');
+                initializeWidget();
             }
         }
-
-        async function startConversation() {
-            if (isCallActive) {
-                // End the call
-                vapi.stop();
-                isCallActive = false;
-                updateButton(false);
-                updateStatus(false);
-            } else {
-                // Start the call
-                try {
-                    updateStatus(true, 'جاري الاتصال...');
-                    await vapi.start('e2a656f8-5bfc-4cb1-993d-9db82a69bd79');
-                    isCallActive = true;
-                    updateButton(true);
-                    updateStatus(true, 'متصل - تحدث الآن');
-                } catch (error) {
-                    console.error('Error starting call:', error);
-                    updateStatus(false);
-                    alert('حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.');
-                }
-            }
-        }
-
-        // Event listeners
-        vapi.on('call-start', () => {
-            console.log('Call started');
-            isCallActive = true;
-            updateButton(true);
-            updateStatus(true, 'متصل - تحدث الآن');
-        });
-
-        vapi.on('call-end', () => {
-            console.log('Call ended');
-            isCallActive = false;
-            updateButton(false);
-            updateStatus(false);
-        });
-
-        vapi.on('speech-start', () => {
-            console.log('Assistant started speaking');
-            updateStatus(true, 'المساعد يتحدث...');
-        });
-
-        vapi.on('speech-end', () => {
-            console.log('Assistant stopped speaking');
-            updateStatus(true, 'متصل - تحدث الآن');
-        });
-
-        vapi.on('error', (error) => {
-            console.error('Vapi error:', error);
-            isCallActive = false;
-            updateButton(false);
-            updateStatus(false);
-        });
 
         // Attach click event to button
         startButton.addEventListener('click', startConversation);
@@ -496,10 +554,13 @@
         // Add click handlers for quick action cards
         document.querySelectorAll('.quick-action-card').forEach(card => {
             card.addEventListener('click', function() {
-                if (!isCallActive) {
-                    startConversation();
-                }
+                startConversation();
             });
+        });
+
+        // Initialize when page loads
+        window.addEventListener('load', () => {
+            setTimeout(initializeWidget, 500);
         });
     </script>
 </body>
