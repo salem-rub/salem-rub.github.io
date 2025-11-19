@@ -12,6 +12,7 @@
         }
 
         body {
+            /* Using SEC theme colors: Deep Blue #0047AB, Bright Orange #FF8C42 */
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
             min-height: 100vh;
@@ -55,6 +56,7 @@
         .logo-icon {
             width: 30px;
             height: 30px;
+            /* Using orange accent for a stylized icon/placeholder */
             border: 3px solid #FF8C42;
             border-radius: 50%;
             border-top-color: transparent;
@@ -200,8 +202,18 @@
         }
 
         .status.connected .status-dot {
-            background: #27AE60;
+            background: #27AE60; /* Green for connected */
             animation: blink 2s infinite;
+        }
+        
+        .status.speaking .status-dot {
+            background: #FF8C42; /* Orange for speaking */
+            animation: none;
+        }
+        
+        .status.connecting .status-dot {
+            background: #0047AB; /* Blue for connecting */
+            animation: blink 1s infinite;
         }
 
         @keyframes blink {
@@ -297,33 +309,8 @@
             margin-top: 2rem;
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            .header-content {
-                flex-direction: column;
-                gap: 1rem;
-                text-align: center;
-            }
-
-            .main-title {
-                font-size: 1.8rem;
-            }
-
-            .subtitle {
-                font-size: 1rem;
-            }
-
-            .card {
-                padding: 2rem 1.5rem;
-            }
-
-            .quick-actions-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Hide default vapi widget button */
-        #vapi-widget-button {
+        /* Hide Vapi's built-in widget since we are using a custom button */
+        vapi-widget {
             display: none !important;
         }
     </style>
@@ -334,6 +321,7 @@
         <div class="header-content">
             <div class="logo-section">
                 <div class="logo">
+                    <!-- Placeholder icon using SEC colors -->
                     <div class="logo-icon"></div>
                 </div>
                 <div class="company-name">
@@ -358,6 +346,7 @@
 
             <div class="voice-container">
                 <div class="pulse-ring">
+                    <!-- Microphone SVG Icon -->
                     <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
                         <circle cx="50" cy="50" r="40" fill="url(#gradient)" />
                         <path d="M50 30 C50 30 42 35 42 45 L42 55 C42 65 50 70 50 70 C50 70 58 65 58 55 L58 45 C58 35 50 30 50 30 Z" fill="white"/>
@@ -378,6 +367,7 @@
                 <span>غير متصل</span>
             </div>
 
+            <!-- This is the custom button that needs the functionality -->
             <button class="action-button" id="startButton" onclick="startConversation()">
                 🎙️ ابدأ المحادثة
             </button>
@@ -387,11 +377,11 @@
                     ⚡ جرب الأسئلة التالية
                 </div>
                 <div class="quick-actions-grid">
-                    <div class="quick-action-card">
+                    <div class="quick-action-card" data-prompt="ليش فاتورتي ارتفعت هالشهر؟">
                         <div class="quick-action-title">ليش فاتورتي ارتفعت هالشهر؟</div>
                         <div class="quick-action-desc">استفسار عن ارتفاع استهلاك الكهرباء والفاتورة</div>
                     </div>
-                    <div class="quick-action-card">
+                    <div class="quick-action-card" data-prompt="عندي انقطاع كهرباء بالبيت">
                         <div class="quick-action-title">عندي انقطاع كهرباء بالبيت</div>
                         <div class="quick-action-desc">الإبلاغ عن انقطاع التيار الكهربائي وفتح بلاغ</div>
                     </div>
@@ -405,69 +395,175 @@
         <p>© 2024 الشركة السعودية للكهرباء - جميع الحقوق محفوظة</p>
     </div>
 
-    <!-- Vapi Widget -->
+    <!-- Vapi Widget is hidden but must be included to load the script/SDK if we were using it for consent/chat -->
     <vapi-widget
         public-key="1f2432da-8fee-4c9e-af48-674fa145d001"
         assistant-id="e2a656f8-5bfc-4cb1-993d-9db82a69bd79"
         mode="voice"
         theme="dark"
         base-bg-color="#000000"
-        accent-color="#14B8A6"
-        cta-button-color="#0047AB"
+        accent-color="#F26724"
+        cta-button-color="#004481"
         cta-button-text-color="#ffffff"
         border-radius="large"
         size="full"
         position="bottom-right"
-        title="تحدث مع المساعد الذكي"
-        start-button-text="ابدأ"
-        end-button-text="إنهاء المكالمة"
-        chat-first-message="مرحباً، كيف يمكنني مساعدتك اليوم؟"
-        chat-placeholder="اكتب رسالتك..."
+        title="TALK WITH AI"
+        start-button-text="Start"
+        end-button-text="End Call"
+        chat-first-message="Hey, How can I help you today?"
+        chat-placeholder="Type your message..."
         voice-show-transcript="true"
         consent-required="true"
-        consent-title="الشروط والأحكام"
-        consent-content="بالنقر على 'موافق'، وفي كل مرة أتفاعل فيها مع هذا الوكيل الذكي، أوافق على تسجيل وتخزين ومشاركة اتصالاتي مع مزودي خدمات خارجيين، وكما هو موضح في شروط الخدمة."
+        consent-title="Terms and conditions"
+        consent-content="By clicking "Agree," and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as otherwise described in our Terms of Service."
         consent-storage-key="vapi_widget_consent"
     ></vapi-widget>
-    <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js" async type="text/javascript"></script>
 
-    <script>
-        function startConversation() {
-            // Trigger the vapi widget
-            const vapiButton = document.querySelector('vapi-widget');
-            if (vapiButton && vapiButton.shadowRoot) {
-                const button = vapiButton.shadowRoot.querySelector('button');
-                if (button) {
-                    button.click();
+
+    <script type="module">
+        // Import Vapi SDK from CDN
+        import Vapi from 'https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.3/dist/index.js';
+
+        // Initialize Vapi with the provided public key
+        const VAPI_PUBLIC_KEY = '1f2432da-8fee-4c9e-af48-674fa145d001';
+        const VAPI_ASSISTANT_ID = 'e2a656f8-5bfc-4cb1-993d-9db82a69bd79';
+        
+        // Check if Vapi is available before initializing
+        if (typeof Vapi === 'undefined') {
+            console.error("Vapi SDK failed to load. Please check the import script.");
+        }
+        
+        const vapi = new Vapi(VAPI_PUBLIC_KEY);
+        
+        let isCallActive = false;
+        const startButton = document.getElementById('startButton');
+        const statusEl = document.getElementById('status');
+
+        /**
+         * Updates the connection status indicator on the UI.
+         * @param {string} status 'connected', 'connecting', 'speaking', or 'disconnected'
+         * @param {string} text The text to display next to the dot.
+         */
+        function updateStatus(status, text) {
+            statusEl.className = 'status'; // Reset classes
+            
+            if (status === 'connected') {
+                statusEl.classList.add('connected');
+            } else if (status === 'connecting') {
+                statusEl.classList.add('connecting');
+            } else if (status === 'speaking') {
+                 statusEl.classList.add('speaking');
+            }
+            // For 'disconnected' status, only the default class remains
+
+            statusEl.innerHTML = `<span class="status-dot"></span><span>${text}</span>`;
+        }
+
+        /**
+         * Updates the main action button text and style.
+         * @param {boolean} isActive True if the call is active.
+         */
+        function updateButton(isActive) {
+            if (isActive) {
+                startButton.textContent = '⏹️ إنهاء المكالمة';
+                // Use a warning/stop color (red/orange)
+                startButton.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)'; 
+            } else {
+                startButton.textContent = '🎙️ ابدأ المحادثة';
+                // Use the primary SEC blue color
+                startButton.style.background = 'linear-gradient(135deg, #0047AB 0%, #1E5BA8 100%)';
+            }
+        }
+
+        /**
+         * Starts or stops the Vapi conversation.
+         */
+        async function startConversation() {
+            if (isCallActive) {
+                // End the call
+                vapi.stop();
+            } else {
+                // Start the call
+                try {
+                    updateStatus('connecting', 'جاري الاتصال...');
+                    // Start without a custom message to allow the Assistant ID's greeting to take effect
+                    await vapi.start(VAPI_ASSISTANT_ID); 
+                    isCallActive = true; // This will also be set by the 'call-start' event, but we set it here for immediate feedback
+                    updateButton(true);
+                } catch (error) {
+                    console.error('Error starting call:', error);
+                    updateStatus('disconnected', 'حدث خطأ في الاتصال. يرجى المحاولة مرة أخرى.');
+                    updateButton(false);
+                    isCallActive = false;
                 }
             }
-            
-            // Update status
-            updateStatus(true);
         }
 
-        function updateStatus(connected) {
-            const statusEl = document.getElementById('status');
-            if (connected) {
-                statusEl.classList.add('connected');
-                statusEl.innerHTML = '<span class="status-dot"></span><span>متصل</span>';
-            } else {
-                statusEl.classList.remove('connected');
-                statusEl.innerHTML = '<span class="status-dot"></span><span>غير متصل</span>';
-            }
-        }
+        // --- Vapi Event Listeners ---
+        vapi.on('call-start', () => {
+            console.log('Vapi Call started');
+            isCallActive = true;
+            updateButton(true);
+            updateStatus('connected', 'متصل - تحدث الآن');
+        });
 
-        // Listen for widget state changes
-        window.addEventListener('message', (event) => {
-            if (event.data && event.data.type === 'vapi-state') {
-                updateStatus(event.data.state === 'active');
+        vapi.on('call-end', () => {
+            console.log('Vapi Call ended');
+            isCallActive = false;
+            updateButton(false);
+            updateStatus('disconnected', 'غير متصل');
+        });
+
+        vapi.on('speech-start', () => {
+            console.log('Assistant started speaking');
+            updateStatus('speaking', 'المساعد يتحدث...');
+        });
+
+        vapi.on('speech-end', () => {
+            console.log('Assistant stopped speaking');
+            // If the call is still active, return to listening state
+            if (isCallActive) {
+                updateStatus('connected', 'متصل - تحدث الآن');
             }
         });
+        
+        vapi.on('message', (message) => {
+             // You can use this to display the message in the UI if needed
+             if (message.message.role === 'assistant' && message.message.content) {
+                 console.log('Assistant message:', message.message.content);
+             }
+        });
+
+        vapi.on('error', (error) => {
+            console.error('Vapi Error:', error);
+            isCallActive = false;
+            updateButton(false);
+            updateStatus('disconnected', 'خطأ: ' + error.message || 'فشل الاتصال.');
+        });
+
+        // Initialize status text on load
+        updateStatus('disconnected', 'غير متصل');
+        
+        // Make startConversation available globally via the button's onclick attribute
+        window.startConversation = startConversation;
 
         // Add click handlers for quick action cards
         document.querySelectorAll('.quick-action-card').forEach(card => {
             card.addEventListener('click', function() {
-                startConversation();
+                if (!isCallActive) {
+                    startConversation();
+                }
+                // Optional: send the prompt text to the assistant upon call start
+                const promptText = this.getAttribute('data-prompt');
+                if (isCallActive && promptText) {
+                    vapi.send({
+                        message: {
+                            role: 'user',
+                            content: promptText
+                        }
+                    });
+                }
             });
         });
     </script>
