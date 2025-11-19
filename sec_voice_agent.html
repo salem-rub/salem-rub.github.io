@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المساعد الذكي - الشركة السعودية للكهرباء</title>
-    <!-- Vapi SDK Import: Must be included before the script block that uses it -->
-    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.3/dist/index.js"></script>
+    <!-- Vapi SDK Import: Using the official, reliable UMD link for global browser access -->
+    <script src="https://cdn.jsdelivr.net/npm/@vapi-ai/web@2.3.3/dist/web.min.js" type="application/javascript"></script>
     <style>
         * {
             margin: 0;
@@ -404,7 +404,7 @@
         const startButton = document.getElementById('startButton');
         const statusEl = document.getElementById('status');
         
-        let vapi;
+        let vapi = null; // Initialize vapi as null
         let isCallActive = false;
 
         /**
@@ -415,7 +415,7 @@
             // Check if Vapi object is globally available (from the CDN script tag)
             if (typeof Vapi !== 'undefined') {
                 vapi = new Vapi(VAPI_PUBLIC_KEY);
-                console.log('Vapi SDK initialized.');
+                console.log('Vapi SDK initialized successfully.');
 
                 // --- Vapi Event Listeners ---
                 vapi.on('call-start', () => {
@@ -459,7 +459,10 @@
                     updateStatus('disconnected', 'خطأ: ' + (error.message || 'فشل الاتصال.'));
                 });
             } else {
+                 // Log a clearer message if Vapi is missing
                  console.error("Vapi SDK is not available. Check the CDN link in the header.");
+                 // We rely on the global Vapi object, so if it's missing, Vapi isn't loaded.
+                 // We don't try to update status here, as it might also fail if DOM isn't ready.
             }
         }
 
@@ -469,17 +472,19 @@
          * @param {string} text The text to display next to the dot.
          */
         function updateStatus(status, text) {
-            statusEl.className = 'status'; // Reset classes
-            
-            if (status === 'connected') {
-                statusEl.classList.add('connected');
-            } else if (status === 'connecting') {
-                statusEl.classList.add('connecting');
-            } else if (status === 'speaking') {
-                 statusEl.classList.add('speaking');
-            }
+            if (statusEl) {
+                statusEl.className = 'status'; // Reset classes
+                
+                if (status === 'connected') {
+                    statusEl.classList.add('connected');
+                } else if (status === 'connecting') {
+                    statusEl.classList.add('connecting');
+                } else if (status === 'speaking') {
+                    statusEl.classList.add('speaking');
+                }
 
-            statusEl.innerHTML = `<span class="status-dot"></span><span>${text}</span>`;
+                statusEl.innerHTML = `<span class="status-dot"></span><span>${text}</span>`;
+            }
         }
 
         /**
@@ -487,14 +492,16 @@
          * @param {boolean} isActive True if the call is active.
          */
         function updateButton(isActive) {
-            if (isActive) {
-                startButton.textContent = '⏹️ إنهاء المكالمة';
-                // Use a warning/stop color (red/orange)
-                startButton.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)'; 
-            } else {
-                startButton.textContent = '🎙️ ابدأ المحادثة';
-                // Use the primary SEC blue color
-                startButton.style.background = 'linear-gradient(135deg, #0047AB 0%, #1E5BA8 100%)';
+            if (startButton) {
+                if (isActive) {
+                    startButton.textContent = '⏹️ إنهاء المكالمة';
+                    // Use a warning/stop color (red/orange)
+                    startButton.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)'; 
+                } else {
+                    startButton.textContent = '🎙️ ابدأ المحادثة';
+                    // Use the primary SEC blue color
+                    startButton.style.background = 'linear-gradient(135deg, #0047AB 0%, #1E5BA8 100%)';
+                }
             }
         }
 
@@ -503,7 +510,7 @@
          */
         window.startConversation = async function() {
             if (!vapi) {
-                console.error("Vapi SDK not initialized.");
+                console.error("Vapi SDK not initialized. Cannot start conversation.");
                 updateStatus('disconnected', 'خطأ في التهيئة.');
                 return;
             }
