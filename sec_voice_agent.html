@@ -407,10 +407,10 @@
 
             <div class="status" id="status">
                 <span class="status-dot"></span>
-                <span>غير متصل</span>
+                <span>جاري التهيئة...</span>
             </div>
 
-            <button class="action-button" id="startButton">
+            <button class="action-button" id="startButton" disabled>
                 🎙️ ابدأ المحادثة
             </button>
 
@@ -469,9 +469,6 @@
 
 
     <script>
-        // Vapi Configuration (now controlled via the Widget element)
-        const ASSISTANT_ID = 'e2a656f8-5bfc-4cb1-993d-9db82a69bd79';
-        
         // UI Elements
         const startButton = document.getElementById('startButton');
         const statusEl = document.getElementById('status');
@@ -533,21 +530,23 @@
             startButton.disabled = false;
         }
 
-        // --- Widget Initialization and Event Binding ---
+        // --- Widget Initialization and Event Binding (Polling for reliability) ---
         function initializeVapiWidget() {
+            // Stop if already initialized
             if (isVapiInitialized) return;
 
-            // Get the Widget element
+            // Look for the widget element
             vapiWidget = document.querySelector('vapi-widget');
 
             if (!vapiWidget) {
-                // If the widget element isn't there, wait longer
-                setTimeout(initializeVapiWidget, 1000); // Wait another second
+                // If not found, try again shortly (Polling)
+                console.log('Waiting for Vapi Widget element to load...');
+                setTimeout(initializeVapiWidget, 100); 
                 return;
             }
 
             try {
-                // Bind Widget events to update our custom UI (status/button)
+                // --- Bind Widget Events ---
                 vapiWidget.addEventListener('call-start', () => {
                     isCallActive = true;
                     updateButton(true);
@@ -575,10 +574,11 @@
                     updateStatus('error');
                 });
 
-                // Success
+                // --- Success ---
                 isVapiInitialized = true;
-                console.log('Vapi Widget Initialized successfully.');
+                console.log('Vapi Widget Initialized successfully. Button is active.');
                 updateButton(false); 
+                updateStatus('idle');
 
             } catch (error) {
                 console.error('Error during Vapi Widget setup:', error);
@@ -588,27 +588,18 @@
 
         // --- Main Conversation Toggler ---
         async function startConversation(prompt = null) {
+            // If initialization failed permanently, do nothing
             if (!isVapiInitialized) {
-                updateButton(false, true); // Show loading state
-                // Attempt to initialize first
-                setTimeout(() => {
-                    initializeVapiWidget();
-                    if (isVapiInitialized) {
-                        startVapiCall(prompt);
-                    } else {
-                         // Permanently disable if still failed
-                        updateButton(false, false); 
-                        updateStatus('error');
-                    }
-                }, 100);
+                updateStatus('error');
                 return;
             }
-            
-            startVapiCall(prompt);
-        }
 
-        async function startVapiCall(prompt) {
-            if (!vapiWidget || !isVapiInitialized) return;
+            // Ensure the widget is available
+            if (!vapiWidget) {
+                 console.error("Vapi Widget element not found, re-initializing.");
+                 initializeVapiWidget(); // Re-attempt initialization
+                 return;
+            }
 
             if (isCallActive) {
                 // End the call using the Widget's stop method
@@ -618,7 +609,6 @@
                 try {
                     updateStatus('connecting');
 
-                    // If a prompt is provided, we must modify the widget's config to inject the prompt.
                     if (prompt) {
                         const systemPrompt = `أنت مساعد الذكي للشركة السعودية للكهرباء (SEC). يبدأ المستخدم محادثة بالضغط على زر. ابدأ المحادثة بالترحيب ثم عالج استفسار المستخدم الفوري وهو: "${prompt}"`;
                         
@@ -631,7 +621,6 @@
 
                     // If we injected a prompt, reset the first message after starting the call
                     if (prompt) {
-                        // The user will see this next time, or the default if they open chat
                         vapiWidget.setAttribute('chat-first-message', "أهلاً، كيف يمكنني مساعدتك اليوم؟"); 
                     }
 
@@ -652,14 +641,13 @@
             document.querySelectorAll('.quick-action-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const prompt = this.getAttribute('data-prompt');
-                    // We call startConversation directly, which handles the call state logic
+                    // We call startConversation, which handles the call state logic
                     startConversation(prompt);
                 });
             });
 
-            // 3. Initial Widget Setup (Must be delayed slightly to ensure the widget script has run)
-            // Use a 500ms delay to give the async widget script time to create the <vapi-widget> element.
-            setTimeout(initializeVapiWidget, 500); 
+            // 3. Start the robust initialization process (Polling)
+            initializeVapiWidget(); 
         });
     </script>
 </body>
