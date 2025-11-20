@@ -104,7 +104,7 @@
                         <div class="font-bold text-gray-700">ليش فاتورتي ارتفعت هالشهر؟</div>
                         <div class="text-sm text-gray-500">استفسار عن ارتفاع استهلاك الكهرباء والفاتورة</div>
                     </div>
-                    <div class="quick-action-card" data-prompt="عندي انقطاع كهرباء بالبيت">
+                    <div class="quick-action-card bg-gray-50 hover:bg-sec-orange/10 p-4 rounded-xl cursor-pointer transition duration-150 border border-gray-100 hover:border-sec-orange/50">
                         <div class="font-bold text-gray-700">عندي انقطاع كهرباء بالبيت</div>
                         <div class="text-sm text-gray-500">الإبلاغ عن انقطاع التيار الكهربائي وفتح بلاغ</div>
                     </div>
@@ -257,14 +257,12 @@
         // Attach event listeners after the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', () => {
             // Start the client discovery
-            // We start initialization, and Polling handles readiness.
             initializeVapiClient();
             
             // Attach click handlers for quick action cards
             document.querySelectorAll('.quick-action-card').forEach(card => {
                 card.addEventListener('click', function() {
                     if (!isCallActive && isVapiReady) {
-                        // The prompt setting is handled inside startConversation
                         startConversation();
                     }
                 });
