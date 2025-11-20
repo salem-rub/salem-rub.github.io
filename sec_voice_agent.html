@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>المساعد الذكي - الشركة السعودية للكهرباء</title>
-    <!-- Vapi Widget SDK is now included in the body for stable loading -->
+    
+    <!-- Load Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* [CSS styles remain unchanged for consistency] */
         * {
             margin: 0;
             padding: 0;
@@ -262,7 +263,6 @@
             box-shadow: none;
         }
 
-
         /* Quick Actions */
         .quick-actions {
             border-top: 1px solid #E8EEF5;
@@ -352,9 +352,14 @@
             }
         }
         
-        /* IMPORTANT: Hiding the default Vapi Widget button so our custom button can control the call */
-        vapi-widget::part(button-root) {
-            display: none !important;
+        /* Hide the actual Vapi Widget visually, but keep it in DOM */
+        vapi-widget {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            z-index: -1; /* Behind everything */
+            opacity: 0;  /* Invisible */
+            pointer-events: none; /* Cant be clicked directly */
         }
     </style>
 </head>
@@ -364,7 +369,6 @@
         <div class="header-content">
             <div class="logo-section">
                 <div class="logo">
-                    <!-- SEC Logo Icon placeholder (can be replaced with actual SVG or image) -->
                     <div class="logo-icon"></div>
                 </div>
                 <div class="company-name">
@@ -389,7 +393,6 @@
 
             <div class="voice-container">
                 <div class="pulse-ring">
-                    <!-- Microphone SVG Icon -->
                     <svg width="100" height="100" viewBox="0 0 100 100" fill="none">
                         <circle cx="50" cy="50" r="40" fill="url(#gradient)" />
                         <path d="M50 30 C50 30 42 35 42 45 L42 55 C42 65 50 70 50 70 C50 70 58 65 58 55 L58 45 C58 35 50 30 50 30 Z" fill="white"/>
@@ -437,8 +440,7 @@
         <p>© 2024 الشركة السعودية للكهرباء - جميع الحقوق محفوظة</p>
     </div>
 
-    <!-- Vapi Widget Code (Fallback Solution to ensure SDK loading) -->
-    <!-- The widget is configured to use SEC colors and is placed at the bottom-right, but its button is hidden via CSS -->
+    <!-- Vapi Widget Code - Hidden via CSS but fully functional -->
     <vapi-widget
         id="vapiWidget"
         public-key="1f2432da-8fee-4c9e-af48-674fa145d001"
@@ -452,21 +454,18 @@
         border-radius="large"
         size="full"
         position="bottom-right"
-        title="المساعد الصوتي"
         start-button-text="ابدأ"
         end-button-text="إنهاء"
         chat-first-message="أهلاً، كيف يمكنني مساعدتك اليوم؟"
-        chat-placeholder="اكتب رسالتك..."
         voice-show-transcript="true"
         consent-required="true"
         consent-title="الشروط والأحكام"
-        consent-content="بالنقر على 'أوافق'، وفي كل مرة أتفاعل فيها مع هذا المساعد، فإنني أوافق على تسجيل وتخزين ومشاركة اتصالاتي مع مزودي خدمات الطرف الثالث، وكما هو موضح في شروط الخدمة."
+        consent-content="بالنقر على 'أوافق'، فإنني أوافق على تسجيل وتخزين المحادثة."
         consent-storage-key="vapi_widget_consent"
     ></vapi-widget>
 
     <!-- The Vapi Widget SDK loader -->
     <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js" async type="text/javascript"></script>
-
 
     <script>
         // UI Elements
@@ -474,53 +473,34 @@
         const statusEl = document.getElementById('status');
 
         let isCallActive = false;
-        let vapiWidget = null;
-        let isVapiInitialized = false;
+        let internalButton = null; // This will hold the actual button inside the Shadow DOM
+        let isWidgetReady = false;
 
         // --- UI Update Functions ---
         function updateStatus(state) {
             statusEl.classList.remove('connected', 'connecting', 'speaking', 'error', 'idle');
-
-            switch (state) {
-                case 'connecting':
-                    statusEl.classList.add('connecting');
-                    statusEl.innerHTML = `<span class="status-dot"></span><span>جاري الاتصال...</span>`;
-                    break;
-                case 'connected':
-                    statusEl.classList.add('connected');
-                    statusEl.innerHTML = `<span class="status-dot"></span><span>متصل - تحدث الآن</span>`;
-                    break;
-                case 'speaking':
-                    statusEl.classList.add('speaking');
-                    statusEl.innerHTML = `<span class="status-dot"></span><span>المساعد يتحدث...</span>`;
-                    break;
-                case 'error':
-                    statusEl.classList.add('error');
-                    statusEl.innerHTML = `<span class="status-dot"></span><span>فشل الاتصال / التهيئة.</span>`;
-                    break;
-                case 'idle':
-                default:
-                    statusEl.classList.add('idle');
-                    statusEl.innerHTML = `<span class="status-dot"></span><span>غير متصل</span>`;
-                    break;
-            }
+            
+            // Map states
+            let text = 'غير متصل';
+            let cls = 'idle';
+            
+            if (state === 'connecting') { text = 'جاري الاتصال...'; cls = 'connecting'; }
+            else if (state === 'connected') { text = 'متصل - تحدث الآن'; cls = 'connected'; }
+            else if (state === 'speaking') { text = 'المساعد يتحدث...'; cls = 'speaking'; }
+            else if (state === 'error') { text = 'فشل الاتصال / التهيئة.'; cls = 'error'; }
+            
+            statusEl.classList.add(cls);
+            statusEl.innerHTML = `<span class="status-dot"></span><span>${text}</span>`;
         }
 
-        function updateButton(isActive, loading = false) {
+        function updateButton(active, loading = false) {
             if (loading) {
                 startButton.textContent = 'جاري التحميل...';
                 startButton.disabled = true;
                 return;
             }
-            // Check for initialization failure
-            if (!isVapiInitialized) {
-                startButton.textContent = '❌ فشل التهيئة';
-                startButton.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
-                startButton.disabled = true;
-                return;
-            }
             
-            if (isActive) {
+            if (active) {
                 startButton.textContent = '⏹️ إنهاء المكالمة';
                 startButton.style.background = 'linear-gradient(135deg, #e74c3c 0%, #c0392b 100%)';
             } else {
@@ -530,124 +510,95 @@
             startButton.disabled = false;
         }
 
-        // --- Widget Initialization and Event Binding (Polling for reliability) ---
-        function initializeVapiWidget() {
-            // Stop if already initialized
-            if (isVapiInitialized) return;
+        // --- Shadow DOM Connector ---
+        // This function hunts down the button INSIDE the widget's shadow DOM
+        function findInternalButton() {
+            const widget = document.querySelector('vapi-widget');
+            if (!widget || !widget.shadowRoot) return null;
+            
+            // Vapi widget usually puts the main button inside the shadow root.
+            // We look for a button element.
+            const btn = widget.shadowRoot.querySelector('button');
+            return btn;
+        }
 
-            // Look for the widget element
-            vapiWidget = document.querySelector('vapi-widget');
+        // --- Initialization (Polling) ---
+        function initializeConnector() {
+            if (isWidgetReady) return;
 
-            if (!vapiWidget) {
-                // If not found, try again shortly (Polling)
-                console.log('Waiting for Vapi Widget element to load...');
-                setTimeout(initializeVapiWidget, 100); 
-                return;
-            }
+            const btn = findInternalButton();
+            
+            if (btn) {
+                // Found it!
+                console.log("Successfully connected to Vapi Internal Button.");
+                internalButton = btn;
+                isWidgetReady = true;
+                updateButton(false); // Enable our button
+                updateStatus('idle');
 
-            try {
-                // --- Bind Widget Events ---
-                vapiWidget.addEventListener('call-start', () => {
+                // Attach widget event listeners to sync UI
+                const widget = document.querySelector('vapi-widget');
+                widget.addEventListener('call-start', () => {
                     isCallActive = true;
                     updateButton(true);
                     updateStatus('connected');
                 });
-
-                vapiWidget.addEventListener('call-end', () => {
+                widget.addEventListener('call-end', () => {
                     isCallActive = false;
                     updateButton(false);
                     updateStatus('idle');
                 });
+                widget.addEventListener('speech-start', () => updateStatus('speaking'));
+                widget.addEventListener('speech-end', () => updateStatus('connected'));
+                widget.addEventListener('error', () => updateStatus('error'));
 
-                vapiWidget.addEventListener('speech-start', () => {
-                    updateStatus('speaking');
-                });
-
-                vapiWidget.addEventListener('speech-end', () => {
-                    updateStatus('connected');
-                });
-                
-                vapiWidget.addEventListener('error', (error) => {
-                    console.error('Vapi Widget error:', error);
-                    isCallActive = false;
-                    updateButton(false);
-                    updateStatus('error');
-                });
-
-                // --- Success ---
-                isVapiInitialized = true;
-                console.log('Vapi Widget Initialized successfully. Button is active.');
-                updateButton(false); 
-                updateStatus('idle');
-
-            } catch (error) {
-                console.error('Error during Vapi Widget setup:', error);
-                updateStatus('error');
-            }
-        }
-
-        // --- Main Conversation Toggler ---
-        async function startConversation(prompt = null) {
-            // If initialization failed permanently, do nothing
-            if (!isVapiInitialized) {
-                updateStatus('error');
-                return;
-            }
-
-            // Ensure the widget is available
-            if (!vapiWidget) {
-                 console.error("Vapi Widget element not found, re-initializing.");
-                 initializeVapiWidget(); // Re-attempt initialization
-                 return;
-            }
-
-            if (isCallActive) {
-                // End the call using the Widget's stop method
-                vapiWidget.stop();
             } else {
-                // Start the call using the Widget's start method
-                try {
-                    updateStatus('connecting');
-
-                    if (prompt) {
-                        const systemPrompt = `أنت مساعد الذكي للشركة السعودية للكهرباء (SEC). يبدأ المستخدم محادثة بالضغط على زر. ابدأ المحادثة بالترحيب ثم عالج استفسار المستخدم الفوري وهو: "${prompt}"`;
-                        
-                        // Temporarily set the first message config on the widget before starting
-                        vapiWidget.setAttribute('chat-first-message', systemPrompt);
-                    }
-                    
-                    // Start the call using the widget's start method
-                    await vapiWidget.start();
-
-                    // If we injected a prompt, reset the first message after starting the call
-                    if (prompt) {
-                        vapiWidget.setAttribute('chat-first-message', "أهلاً، كيف يمكنني مساعدتك اليوم؟"); 
-                    }
-
-                } catch (error) {
-                    console.error('Error starting call via Widget:', error);
-                    updateStatus('error');
-                    updateButton(false);
-                }
+                // Keep looking...
+                console.log("Waiting for Vapi Widget Shadow DOM...");
+                setTimeout(initializeConnector, 200); 
             }
         }
 
-        // --- Event Listeners Setup (DOM Ready) ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // 1. Attach startConversation to the main button
-            startButton.addEventListener('click', () => startConversation());
+        // --- Main Toggle Function ---
+        function toggleCall(prompt = null) {
+            if (!isWidgetReady || !internalButton) return;
 
-            // 2. Attach click handlers for Quick Action Cards
+            // If we are starting a call and have a prompt, we might want to inject it.
+            // But with the Shadow DOM click method, we are just clicking the button.
+            // The prompt injection via attribute works if done BEFORE the call starts.
+            if (!isCallActive && prompt) {
+                const widget = document.querySelector('vapi-widget');
+                const systemPrompt = `أنت مساعد الذكي للشركة السعودية للكهرباء. ابدأ المحادثة بالترحيب ثم عالج استفسار المستخدم الفوري وهو: "${prompt}"`;
+                widget.setAttribute('chat-first-message', systemPrompt);
+            }
+
+            // SIMULATE CLICK on the hidden internal button
+            internalButton.click();
+            
+            // Reset prompt after a delay if we used one
+            if (!isCallActive && prompt) {
+                setTimeout(() => {
+                    const widget = document.querySelector('vapi-widget');
+                    widget.setAttribute('chat-first-message', "أهلاً، كيف يمكنني مساعدتك اليوم؟");
+                }, 2000);
+            }
+        }
+
+        // --- Setup ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Link main button
+            startButton.addEventListener('click', () => toggleCall());
+
+            // Link quick action cards
             document.querySelectorAll('.quick-action-card').forEach(card => {
                 card.addEventListener('click', function() {
                     const prompt = this.getAttribute('data-prompt');
-                    // We call startConversation, which handles the call state logic
-                    startConversation(prompt);
+                    toggleCall(prompt);
                 });
             });
 
-            // 3. Start the robust initialization process (Polling)
-            initializeVapiWidget(); 
+            // Start hunting for the widget
+            setTimeout(initializeConnector, 500);
         });
     </script>
 </body>
