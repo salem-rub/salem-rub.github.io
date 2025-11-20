@@ -1,288 +1,80 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>المساعد الذكي - الشركة السعودية للكهرباء</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8" />
+<title>SEC Voice Agent</title>
+<style>
+    body {
+        background: #f5f7fa;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: sans-serif;
+    }
 
-        body {
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f8f9fa;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
+    /* Hide Vapi widget completely */
+    vapi-widget {
+        display: none !important;
+    }
 
-        /* SEC Theme Colors */
-        .sec-blue { background-color: #004481; }
-        .sec-orange { background-color: #F26724; }
-        .text-sec-blue { color: #004481; }
+    /* Big central button */
+    #voiceBtn {
+        width: 180px;
+        height: 180px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #004481, #0072c6);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 22px;
+        font-weight: bold;
+        cursor: pointer;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+        transition: 0.25s;
+    }
 
-        /* Hide the default Vapi Widget component */
-        vapi-widget {
-            display: none !important;
-        }
-
-        /* Custom Pulse Effect for the Mic Icon */
-        @keyframes pulse-sec {
-            0% {
-                box-shadow: 0 0 0 0 rgba(0, 68, 129, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 30px rgba(0, 68, 129, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 68, 129, 0);
-            }
-        }
-
-        .pulse-ring-sec {
-            animation: pulse-sec 2s infinite;
-        }
-    </style>
+    #voiceBtn:hover {
+        transform: scale(1.06);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+    }
+</style>
 </head>
-<body class="dir-rtl">
-    <div class="bg-white shadow-md">
-        <div class="max-w-4xl mx-auto py-4 px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-full bg-sec-orange flex items-center justify-center shadow-lg">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                </div>
-                <div class="flex flex-col text-right">
-                    <h1 class="text-lg font-bold text-sec-blue">الشركة السعودية للكهرباء</h1>
-                    <p class="text-sm text-gray-500">نعمل بإتقان من أجلكم</p>
-                </div>
-            </div>
-            <a href="https://www.se.com.sa" class="text-sm font-semibold text-sec-blue hover:text-sec-orange transition duration-150" target="_blank">www.se.com.sa</a>
-        </div>
-    </div>
 
-    <div class="flex-1 container mx-auto p-4 sm:p-6 lg:p-8">
-        <div class="max-w-xl mx-auto bg-white rounded-3xl shadow-xl p-8 sm:p-10 text-center border-t-4 border-sec-orange">
+<body>
 
-            <div class="mb-6">
-                <span class="inline-block px-4 py-1 text-sm font-medium text-white rounded-full sec-blue shadow-md">🤖 المساعد الذكي</span>
-            </div>
+    <!-- Your Custom Central Button -->
+    <div id="voiceBtn">🎙️ ابدأ المحادثة</div>
 
-            <h2 class="text-2xl sm:text-3xl font-extrabold text-gray-800 mb-4">المساعد الافتراضي لخدمة العملاء</h2>
-            <p class="text-gray-500 text-base mb-8">
-                لخدمة العملاء - الفواتير، الانقطاعات، والشكاوى الفنية
-            </p>
-
-            <div class="my-8">
-                <div id="mic-ring" class="w-32 h-32 mx-auto rounded-full sec-blue flex items-center justify-center cursor-pointer transition transform hover:scale-105 duration-300 shadow-2xl pulse-ring-sec" onclick="startConversation()">
-                    <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 14c1.66 0 2.99-1.34 2.99-3L15 4c0-1.66-1.34-3-3-3S9 2.34 9 4v7c0 1.66 1.34 3 3 3zm5.3-3c0 3.53-2.94 6.46-6.3 6.46S5.7 14.53 5.7 11H4c0 4.07 3.06 7.44 7 7.93V23h2v-4.07c3.94-.49 7-3.86 7-7.93h-1.7z"/>
-                    </svg>
-                </div>
-
-                <div class="flex items-center justify-center gap-2 mt-6 text-gray-500 text-sm" id="status-indicator">
-                    <span class="status-dot w-2 h-2 rounded-full bg-gray-400" id="status-dot"></span>
-                    <span id="status-text">جاري التهيئة...</span>
-                </div>
-            </div>
-
-            <button class="w-full sm:w-auto px-10 py-3 rounded-full text-white text-lg font-semibold transition duration-150 transform active:scale-95 shadow-lg sec-blue hover:bg-[#003766]" id="startButton" disabled onclick="startConversation()">
-                🎙️ ابدأ المحادثة
-            </button>
-
-            <div class="mt-10 pt-6 border-t border-gray-100">
-                <div class="text-right text-sm text-gray-400 mb-4 flex items-center justify-end gap-1">
-                    ⚡ جرب الأسئلة التالية
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-right">
-                    <div class="quick-action-card bg-gray-50 hover:bg-sec-orange/10 p-4 rounded-xl cursor-pointer transition duration-150 border border-gray-100 hover:border-sec-orange/50">
-                        <div class="font-bold text-gray-700">ليش فاتورتي ارتفعت هالشهر؟</div>
-                        <div class="text-sm text-gray-500">استفسار عن ارتفاع استهلاك الكهرباء والفاتورة</div>
-                    </div>
-                    <div class="quick-action-card bg-gray-50 hover:bg-sec-orange/10 p-4 rounded-xl cursor-pointer transition duration-150 border border-gray-100 hover:border-sec-orange/50">
-                        <div class="font-bold text-gray-700">عندي انقطاع كهرباء بالبيت</div>
-                        <div class="text-sm text-gray-500">الإبلاغ عن انقطاع التيار الكهربائي وفتح بلاغ</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="bg-white border-t border-gray-200 py-3 text-center text-sm text-gray-500">
-        <p>© 2024 الشركة السعودية للكهرباء - جميع الحقوق محفوظة</p>
-    </div>
-
+    <!-- Hidden Vapi Widget -->
     <vapi-widget
+        id="vapi"
         public-key="1f2432da-8fee-4c9e-af48-674fa145d001"
         assistant-id="e2a656f8-5bfc-4cb1-993d-9db82a69bd79"
         mode="voice"
-        theme="dark"
-        base-bg-color="#000000"
-        accent-color="#F26724"
-        cta-button-color="#004481"
-        cta-button-text-color="#ffffff"
-        border-radius="large"
+        theme="light"
         size="full"
         position="bottom-right"
-        title="TALK WITH AI"
-        start-button-text="Start"
-        end-button-text="End Call"
-        chat-first-message="Hey, How can I help you today?"
-        chat-placeholder="Type your message..."
         voice-show-transcript="true"
-        consent-required="true"
-        consent-title="Terms and conditions"
-        consent-content="By clicking "Agree," and each time I interact with this AI agent, I consent to the recording, storage, and sharing of my communications with third-party service providers, and as otherwise described in our Terms of Service."
-        consent-storage-key="vapi_widget_consent"
     ></vapi-widget>
 
-    <script src="https://cdn.vapi.ai/vapi-latest.js"></script>
-
-
-
+    <!-- Load Vapi Widget SDK -->
+    <script src="https://unpkg.com/@vapi-ai/client-sdk-react/dist/embed/widget.umd.js"
+        async type="text/javascript"></script>
 
     <script>
-        // VAPI Configuration
-        const VAPI_PUBLIC_KEY = "1f2432da-8fee-4c9e-af48-674fa145d001";
-        const ASSISTANT_ID = "e2a656f8-5bfc-4cb1-993d-9db82a69bd79";
+        // Wait until widget is loaded
+        document.getElementById("voiceBtn").addEventListener("click", function () {
+            const widget = document.querySelector("vapi-widget");
+            if (!widget) return alert("Widget not loaded yet");
 
-        let vapiClient = null;
-        let isCallActive = false;
-        let isVapiReady = false;
-
-        const startButton = document.getElementById('startButton');
-        const statusDot = document.getElementById('status-dot');
-        const statusText = document.getElementById('status-text');
-        const micRing = document.getElementById('mic-ring');
-
-        function updateStatus(connected, text, colorClass) {
-            statusText.textContent = text;
-            statusDot.className = `status-dot w-2 h-2 rounded-full ${colorClass || 'bg-gray-400'}`;
-            if (connected) {
-                micRing.classList.add('pulse-ring-sec');
-            } else {
-                micRing.classList.remove('pulse-ring-sec');
-            }
-        }
-
-        function updateButton(isActive) {
-            if (isActive) {
-                startButton.textContent = '⏹️ إنهاء المكالمة';
-                startButton.classList.remove('sec-blue', 'hover:bg-[#003766]');
-                startButton.classList.add('bg-red-600', 'hover:bg-red-700');
-            } else {
-                startButton.textContent = '🎙️ ابدأ المحادثة';
-                startButton.classList.add('sec-blue', 'hover:bg-[#003766]');
-                startButton.classList.remove('bg-red-600', 'hover:bg-red-700');
-            }
-        }
-
-        function handleVapiEvents(client) {
-            // Updated Event Names: call-start -> callStarted, etc.
-            client.on('callStarted', () => {
-                isCallActive = true;
-                updateButton(true);
-                updateStatus(true, 'متصل - تحدث الآن', 'bg-green-500');
-            });
-
-            client.on('callEnded', () => {
-                isCallActive = false;
-                updateButton(false);
-                updateStatus(false, 'جاهز لبدء المحادثة', 'bg-sec-blue');
-            });
-
-            client.on('speechStarted', () => {
-                updateStatus(true, 'المساعد يتحدث...', 'bg-sec-orange');
-            });
-
-            client.on('speechEnded', () => {
-                updateStatus(true, 'متصل - تحدث الآن', 'bg-green-500');
-            });
-
-            client.on('error', (error) => {
-                console.error('Vapi error:', error);
-                isCallActive = false;
-                updateButton(false);
-                updateStatus(false, '❌ فشل الاتصال', 'bg-red-500');
-            });
-        }
-
-        function initializeVapiClient() {
-            // Check if Vapi object is available on the window object
-            if (typeof Vapi !== 'undefined' && typeof window.Vapi.createClient === 'function') {
-                try {
-                    // NEW SYNTAX: vapi = window.Vapi.createClient({ apiKey: 'PUBLIC_KEY' });
-                    vapiClient = window.Vapi.createClient({ apiKey: VAPI_PUBLIC_KEY });
-
-                    handleVapiEvents(vapiClient);
-                    isVapiReady = true;
-                    startButton.disabled = false;
-                    updateButton(false);
-                    updateStatus(false, 'جاهز لبدء المحادثة', 'bg-sec-blue');
-                    console.log('Vapi Client initialized successfully.');
-                } catch (error) {
-                    console.error('Vapi Client initialization error:', error);
-                    updateStatus(false, '❌ فشل التهيئة', 'bg-red-500');
-                }
-            } else {
-                // If Vapi is not found, retry initialization later.
-                setTimeout(initializeVapiClient, 500); // Retry after 500ms
-            }
-        }
-
-        async function startConversation() {
-            if (!isVapiReady) {
-                console.error('Vapi is not ready yet.');
-                return;
-            }
-
-            if (isCallActive) {
-                // End the call
-                updateStatus(false, 'جاري إنهاء المكالمة...', 'bg-gray-500');
-                vapiClient.stopCall(); // NEW SYNTAX
-            } else {
-                // Start the call
-                try {
-                    updateStatus(true, 'جاري الاتصال...', 'bg-yellow-500');
-                    // NEW SYNTAX: await vapi.startCall({ assistantId: 'assistant-id' });
-                    await vapiClient.startCall({ assistantId: ASSISTANT_ID });
-                } catch (error) {
-                    console.error('Error starting call:', error);
-                    updateStatus(false, '❌ خطأ في البدء', 'bg-red-500');
-                }
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            waitForVapi();
-            
-            // Attach click handlers for quick action cards
-            document.querySelectorAll('.quick-action-card').forEach(card => {
-                card.addEventListener('click', function() {
-                    if (!isCallActive && isVapiReady) {
-                        startConversation();
-                    }
-                });
-            });
+            // Open + Start the call
+            widget.open();      // show the widget UI
+            widget.start();     // start assistant call
         });
-
-        function waitForVapi() {
-            if (window.Vapi && typeof window.Vapi.createClient === 'function') {
-                console.log("Vapi SDK Loaded Successfully.");
-                initializeVapiClient();
-                return;
-            }
-
-            console.warn("Vapi is not ready yet, retrying...");
-            setTimeout(waitForVapi, 300);
-        }
-        
-        // Expose startConversation globally for the mic icon
-        window.startConversation = startConversation;
     </script>
+
 </body>
 </html>
