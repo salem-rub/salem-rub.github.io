@@ -255,8 +255,11 @@
             }
         }
 
-        function waitForVapi() {
-    // Check if SDK is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+    waitForVapi();
+});
+
+function waitForVapi() {
     if (window.Vapi && typeof window.Vapi.createClient === 'function') {
         console.log("Vapi SDK Loaded Successfully.");
         initializeVapiClient();
@@ -267,9 +270,6 @@
     setTimeout(waitForVapi, 300);
 }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            waitForVapi();
-        });
 
             
             // Attach click handlers for quick action cards
