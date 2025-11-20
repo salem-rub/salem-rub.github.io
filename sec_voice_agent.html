@@ -256,21 +256,7 @@
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-    waitForVapi();
-});
-
-function waitForVapi() {
-    if (window.Vapi && typeof window.Vapi.createClient === 'function') {
-        console.log("Vapi SDK Loaded Successfully.");
-        initializeVapiClient();
-        return;
-    }
-
-    console.warn("Vapi is not ready yet, retrying...");
-    setTimeout(waitForVapi, 300);
-}
-
-
+            waitForVapi();
             
             // Attach click handlers for quick action cards
             document.querySelectorAll('.quick-action-card').forEach(card => {
@@ -281,6 +267,17 @@ function waitForVapi() {
                 });
             });
         });
+
+        function waitForVapi() {
+            if (window.Vapi && typeof window.Vapi.createClient === 'function') {
+                console.log("Vapi SDK Loaded Successfully.");
+                initializeVapiClient();
+                return;
+            }
+
+            console.warn("Vapi is not ready yet, retrying...");
+            setTimeout(waitForVapi, 300);
+        }
         
         // Expose startConversation globally for the mic icon
         window.startConversation = startConversation;
