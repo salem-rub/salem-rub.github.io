@@ -255,11 +255,22 @@
             }
         }
 
-        // Attach event listeners after the DOM is fully loaded
+        function waitForVapi() {
+    // Check if SDK is fully loaded
+    if (window.Vapi && typeof window.Vapi.createClient === 'function') {
+        console.log("Vapi SDK Loaded Successfully.");
+        initializeVapiClient();
+        return;
+    }
+
+    console.warn("Vapi is not ready yet, retrying...");
+    setTimeout(waitForVapi, 300);
+}
+
         document.addEventListener('DOMContentLoaded', () => {
-            // Start the client discovery
-            // The Polling mechanism inside initializeVapiClient handles the readiness.
-            initializeVapiClient();
+            waitForVapi();
+        });
+
             
             // Attach click handlers for quick action cards
             document.querySelectorAll('.quick-action-card').forEach(card => {
