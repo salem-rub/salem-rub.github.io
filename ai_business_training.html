@@ -1581,9 +1581,11 @@ professional business logo for tech company, modern minimalist style, blue and o
         let currentSlide = 0;
         const slides = document.querySelectorAll('.slide-container');
         
-        // Update the total number of slides in the initial counter display
-        document.getElementById('counter').textContent = (currentSlide + 1) + ' / ' + slides.length;
-
+        // Ensure the initial counter is correct (Important after adding slides)
+        document.addEventListener('DOMContentLoaded', () => {
+             document.getElementById('counter').textContent = (currentSlide + 1) + ' / ' + slides.length;
+        });
+        
         function showSlide(n) {
             slides[currentSlide].classList.remove('active');
             currentSlide = (n + slides.length) % slides.length;
@@ -1605,17 +1607,30 @@ professional business logo for tech company, modern minimalist style, blue and o
         
         function toggleFullscreen() {
             const elem = document.querySelector('.presentation-wrapper');
-            if (!document.fullscreenElement) {
+            // Check for fullscreen element using various prefixes
+            const isFullscreen = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+
+            if (!isFullscreen) {
+                // Request fullscreen using various prefixes
                 if (elem.requestFullscreen) {
                     elem.requestFullscreen();
-                } else if (elem.webkitRequestFullscreen) {
+                } else if (elem.webkitRequestFullscreen) { // Safari/Chrome/Opera
                     elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) {
+                } else if (elem.msRequestFullscreen) { // IE/Edge
                     elem.msRequestFullscreen();
+                } else if (elem.mozRequestFullScreen) { // Firefox
+                    elem.mozRequestFullScreen();
                 }
             } else {
+                // Exit fullscreen using various prefixes
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
                 }
             }
         }
