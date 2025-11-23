@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الذكاء الاصطناعي للأعمال - تدريب شامل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: #0F172A;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .presentation-wrapper {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .slide-container {
+            width: 95vw;
+            height: 95vh;
+            max-width: 1600px;
+            max-height: 900px;
+            background: #1E293B;
+            border: 1px solid #F59E0B;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(245, 158, 11, 0.15);
+            padding: 60px 80px 100px;
+            display: none;
+            flex-direction: column;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .slide-container.active {
+            display: flex;
+        }
+        
+        .slide-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .slide-container > * {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .slide-number {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(245, 158, 11, 0.15);
+            color: #F59E0B;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            border: 1px solid #F59E0B;
+        }
+        
+        h1 {
+            font-size: 4em;
+            color: #FFFFFF;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.2;
+            margin-top: 80px;
+        }
+        
+        h2 {
+            font-size: 3em;
+            color: #F59E0B;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        
+        h3 {
+            font-size: 1.8em;
+            color: #FCD34D;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        p, li {
+            color: #F1F5F9;
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin: 15px 0;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #CBD5E1;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .presenter-info {
+            font-size: 1.4em;
+            color: #F59E0B;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .content-area {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+        
+        .tile {
+            background: #334155;
+            border: 1px solid #475569;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 15px;
+            transition: all 0.3s;
+        }
+        
+        .tile:hover {
+            border-color: #F59E0B;
+            transform: translateY(-5px);
+        }
+        
+        .tile .icon {
+            font-size: 3em;
+            color: #F59E0B;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+            width: 100%;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            width: 100%;
+        }
+        
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            width: 100%;
+        }
+        
+        .code-block {
+            background: #0F172A;
+            border: 1px solid #F59E0B;
+            border-radius: 12px;
+            padding: 20px;
+            font-family: 'Courier New', monospace;
+            color: #E2E8F0;
+            direction: ltr;
+            text-align: left;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        
+        .highlight-box {
+            background: rgba(245, 158, 11, 0.15);
+            border: 2px solid #F59E0B;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+        
+        .step-card {
+            background: #334155;
+            border-left: 5px solid #F59E0B;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        
+        .step-number {
+            background: #F59E0B;
+            color: #0F172A;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.2em;
+            margin-left: 10px;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-weight: 700;
+            margin: 10px 5px;
+        }
+        
+        .department-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 15px;
+            font-weight: 700;
+            margin: 8px 5px;
+            font-size: 0.9em;
+        }
+        
+        .dept-hr { background: rgba(16, 185, 129, 0.2); color: #10B981; border: 1px solid #10B981; }
+        .dept-eng { background: rgba(59, 130, 246, 0.2); color: #3B82F6; border: 1px solid #3B82F6; }
+        .dept-mfg { background: rgba(139, 92, 246, 0.2); color: #8B5CF6; border: 1px solid #8B5CF6; }
+        .dept-pm { background: rgba(236, 72, 153, 0.2); color: #EC4899; border: 1px solid #EC4899; }
+        .dept-sales { background: rgba(245, 158, 11, 0.2); color: #F59E0B; border: 1px solid #F59E0B; }
+        .dept-marketing { background: rgba(239, 68, 68, 0.2); color: #EF4444; border: 1px solid #EF4444; }
+        
+        .bullet-list ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .bullet-list li {
+            margin-bottom: 20px;
+            padding-right: 40px;
+            position: relative;
+        }
+        
+        .bullet-list i {
+            position: absolute;
+            right: 0;
+            top: 5px;
+            color: #FCD34D;
+            font-size: 1.5em;
+        }
+        
+        .controls {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            z-index: 999999;
+            background: rgba(30, 41, 59, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: 1px solid rgba(245, 158, 11, 0.5);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .controls button {
+            background: #F59E0B;
+            color: #0F172A;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 0.95em;
+            font-weight: 700;
+            cursor: pointer;
+            font-family: 'Tajawal';
+            transition: all 0.3s;
+        }
+        
+        .controls button:hover {
+            background: #FBBF24;
+            transform: translateY(-2px);
+        }
+        
+        .slide-counter {
+            color: #F59E0B;
+            font-size: 0.95em;
+            min-width: 70px;
+            text-align: center;
+            font-weight: 700;
+        }
+        
+        .timer-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(245, 158, 11, 0.15);
+            color: #F59E0B;
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.9em;
+            border: 1px solid #F59E0B;
+            display: none;
+        }
+        
+        .tool-card {
+            background: #1E293B;
+            border: 2px solid #F59E0B;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .tool-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(245, 158, 11, 0.3);
+        }
+        
+        .tool-icon {
+            font-size: 4em;
+            margin-bottom: 15px;
+        }
+
+        .google-tool {
+            border: 2px solid #4285F4;
+            background: rgba(66, 133, 244, 0.1);
+        }
+
+        .google-tool h3 {
+             color: #4285F4;
+        }
+        
+        @media (max-width: 1400px) {
+            h1 { font-size: 3em; }
+            h2 { font-size: 2.5em; }
+            .slide-container { padding: 50px 60px 90px; }
+        }
+        
+        @media (max-width: 1024px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 2em; }
+            .grid-3, .grid-2, .grid-4 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-wrapper">
+    
+    <div class="slide-container active">
+        <div class="timer-box">⏱️ 0:00-0:02 (2 min)</div>
+        <h1>🚀 الذكاء الاصطناعي<br/>لرواد الأعمال والمحترفين</h1>
+        <p class="subtitle">دليل عملي شامل لتطبيق AI في عملك اليومي - ساعتين مكثفتين</p>
+        <div style="text-align: center; margin-top: 30px;">
+            <span class="badge">💼 للمحترفين</span>
+            <span class="badge">🎯 100% عملي</span>
+            <span class="badge">⚡ نتائج فورية</span>
+        </div>
+        <div style="text-align: center; margin-top: 25px;">
+            <span class="department-badge dept-hr">HR</span>
+            <span class="department-badge dept-eng">هندسة</span>
+            <span class="department-badge dept-mfg">تصنيع</span>
+            <span class="department-badge dept-pm">إدارة مشاريع</span>
+            <span class="department-badge dept-sales">مبيعات</span>
+            <span class="department-badge dept-marketing">تسويق</span>
+        </div>
+        <p class="presenter-info">المدرب: Salem Abu Alrub – TechServJo<br/>AI Consultant & Business Automation Expert</p>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">2 / 29</div>
+        <div class="timer-box">⏱️ 0:02-0:05 (3 min)</div>
+        <h2>👥 من يستفيد من هذا التدريب؟</h2>
+        <div class="content-area">
+            <div class="grid-3">
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-users"></i></div>
+                    <h3>الموارد البشرية</h3>
+                    <p>• فرز السير الذاتية تلقائياً</p>
+                    <p>• جدولة المقابلات</p>
+                    <p>• تحليل أداء الموظفين</p>
+                    <p>• إنشاء سياسات ووثائق</p>
+                </div>
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-chart-line"></i></div>
+                    <h3>المبيعات والتسويق</h3>
+                    <p>• توليد محتوى تسويقي</p>
+                    <p>• تحليل السوق والمنافسين</p>
+                    <p>• chatbots للعملاء</p>
+                    <p>• حملات إعلانية ذكية</p>
+                </div>
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-project-diagram"></i></div>
+                    <h3>إدارة المشاريع</h3>
+                    <p>• تخطيط المشاريع</p>
+                    <p>• تتبع المخاطر</p>
+                    <p>• توزيع المهام الذكي</p>
+                    <p>• تقارير تلقائية</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">3 / 29</div>
+        <div class="timer-box">⏱️ 0:05-0:08 (3 min)</div>
+        <h2>👥 المزيد من المستفيدين</h2>
+        <div class="content-area">
+            <div class="grid-3">
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-cogs"></i></div>
+                    <h3>الهندسة والتصنيع</h3>
+                    <p>• تحسين عمليات الإنتاج</p>
+                    <p>• الصيانة التنبؤية</p>
+                    <p>• مراقبة الجودة</p>
+                    <p>• تصميم بمساعدة AI</p>
+                </div>
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-file-alt"></i></div>
+                    <h3>التوثيق والإدارة</h3>
+                    <p>• كتابة التقارير</p>
+                    <p>• تلخيص المستندات</p>
+                    <p>• ترجمة فورية</p>
+                    <p>• إدارة المعرفة</p>
+                </div>
+                <div class="tile">
+                    <div class="icon"><i class="fa-solid fa-crown"></i></div>
+                    <h3>أصحاب الأعمال</h3>
+                    <p>• اتخاذ قرارات مبنية على بيانات</p>
+                    <p>• تحليل الأداء المالي</p>
+                    <p>• توقع الاتجاهات</p>
+                    <p>• توفير 50%+ من الوقت</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">4 / 29</div>
+        <div class="timer-box">⏱️ 0:08-0:10 (2 min)</div>
+        <h2>📋 جدول التدريب الشامل</h2>
+        <div class="content-area">
+            <div class="grid-2">
+                <div class="step-card">
+                    <h3><span class="step-number">1</span>الجزء الأول (50 دقيقة)</h3>
+                    <div class="bullet-list">
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i>مقدمة في الذكاء الاصطناعي</li>
+                            <li><i class="fa-solid fa-check"></i>أدوات AI الأساسية</li>
+                            <li><i class="fa-solid fa-check"></i>ChatGPT للمحترفين</li>
+                            <li><i class="fa-solid fa-check"></i>تطبيقات عملية حسب القسم</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-number">2</span>الجزء الثاني (60 دقيقة)</h3>
+                    <div class="bullet-list">
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i>أدوات متقدمة (Gemini, Midjourney, Claude)</li>
+                            <li><i class="fa-solid fa-check"></i>**AI في Google Workspace للإنتاجية**</li>
+                            <li><i class="fa-solid fa-check"></i>الأتمتة بالذكاء الاصطناعي</li>
+                            <li><i class="fa-solid fa-check"></i>بناء chatbot لشركتك</li>
+                            <li><i class="fa-solid fa-check"></i>استراتيجية التطبيق</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="highlight-box" style="text-align: center;">
+            <p style="font-size: 1.3em;"><strong>☕ استراحة 10 دقائق في المنتصف</strong></p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">5 / 29</div>
+        <div class="timer-box">⏱️ 0:10-0:15 (5 min)</div>
+        <h2>🌟 لماذا يجب أن تتبنى AI الآن؟</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="grid-2" style="margin-bottom: 30px;">
+                    <div class="tile" style="border: 2px solid #10B981;">
+                        <h3 style="color: #10B981;">✅ الفوائد</h3>
+                        <p style="font-size: 1.2em;">• توفير 10-20 ساعة أسبوعياً</p>
+                        <p style="font-size: 1.2em;">• زيادة الإنتاجية 300%+</p>
+                        <p style="font-size: 1.2em;">• تقليل الأخطاء 90%+</p>
+                        <p style="font-size: 1.2em;">• خفض التكاليف 40%+</p>
+                    </div>
+                    <div class="tile" style="border: 2px solid #EF4444;">
+                        <h3 style="color: #EF4444;">⚠️ المخاطر من التأخر</h3>
+                        <p style="font-size: 1.2em;">• المنافسون يتقدمون</p>
+                        <p style="font-size: 1.2em;">• خسارة فرص السوق</p>
+                        <p style="font-size: 1.2em;">• ارتفاع التكاليف التشغيلية</p>
+                        <p style="font-size: 1.2em;">• صعوبة اللحاق لاحقاً</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="text-align: center;">
+                    <h3 style="color: #F59E0B; font-size: 2em; margin-bottom: 20px;">📊 إحصائية مهمة</h3>
+                    <p style="font-size: 1.8em; line-height: 1.8;">
+                        <strong style="color: #F59E0B;">87%</strong> من الشركات تعتقد أن AI سيمنحها<br/>
+                        <strong>ميزة تنافسية</strong> في السنوات الثلاث القادمة
+                    </p>
+                    <p style="font-size: 1.2em; margin-top: 20px; color: #CBD5E1;">- McKinsey Global Survey 2024</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">6 / 29</div>
+        <div class="timer-box">⏱️ 0:15-0:18 (3 min)</div>
+        <h2>🤖 ما هو الذكاء الاصطناعي بالضبط؟</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="highlight-box" style="margin-bottom: 30px;">
+                    <h3 style="color: #F59E0B; text-align: center; font-size: 2em;">التعريف البسيط</h3>
+                    <p style="text-align: center; font-size: 1.5em; margin-top: 20px; line-height: 2;">
+                        برامج كمبيوتر تستطيع <strong style="color: #F59E0B;">التعلم والتفكير</strong><br/>
+                        لأداء مهام تحتاج عادة إلى <strong style="color: #F59E0B;">ذكاء بشري</strong>
+                    </p>
+                </div>
+                
+                <div class="grid-4">
+                    <div class="tile">
+                        <div class="icon">🧠</div>
+                        <h3>التعلم الآلي</h3>
+                        <p>يتعلم من البيانات والأمثلة</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon">💬</div>
+                        <h3>معالجة اللغة</h3>
+                        <p>فهم وتوليد النصوص</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon">👁️</div>
+                        <h3>الرؤية الحاسوبية</h3>
+                        <p>فهم الصور والفيديو</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon">🎨</div>
+                        <h3>الإبداع</h3>
+                        <p>توليد محتوى جديد</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">7 / 29</div>
+        <div class="timer-box">⏱️ 0:18-0:23 (5 min)</div>
+        <h2>💬 ChatGPT: أداتك الأساسية</h2>
+        <div class="content-area">
+            <div class="grid-2">
+                <div class="tile">
+                    <h3>ما هو ChatGPT؟</h3>
+                    <p>مساعد ذكي قادر على:</p>
+                    <div class="bullet-list">
+                        <ul>
+                            <li><i class="fa-solid fa-pencil"></i>كتابة أي نوع من النصوص</li>
+                            <li><i class="fa-solid fa-lightbulb"></i>توليد أفكار إبداعية</li>
+                            <li><i class="fa-solid fa-code"></i>كتابة وشرح الأكواد</li>
+                            <li><i class="fa-solid fa-language"></i>ترجمة 50+ لغة</li>
+                            <li><i class="fa-solid fa-search"></i>البحث والتحليل</li>
+                            <li><i class="fa-solid fa-chart-bar"></i>تحليل البيانات</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="tool-card">
+                        <div class="tool-icon">🤖</div>
+                        <h3 style="color: #F59E0B;">ChatGPT Plus</h3>
+                        <p style="font-size: 1.3em; margin: 20px 0;">$20/شهر</p>
+                        <div style="text-align: right; margin-top: 20px;">
+                            <p>✅ GPT-4 الأقوى</p>
+                            <p>✅ سرعة أعلى</p>
+                            <p>✅ تحليل الصور</p>
+                            <p>✅ DALL-E للتصميم</p>
+                            <p>✅ أدوات إضافية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">8 / 29</div>
+        <div class="timer-box">⏱️ 0:23-0:30 (7 min) - HANDS-ON</div>
+        <h2>✍️ فن كتابة Prompts الفعالة</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="grid-2" style="margin-bottom: 30px;">
+                    <div class="step-card">
+                        <h3>❌ Prompt ضعيف</h3>
+                        <div class="code-block">اكتب عن التسويق</div>
+                        <p style="color: #EF4444; margin-top: 15px;">• غير محدد<br/>• لا سياق<br/>• نتيجة عامة</p>
+                    </div>
+                    <div class="step-card">
+                        <h3>✅ Prompt قوي</h3>
+                        <div class="code-block">أنت خبير تسويق رقمي. اكتب خطة تسويقية لمنتج جديد (تطبيق توصيل طعام) موجه للشباب 18-30 سنة في الأردن. الخطة يجب أن تتضمن:
+1. تحليل الجمهور المستهدف
+2. القنوات التسويقية المقترحة
+3. الميزانية المتوقعة
+4. مؤشرات النجاح (KPIs)
+5. جدول زمني لـ 3 أشهر
+
+اجعل الخطة عملية وقابلة للتطبيق فوراً.</div>
+                        <p style="color: #10B981; margin-top: 15px;">• محدد جداً<br/>• سياق واضح<br/>• متطلبات دقيقة</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3 style="color: #F59E0B; margin-bottom: 20px;">🎯 قاعدة RISE للـ Prompts الفعالة</h3>
+                    <div class="grid-4">
+                        <div>
+                            <h3 style="color: #10B981;">R - Role</h3>
+                            <p>حدد الدور<br/>"أنت خبير..."</p>
+                        </div>
+                        <div>
+                            <h3 style="color: #3B82F6;">I - Input</h3>
+                            <p>أعطِ السياق<br/>والمعلومات</p>
+                        </div>
+                        <div>
+                            <h3 style="color: #8B5CF6;">S - Steps</h3>
+                            <p>حدد الخطوات<br/>المطلوبة</p>
+                        </div>
+                        <div>
+                            <h3 style="color: #EC4899;">E - Expectation</h3>
+                            <p>وضح النتيجة<br/>المتوقعة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">9 / 29</div>
+        <div class="timer-box">⏱️ 0:30-0:35 (5 min) - DEMO</div>
+        <h2>👥 AI للموارد البشرية</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="grid-3">
+                    <div class="step-card">
+                        <h3><span class="step-number">1</span>فرز السير الذاتية</h3>
+                        <p style="margin-top: 15px;">Prompt:</p>
+                        <div class="code-block" style="font-size: 0.9em;">حلل هذه السيرة الذاتية وقيمها لوظيفة [مدير تسويق رقمي]. أعطني:
+1. نقاط القوة (5 نقاط)
+2. نقاط الضعف (3 نقاط)
+3. مدى الملاءمة من 10
+4. أسئلة مقترحة للمقابلة
+
+[الصق السيرة الذاتية]</div>
+                    </div>
+                    <div class="step-card">
+                        <h3><span class="step-number">2</span>كتابة إعلانات الوظائف</h3>
+                        <p style="margin-top: 15px;">Prompt:</p>
+                        <div class="code-block" style="font-size: 0.9em;">اكتب إعلان وظيفة جذاب لـ:
+المسمى: مهندس برمجيات
+الخبرة: 3-5 سنوات
+التقنيات: React, Node.js
+الموقع: عمّان، الأردن
+
+اجعله احترافياً وجذاباً للمواهب</div>
+                    </div>
+                    <div class="step-card">
+                        <h3><span class="step-number">3</span>تقييم الأداء</h3>
+                        <p style="margin-top: 15px;">Prompt:</p>
+                        <div class="code-block" style="font-size: 0.9em;">بناءً على هذه البيانات عن الموظف:
+- المبيعات: 85% من الهدف
+- الحضور: 95%
+- العمل الجماعي: ممتاز
+- المبادرات: 3 مقترحات قُبلت
+
+اكتب تقييم أداء شامل مع:
+1. نقاط التميز
+2. مجالات التحسين
+3. خطة تطوير
+4. التوصيات</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">10 / 29</div>
+        <div class="timer-box">⏱️ 0:35-0:40 (5 min) - DEMO</div>
+        <h2>💰 AI للمبيعات</h2>
+        <div class="content-area">
+            <div class="grid-3">
+                <div class="step-card">
+                    <h3><span class="step-number">1</span>كتابة عروض مبيعات</h3>
+                    <div class="code-block" style="font-size: 0.85em;">اكتب عرض مبيعات لـ [منتجك/خدمتك] موجه لـ [نوع العميل]. 
+
+المنتج: نظام CRM سحابي
+العميل: شركات صغيرة ومتوسطة
+الألم: صعوبة تتبع العملاء
+
+اكتب:
+1. عنوان جذاب
+2. المشكلة
+3. الحل
+4. الفوائد (5)
+5. دعوة لاتخاذ إجراء</div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-number">2</span>متابعة العملاء</h3>
+                    <div class="code-block" style="font-size: 0.85em;">اكتب رسالة متابعة احترافية لعميل محتمل:
+
+السياق:
+- اجتمعنا قبل أسبوع
+- أبدى اهتماماً بالمنتج
+- لم يرد على العرض
+
+اكتب رسالة:
+- ودية وغير ملحة
+- تذكره بالفوائد
+- تقدم قيمة إضافية
+- طلب لقاء/مكالمة</div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-number">3</span>تحليل المنافسين</h3>
+                    <div class="code-block" style="font-size: 0.85em;">قارن منتجنا بالمنافسين:
+
+منتجنا: [وصف]
+المنافس 1: [وصف]
+المنافس 2: [وصف]
+
+أعطني:
+1. جدول مقارنة
+2. نقاط التميز لدينا
+3. نقاط ضعفنا
+4. استراتيجية تسعير
+5. رسائل تسويقية مقترحة</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">11 / 29</div>
+        <div class="timer-box">⏱️ 0:40-0:45 (5 min) - DEMO</div>
+        <h2>📱 AI للتسويق الرقمي</h2>
+        <div class="content-area">
+            <div class="grid-3">
+                <div class="step-card">
+                    <h3><span class="step-number">1</span>محتوى وسائل التواصل</h3>
+                    <div class="code-block" style="font-size: 0.85em;">أنت مسوق محترف. اكتب 7 منشورات لـ LinkedIn لشركة [نوع الشركة]:
+
+الموضوع: [موضوعك]
+الجمهور: محترفون في مجال [المجال]
+الأسلوب: احترافي وملهم
+
+كل منشور:
+- 150-200 كلمة
+- 3-5 هاشتاقات
+- دعوة لاتخاذ إجراء
+- emoji مناسب</div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-number">2</span>حملة إعلانية</h3>
+                    <div class="code-block" style="font-size: 0.85em;">صمم حملة إعلانية كاملة لـ:
+
+المنتج: [منتجك]
+الميزانية: $5000
+المدة: شهر واحد
+الهدف: 100 عميل جديد
+
+أعطني:
+1. استراتيجية الحملة
+2. القنوات الإعلانية
+3. توزيع الميزانية
+4. 5 نصوص إعلانية
+5. KPIs</div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-number">3</span>تحليل الأداء</h3>
+                    <div class="code-block" style="font-size: 0.85em;">حلل أداء حملتنا:
+
+البيانات:
+- 10,000 مشاهدة
+- 500 نقرة (CTR: 5%)
+- 25 تحويل
+- التكلفة: $1000
+
+أعطني:
+1. تقييم الأداء
+2. نقاط القوة
+3. نقاط التحسين
+4. توصيات
+5. خطة التحسين</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">12 / 29</div>
+        <div class="timer-box">⏱️ 0:45-0:50 (5 min)</div>
+        <h2>📊 AI لإدارة المشاريع</h2>
+        <div class="content-area">
+            <div class="grid-2">
+                <div class="step-card">
+                    <h3><span class="step-number">1</span>تخطيط المشاريع</h3>
+                    <div class="code-block" style="font-size: 0.85em;">أنت مدير مشاريع خبير. خطط لمشروع:
+
+المشروع: تطوير تطبيق جوال
+المدة: 4 أشهر
+الفريق: 6 أشخاص
+الميزانية: $50,000
+
+أعطني:
+1. تقسيم المراحل (Phases)
+2. المهام الرئيسية
+3. الجدول الزمني
+4. توزيع الموارد
+5. المخاطر المحتملة
+6. خطة التخفيف</div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-number">2</span>تقارير التقدم</h3>
+                    <div class="code-block" style="font-size: 0.85em;">اكتب تقرير تقدم أسبوعي:
+
+البيانات:
+- المهام المكتملة: 12/15
+- التأخير: يومان
+- المشاكل: مشكلة تقنية في API
+- التكلفة: 80% من الميزانية
+
+اكتب تقرير يتضمن:
+1. ملخص تنفيذي
+2. الإنجازات
+3. التحديات
+4. الخطوات القادمة
+5. التوصيات</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">13 / 29</div>
+        <div class="timer-box">⏱️ 0:50-1:00 (10 min)</div>
+        <h2 style="text-align: center;">☕ استراحة قصيرة</h2>
+        <div class="content-area">
+            <div style="text-align: center;">
+                <div style="font-size: 8em; color: #F59E0B; margin: 40px 0;">⏰</div>
+                <p style="font-size: 2em; margin: 20px 0;">10 دقائق</p>
+                <div class="highlight-box" style="max-width: 900px; margin: 40px auto;">
+                    <h3 style="color: #F59E0B; margin-bottom: 20px;">✅ ما أنجزناه حتى الآن</h3>
+                    <p style="font-size: 1.3em; line-height: 2;">
+                        ✓ فهم أساسيات الذكاء الاصطناعي<br/>
+                        ✓ إتقان ChatGPT وكتابة Prompts فعالة<br/>
+                        ✓ تطبيقات عملية للموارد البشرية<br/>
+                        ✓ استخدامات المبيعات والتسويق<br/>
+                        ✓ إدارة المشاريع بالذكاء الاصطناعي
+                    </p>
+                </div>
+                <p style="font-size: 1.3em; color: #CBD5E1; margin-top: 30px;">
+                    القادم: أدوات متقدمة وبناء حلول مخصصة! 🚀
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">14 / 29</div>
+        <div class="timer-box">⏱️ 1:00-1:05 (5 min)</div>
+        <h2>🛠️ أدوات AI متقدمة (المستوى الثاني)</h2>
+        <div class="content-area">
+            <div class="grid-4">
+                <div class="tool-card">
+                    <div class="tool-icon">🎨</div>
+                    <h3>Midjourney</h3>
+                    <p>تصميم صور احترافية</p>
+                    <p style="color: #F59E0B; margin-top: 10px;">$30/شهر</p>
+                </div>
+                <div class="tool-card google-tool">
+                    <div class="tool-icon" style="color: #4285F4;">🚀</div>
+                    <h3>Gemini Advanced</h3>
+                    <p>تحليل عميق وتفاعل متعدد الوسائط</p>
+                    <p style="color: #4285F4; margin-top: 10px;">ضمن Workspace</p>
+                </div>
+                <div class="tool-card google-tool">
+                    <div class="tool-icon" style="color: #34A853;">🎬</div>
+                    <h3>Google Vids</h3>
+                    <p>إنشاء فيديوهات احترافية بالذكاء الاصطناعي</p>
+                    <p style="color: #34A853; margin-top: 10px;">ضمن Workspace</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🧠</div>
+                    <h3>Claude</h3>
+                    <p>تحليل وثائق طويلة</p>
+                    <p style="color: #F59E0B; margin-top: 10px;">$20/شهر</p>
+                </div>
+            </div>
+            <div style="width: 100%; margin-top: 25px;">
+                <div class="grid-4" style="grid-template-columns: repeat(2, 1fr); margin: 0 auto; max-width: 800px;">
+                    <div class="tool-card google-tool">
+                        <div class="tool-icon" style="color: #FBBC05;">📝</div>
+                        <h3>NotebookLM</h3>
+                        <p>ربط وتحليل المستندات الشخصية</p>
+                        <p style="color: #FBBC05; margin-top: 10px;">قيد التطوير</p>
+                    </div>
+                    <div class="tool-card">
+                        <div class="tool-icon">📊</div>
+                        <h3>Jasper AI</h3>
+                        <p>كتابة محتوى تسويقي</p>
+                        <p style="color: #F59E0B; margin-top: 10px;">$49/شهر</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">15 / 29</div>
+        <div class="timer-box">⏱️ 1:05-1:10 (5 min) - DEMO</div>
+        <h2>🚀 Gemini في Google Workspace: الإنتاجية اليومية</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="highlight-box google-tool" style="margin-bottom: 30px; text-align: center;">
+                    <h3 style="color: #4285F4; font-size: 2em; margin-bottom: 20px;">مساعدك الذكي المدمج</h3>
+                    <p style="font-size: 1.4em; line-height: 1.8; color: #F1F5F9;">
+                        يُساعدك Gemini على العمل بكفاءة أكبر وسرعة من خلال مساعد مدمج في أدوات Google Workspace
+                    </p>
+                </div>
+
+                <div class="grid-2">
+                    <div class="tile google-tool">
+                        <h3 style="color: #EA4335;"><i class="fa-solid fa-envelope"></i> Gmail و Meet</h3>
+                        <div class="bullet-list">
+                            <ul>
+                                <li><i class="fa-solid fa-check"></i>تلخيص سلاسل رسائل البريد الإلكتروني الطويلة</li>
+                                <li><i class="fa-solid fa-check"></i>اقتراح مسودات الردود لرسائل البريد الإلكتروني</li>
+                                <li><i class="fa-solid fa-check"></i>تدوين ملاحظات الاجتماع التلقائي في Meet</li>
+                                <li><i class="fa-solid fa-check"></i>اكتشاف بنود العمل والمهام أثناء المكالمات</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tile google-tool">
+                        <h3 style="color: #4285F4;"><i class="fa-solid fa-file-alt"></i> Docs و Sheets</h3>
+                        <div class="bullet-list">
+                            <ul>
+                                <li><i class="fa-solid fa-check"></i>كتابة مسودات تلقائية وإنشاء تقارير كاملة في Docs</li>
+                                <li><i class="fa-solid fa-check"></i>توليد صيغ Sheets المعقدة من وصف نصي بسيط</li>
+                                <li><i class="fa-solid fa-check"></i>تصنيف البيانات وتحليلها في Sheets باستخدام دالة =AI()</li>
+                                <li><i class="fa-solid fa-check"></i>تحسين وتهيئة الشرائح تلقائياً في Google Slides</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight-box google-tool" style="text-align: center; margin-top: 30px;">
+                    <h3 style="color: #FBBC05; font-size: 1.8em; margin-bottom: 10px;">🌟 النصيحة الذهبية: دالة AI في Sheets</h3>
+                    <p style="font-size: 1.2em; color: #F1F5F9;">
+                        استخدم الدالة <code>=AI("صنف هذا التعليق كإيجابي أو سلبي"، C2)</code> لتصنيف مئات الصفوف فوراً.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="slide-container">
+        <div class="slide-number">16 / 29</div>
+        <div class="timer-box">⏱️ 1:10-1:15 (5 min) - DEMO</div>
+        <h2>🎨 Midjourney: تصميم بالذكاء الاصطناعي</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="grid-2" style="margin-bottom: 30px;">
+                    <div class="tile">
+                        <h3>الاستخدامات</h3>
+                        <div class="bullet-list">
+                            <ul>
+                                <li><i class="fa-solid fa-image"></i>تصميم شعارات</li>
+                                <li><i class="fa-solid fa-palette"></i>صور تسويقية</li>
+                                <li><i class="fa-solid fa-book"></i>رسومات توضيحية</li>
+                                <li><i class="fa-solid fa-store"></i>تصاميم منتجات</li>
+                                <li><i class="fa-solid fa-camera"></i>صور المحتوى</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <h3>نصائح للـ Prompts</h3>
+                        <div class="code-block" style="font-size: 0.9em;">// مثال prompt جيد
+professional business logo for tech company, modern minimalist style, blue and orange colors, vector art, white background --ar 1:1 --v 6
+
+// عناصر مهمة:
+1. الموضوع الأساسي
+2. الأسلوب الفني
+3. الألوان
+4. الجودة والتفاصيل
+5. النسبة (--ar)
+6. الإصدار (--v 6)</div>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3 style="color: #F59E0B; margin-bottom: 15px;">💡 حالة استخدام: شركة تصنيع</h3>
+                    <p style="font-size: 1.2em;">استخدم Midjourney لتصميم نماذج أولية للمنتجات، كتالوجات، وصور تسويقية دون الحاجة لمصمم باهظ التكلفة!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">17 / 29</div>
+        <div class="timer-box">⏱️ 1:15-1:20 (5 min) - DEMO</div>
+        <h2>📄 Claude: تحليل الوثائق الطويلة</h2>
+        <div class="content-area">
+            <div class="grid-2">
+                <div class="tile">
+                    <h3>مميزات Claude</h3>
+                    <div class="bullet-list">
+                        <ul>
+                            <li><i class="fa-solid fa-file-pdf"></i>قراءة 75,000 كلمة دفعة واحدة</li>
+                            <li><i class="fa-solid fa-brain"></i>فهم عميق للسياق</li>
+                            <li><i class="fa-solid fa-search"></i>استخراج معلومات دقيق</li>
+                            <li><i class="fa-solid fa-chart-bar"></i>تلخيص ذكي</li>
+                            <li><i class="fa-solid fa-language"></i>ترجمة احترافية</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <h3>أمثلة عملية</h3>
+                    <div class="step-card">
+                        <p><strong>للتوثيق:</strong></p>
+                        <div class="code-block" style="font-size: 0.85em;">لخص هذا العقد القانوني (50 صفحة) واستخرج:
+1. الأطراف المعنية
+2. المدة الزمنية
+3. الشروط المالية
+4. البنود المهمة
+5. المخاطر المحتملة
+
+[الصق العقد]</div>
+                    </div>
+                    <div class="step-card">
+                        <p><strong>للهندسة:</strong></p>
+                        <div class="code-block" style="font-size: 0.85em;">حلل هذه المواصفات التقنية وأعطني:
+1. المتطلبات الأساسية
+2. التحديات المحتملة
+3. الحلول المقترحة
+4. جدول زمني للتنفيذ</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">18 / 29</div>
+        <div class="timer-box">⏱️ 1:20-1:25 (5 min)</div>
+        <h2>⚡ أتمتة العمليات بالذكاء الاصطناعي</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="highlight-box" style="margin-bottom: 30px;">
+                    <h3 style="color: #F59E0B; text-align: center; font-size: 2em;">AI + Automation = قوة خارقة</h3>
+                    <p style="text-align: center; font-size: 1.4em; margin-top: 20px;">
+                        دمج الذكاء الاصطناعي مع الأتمتة يحول عملك بالكامل
+                    </p>
+                </div>
+                
+                <div class="grid-3">
+                    <div class="tile">
+                        <div class="icon">📧</div>
+                        <h3>إدارة البريد</h3>
+                        <p>• تصنيف تلقائي</p>
+                        <p>• ردود ذكية</p>
+                        <p>• أولوية المهام</p>
+                        <p>• ملخصات يومية</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon">💬</div>
+                        <h3>خدمة العملاء</h3>
+                        <p>• chatbot ذكي 24/7</p>
+                        <p>• فهم اللغة الطبيعية</p>
+                        <p>• حل 80% من الاستفسارات</p>
+                        <p>• تصعيد ذكي للإنسان</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon">📊</div>
+                        <h3>التقارير</h3>
+                        <p>• جمع البيانات تلقائياً</p>
+                        <p>• تحليل ذكي</p>
+                        <p>• توليد insights</p>
+                        <p>• إرسال تلقائي</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">19 / 29</div>
+        <div class="timer-box">⏱️ 1:25-1:35 (10 min) - HANDS-ON</div>
+        <h2>🤖 مشروع عملي: بناء Chatbot لشركتك</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="step-card">
+                    <h3><span class="step-number">1</span>تحديد الغرض</h3>
+                    <p>ما الذي يجب أن يفعله الـ chatbot؟</p>
+                    <div class="grid-3" style="margin-top: 15px;">
+                        <div>✓ الإجابة على الأسئلة الشائعة</div>
+                        <div>✓ جدولة المواعيد</div>
+                        <div>✓ تقديم معلومات المنتجات</div>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <h3><span class="step-number">2</span>جمع المعلومات</h3>
+                    <p>احصر المعلومات التي يحتاجها الـ bot:</p>
+                    <div class="bullet-list">
+                        <ul>
+                            <li><i class="fa-solid fa-book"></i>أسئلة وأجوبة شائعة</li>
+                            <li><i class="fa-solid fa-info"></i>معلومات الشركة</li>
+                            <li><i class="fa-solid fa-shopping-cart"></i>كتالوج المنتجات/الخدمات</li>
+                            <li><i class="fa-solid fa-phone"></i>معلومات الاتصال</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="step-card">
+                    <h3><span class="step-number">3</span>إنشاء Base Prompt</h3>
+                    <div class="code-block" style="font-size: 0.85em;">أنت مساعد خدمة عملاء لشركة [اسم الشركة] المتخصصة في [المجال].
+
+دورك:
+- الرد على استفسارات العملاء بطريقة ودية واحترافية
+- تقديم معلومات دقيقة عن [المنتجات/الخدمات]
+- مساعدة في جدولة المواعيد
+- تحويل للدعم البشري عند الضرورة
+
+قواعد:
+- كن مهذباً ومحترفاً دائماً
+- إذا لم تعرف الإجابة، اعترف بذلك
+- لا تخترع معلومات غير موجودة
+- اقترح الخطوة التالية دائماً
+
+المعلومات:
+[أضف معلومات شركتك هنا]</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">20 / 29</div>
+        <div class="timer-box">⏱️ 1:35-1:40 (5 min)</div>
+        <h2>🛠️ أدوات بناء Chatbots بدون برمجة</h2>
+        <div class="content-area">
+            <div class="grid-4">
+                <div class="tool-card">
+                    <div class="tool-icon">🟢</div>
+                    <h3>ChatBase</h3>
+                    <p>سهل جداً</p>
+                    <p style="color: #10B981; margin-top: 10px;">$19/شهر</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">💬</div>
+                    <h3>Voiceflow</h3>
+                    <p>قوي ومرن</p>
+                    <p style="color: #10B981; margin-top: 10px;">$40/شهر</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">🤖</div>
+                    <h3>Landbot</h3>
+                    <p>تفاعلي وجميل</p>
+                    <p style="color: #10B981; margin-top: 10px;">$30/شهر</p>
+                </div>
+                <div class="tool-card">
+                    <div class="tool-icon">⚙️</div>
+                    <h3>n8n</h3>
+                    <p>مجاني ومفتوح</p>
+                    <p style="color: #10B981; margin-top: 10px;">مجاني!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">21 / 29</div>
+        <div class="timer-box">⏱️ 1:40-1:45 (5 min)</div>
+        <h2>⚙️ AI للهندسة والتصنيع</h2>
+        <div class="content-area">
+            <div class="grid-3">
+                <div class="step-card">
+                    <h3><span class="step-number">1</span>تحسين العمليات</h3>
+                    <div class="code-block" style="font-size: 0.8em;">حلل خط الإنتاج التالي واقترح تحسينات:
+
+البيانات:
+- 8 ساعات عمل/يوم
+- 5 محطات عمل
+- المحطة 3: عنق الزجاجة (30 دقيقة/وحدة)
+- المحطات الأخرى: 15 دقيقة/وحدة
+- الهدف: زيادة الإنتاج 30%
+
+أعطني:
+1. تحليل المشكلة
+2. 5 حلول مقترحة
+3. التكلفة المتوقعة لكل حل
+4. العائد المتوقع
+5. خطة تنفيذ</div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-number">2</span>الصيانة التنبؤية</h3>
+                    <div class="code-block" style="font-size: 0.8em;">بناءً على هذه البيانات من الآلة:
+- الاهتزازات: زيادة 15% في 3 أيام
+- درجة الحرارة: ارتفاع 8 درجات
+- الصوت: أعلى من المعتاد
+- ساعات التشغيل: 3,200 من 4,000
+
+هل تحتاج الآلة لصيانة؟
+1. احتمالية العطل
+2. التوقيت المثالي للصيانة
+3. القطع المشتبه بها
+4. خطة الصيانة</div>
+                </div>
+                <div class="step-card google-tool">
+                    <h3><span class="step-number">3</span>مراقبة الجودة بالرؤية الحاسوبية</h3>
+                    <div class="code-block" style="font-size: 0.8em;">**الأدوات:**
+1. **Google Cloud Vision API:** لاكتشاف العيوب والشعارات والنصوص.
+2. **Visual Inspection AI:** أتمتة مهام الفحص البصري للمنتجات في المصانع.
+3. **Vertex AI Vision:** لبناء تطبيقات رؤية حاسوبية لدمج نماذج التعلم الآلي مع بث الفيديو المباشر.
+<br/>
+<p style="font-size: 1.1em; margin-top: 10px; color: #4285F4;">**التطبيق العملي:** استخدم كاميرات المراقبة على خط الإنتاج لاكتشاف العيوب بنسبة 100% فوراً قبل مغادرة المنتج للمصنع.</p>
+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">22 / 29</div>
+        <div class="timer-box">⏱️ 1:45-1:50 (5 min)</div>
+        <h2>📝 AI لكتابة الوثائق والتقارير</h2>
+        <div class="content-area">
+            <div class="grid-2">
+                <div class="step-card">
+                    <h3><span class="step-number">1</span>كتابة السياسات</h3>
+                    <div class="code-block" style="font-size: 0.85em;">اكتب سياسة شاملة لـ [الموضوع]:
+
+الموضوع: سياسة العمل عن بعد
+الشركة: [نوع الشركة]
+الموظفون: 50 موظف
+
+السياسة يجب أن تتضمن:
+1. الأهداف
+2. من يحق له
+3. الأيام المسموحة
+4. متطلبات التقنية
+5. ساعات العمل
+6. التواصل والإدارة
+7. الأمن والخصوصية
+8. التقييم والمتابعة</div>
+                </div>
+                <div class="step-card">
+                    <h3><span class="step-number">2</span>تلخيص الاجتماعات</h3>
+                    <div class="code-block" style="font-size: 0.85em;">لخص هذا الاجتماع:
+
+[الصق نص/تسجيل الاجتماع]
+
+أعطني:
+1. ملخص تنفيذي (3 نقاط)
+2. القرارات المتخذة
+3. المهام والمسؤوليات
+4. المواعيد النهائية
+5. النقاط المفتوحة
+6. الاجتماع القادم
+
+التنسيق: جدول منظم</div>
+                </div>
+            </div>
+            <div class="step-card google-tool" style="margin-top: 20px;">
+                <h3><span class="step-number">3</span>استخراج البيانات من الوثائق (Document AI)</h3>
+                <div class="code-block" style="font-size: 0.9em;">
+                    **الأداة:** Google Cloud Document AI
+                    <br/>
+                    **الاستخدام:** منصة لاستخلاص البيانات المهيكلة من المستندات غير المهيكلة (مثل فواتير المبيعات، عقود الإيجار، أو استمارات الموارد البشرية).
+                    <br/>
+                    **الميزة:** يمكنها استخدام نماذج مدربة مسبقاً لاستخراج حقول محددة (مثل: اسم العميل، تاريخ الاستحقاق، المبلغ الإجمالي) بدقة عالية.
+                </div>
+                <p style="margin-top: 10px; font-size: 1.2em; color: #4285F4;">**التطبيق العملي:** أتمتة إدخال بيانات مئات الفواتير شهرياً لتقليل الجهد البشري والأخطاء بنسبة 90%+.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">23 / 29</div>
+        <div class="timer-box">⏱️ 1:50-1:55 (5 min)</div>
+        <h2>🎯 استراتيجية تطبيق AI في شركتك</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="grid-4" style="margin-bottom: 30px;">
+                    <div class="step-card">
+                        <h3 style="text-align: center;"><span class="step-number">1</span></h3>
+                        <h3>التقييم</h3>
+                        <p>• حدد المهام المتكررة</p>
+                        <p>• احسب الوقت المهدور</p>
+                        <p>• حدد نقاط الألم</p>
+                    </div>
+                    <div class="step-card">
+                        <h3 style="text-align: center;"><span class="step-number">2</span></h3>
+                        <h3>التخطيط</h3>
+                        <p>• ابدأ بمهمة واحدة</p>
+                        <p>• اختر الأداة المناسبة</p>
+                        <p>• حدد مؤشرات النجاح</p>
+                    </div>
+                    <div class="step-card">
+                        <h3 style="text-align: center;"><span class="step-number">3</span></h3>
+                        <h3>التنفيذ</h3>
+                        <p>• طبق تدريجياً</p>
+                        <p>• درب الفريق</p>
+                        <p>• راقب النتائج</p>
+                    </div>
+                    <div class="step-card">
+                        <h3 style="text-align: center;"><span class="step-number">4</span></h3>
+                        <h3>التوسع</h3>
+                        <p>• حسّن باستمرار</p>
+                        <p>• طبق على مهام أخرى</p>
+                        <p>• شارك النجاحات</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box">
+                    <h3 style="color: #F59E0B; margin-bottom: 20px;">⚠️ أخطاء شائعة يجب تجنبها</h3>
+                    <div class="grid-3">
+                        <div>
+                            <p style="color: #EF4444; font-weight: 700;">❌ البدء بكل شيء</p>
+                            <p>ابدأ صغيراً وتوسع</p>
+                        </div>
+                        <div>
+                            <p style="color: #EF4444; font-weight: 700;">❌ عدم قياس النتائج</p>
+                            <p>راقب وحلل دائماً</p>
+                        </div>
+                        <div>
+                            <p style="color: #EF4444; font-weight: 700;">❌ إهمال التدريب</p>
+                            <p>استثمر في تدريب الفريق</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">24 / 29</div>
+        <div class="timer-box">⏱️ 1:55-2:00 (5 min)</div>
+        <h2>💰 حساب عائد الاستثمار (ROI)</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="highlight-box" style="margin-bottom: 30px;">
+                    <h3 style="color: #F59E0B; text-align: center; font-size: 2em;">مثال حقيقي</h3>
+                </div>
+                
+                <div class="grid-2">
+                    <div class="tile" style="border: 2px solid #EF4444;">
+                        <h3 style="color: #EF4444;">📉 قبل AI</h3>
+                        <p style="font-size: 1.2em; margin: 15px 0;">
+                            <strong>خدمة العملاء:</strong><br/>
+                            • 3 موظفين × $2000 = $6000/شهر<br/>
+                            • 8 ساعات/يوم<br/>
+                            • 50 استفسار/يوم<br/>
+                            • معدل الرد: 24 ساعة<br/>
+                            <br/>
+                            <strong>التكلفة السنوية: $72,000</strong>
+                        </p>
+                    </div>
+                    <div class="tile" style="border: 2px solid #10B981;">
+                        <h3 style="color: #10B981;">📈 بعد AI Chatbot</h3>
+                        <p style="font-size: 1.2em; margin: 15px 0;">
+                            <strong>النظام الجديد:</strong><br/>
+                            • 1 موظف × $2000 = $2000/شهر<br/>
+                            • Chatbot: $100/شهر<br/>
+                            • يعمل 24/7<br/>
+                            • 200 استفسار/يوم<br/>
+                            • معدل الرد: فوري<br/>
+                            <br/>
+                            <strong>التكلفة السنوية: $25,200</strong>
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="text-align: center; margin-top: 30px;">
+                    <h3 style="color: #10B981; font-size: 2.5em; margin-bottom: 20px;">💰 التوفير: $46,800/سنة</h3>
+                    <p style="font-size: 1.4em;">+ زيادة رضا العملاء + تحسين سرعة الاستجابة × 24</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">25 / 29</div>
+        <div class="timer-box">⏱️ 2:00-2:05 (5 min)</div>
+        <h2>🔒 الأمن والخصوصية في AI</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="grid-3">
+                    <div class="tile">
+                        <div class="icon">⚠️</div>
+                        <h3>المخاطر</h3>
+                        <p>• تسريب بيانات حساسة</p>
+                        <p>• انتهاك الخصوصية</p>
+                        <p>• استخدام غير قانوني</p>
+                        <p>• اعتماد كامل على AI</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon">🛡️</div>
+                        <h3>الحماية</h3>
+                        <p>• لا تشارك بيانات سرية</p>
+                        <p>• استخدم حسابات مدفوعة</p>
+                        <p>• فعّل المصادقة الثنائية</p>
+                        <p>• راجع سياسة الخصوصية</p>
+                    </div>
+                    <div class="tile">
+                        <div class="icon">✅</div>
+                        <h3>أفضل الممارسات</h3>
+                        <p>• درب الفريق على الأمان</p>
+                        <p>• راجع المخرجات دائماً</p>
+                        <p>• احتفظ بنسخ احتياطية</p>
+                        <p>• وثق السياسات</p>
+                    </div>
+                </div>
+                
+                <div class="highlight-box" style="margin-top: 30px;">
+                    <h3 style="color: #EF4444; margin-bottom: 15px;">🚫 لا تفعل أبداً</h3>
+                    <div class="grid-2">
+                        <div>
+                            <p>❌ إدخال كلمات مرور أو مفاتيح API</p>
+                            <p>❌ مشاركة معلومات العملاء الشخصية</p>
+                            <p>❌ رفع مستندات مالية حساسة</p>
+                        </div>
+                        <div>
+                            <p>❌ مشاركة استراتيجيات سرية</p>
+                            <p>❌ إدخال معلومات طبية</p>
+                            <p>❌ الثقة العمياء بالمخرجات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">26 / 29</div>
+        <div class="timer-box">⏱️ 2:05-2:10 (5 min)</div>
+        <h2>📋 خطة العمل: الـ 30 يوم القادمة</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="grid-3">
+                    <div class="step-card">
+                        <h3 style="color: #10B981;">الأسبوع 1-2</h3>
+                        <h3>الاستكشاف</h3>
+                        <div class="bullet-list">
+                            <ul>
+                                <li><i class="fa-solid fa-check"></i>افتح حساب ChatGPT Plus أو Gemini Advanced</li>
+                                <li><i class="fa-solid fa-check"></i>جرب 3 أدوات مختلفة (بما في ذلك ميزات Google Workspace AI)</li>
+                                <li><i class="fa-solid fa-check"></i>حدد 5 مهام للأتمتة</li>
+                                <li><i class="fa-solid fa-check"></i>احسب الوقت المهدور</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <h3 style="color: #3B82F6;">الأسبوع 3</h3>
+                        <h3>التطبيق</h3>
+                        <div class="bullet-list">
+                            <ul>
+                                <li><i class="fa-solid fa-check"></i>ابدأ بمهمة واحدة</li>
+                                <li><i class="fa-solid fa-check"></i>اكتب prompts فعالة</li>
+                                <li><i class="fa-solid fa-check"></i>اختبر وحسّن</li>
+                                <li><i class="fa-solid fa-check"></i>وثق العملية</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step-card">
+                        <h3 style="color: #8B5CF6;">الأسبوع 4</h3>
+                        <h3>التوسع</h3>
+                        <div class="bullet-list">
+                            <ul>
+                                <li><i class="fa-solid fa-check"></i>قس النتائج</li>
+                                <li><i class="fa-solid fa-check"></i>شارك مع الفريق</li>
+                                <li><i class="fa-solid fa-check"></i>طبق على مهمة ثانية</li>
+                                <li><i class="fa-solid fa-check"></i>خطط للشهر القادم</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="slide-number">27 / 29</div>
+        <div class="timer-box">⏱️ 2:10-2:15 (5 min)</div>
+        <h2>🎓 ختام التدريب</h2>
+        <div class="content-area">
+            <div style="width: 100%;">
+                <div class="grid-2" style="margin-bottom: 40px;">
+                    <div class="tile" style="background: rgba(245, 158, 11, 0.15);">
+                        <h3 style="color: #F59E0B;">✅ ما تعلمناه</h3>
+                        <p>• أساسيات الذكاء الاصطناعي</p>
+                        <p>• ChatGPT وكتابة Prompts فعالة</p>
+                        <p>• تطبيقات عملية لكل قسم</p>
+                        <p>• أدوات متقدمة (Gemini, Midjourney, Claude)</p>
+                        <p>• **AI في Google Workspace**</p>
+                        <p>• بناء chatbot مخصص</p>
+                        <p>• استراتيجية التطبيق والـ ROI</p>
+                        <p>• الأمن والخصوصية</p>
+                    </div>
+                    <div class="tile" style="background: rgba(16, 185, 129, 0.15);">
+                        <h3 style="color: #10B981;">🚀 أنت الآن قادر على</h3>
+                        <p>• استخدام AI في عملك اليومي</p>
+                        <p>• توفير 10-20 ساعة أسبوعياً</p>
+                        <p>• زيادة إنتاجيتك 300%+</p>
+                        <p>• أتمتة المهام المتكررة</p>
+                        <p>• بناء حلول AI مخصصة</p>
+                        <p>• قيادة التحول الرقمي في شركتك</p>
+                        <p>• تحقيق ميزة تنافسية</p>
+                    </div>
+                </div>
+                
+                <div style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.3) 0%, rgba(239, 68, 68, 0.3) 100%); border: 3px solid #F59E0B; border-radius: 15px; padding: 40px; text-align: center;">
+                    <h1 style="font-size: 3em; margin-bottom: 20px;">🎉 مبروك!</h1>
+                    <p style="font-size: 1.6em; margin-bottom: 30px;">
+                        أنت الآن <strong>قائد التحول الرقمي</strong> في شركتك
+                    </p>
+                    <div class="badge" style="font-size: 1.3em; margin: 20px; background: linear-gradient(135deg, #10B981 0%, #059669 100%);">
+                        <i class="fa-solid fa-trophy"></i> AI Business Professional
+                    </div>
+                    <p class="presenter-info" style="margin-top: 40px; font-size: 1.4em;">
+                        <strong>شكراً لكم جميعاً!</strong><br/>
+                        Salem Abu Alrub – TechServJo<br/>
+                        <i class="fa-solid fa-envelope"></i> salem@techservjo.com<br/>
+                        <i class="fa-solid fa-phone"></i> <span dir="ltr">+962 797970257</span><br/>
+                        <i class="fa-solid fa-globe"></i> https://techservjo.com<br/>
+                        <i class="fa-brands fa-linkedin"></i> salem-rub</a>
+                    </p>
+
+                    <div style="text-align:center; margin-top:18px;">
+                        <a href="https://www.linkedin.com/in/salem-rub/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile - Salem Abu Alrub">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://www.linkedin.com/in/salem-rub/&format=svg" alt="QR code to LinkedIn - Salem Abu Alrub" style="display:block; margin:0 auto; width:140px; height:140px; border-radius:12px; background:#ffffff; padding:6px;"/>
+                        </a>
+                        <div style="color:#F1F5F9; margin-top:10px; font-size:1.05em;">امسح للاتصال على لينكدإن · Scan to connect</div>
+                    </div>
+                    <p style="font-size: 1.2em; margin-top: 30px; color: #F1F5F9;">
+                        <i class="fa-solid fa-question-circle"></i> الأسئلة والاستفسارات<br/>
+                        <i class="fa-solid fa-handshake"></i> نتطلع لرؤية نجاحاتكم!
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <div class="controls">
+        <button onclick="prevSlide()">السابق ←</button>
+        <span class="slide-counter" id="counter">1 / 29</span>
+        <button onclick="nextSlide()">→ التالي</button>
+        <button onclick="toggleFullscreen()" style="background: rgba(245, 158, 11, 0.2); color: #F59E0B; border: 1px solid #F59E0B;" title="شاشة كاملة (F)">
+            <i class="fa-solid fa-expand"></i>
+        </button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide-container');
+        
+        // Update the total number of slides in the initial counter display
+        document.getElementById('counter').textContent = (currentSlide + 1) + ' / ' + slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            document.getElementById('counter').textContent = (currentSlide + 1) + ' / ' + slides.length;
+        }
+        
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                showSlide(currentSlide + 1);
+            }
+        }
+        
+        function prevSlide() {
+            if (currentSlide > 0) {
+                showSlide(currentSlide - 1);
+            }
+        }
+        
+        function toggleFullscreen() {
+            const elem = document.querySelector('.presentation-wrapper');
+            if (!document.fullscreenElement) {
+                if (elem.requestFullscreen) {
+                    elem.requestFullscreen();
+                } else if (elem.webkitRequestFullscreen) {
+                    elem.webkitRequestFullscreen();
+                } else if (elem.msRequestFullscreen) {
+                    elem.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                }
+            }
+        }
+        
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'PageDown') nextSlide();
+            if (e.key === 'ArrowLeft' || e.key === 'PageUp') prevSlide();
+            if (e.key === 'Home') showSlide(0);
+            if (e.key === 'End') showSlide(slides.length - 1);
+            if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+        });
+    </script>
+</body>
+</html>
