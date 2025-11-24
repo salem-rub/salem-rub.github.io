@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الذكاء الاصطناعي للصناعات المتقدمة - Pharma Grade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet"/>
+    <style>
+        :root {
+            --bg-dark: #0f172a;
+            --card-bg: #1e293b;
+            --accent: #0ea5e9; /* Sky blue for clean water/hygiene */
+            --steel: #94a3b8; /* Stainless steel color */
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --success: #10b981;
+            --text-main: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-main);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .presentation-wrapper {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+        }
+
+        .slide-container {
+            width: 95vw;
+            height: 90vh;
+            max-width: 1600px;
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid #334155;
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            padding: 40px 60px;
+            display: none;
+            flex-direction: column;
+            position: relative;
+            overflow-y: auto;
+        }
+
+        .slide-container.active { display: flex; animation: fadeIn 0.5s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Typography */
+        h1 { font-size: 3.5em; font-weight: 900; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 20px; }
+        h2 { font-size: 2.2em; color: var(--accent); margin-bottom: 30px; border-right: 5px solid var(--accent); padding-right: 20px; }
+        h3 { font-size: 1.4em; color: var(--steel); margin-bottom: 15px; }
+        p, li { font-size: 1.15em; line-height: 1.7; color: var(--text-muted); margin-bottom: 10px; }
+
+        /* Specific Components */
+        .badge-pill {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 0.9em;
+            font-weight: bold;
+            border: 1px solid currentColor;
+            margin-left: 10px;
+        }
+        .badge-pharma { color: #38bdf8; background: rgba(56, 189, 248, 0.1); }
+        .badge-steel { color: #94a3b8; background: rgba(148, 163, 184, 0.1); }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; height: 100%; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            transition: transform 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+        /* Prompts Formatting */
+        .prompt-box {
+            background: #000;
+            border: 1px solid #334155;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 15px;
+            position: relative;
+        }
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--warning);
+            font-size: 0.9em;
+            font-family: monospace;
+        }
+        .prompt-text {
+            font-family: 'Courier New', monospace;
+            color: #a5f3fc;
+            font-size: 1em;
+            white-space: pre-wrap;
+            direction: rtl;
+            text-align: right;
+        }
+        .copy-btn {
+            background: transparent;
+            border: 1px solid var(--steel);
+            color: var(--steel);
+            padding: 2px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8em;
+        }
+        .copy-btn:hover { background: var(--steel); color: #000; }
+
+        /* Section Dividers */
+        .section-header {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+        .section-icon { font-size: 5em; color: var(--accent); margin-bottom: 30px; }
+
+        /* Controls */
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.95);
+            padding: 12px 30px;
+            border-radius: 50px;
+            border: 1px solid var(--accent);
+            display: flex;
+            gap: 25px;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: var(--accent);
+            font-size: 1.4em;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-btn:hover:not(:disabled) { color: #fff; transform: scale(1.2); }
+        .nav-btn:disabled { color: #475569; cursor: not-allowed; transform: none; }
+        
+        .slide-counter { 
+            color: #fff; 
+            font-family: monospace; 
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            min-width: 80px;
+            justify-content: center;
+        }
+        
+        .separator {
+            width: 1px;
+            background: #334155;
+            height: 24px;
+            align-self: center;
+        }
+
+        .tag-role {
+            background: rgba(255,255,255,0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.8em;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+<div class="presentation-wrapper">
+
+    <div class="slide-container active">
+        <div class="section-header">
+            <div style="font-size: 8em; margin-bottom: 20px;">🏗️ 💊</div>
+            <h1>الذكاء الاصطناعي للصناعات المتقدمة</h1>
+            <p style="font-size: 1.8em; color: var(--accent);">تصنيع الستانلس ستيل & أنظمة معالجة المياه</p>
+            <div style="margin-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <span class="badge-pill badge-pharma">Pharma Grade</span>
+                <span class="badge-pill badge-steel">Stainless Steel Fabrication</span>
+                <span class="badge-pill badge-pharma">AI Integration</span>
+            </div>
+            <p style="margin-top: 30px; font-size: 1.2em; color: var(--steel);">دليل عملي شامل لأصحاب الأعمال والمدراء</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2>لماذا الذكاء الاصطناعي في مصنعك الآن؟</h2>
+        <div class="grid-2">
+            <div>
+                <div class="card" style="border-left: 4px solid var(--danger);">
+                    <h3>🚫 التحديات الحالية</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-xmark" style="color:var(--danger)"></i> <strong>ضغط التوثيق:</strong> شركات الأدوية تطلب أطنان من الورق (Validation, DQ, IQ, OQ).</li>
+                        <li><i class="fa-solid fa-xmark" style="color:var(--danger)"></i> <strong>ندرة المواهب:</strong> صعوبة إيجاد لحامين (TIG/Orbital) يفهمون معايير ASME BPE.</li>
+                        <li><i class="fa-solid fa-xmark" style="color:var(--danger)"></i> <strong>دقة التسعير:</strong> المخاطرة في تسعير مشاريع معقدة بمواد خام متقلبة الأسعار.</li>
+                    </ul>
+                </div>
+            </div>
+            <div>
+                <div class="card" style="border-left: 4px solid var(--success);">
+                    <h3>✅ الحل بالذكاء الاصطناعي</h3>
+                    <ul>
+                        <li><i class="fa-solid fa-check" style="color:var(--success)"></i> <strong>الدقة:</strong> تدقيق شهادات المواد (MTRs) في ثوانٍ.</li>
+                        <li><i class="fa-solid fa-check" style="color:var(--success)"></i> <strong>السرعة:</strong> تحويل كراسة الشروط (URS) إلى عرض فني في ساعة واحدة.</li>
+                        <li><i class="fa-solid fa-check" style="color:var(--success)"></i> <strong>الكفاءة:</strong> مساعد شخصي لكل مهندس وفني في المصنع.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <p style="font-size: 1.4em; color: var(--warning);">"نحن لا نستبدل المهندسين، نحن نمنحهم قدرات خارقة."</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-header">
+            <div class="section-icon"><i class="fa-solid fa-chess"></i></div>
+            <h2 style="border:none;">المحور الأول: الإدارة الاستراتيجية والمخاطر</h2>
+            <p>كيف يتخذ المدير المالك قرارات أذكى وأسرع</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2>🛡️ تحليل العقود والمخاطر (Risk Assessment)</h2>
+        <p>التعامل مع عقود شركات الأدوية الصارمة والشروط الجزائية.</p>
+        
+        <div class="grid-2">
+            <div>
+                <h3>السيناريو</h3>
+                <p>وصلك عقد من عميل (شركة أدوية) يحتوي على بنود غامضة بخصوص "تأخير التسليم" و "اختبارات الجودة المفاجئة". تحتاج لمراجعة قانونية/فنية سريعة.</p>
+                <div class="card" style="margin-top: 20px;">
+                    <i class="fa-solid fa-robot"></i> <strong>الأداة المقترحة:</strong> Claude 3.5 Sonnet (لأنه ممتاز في تحليل النصوص الطويلة).
+                </div>
+            </div>
+            <div>
+                <div class="prompt-box">
+                    <div class="prompt-header">
+                        <span>نسخ ولصق للذكاء الاصطناعي</span>
+                        <button class="copy-btn">نسخ</button>
+                    </div>
+                    <div class="prompt-text">أنت مستشار قانوني وهندسي خبير في عقود الإنشاءات الصناعية (FIDIC) وصناعة الأدوية.
+
+مرفق مسودة عقد لمشروع تصنيع وتوريد نظام مياه (WFI Loop).
+أرجو مراجعة البنود المتعلقة بـ:
+1. الغرامات والشروط الجزائية (Penalties).
+2. شروط القوة القاهرة (Force Majeure) - هل تشمل تأخر وصول المواد الخام؟
+3. شروط قبول المشروع (Acceptance Criteria) - هل هي محددة بمعايير واضحة أم مطاطة؟
+
+قم بتحديد الفقرات الخطرة واقترح صياغة بديلة تحمي حقوقي كمصنع دون أن ترفضها شركة الأدوية.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-header">
+            <div class="section-icon"><i class="fa-solid fa-users-gear"></i></div>
+            <h2 style="border:none;">المحور الثاني: الموارد البشرية الفنية</h2>
+            <p>حرب المواهب: كيف تجد وتحافظ على الفنيين المهرة</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2>👨‍🏭 توظيف الفنيين المتخصصين (Technical Hiring)</h2>
+        <p>الابتعاد عن الإعلانات التقليدية لجذب لحامين TIG/Orbital محترفين.</p>
+        
+        <div class="card">
+            <h3>المشكلة:</h3>
+            <p>الإعلانات العامة ("مطلوب لحام") تجلب مئات الطلبات غير المؤهلة. نحن نحتاج شخصاً يفهم الـ Sanitary Welding والـ Purging.</p>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-header">
+                <span>Prompt لإنشاء إعلان وظيفي دقيق</span>
+            </div>
+            <div class="prompt-text">أنت مدير ورشة تصنيع ستانلس ستيل متخصص في الصناعات الدوائية.
+اكتب إعلان توظيف لـ "فني لحام أرجون (TIG Welder)".
+
+المتطلبات التي يجب ذكرها بوضوح:
+- خبرة لا تقل عن 5 سنوات في أنابيب الستانلس ستيل (Thin wall thickness).
+- إجادة استخدام اللحام بالحقن الخلفي (Back Purging) لمنع الأكسدة (Sugaring).
+- القدرة على استخدام ماكينات اللحام المداري (Orbital Welding) - ميزة إضافية.
+- فهم معايير النظافة (GMP).
+
+اكتب الإعلان بلهجة مهنية ولكن جذابة للفنيين، واضمن فيه 3 أسئلة فنية (Screening Questions) يجب على المتقدم الإجابة عليها لفرز الطلبات.</div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-header">
+            <div class="section-icon"><i class="fa-solid fa-file-invoice-dollar"></i></div>
+            <h2 style="border:none;">المحور الثالث: المبيعات والتسعير</h2>
+            <p>من كراسة شروط معقدة إلى عرض سعر رابح</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2>📑 تحليل كراسات الشروط (URS Parsing)</h2>
+        <div class="grid-2">
+            <div>
+                <h3>التحدي</h3>
+                <p>ملفات URS (User Requirement Specification) تأتي بمئات الصفحات. تفويت تفصيل صغير (مثل نوع العزل أو Ra value) قد يكلفك المشروع كله.</p>
+                <div class="card" style="margin-top: 20px; border-color: var(--accent);">
+                    <h4>🚀 سير العمل (Workflow):</h4>
+                    <ol>
+                        <li>استلام ملف PDF من العميل.</li>
+                        <li>رفعه فوراً على ChatGPT Plus / Claude.</li>
+                        <li>استخراج جدول المواصفات.</li>
+                        <li>إرساله للمشتريات للتسعير.</li>
+                    </ol>
+                </div>
+            </div>
+            <div>
+                <div class="prompt-box">
+                    <div class="prompt-header">
+                        <span>Prompt لاستخراج المواصفات</span>
+                    </div>
+                    <div class="prompt-text">أنا مهندس مبيعات في مصنع أنظمة مياه. مرفق ملف URS لمشروع مياه نقية (Purified Water).
+
+استخرج لي جدولاً دقيقاً يحتوي على المتطلبات التالية فقط:
+1. نوع الستانلس ستيل المطلوب (304 / 316L).
+2. درجة خشونة السطح الداخلي (Ra Value) للأنابيب والخزانات.
+3. نوع الصمامات المطلوبة (Manual / Pneumatic) والماركات المعتمدة (Preferred Vendors).
+4. متطلبات التوثيق (Documentation Requirements).
+5. أي متطلبات خاصة باللحام (Boroscope Inspection percentage).
+
+ضع الإجابة في جدول منظم لأستخدمه في التسعير.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-header">
+            <div class="section-icon"><i class="fa-solid fa-boxes-stacked"></i></div>
+            <h2 style="border:none;">المحور الرابع: المشتريات وسلسلة التوريد</h2>
+            <p>الذكاء في شراء الستانلس ستيل والإكسسوارات</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2>⚖️ مقارنة الموردين والبدائل</h2>
+        <p>اتخاذ قرارات شراء ذكية بناءً على المواصفات الفنية وليس السعر فقط.</p>
+        
+        <div class="grid-2">
+            <div class="card">
+                <h3>حالة استخدام واقعية</h3>
+                <p>المشروع يتطلب مضخات (Centrifugal Pumps) بمواصفات WFI. المورد المعتمد (مثلاً Grundfos) لديه فترة توريد 12 أسبوعاً، ونحن نحتاج 6 أسابيع.</p>
+                <p><strong>الهدف:</strong> إيجاد بديل مكافئ فنياً (Technical Equivalent) لإقناع العميل به.</p>
+            </div>
+            <div class="prompt-box">
+                <div class="prompt-header">
+                    <span>Prompt البحث عن بدائل</span>
+                </div>
+                <div class="prompt-text">أعمل في مشروع لمحطة مياه WFI.
+المضخة الموصوفة هي [موديل المضخة الحالية] ولكن فترة توريدها طويلة جداً.
+
+تصرف كخبير مشتريات هندسي. اقترح لي 3 بدائل من ماركات عالمية مرموقة (مثل Alfa Laval, Fristam, GEA) تكون مكافئة تماماً من حيث:
+1. التدفق والضغط (Flow/Head).
+2. مادة التصنيع (316L Contact parts).
+3. شهادات الـ Pharma (EHEDG, 3A).
+
+أعطني جدول مقارنة لأقدمه للعميل للحصول على الموافقة الفنية (Technical Approval).</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-header">
+            <div class="section-icon"><i class="fa-solid fa-compass-drafting"></i></div>
+            <h2 style="border:none;">المحور الخامس: الهندسة والتصميم</h2>
+            <p>الامتثال للأكواد العالمية (ASME BPE)</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2>📏 المساعد الهندسي للكود (ASME BPE Assistant)</h2>
+        <div class="grid-2">
+            <div>
+                <h3>لماذا نحتاجه؟</h3>
+                <p>كود ASME BPE ضخم ومعقد. المهندسون يضيعون ساعات في البحث عن تفاصيل دقيقة (مثل أبعاد الـ Dead Legs أو ميل الأنابيب Slope).</p>
+                <div class="card" style="margin-top: 15px;">
+                    <strong>نصيحة:</strong> قم بإنشاء "Custom GPT" وارفع عليه ملفات الـ PDF الخاصة بالأكواد التي تعمل بها لتكون مرجعاً خاصاً لشركتك.
+                </div>
+            </div>
+            <div>
+                <div class="prompt-box">
+                    <div class="prompt-header">
+                        <span>سؤال فني دقيق</span>
+                    </div>
+                    <div class="prompt-text">بناءً على معيار ASME BPE-2019 (أو الأحدث):
+
+لدينا خط توزيع مياه (Loop) بقطر 2 إنش.
+1. ما هي النسبة المسموح بها للـ Dead Leg (L/D ratio)؟
+2. ما هو الحد الأدنى للميل (Slope) المطلوب للأنابيب لضمان التصريف الكامل (Drainability)؟
+3. ما هي متطلبات دعم الأنابيب (Pipe Supports) لهذا القطر لمنع الترخيم (Sagging)؟
+
+يرجى ذكر رقم الفقرة في الكود إن أمكن.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-header">
+            <div class="section-icon"><i class="fa-solid fa-industry"></i></div>
+            <h2 style="border:none;">المحور السادس: الإنتاج والجودة (QC)</h2>
+            <p>التوثيق هو "المنتج الثاني" الذي تبيعه</p>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2>🔍 التدقيق الآلي لشهادات المواد (MTR Auditing)</h2>
+        <p>تخيل تدقيق 50 شهادة مواسير يدوياً! دع الذكاء الاصطناعي يقوم بذلك.</p>
+        
+        <div class="grid-3">
+            <div class="card">
+                <h3>الخطوة 1</h3>
+                <p>صور الشهادة أو ارفع ملف PDF.</p>
+            </div>
+            <div class="card">
+                <h3>الخطوة 2</h3>
+                <p>اطلب من AI التحقق من الكيمياء (Chemistry Check).</p>
+            </div>
+            <div class="card">
+                <h3>الخطوة 3</h3>
+                <p>الحصول على تقرير "مقبول/مرفوض".</p>
+            </div>
+        </div>
+
+        <div class="prompt-box">
+            <div class="prompt-header">
+                <span>Prompt لمهندس الجودة</span>
+            </div>
+            <div class="prompt-text">تحقق من شهادة المواد (MTR) المرفقة للستانلس ستيل 316L.
+
+1. هل محتوى الكربون (Carbon) أقل من 0.035%؟
+2. هل محتوى الكروم (Chromium) والنيكل (Nickel) والموليبدينوم (Molybdenum) يقع ضمن مجال المواصفة القياسية ASTM A270؟
+3. استخرج رقم الـ Heat Number.
+
+إذا كانت هناك أي قيمة خارج المواصفة، نبهني فوراً باللون الأحمر.</div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <h2>📝 إنشاء إجراءات العمل (SOP Generator)</h2>
+        <p>العميل يطلب SOP لعملية التخميل (Passivation) غداً!</p>
+        
+        <div class="prompt-box">
+            <div class="prompt-text">أنت مدير توكيد جودة (QA Manager) في مصنع أنظمة دوائية.
+اكتب إجراءات تشغيل قياسية (SOP) لعملية التخميل (Passivation) لنظام توزيع مياه 316L باستخدام حمض الستريك (Citric Acid).
+
+الهيكل المطلوب:
+1. الهدف (Objective).
+2. أدوات السلامة (PPE) المطلوبة.
+3. نسب الخلط والتركيز.
+4. درجة الحرارة وزمن التدوير (Circulation Time).
+5. إجراءات الغسيل النهائي واختبار التوصيلية (Conductivity Test).
+6. سجل التشغيل (Log Sheet Template).</div>
+        </div>
+    </div>
+
+    <div class="slide-container">
+        <div class="section-header">
+            <h1>🚀 خطوتك القادمة</h1>
+            <div class="grid-3" style="width: 100%; margin-top: 40px;">
+                <div class="card">
+                    <h3>1. التجهيز</h3>
+                    <p>اشترك في ChatGPT Team أو Claude Pro لك ولرؤساء الأقسام.</p>
+                </div>
+                <div class="card">
+                    <h3>2. التجربة</h3>
+                    <p>ابدأ غداً برفع ملف URS قديم واطلب تحليله لترى النتيجة.</p>
+                </div>
+                <div class="card">
+                    <h3>3. التوسع</h3>
+                    <p>درب مهندسي الجودة على فحص الـ MTRs بالذكاء الاصطناعي.</p>
+                </div>
+            </div>
+            <p style="margin-top: 50px; color: var(--accent);">هل لديك أي أسئلة حول تطبيق حالة محددة؟</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="controls">
+    <button class="nav-btn" id="prevBtn" onclick="prevSlide()" title="السابق"><i class="fa-solid fa-arrow-right"></i></button>
+    <span class="slide-counter" id="counter">1 / 15</span>
+    <button class="nav-btn" id="nextBtn" onclick="nextSlide()" title="التالي"><i class="fa-solid fa-arrow-left"></i></button>
+    
+    <div class="separator"></div>
+    
+    <button class="nav-btn" onclick="toggleFullscreen()" title="شاشة كاملة (F)">
+        <i class="fa-solid fa-expand"></i>
+    </button>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide-container');
+    const counter = document.getElementById('counter');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function updateControls() {
+        // Update Counter
+        counter.textContent = `${currentSlide + 1} / ${slides.length}`;
+        
+        // Handle Loop Prevention (Disable buttons at ends)
+        prevBtn.disabled = currentSlide === 0;
+        prevBtn.style.opacity = currentSlide === 0 ? "0.3" : "1";
+        
+        nextBtn.disabled = currentSlide === slides.length - 1;
+        nextBtn.style.opacity = currentSlide === slides.length - 1 ? "0.3" : "1";
+    }
+
+    function showSlide(n) {
+        slides[currentSlide].classList.remove('active');
+        currentSlide = n;
+        slides[currentSlide].classList.add('active');
+        updateControls();
+    }
+
+    function nextSlide() { 
+        if (currentSlide < slides.length - 1) {
+            showSlide(currentSlide + 1);
+        }
+    }
+
+    function prevSlide() { 
+        if (currentSlide > 0) {
+            showSlide(currentSlide - 1);
+        }
+    }
+
+    function toggleFullscreen() {
+        if (!document.fullscreenElement) {
+            document.documentElement.requestFullscreen().catch(err => {
+                console.log(`Error attempting to enable fullscreen: ${err.message}`);
+            });
+        } else {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            }
+        }
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' || e.key === 'PageDown') nextSlide();
+        if (e.key === 'ArrowRight' || e.key === 'PageUp') prevSlide();
+        if (e.key.toLowerCase() === 'f') toggleFullscreen();
+    });
+
+    // Copy Button Logic
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const text = this.parentElement.nextElementSibling.innerText;
+            navigator.clipboard.writeText(text);
+            const originalText = this.innerText;
+            this.innerText = 'تم النسخ!';
+            setTimeout(() => { this.innerText = originalText; }, 2000);
+        });
+    });
+
+    // Initialize state
+    updateControls();
+</script>
+
+</body>
+</html>
