@@ -3,242 +3,268 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Rawan Yaseen - Specialist Obstetrician & Gynaecologist</title>
+    <title>Dr. Rawan Yaseen - Obstetrics & Gynaecology Clinic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
+            font-family: 'Lato', sans-serif;
+            scroll-behavior: smooth;
         }
-        
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
         }
-        
-        .hero-section {
-            text-align: center;
-            padding: 60px 30px;
-            background: linear-gradient(135deg, #667eea05 0%, #764ba205 100%);
+        .hero-bg {
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.7)), url('https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
-        
-        .hero-section h1 {
-            font-size: 2.5em;
-            color: #667eea;
-            margin-bottom: 10px;
-            font-weight: 600;
+        .service-card {
+            transition: all 0.3s ease;
         }
-        
-        .hero-section .subtitle {
-            font-size: 1.3em;
-            color: #666;
-            margin-bottom: 15px;
-        }
-        
-        .credentials {
-            font-size: 0.9em;
-            color: #888;
-            margin-bottom: 40px;
-        }
-        
-        .ai-orb-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin: 40px 0;
-        }
-        
-        .cta-text {
-            font-size: 1.4em;
-            color: #667eea;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-        
-        .cta-subtext {
-            font-size: 1em;
-            color: #888;
-            margin-bottom: 30px;
-        }
-        
-        /* Center and enlarge the ElevenLabs widget */
-        elevenlabs-convai {
-            position: static !important;
-            transform: scale(3) !important;
-            margin: 80px auto !important;
-            display: block !important;
-            left: auto !important;
-            right: auto !important;
-            bottom: auto !important;
-            top: auto !important;
-        }
-        
-        .content {
-            padding: 40px 30px;
-            background: #fafbff;
-        }
-        
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-bottom: 40px;
-        }
-        
-        .info-card {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            transition: transform 0.3s ease;
-        }
-        
-        .info-card:hover {
+        .service-card:hover {
             transform: translateY(-5px);
-        }
-        
-        .info-card h3 {
-            color: #667eea;
-            font-size: 1.2em;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .info-card p, .info-card ul {
-            color: #666;
-            font-size: 0.95em;
-        }
-        
-        .info-card ul {
-            padding-left: 20px;
-        }
-        
-        .info-card li {
-            margin-bottom: 6px;
-        }
-        
-        .location-card {
-            grid-column: span 1;
-        }
-        
-        .specialties-card {
-            grid-column: span 2;
-        }
-        
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 1.8em;
-            }
-            
-            elevenlabs-convai {
-                transform: scale(2) !important;
-                margin: 60px auto !important;
-            }
-            
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .specialties-card {
-                grid-column: span 1;
-            }
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="hero-section">
-            <h1>Dr. Rawan Yaseen</h1>
-            <div class="subtitle">Specialist Obstetrician & Gynaecologist</div>
-            <div class="credentials">MBBS | MRCOG | Jordanian Board OBGYN | Arab Board OBGYN</div>
-            
-            <div class="ai-orb-container">
-                <div class="cta-text">Speak with AI Assistant</div>
-                <div class="cta-subtext">Click the button below to start a voice conversation</div>
-                <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
-            </div>
-        </div>
-        
-        <div class="content">
-            <div class="info-grid">
-                <div class="info-card location-card">
-                    <h3>📍 Location</h3>
-                    <p>
-                        King's Mudon Medical Centre<br>
-                        Mudon Community Centre<br>
-                        Floor 1, Mudon - Dubai
-                    </p>
-                </div>
-                
-                <div class="info-card">
-                    <h3>🗣️ Languages</h3>
-                    <p>English, Arabic</p>
-                </div>
-                
-                <div class="info-card specialties-card">
-                    <h3>🩺 Areas of Expertise</h3>
-                    <ul>
-                        <li>Pregnancy & delivery care (vaginal & Cesarean)</li>
-                        <li>Women's health screening & preventive care</li>
-                        <li>Teenage health & psychosexual services</li>
-                        <li>Infertility management</li>
-                        <li>Menopause, contraception & family planning</li>
-                        <li>Gynecology & obstetrics ultrasound</li>
-                        <li>Cervical screening</li>
-                        <li>Aesthetic gynecology procedures</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
-    
+
+    <!-- Error Handler and Polyfill for Preview Environment -->
     <script>
-        // Hide "Powered by" text after widget loads
-        function hidePoweredBy() {
-            const widget = document.querySelector('elevenlabs-convai');
-            if (widget && widget.shadowRoot) {
-                // Add CSS to hide powered by text
-                const style = document.createElement('style');
-                style.textContent = `
-                    [class*="powered"], 
-                    [class*="Powered"],
-                    a[href*="elevenlabs"],
-                    div:has(> a[href*="elevenlabs"]) {
-                        display: none !important;
-                        visibility: hidden !important;
-                    }
-                `;
-                widget.shadowRoot.appendChild(style);
+        // Polyfill to prevent "Cannot assign to read only property 'getUserMedia'" error in some environments
+        try {
+            if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
+                // If it exists but might be read-only, we try to wrap it or leave it alone if it works.
+                // The error usually comes from libraries trying to overwrite it.
+                // We define a property to make it writable if possible, or catch the failure.
+                Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+                    writable: true,
+                    value: navigator.mediaDevices.getUserMedia
+                });
+            }
+        } catch (e) {
+            console.warn("Could not patch getUserMedia:", e);
+        }
+
+        window.addEventListener('error', function(event) {
+            // This catches the specific ElevenLabs widget error caused by iframe restrictions
+            if (event.message && (event.message.includes('getUserMedia') || event.message.includes('MediaDevices') || event.message.includes('read only property'))) {
+                const banner = document.getElementById('preview-warning');
+                if (banner) banner.classList.remove('hidden');
+                console.error("ElevenLabs Widget Error caught: ", event.message);
+            }
+        });
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <!-- Warning Banner for Preview Mode -->
+    <div id="preview-warning" class="hidden fixed top-0 left-0 w-full bg-amber-100 border-b border-amber-200 text-amber-800 px-4 py-3 z-[60] text-center shadow-md">
+        <p class="text-sm font-medium">
+            <i class="fas fa-exclamation-triangle mr-2"></i>
+            <strong>Microphone blocked?</strong> This preview window may restrict voice access. 
+            <span class="underline">Please download the file and open it in your browser to test the Agent.</span>
+            <button onclick="document.getElementById('preview-warning').style.display='none'" class="ml-4 text-amber-600 hover:text-amber-800 font-bold">&times; Dismiss</button>
+        </p>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-sm fixed w-full z-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex items-center">
+                    <span class="text-2xl font-semibold text-rose-500">Dr. Rawan Yaseen</span>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-600 hover:text-rose-500 transition">Home</a>
+                    <a href="#about" class="text-gray-600 hover:text-rose-500 transition">About</a>
+                    <a href="#services" class="text-gray-600 hover:text-rose-500 transition">Services</a>
+                    <a href="#contact" class="text-gray-600 hover:text-rose-500 transition">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-bg min-h-screen flex items-center justify-center pt-20">
+        <div class="text-center max-w-4xl px-4">
+            <span class="text-rose-500 font-semibold tracking-wide uppercase mb-2 block">Specialist Obstetrician & Gynaecologist</span>
+            <h1 class="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+                Compassionate Care for <br> Every Stage of Life
+            </h1>
+            <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
+                Providing comprehensive women's healthcare with evidence-based medicine and a personalized touch.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#contact" class="px-8 py-3 bg-rose-500 text-white rounded-full font-medium hover:bg-rose-600 transition shadow-lg">
+                    Book an Appointment
+                </a>
+                <!-- This button triggers the AI Agent -->
+                <button onclick="triggerAiAgent()" class="px-8 py-3 bg-white text-rose-500 border border-rose-200 rounded-full font-medium hover:bg-rose-50 transition shadow-sm flex items-center justify-center gap-2">
+                    <i class="fas fa-microphone"></i> Talk to Sarah (AI Assistant)
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center">
+                <h2 class="text-3xl font-bold mb-6 text-gray-900">About Dr. Rawan Yaseen</h2>
+                <p class="text-lg text-gray-600 mb-4">
+                    Dr. Rawan is a highly skilled Specialist Obstetrician & Gynecologist holding the <strong>MBBS</strong> and membership of the <strong>Royal College of Obstetricians and Gynaecologists (MRCOG)</strong>.
+                </p>
+                <p class="text-gray-600 mb-8 max-w-3xl mx-auto">
+                    She is board-certified by both the <strong>Jordanian and Arab Boards in Obstetrics and Gynecology</strong>. Her approach combines the highest clinical standards with a warm, empathetic manner, ensuring every patient feels heard and cared for.
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 max-w-lg mx-auto">
+                    <div class="p-4 bg-slate-50 rounded-lg">
+                        <i class="fas fa-certificate text-rose-500 mb-2 text-xl"></i>
+                        <h4 class="font-bold text-gray-900">Certified</h4>
+                        <p class="text-sm text-gray-500">Jordanian & Arab Board OBGYN</p>
+                    </div>
+                    <div class="p-4 bg-slate-50 rounded-lg">
+                        <i class="fas fa-globe text-rose-500 mb-2 text-xl"></i>
+                        <h4 class="font-bold text-gray-900">Bilingual</h4>
+                        <p class="text-sm text-gray-500">English & Arabic</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-slate-50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-gray-900 mb-4">Our Specialties</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Comprehensive medical services tailored to women's health needs.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-baby-carriage text-rose-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Obstetrics Care</h3>
+                    <p class="text-gray-600 text-sm">Comprehensive care for normal and high-risk pregnancies, including vaginal and Caesarean deliveries.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-venus text-rose-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Gynaecology</h3>
+                    <p class="text-gray-600 text-sm">Screening, preventive care, cervical screening, and management of menopausal challenges.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-user-md text-rose-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Fertility & Planning</h3>
+                    <p class="text-gray-600 text-sm">Management of infertile couples, contraception counseling, and personalized family planning.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-spa text-rose-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Aesthetic Gynaecology</h3>
+                    <p class="text-gray-600 text-sm">Special interest in surgical and non-surgical procedures to enhance functional and aesthetic outcomes.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-notes-medical text-rose-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Teenage Health</h3>
+                    <p class="text-gray-600 text-sm">Specialized psychosexual health services and guidance for adolescent well-being.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card bg-white p-8 rounded-xl shadow-sm border border-slate-100">
+                    <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mb-6">
+                        <i class="fas fa-microscope text-rose-500 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Ultrasound</h3>
+                    <p class="text-gray-600 text-sm">Advanced gynecology and obstetrics ultrasound imaging services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Footer -->
+    <section id="contact" class="bg-gray-900 text-white py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-2 gap-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-6">Visit Us</h2>
+                    <p class="text-gray-400 mb-8">
+                        Experience world-class care at our convenient location in Dubai.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-rose-500 mt-1 w-6"></i>
+                            <div>
+                                <h4 class="font-bold">King’s Mudon Medical Centre</h4>
+                                <p class="text-gray-400">Mudon Community Centre, Floor 1<br>Mudon, Dubai</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-rose-500 w-6"></i>
+                            <p class="text-gray-400">Click the AI Assistant to book now</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Simple Map Placeholder (You can replace src with real map embed) -->
+                <div class="rounded-xl overflow-hidden h-64 bg-gray-800 flex items-center justify-center border border-gray-700">
+                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.1132714241513!2d55.26329737604928!3d25.02996913844675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f714217112c29%3A0xe7819076fa4c679!2sKing&#39;s%20Medical%20Centre%20-%20Mudon!5e0!3m2!1sen!2sjo!4v1733076043144!5m2!1sen!2sjo" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-16 pt-8 text-center text-gray-500 text-sm">
+                &copy; 2024 Dr. Rawan Yaseen Clinic. All rights reserved.
+            </div>
+        </div>
+    </section>
+
+    <!-- ElevenLabs AI Widget Logic -->
+    <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+
+    <!-- Custom Script to Connect the Button to the Widget -->
+    <script>
+        function triggerAiAgent() {
+            const agent = document.querySelector('elevenlabs-convai');
+            if (agent && agent.shadowRoot) {
+                // Find the internal button inside the Shadow DOM and click it
+                const btn = agent.shadowRoot.querySelector('button');
+                if (btn) {
+                    btn.click();
+                } else {
+                    console.error("Agent button not found inside shadow root.");
+                    alert("The AI Agent is loading, please wait a moment.");
+                }
+            } else {
+                // Better error handling for preview mode failure
+                const banner = document.getElementById('preview-warning');
+                if (banner && !banner.classList.contains('hidden')) {
+                     alert("The agent is blocked in this preview. Please download the file to speak.");
+                } else {
+                     alert("Sarah (AI Agent) is warming up... please try again in 2 seconds.");
+                }
             }
         }
-        
-        // Try to hide powered by text periodically
-        let attempts = 0;
-        const interval = setInterval(() => {
-            attempts++;
-            hidePoweredBy();
-            if (attempts > 20) {
-                clearInterval(interval);
-            }
-        }, 500);
     </script>
+
 </body>
 </html>
