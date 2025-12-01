@@ -60,72 +60,7 @@
             align-items: center;
             justify-content: center;
             margin: 40px 0;
-        }
-        
-        .orb-wrapper {
             position: relative;
-            margin-bottom: 20px;
-        }
-        
-        .orb {
-            width: 180px;
-            height: 180px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .orb::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent);
-        }
-        
-        .orb:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.6);
-        }
-        
-        .orb-pulse {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 2px solid #667eea;
-            animation: pulse 2s infinite;
-            opacity: 0.6;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: scale(1.15);
-                opacity: 0.3;
-            }
-            100% {
-                transform: scale(1.3);
-                opacity: 0;
-            }
-        }
-        
-        .orb svg {
-            width: 80px;
-            height: 80px;
-            fill: white;
-            z-index: 2;
         }
         
         .cta-text {
@@ -138,6 +73,13 @@
         .cta-subtext {
             font-size: 1em;
             color: #888;
+            margin-bottom: 30px;
+        }
+        
+        /* Style the ElevenLabs widget to be centered */
+        elevenlabs-convai {
+            transform: scale(1.5);
+            margin: 20px 0;
         }
         
         .content {
@@ -194,27 +136,13 @@
             grid-column: span 2;
         }
         
-        /* Position ElevenLabs widget off-screen but keep it functional */
-        elevenlabs-convai {
-            position: fixed !important;
-            bottom: -500px !important;
-            right: -500px !important;
-            pointer-events: none !important;
-        }
-        
         @media (max-width: 768px) {
             .hero-section h1 {
                 font-size: 1.8em;
             }
             
-            .orb {
-                width: 150px;
-                height: 150px;
-            }
-            
-            .orb svg {
-                width: 60px;
-                height: 60px;
+            elevenlabs-convai {
+                transform: scale(1.2);
             }
             
             .info-grid {
@@ -235,17 +163,9 @@
             <div class="credentials">MBBS | MRCOG | Jordanian Board OBGYN | Arab Board OBGYN</div>
             
             <div class="ai-orb-container">
-                <div class="orb-wrapper">
-                    <div class="orb-pulse"></div>
-                    <div class="orb" id="aiOrb">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                        </svg>
-                    </div>
-                </div>
                 <div class="cta-text">Speak with AI Assistant</div>
-                <div class="cta-subtext">Click to ask questions about services & appointments</div>
+                <div class="cta-subtext">Click the button below to start a voice conversation</div>
+                <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
             </div>
         </div>
         
@@ -283,64 +203,5 @@
     </div>
     
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
-    <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
-    
-    <script>
-        // Function to start conversation
-        function startConversation() {
-            const widget = document.querySelector('elevenlabs-convai');
-            if (widget && widget.shadowRoot) {
-                // First click to open widget
-                const openButton = widget.shadowRoot.querySelector('button');
-                if (openButton) {
-                    openButton.click();
-                    
-                    // Wait a bit then click the start conversation button
-                    setTimeout(function() {
-                        const startButton = widget.shadowRoot.querySelector('button[aria-label*="start"], button[aria-label*="Start"]');
-                        if (startButton) {
-                            startButton.click();
-                        } else {
-                            // Try finding any button that might start the conversation
-                            const buttons = widget.shadowRoot.querySelectorAll('button');
-                            buttons.forEach(btn => {
-                                if (btn.textContent.toLowerCase().includes('start') || 
-                                    btn.textContent.toLowerCase().includes('talk') ||
-                                    btn.getAttribute('aria-label')?.toLowerCase().includes('start')) {
-                                    btn.click();
-                                }
-                            });
-                        }
-                    }, 500);
-                    
-                    return true;
-                }
-            }
-            return false;
-        }
-        
-        // Wait for widget to load
-        let widgetReady = false;
-        const checkInterval = setInterval(function() {
-            const widget = document.querySelector('elevenlabs-convai');
-            if (widget && widget.shadowRoot) {
-                widgetReady = true;
-                clearInterval(checkInterval);
-                console.log('Widget is ready');
-            }
-        }, 100);
-        
-        // Add click handler to orb
-        document.getElementById('aiOrb').addEventListener('click', function() {
-            if (widgetReady) {
-                startConversation();
-            } else {
-                // Wait for widget to be ready
-                setTimeout(function() {
-                    startConversation();
-                }, 1000);
-            }
-        });
-    </script>
 </body>
 </html>
