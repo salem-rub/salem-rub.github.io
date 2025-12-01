@@ -283,17 +283,41 @@
     <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
     
     <script>
-        document.getElementById('aiOrb').addEventListener('click', function() {
-            // Wait for widget to be available
-            setTimeout(function() {
-                const widget = document.querySelector('elevenlabs-convai');
-                if (widget && widget.shadowRoot) {
+        // Function to trigger widget
+        function triggerWidget() {
+            const widget = document.querySelector('elevenlabs-convai');
+            if (widget) {
+                if (widget.shadowRoot) {
                     const button = widget.shadowRoot.querySelector('button');
                     if (button) {
                         button.click();
+                        return true;
                     }
                 }
-            }, 100);
+            }
+            return false;
+        }
+        
+        // Wait for widget to load
+        let attempts = 0;
+        const checkInterval = setInterval(function() {
+            attempts++;
+            const widget = document.querySelector('elevenlabs-convai');
+            if (widget && widget.shadowRoot) {
+                clearInterval(checkInterval);
+                console.log('Widget loaded and ready');
+            }
+            if (attempts > 50) {
+                clearInterval(checkInterval);
+            }
+        }, 100);
+        
+        // Add click handler
+        document.getElementById('aiOrb').addEventListener('click', function() {
+            if (!triggerWidget()) {
+                // Try again after a short delay
+                setTimeout(triggerWidget, 200);
+            }
         });
     </script>
 </body>
