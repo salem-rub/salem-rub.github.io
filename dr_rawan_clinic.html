@@ -75,16 +75,16 @@
             margin-bottom: 30px;
         }
         
-        /* Center and enlarge the ElevenLabs widget */
+        /* Position the ElevenLabs widget in lower right corner */
         elevenlabs-convai {
-            position: static !important;
-            transform: scale(3) !important;
-            margin: 80px auto !important;
-            display: block !important;
+            position: fixed !important;
+            bottom: 20px !important;
+            right: 20px !important;
             left: auto !important;
-            right: auto !important;
-            bottom: auto !important;
             top: auto !important;
+            transform: none !important;
+            margin: 0 !important;
+            z-index: 9999 !important;
         }
         
         .content {
@@ -170,8 +170,7 @@
             
             <div class="ai-orb-container">
                 <div class="cta-text">Speak with AI Assistant</div>
-                <div class="cta-subtext">Click the button below to start a voice conversation</div>
-                <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
+                <div class="cta-subtext">Click the button in the lower right corner to start a voice conversation</div>
             </div>
         </div>
         
@@ -208,6 +207,7 @@
         </div>
     </div>
     
+    <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
     
     <script>
