@@ -62,84 +62,29 @@
             margin: 40px 0;
         }
         
-        .orb-wrapper {
-            position: relative;
-            margin-bottom: 20px;
-        }
-        
-        .orb {
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.5);
-            position: relative;
-            overflow: hidden;
-            border: none;
-        }
-        
-        .orb::before {
-            content: '';
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent);
-        }
-        
-        .orb:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.7);
-        }
-        
-        .orb-pulse {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 3px solid #667eea;
-            animation: pulse 2s infinite;
-            opacity: 0.6;
-        }
-        
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.3;
-            }
-            100% {
-                transform: scale(1.2);
-                opacity: 0;
-            }
-        }
-        
-        .orb svg {
-            width: 90px;
-            height: 90px;
-            fill: white;
-            z-index: 2;
-            position: relative;
-        }
-        
         .cta-text {
-            font-size: 1.5em;
+            font-size: 1.4em;
             color: #667eea;
             font-weight: 600;
             margin-bottom: 10px;
         }
         
         .cta-subtext {
-            font-size: 1.05em;
+            font-size: 1em;
             color: #888;
+            margin-bottom: 30px;
+        }
+        
+        /* Center and enlarge the ElevenLabs widget */
+        elevenlabs-convai {
+            position: static !important;
+            transform: scale(3) !important;
+            margin: 80px auto !important;
+            display: block !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            top: auto !important;
         }
         
         .content {
@@ -196,27 +141,14 @@
             grid-column: span 2;
         }
         
-        /* Hide the ElevenLabs widget completely */
-        elevenlabs-convai {
-            position: fixed !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
-            bottom: -1000px !important;
-        }
-        
         @media (max-width: 768px) {
             .hero-section h1 {
                 font-size: 1.8em;
             }
             
-            .orb {
-                width: 160px;
-                height: 160px;
-            }
-            
-            .orb svg {
-                width: 70px;
-                height: 70px;
+            elevenlabs-convai {
+                transform: scale(2) !important;
+                margin: 60px auto !important;
             }
             
             .info-grid {
@@ -237,17 +169,9 @@
             <div class="credentials">MBBS | MRCOG | Jordanian Board OBGYN | Arab Board OBGYN</div>
             
             <div class="ai-orb-container">
-                <div class="orb-wrapper">
-                    <div class="orb-pulse"></div>
-                    <button class="orb" id="voiceButton" aria-label="Start voice conversation">
-                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
-                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
-                        </svg>
-                    </button>
-                </div>
                 <div class="cta-text">Speak with AI Assistant</div>
-                <div class="cta-subtext">Click the button to start a voice conversation</div>
+                <div class="cta-subtext">Click the button below to start a voice conversation</div>
+                <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
             </div>
         </div>
         
@@ -284,45 +208,37 @@
         </div>
     </div>
     
-    <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
     
     <script>
-        let widgetReady = false;
-        let checkAttempts = 0;
-        
-        // Check if widget is loaded
-        const checkWidget = setInterval(() => {
-            checkAttempts++;
+        // Hide "Powered by" text after widget loads
+        function hidePoweredBy() {
             const widget = document.querySelector('elevenlabs-convai');
-            
             if (widget && widget.shadowRoot) {
-                widgetReady = true;
-                clearInterval(checkWidget);
-                console.log('ElevenLabs widget loaded');
+                // Add CSS to hide powered by text
+                const style = document.createElement('style');
+                style.textContent = `
+                    [class*="powered"], 
+                    [class*="Powered"],
+                    a[href*="elevenlabs"],
+                    div:has(> a[href*="elevenlabs"]) {
+                        display: none !important;
+                        visibility: hidden !important;
+                    }
+                `;
+                widget.shadowRoot.appendChild(style);
             }
-            
-            if (checkAttempts > 100) {
-                clearInterval(checkWidget);
-                console.log('Widget load timeout');
-            }
-        }, 100);
+        }
         
-        // Click handler for custom button
-        document.getElementById('voiceButton').addEventListener('click', () => {
-            const widget = document.querySelector('elevenlabs-convai');
-            
-            if (widget && widget.shadowRoot) {
-                // Find and click the widget button
-                const widgetButton = widget.shadowRoot.querySelector('button');
-                if (widgetButton) {
-                    widgetButton.click();
-                    console.log('Widget button clicked');
-                }
-            } else {
-                console.log('Widget not ready yet');
+        // Try to hide powered by text periodically
+        let attempts = 0;
+        const interval = setInterval(() => {
+            attempts++;
+            hidePoweredBy();
+            if (attempts > 20) {
+                clearInterval(interval);
             }
-        });
+        }, 500);
     </script>
 </body>
 </html>
