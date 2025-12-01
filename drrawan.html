@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Rawan Yaseen - Specialist Obstetrician & Gynaecologist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 60px 30px;
+            background: linear-gradient(135deg, #667eea05 0%, #764ba205 100%);
+        }
+        
+        .hero-section h1 {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .hero-section .subtitle {
+            font-size: 1.3em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .credentials {
+            font-size: 0.9em;
+            color: #888;
+            margin-bottom: 40px;
+        }
+        
+        .ai-orb-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 40px 0;
+        }
+        
+        .cta-text {
+            font-size: 1.4em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .cta-subtext {
+            font-size: 1em;
+            color: #888;
+            margin-bottom: 30px;
+        }
+        
+        /* Center and enlarge the ElevenLabs widget */
+        elevenlabs-convai {
+            position: static !important;
+            transform: scale(3) !important;
+            margin: 80px auto !important;
+            display: block !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+            top: auto !important;
+        }
+        
+        .content {
+            padding: 40px 30px;
+            background: #fafbff;
+        }
+        
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        
+        .info-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .info-card h3 {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .info-card p, .info-card ul {
+            color: #666;
+            font-size: 0.95em;
+        }
+        
+        .info-card ul {
+            padding-left: 20px;
+        }
+        
+        .info-card li {
+            margin-bottom: 6px;
+        }
+        
+        .location-card {
+            grid-column: span 1;
+        }
+        
+        .specialties-card {
+            grid-column: span 2;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 1.8em;
+            }
+            
+            elevenlabs-convai {
+                transform: scale(2) !important;
+                margin: 60px auto !important;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .specialties-card {
+                grid-column: span 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero-section">
+            <h1>Dr. Rawan Yaseen</h1>
+            <div class="subtitle">Specialist Obstetrician & Gynaecologist</div>
+            <div class="credentials">MBBS | MRCOG | Jordanian Board OBGYN | Arab Board OBGYN</div>
+            
+            <div class="ai-orb-container">
+                <div class="cta-text">Speak with AI Assistant</div>
+                <div class="cta-subtext">Click the button below to start a voice conversation</div>
+                <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="info-grid">
+                <div class="info-card location-card">
+                    <h3>📍 Location</h3>
+                    <p>
+                        King's Mudon Medical Centre<br>
+                        Mudon Community Centre<br>
+                        Floor 1, Mudon - Dubai
+                    </p>
+                </div>
+                
+                <div class="info-card">
+                    <h3>🗣️ Languages</h3>
+                    <p>English, Arabic</p>
+                </div>
+                
+                <div class="info-card specialties-card">
+                    <h3>🩺 Areas of Expertise</h3>
+                    <ul>
+                        <li>Pregnancy & delivery care (vaginal & Cesarean)</li>
+                        <li>Women's health screening & preventive care</li>
+                        <li>Teenage health & psychosexual services</li>
+                        <li>Infertility management</li>
+                        <li>Menopause, contraception & family planning</li>
+                        <li>Gynecology & obstetrics ultrasound</li>
+                        <li>Cervical screening</li>
+                        <li>Aesthetic gynecology procedures</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
+    
+    <script>
+        // Hide "Powered by" text after widget loads
+        function hidePoweredBy() {
+            const widget = document.querySelector('elevenlabs-convai');
+            if (widget && widget.shadowRoot) {
+                // Add CSS to hide powered by text
+                const style = document.createElement('style');
+                style.textContent = `
+                    [class*="powered"], 
+                    [class*="Powered"],
+                    a[href*="elevenlabs"],
+                    div:has(> a[href*="elevenlabs"]) {
+                        display: none !important;
+                        visibility: hidden !important;
+                    }
+                `;
+                widget.shadowRoot.appendChild(style);
+            }
+        }
+        
+        // Try to hide powered by text periodically
+        let attempts = 0;
+        const interval = setInterval(() => {
+            attempts++;
+            hidePoweredBy();
+            if (attempts > 20) {
+                clearInterval(interval);
+            }
+        }, 500);
+    </script>
+</body>
+</html>
