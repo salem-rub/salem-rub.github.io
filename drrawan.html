@@ -30,6 +30,20 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
+        
+        /* Orb Animation */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4); }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px 10px rgba(244, 63, 94, 0.2); }
+        }
+        .orb-button {
+            animation: breathe 3s infinite ease-in-out;
+        }
+        .orb-button:hover {
+            animation: none;
+            transform: scale(1.1);
+            box-shadow: 0 0 30px 10px rgba(244, 63, 94, 0.3);
+        }
     </style>
 
     <!-- Error Handler and Polyfill for Preview Environment -->
@@ -98,15 +112,21 @@
             <p class="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
                 Providing comprehensive women's healthcare with evidence-based medicine and a personalized touch.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#contact" class="px-8 py-3 bg-rose-500 text-white rounded-full font-medium hover:bg-rose-600 transition shadow-lg">
-                    Book an Appointment
-                </a>
-                <!-- This button triggers the AI Agent -->
-                <button onclick="triggerAiAgent()" class="px-8 py-3 bg-white text-rose-500 border border-rose-200 rounded-full font-medium hover:bg-rose-50 transition shadow-sm flex items-center justify-center gap-2">
-                    <i class="fas fa-microphone"></i> Talk to Sarah (AI Assistant)
+            
+            <!-- Modern Orb Button -->
+            <div class="relative flex flex-col items-center justify-center mt-12">
+                <button onclick="triggerAiAgent()" class="group relative focus:outline-none">
+                    <!-- Glowing Background Effect -->
+                    <div class="absolute -inset-4 bg-gradient-to-r from-rose-400 to-pink-600 rounded-full blur-lg opacity-40 group-hover:opacity-75 transition duration-500 animate-pulse"></div>
+                    
+                    <!-- The Orb -->
+                    <div class="orb-button relative w-24 h-24 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full flex items-center justify-center border-4 border-rose-100 shadow-xl transition-all duration-300">
+                        <i class="fas fa-microphone text-3xl text-white"></i>
+                    </div>
                 </button>
+                <span class="mt-6 text-gray-500 font-semibold tracking-wide uppercase text-sm animate-bounce">Tap to speak with Sarah</span>
             </div>
+
         </div>
     </section>
 
@@ -238,7 +258,7 @@
     </section>
 
     <!-- ElevenLabs AI Widget Logic -->
-    <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
+    <elevenlabs-convai agent-id="agent_5401kbdvk1r8eepaakk8bsnkc0kd"></elevenlabs-convai>
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
 
     <!-- Custom Script to Connect the Button to the Widget -->
