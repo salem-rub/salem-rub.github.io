@@ -218,9 +218,12 @@
             }
         }
         
-        /* Hide default ElevenLabs widget and use custom orb */
+        /* Style ElevenLabs widget */
         elevenlabs-convai {
-            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
         }
     </style>
 </head>
@@ -279,20 +282,22 @@
         </div>
     </div>
     
-    <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+    <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
     
     <script>
-        document.getElementById('aiOrb').addEventListener('click', function() {
-            // Trigger the ElevenLabs widget
-            const widget = document.querySelector('elevenlabs-convai');
-            if (widget && widget.shadowRoot) {
-                const button = widget.shadowRoot.querySelector('button');
-                if (button) {
-                    button.click();
+        // Wait for widget to load
+        setTimeout(function() {
+            document.getElementById('aiOrb').addEventListener('click', function() {
+                const widget = document.querySelector('elevenlabs-convai');
+                if (widget && widget.shadowRoot) {
+                    const button = widget.shadowRoot.querySelector('button');
+                    if (button) {
+                        button.click();
+                    }
                 }
-            }
-        });
+            });
+        }, 2000);
     </script>
 </body>
 </html>
