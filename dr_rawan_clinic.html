@@ -194,9 +194,12 @@
             grid-column: span 2;
         }
         
-        /* Hide ElevenLabs default widget */
+        /* Position ElevenLabs widget off-screen but keep it functional */
         elevenlabs-convai {
-            display: none !important;
+            position: fixed !important;
+            bottom: -500px !important;
+            right: -500px !important;
+            pointer-events: none !important;
         }
         
         @media (max-width: 768px) {
@@ -283,40 +286,59 @@
     <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
     
     <script>
-        // Function to trigger widget
-        function triggerWidget() {
+        // Function to start conversation
+        function startConversation() {
             const widget = document.querySelector('elevenlabs-convai');
-            if (widget) {
-                if (widget.shadowRoot) {
-                    const button = widget.shadowRoot.querySelector('button');
-                    if (button) {
-                        button.click();
-                        return true;
-                    }
+            if (widget && widget.shadowRoot) {
+                // First click to open widget
+                const openButton = widget.shadowRoot.querySelector('button');
+                if (openButton) {
+                    openButton.click();
+                    
+                    // Wait a bit then click the start conversation button
+                    setTimeout(function() {
+                        const startButton = widget.shadowRoot.querySelector('button[aria-label*="start"], button[aria-label*="Start"]');
+                        if (startButton) {
+                            startButton.click();
+                        } else {
+                            // Try finding any button that might start the conversation
+                            const buttons = widget.shadowRoot.querySelectorAll('button');
+                            buttons.forEach(btn => {
+                                if (btn.textContent.toLowerCase().includes('start') || 
+                                    btn.textContent.toLowerCase().includes('talk') ||
+                                    btn.getAttribute('aria-label')?.toLowerCase().includes('start')) {
+                                    btn.click();
+                                }
+                            });
+                        }
+                    }, 500);
+                    
+                    return true;
                 }
             }
             return false;
         }
         
         // Wait for widget to load
-        let attempts = 0;
+        let widgetReady = false;
         const checkInterval = setInterval(function() {
-            attempts++;
             const widget = document.querySelector('elevenlabs-convai');
             if (widget && widget.shadowRoot) {
+                widgetReady = true;
                 clearInterval(checkInterval);
-                console.log('Widget loaded and ready');
-            }
-            if (attempts > 50) {
-                clearInterval(checkInterval);
+                console.log('Widget is ready');
             }
         }, 100);
         
-        // Add click handler
+        // Add click handler to orb
         document.getElementById('aiOrb').addEventListener('click', function() {
-            if (!triggerWidget()) {
-                // Try again after a short delay
-                setTimeout(triggerWidget, 200);
+            if (widgetReady) {
+                startConversation();
+            } else {
+                // Wait for widget to be ready
+                setTimeout(function() {
+                    startConversation();
+                }, 1000);
             }
         });
     </script>
