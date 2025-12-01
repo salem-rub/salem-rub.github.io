@@ -62,6 +62,72 @@
             margin: 40px 0;
         }
         
+        .orb-wrapper {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        .orb {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 40px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .orb::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent);
+        }
+        
+        .orb:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 50px rgba(102, 126, 234, 0.6);
+        }
+        
+        .orb-pulse {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 2px solid #667eea;
+            animation: pulse 2s infinite;
+            opacity: 0.6;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 0.3;
+            }
+            100% {
+                transform: scale(1.3);
+                opacity: 0;
+            }
+        }
+        
+        .orb svg {
+            width: 80px;
+            height: 80px;
+            fill: white;
+            z-index: 2;
+        }
+        
         .cta-text {
             font-size: 1.4em;
             color: #667eea;
@@ -72,19 +138,6 @@
         .cta-subtext {
             font-size: 1em;
             color: #888;
-            margin-bottom: 30px;
-        }
-        
-        /* Position the ElevenLabs widget in lower right corner */
-        elevenlabs-convai {
-            position: fixed !important;
-            bottom: 20px !important;
-            right: 20px !important;
-            left: auto !important;
-            top: auto !important;
-            transform: none !important;
-            margin: 0 !important;
-            z-index: 9999 !important;
         }
         
         .content {
@@ -146,9 +199,14 @@
                 font-size: 1.8em;
             }
             
-            elevenlabs-convai {
-                transform: scale(2) !important;
-                margin: 60px auto !important;
+            .orb {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .orb svg {
+                width: 60px;
+                height: 60px;
             }
             
             .info-grid {
@@ -158,6 +216,11 @@
             .specialties-card {
                 grid-column: span 1;
             }
+        }
+        
+        /* Hide default ElevenLabs widget and use custom orb */
+        elevenlabs-convai {
+            display: none;
         }
     </style>
 </head>
@@ -169,8 +232,17 @@
             <div class="credentials">MBBS | MRCOG | Jordanian Board OBGYN | Arab Board OBGYN</div>
             
             <div class="ai-orb-container">
+                <div class="orb-wrapper">
+                    <div class="orb-pulse"></div>
+                    <div class="orb" id="aiOrb">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/>
+                            <path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/>
+                        </svg>
+                    </div>
+                </div>
                 <div class="cta-text">Speak with AI Assistant</div>
-                <div class="cta-subtext">Click the button in the lower right corner to start a voice conversation</div>
+                <div class="cta-subtext">Click to ask questions about services & appointments</div>
             </div>
         </div>
         
@@ -208,37 +280,19 @@
     </div>
     
     <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
-    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
     
     <script>
-        // Hide "Powered by" text after widget loads
-        function hidePoweredBy() {
+        document.getElementById('aiOrb').addEventListener('click', function() {
+            // Trigger the ElevenLabs widget
             const widget = document.querySelector('elevenlabs-convai');
             if (widget && widget.shadowRoot) {
-                // Add CSS to hide powered by text
-                const style = document.createElement('style');
-                style.textContent = `
-                    [class*="powered"], 
-                    [class*="Powered"],
-                    a[href*="elevenlabs"],
-                    div:has(> a[href*="elevenlabs"]) {
-                        display: none !important;
-                        visibility: hidden !important;
-                    }
-                `;
-                widget.shadowRoot.appendChild(style);
+                const button = widget.shadowRoot.querySelector('button');
+                if (button) {
+                    button.click();
+                }
             }
-        }
-        
-        // Try to hide powered by text periodically
-        let attempts = 0;
-        const interval = setInterval(() => {
-            attempts++;
-            hidePoweredBy();
-            if (attempts > 20) {
-                clearInterval(interval);
-            }
-        }, 500);
+        });
     </script>
 </body>
 </html>
