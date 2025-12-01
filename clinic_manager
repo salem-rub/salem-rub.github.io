@@ -32,13 +32,29 @@
         }
     </style>
 
-    <!-- Error Handler for Preview Environment -->
+    <!-- Error Handler and Polyfill for Preview Environment -->
     <script>
+        // Polyfill to prevent "Cannot assign to read only property 'getUserMedia'" error in some environments
+        try {
+            if (navigator.mediaDevices && typeof navigator.mediaDevices.getUserMedia === 'function') {
+                // If it exists but might be read-only, we try to wrap it or leave it alone if it works.
+                // The error usually comes from libraries trying to overwrite it.
+                // We define a property to make it writable if possible, or catch the failure.
+                Object.defineProperty(navigator.mediaDevices, 'getUserMedia', {
+                    writable: true,
+                    value: navigator.mediaDevices.getUserMedia
+                });
+            }
+        } catch (e) {
+            console.warn("Could not patch getUserMedia:", e);
+        }
+
         window.addEventListener('error', function(event) {
             // This catches the specific ElevenLabs widget error caused by iframe restrictions
             if (event.message && (event.message.includes('getUserMedia') || event.message.includes('MediaDevices') || event.message.includes('read only property'))) {
                 const banner = document.getElementById('preview-warning');
                 if (banner) banner.classList.remove('hidden');
+                console.error("ElevenLabs Widget Error caught: ", event.message);
             }
         });
     </script>
