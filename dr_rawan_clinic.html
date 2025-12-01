@@ -194,6 +194,11 @@
             grid-column: span 2;
         }
         
+        /* Hide ElevenLabs default widget */
+        elevenlabs-convai {
+            display: none !important;
+        }
+        
         @media (max-width: 768px) {
             .hero-section h1 {
                 font-size: 1.8em;
@@ -216,14 +221,6 @@
             .specialties-card {
                 grid-column: span 1;
             }
-        }
-        
-        /* Style ElevenLabs widget */
-        elevenlabs-convai {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
         }
     </style>
 </head>
@@ -282,13 +279,13 @@
         </div>
     </div>
     
-    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async type="text/javascript"></script>
+    <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" type="text/javascript"></script>
     <elevenlabs-convai agent-id="agent_3801kbc3ga40f84s22byz66e0dbe"></elevenlabs-convai>
     
     <script>
-        // Wait for widget to load
-        setTimeout(function() {
-            document.getElementById('aiOrb').addEventListener('click', function() {
+        document.getElementById('aiOrb').addEventListener('click', function() {
+            // Wait for widget to be available
+            setTimeout(function() {
                 const widget = document.querySelector('elevenlabs-convai');
                 if (widget && widget.shadowRoot) {
                     const button = widget.shadowRoot.querySelector('button');
@@ -296,8 +293,8 @@
                         button.click();
                     }
                 }
-            });
-        }, 2000);
+            }, 100);
+        });
     </script>
 </body>
 </html>
