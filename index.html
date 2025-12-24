@@ -711,7 +711,7 @@
                 <div class="pillar-label" id="labelPhysical">البنية التحتية المادية</div>
                 <h1 class="pillar-title" id="titlePhysical">التشطيب<br/>والتجديد</h1>
                 <p class="pillar-desc" id="descPhysical">هندسة مساحات عمل عالية الأداء من خلال إدارة دقيقة للمشاريع والميزانيات</p>
-                <a href="#services" class="pillar-btn" id="btnPhysical">استكشف التشطيب</a>
+                <a href="#renovation-services" class="pillar-btn" id="btnPhysical">استكشف التشطيب</a>
             </div>
         </div>
 
@@ -722,7 +722,7 @@
                 <div class="pillar-label" id="labelDigital">البنية التحتية الرقمية</div>
                 <h1 class="pillar-title" id="titleDigital">الذكاء الاصطناعي<br/>والأتمتة</h1>
                 <p class="pillar-desc" id="descDigital">تبسيط العمليات باستخدام عملاء الذكاء الاصطناعي وسير عمل n8n الخاص</p>
-                <a href="#services" class="pillar-btn" id="btnDigital">استكشف الذكاء الاصطناعي</a>
+                <a href="#ai-services" class="pillar-btn" id="btnDigital">استكشف الذكاء الاصطناعي</a>
             </div>
         </div>
     </section>
@@ -754,12 +754,19 @@
         </div>
     </section>
 
-    <section class="services-section" id="services">
+    <section class="services-section" id="renovation-services">
         <div class="services-container">
-            <h2 class="section-title" id="servicesTitle">الخدمات المتخصصة</h2>
-            <p class="section-subtitle" id="servicesSubtitle">حلول شاملة للبنية التحتية المادية والرقمية</p>
+            <h2 class="section-title" id="renovationTitle">التشطيب والتجديد</h2>
+            <p class="section-subtitle" id="renovationSubtitle">حلول شاملة للبنية التحتية المادية</p>
+            <div class="services-grid" id="renovationGrid"></div>
+        </div>
+    </section>
 
-            <div class="services-grid" id="servicesGrid"></div>
+    <section class="services-section" id="ai-services">
+        <div class="services-container">
+            <h2 class="section-title" id="aiTitle">الذكاء الاصطناعي والأتمتة</h2>
+            <p class="section-subtitle" id="aiSubtitle">حلول ذكية للبنية التحتية الرقمية</p>
+            <div class="services-grid" id="aiGrid"></div>
         </div>
     </section>
 
@@ -809,19 +816,65 @@
                 statNDA: 'آمن بالكامل',
                 statProjects: 'مشروع ناجح',
                 statIndustries: 'قطاعات',
-                servicesTitle: 'الخدمات المتخصصة',
-                servicesSubtitle: 'حلول شاملة للبنية التحتية المادية والرقمية',
+                renovationTitle: 'التشطيب والتجديد',
+                renovationSubtitle: 'حلول شاملة للبنية التحتية المادية',
+                aiTitle: 'الذكاء الاصطناعي والأتمتة',
+                aiSubtitle: 'حلول ذكية للبنية التحتية الرقمية',
                 ctaTitle: 'هل أنت مستعد لتحويل عملك؟',
                 ctaSubtitle: 'دعنا نناقش كيف يمكن لحلولنا تحسين عملياتك وتسريع النمو',
                 ctaButton: 'احجز استشارة مجانية',
                 footerText: '© 2025 TechServJo. جميع الحقوق محفوظة | فريق هندسي معتمد',
-                services: [
+                renovationServices: [
                     {
                         icon: '🏗️',
                         title: 'إدارة مشاريع التشطيب',
                         desc: 'إدارة شاملة للتشطيبات والتجديدات مع تحكم دقيق في الميزانية والجدول الزمني. من التخطيط إلى التنفيذ.',
                         details: ['تخطيط وتصميم المساحات', 'إدارة الموردين والمقاولين', 'مراقبة الجودة والتسليم', 'تحسين التكاليف', 'إدارة الجداول الزمنية']
                     },
+                    {
+                        icon: '🏥',
+                        title: 'تشطيب العيادات',
+                        desc: 'تشطيب وتزيين متخصص للعيادات الطبية مع مراعاة المعايير الصحية واحتياجات المرضى.',
+                        details: ['تصميم مريح للمرضى', 'مواد صحية معتمدة', 'إدارة التدفئة والتهوية', 'تخطيط سير العمل', 'صيانة دورية']
+                    },
+                    {
+                        icon: '🏢',
+                        title: 'تشطيب المكاتب',
+                        desc: 'حلول تشطيب احترافية للمكاتب والمساحات التجارية لبيئة عمل ملهمة وإنتاجية.',
+                        details: ['تصميم مكان العمل', 'تقسيم المساحات', 'إضاءة ذكية', 'أثاث مريح', 'حلول تخزين']
+                    },
+                    {
+                        icon: '🛋️',
+                        title: 'أثاث مخصص',
+                        desc: 'تصميم وتصنيع أثاث مخصص يناسب احتياجاتك الفريدة ويكمل ديكور مساحتك.',
+                        details: ['تصميم مخصص', 'مواد عالية الجودة', 'تصنيع محلي', 'تركيب احترافي', 'ضمان الجودة']
+                    },
+                    {
+                        icon: '🔥',
+                        title: 'حلول مقاومة للحريق',
+                        desc: 'تطبيق حلول ومواد مقاومة للحريق لضمان السلامة والأمان في مساحات العمل.',
+                        details: ['مواد مقاومة للحريق', 'أنظمة إنذار', 'مخارج الطوارئ', 'تدريب السلامة', 'فحص دوري']
+                    },
+                    {
+                        icon: '🔊',
+                        title: 'حلول صوتية',
+                        desc: 'عزل صوتي وحلول صوتية متقدمة لخلق بيئة هادئة ومريحة للعمل.',
+                        details: ['عزل صوتي', 'أسقف معلقة', 'ألواح صوتية', 'أبواب عازلة', 'تصميم الأكوستيك']
+                    },
+                    {
+                        icon: '📋',
+                        title: 'مشاريع التشطيب',
+                        desc: 'تنفيذ مشاريع التشطيب الكاملة من البداية للنهاية مع جودة وإدارة متميزة.',
+                        details: ['إدارة شاملة', 'فريق محترف', 'جودة عالية', 'تسليم في الوقت', 'دعم مستمر']
+                    },
+                    {
+                        icon: '💡',
+                        title: 'الاستشارات',
+                        desc: 'استشارات هندسية ومهنية لتحسين مساحات العمل وزيادة الكفاءة.',
+                        details: ['تقييم المساحة', 'توصيات التصميم', 'تحليل التكلفة', 'خطط العمل', 'متابعة التنفيذ']
+                    }
+                ],
+                aiServices: [
                     {
                         icon: '🤖',
                         title: 'عملاء الذكاء الاصطناعي',
@@ -863,6 +916,12 @@
                         title: 'إدارة الإنتاج',
                         desc: 'جداول إنتاج ذكية، صيانة تنبؤية، وتتبع KPI في الوقت الفعلي لتحسين الكفاءة التشغيلية.',
                         details: ['جدولة ذكية', 'صيانة تنبؤية', 'تتبع الإنتاج', 'تحسين الموارد', 'لوحات معلومات']
+                    },
+                    {
+                        icon: '📈',
+                        title: 'إدارة المشاريع',
+                        desc: 'أدوات ومنهجيات إدارة المشاريع المتقدمة لتنفيذ المشاريع بكفاءة وضمان النجاح.',
+                        details: ['تخطيط المشاريع', 'تتبع المهام', 'إدارة الموارد', 'تقارير التقدم', 'إدارة المخاطر']
                     }
                 ]
             },
@@ -894,13 +953,57 @@
                 ctaSubtitle: "Let's discuss how our solutions can optimize your operations and accelerate growth",
                 ctaButton: 'Book Free Consultation',
                 footerText: '© 2025 TechServJo. All rights reserved | Certified Engineering Team',
-                services: [
+                renovationServices: [
                     {
                         icon: '🏗️',
                         title: 'Fit-out Project Management',
                         desc: 'Comprehensive fit-out and renovation management with precise budget and timeline control. From planning to execution.',
                         details: ['Space planning and design', 'Vendor and contractor management', 'Quality control and delivery', 'Cost optimization', 'Timeline management']
                     },
+                    {
+                        icon: '🏥',
+                        title: 'Clinic Renovation',
+                        desc: 'Specialized clinic and medical facility renovation with attention to health standards and patient comfort.',
+                        details: ['Patient-friendly design', 'Health-compliant materials', 'HVAC management', 'Workflow planning', 'Periodic maintenance']
+                    },
+                    {
+                        icon: '🏢',
+                        title: 'Office Renovation',
+                        desc: 'Professional office fit-out solutions for commercial spaces creating an inspiring and productive work environment.',
+                        details: ['Workplace design', 'Space partitioning', 'Smart lighting', 'Comfortable furniture', 'Storage solutions']
+                    },
+                    {
+                        icon: '🛋️',
+                        title: 'Custom Furniture',
+                        desc: 'Design and manufacturing of custom furniture to meet your unique needs and complement your space décor.',
+                        details: ['Custom design', 'High-quality materials', 'Local manufacturing', 'Professional installation', 'Quality guarantee']
+                    },
+                    {
+                        icon: '🔥',
+                        title: 'Fire-Rated Solutions',
+                        desc: 'Implementation of fire-resistant solutions and materials to ensure safety and security in workspaces.',
+                        details: ['Fire-resistant materials', 'Alarm systems', 'Emergency exits', 'Safety training', 'Periodic inspections']
+                    },
+                    {
+                        icon: '🔊',
+                        title: 'Acoustic Solutions',
+                        desc: 'Sound insulation and advanced acoustic solutions to create a quiet and comfortable work environment.',
+                        details: ['Sound insulation', 'Suspended ceilings', 'Acoustic panels', 'Soundproof doors', 'Acoustic design']
+                    },
+                    {
+                        icon: '📋',
+                        title: 'Fit-out Projects',
+                        desc: 'Complete fit-out project execution from start to finish with excellent quality and management.',
+                        details: ['Comprehensive management', 'Professional team', 'High quality', 'On-time delivery', 'Ongoing support']
+                    },
+                    {
+                        icon: '💡',
+                        title: 'Consultations',
+                        desc: 'Engineering and professional consultations to improve workspaces and increase efficiency.',
+                        details: ['Space assessment', 'Design recommendations', 'Cost analysis', 'Action plans', 'Implementation follow-up']
+                    }
+                ],
+                aiServices: [
                     {
                         icon: '🤖',
                         title: 'AI Agents',
@@ -942,6 +1045,12 @@
                         title: 'Production Management',
                         desc: 'Smart production scheduling, predictive maintenance, and real-time KPI tracking to optimize operational efficiency.',
                         details: ['Smart scheduling', 'Predictive maintenance', 'Production tracking', 'Resource optimization', 'Dashboards']
+                    },
+                    {
+                        icon: '📈',
+                        title: 'Project Management',
+                        desc: 'Advanced project management tools and methodologies for efficient project execution and guaranteed success.',
+                        details: ['Project planning', 'Task tracking', 'Resource management', 'Progress reports', 'Risk management']
                     }
                 ]
             }
@@ -977,8 +1086,10 @@
             document.getElementById('statProjects').textContent = t.statProjects;
             document.getElementById('statIndustries').textContent = t.statIndustries;
             
-            document.getElementById('servicesTitle').textContent = t.servicesTitle;
-            document.getElementById('servicesSubtitle').textContent = t.servicesSubtitle;
+            document.getElementById('renovationTitle').textContent = t.renovationTitle;
+            document.getElementById('renovationSubtitle').textContent = t.renovationSubtitle;
+            document.getElementById('aiTitle').textContent = t.aiTitle;
+            document.getElementById('aiSubtitle').textContent = t.aiSubtitle;
             
             document.getElementById('ctaTitle').textContent = t.ctaTitle;
             document.getElementById('ctaSubtitle').textContent = t.ctaSubtitle;
@@ -986,9 +1097,18 @@
             
             document.getElementById('footerText').textContent = t.footerText;
 
-            const servicesGrid = document.getElementById('servicesGrid');
-            servicesGrid.innerHTML = t.services.map((service, index) => `
-                <div class="service-card" onclick="showServiceDetails(${index})">
+            const renovationGrid = document.getElementById('renovationGrid');
+            renovationGrid.innerHTML = t.renovationServices.map((service, index) => `
+                <div class="service-card" onclick="showRenovationServiceDetails(${index})">
+                    <div class="service-icon">${service.icon}</div>
+                    <h3>${service.title}</h3>
+                    <p>${service.desc}</p>
+                </div>
+            `).join('');
+
+            const aiGrid = document.getElementById('aiGrid');
+            aiGrid.innerHTML = t.aiServices.map((service, index) => `
+                <div class="service-card" onclick="showAIServiceDetails(${index})">
                     <div class="service-icon">${service.icon}</div>
                     <h3>${service.title}</h3>
                     <p>${service.desc}</p>
@@ -999,9 +1119,23 @@
             document.documentElement.setAttribute('lang', currentLang);
         }
 
-        function showServiceDetails(index) {
+        function showRenovationServiceDetails(index) {
             const t = translations[currentLang];
-            const service = t.services[index];
+            const service = t.renovationServices[index];
+            const detailsLabel = currentLang === 'ar' ? 'التفاصيل:' : 'Details:';
+            
+            const content = `
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8; font-size: 1.1rem;">${service.desc}</p>
+                <h4>${detailsLabel}</h4>
+                <ul>${service.details.map(d => `<li>${d}</li>`).join('')}</ul>
+            `;
+            
+            openModal(service.title, content, service.icon);
+        }
+
+        function showAIServiceDetails(index) {
+            const t = translations[currentLang];
+            const service = t.aiServices[index];
             const detailsLabel = currentLang === 'ar' ? 'التفاصيل:' : 'Details:';
             
             const content = `
@@ -1067,6 +1201,10 @@
         }
 
         function initScrollAnimations() {
+            // Check if mobile view
+            const isMobile = () => window.innerWidth <= 1024;
+            
+            // Pillar animations for mobile only
             const pillars = document.querySelectorAll('.pillar');
             
             const observerOptions = {
@@ -1076,10 +1214,12 @@
 
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    } else {
-                        entry.target.classList.remove('active');
+                    if (isMobile()) {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                        } else {
+                            entry.target.classList.remove('active');
+                        }
                     }
                 });
             }, observerOptions);
@@ -1088,18 +1228,20 @@
                 observer.observe(pillar);
             });
 
-            // Also observe stat cards for scroll animations
+            // Stat cards scroll animations for mobile only
             const statCards = document.querySelectorAll('.stat-card');
             const statObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.transform = 'translateY(-5px)';
-                        entry.target.style.boxShadow = '0 20px 40px var(--shadow-hover)';
-                        entry.target.style.borderColor = 'var(--gradient-start)';
-                    } else {
-                        entry.target.style.transform = '';
-                        entry.target.style.boxShadow = '';
-                        entry.target.style.borderColor = '';
+                    if (isMobile()) {
+                        if (entry.isIntersecting) {
+                            entry.target.style.transform = 'translateY(-5px)';
+                            entry.target.style.boxShadow = '0 20px 40px var(--shadow-hover)';
+                            entry.target.style.borderColor = 'var(--gradient-start)';
+                        } else {
+                            entry.target.style.transform = '';
+                            entry.target.style.boxShadow = '';
+                            entry.target.style.borderColor = '';
+                        }
                     }
                 });
             }, {
@@ -1110,19 +1252,20 @@
                 statObserver.observe(card);
             });
 
-            // Observe service cards for scroll animations
+            // Service cards scroll animations for mobile only
             const serviceCards = document.querySelectorAll('.service-card');
             const serviceObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.transform = 'translateY(-10px)';
-                        entry.target.style.borderColor = 'var(--gradient-start)';
-                        entry.target.style.boxShadow = '0 25px 50px var(--shadow-hover), 0 0 60px var(--accent-glow)';
-                        entry.target.querySelector('::before')?.style.setProperty('opacity', '1');
-                    } else {
-                        entry.target.style.transform = '';
-                        entry.target.style.borderColor = '';
-                        entry.target.style.boxShadow = '';
+                    if (isMobile()) {
+                        if (entry.isIntersecting) {
+                            entry.target.style.transform = 'translateY(-10px)';
+                            entry.target.style.borderColor = 'var(--gradient-start)';
+                            entry.target.style.boxShadow = '0 25px 50px var(--shadow-hover), 0 0 60px var(--accent-glow)';
+                        } else {
+                            entry.target.style.transform = '';
+                            entry.target.style.borderColor = '';
+                            entry.target.style.boxShadow = '';
+                        }
                     }
                 });
             }, {
