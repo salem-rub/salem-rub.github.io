@@ -493,6 +493,33 @@
         footer p {
             color: var(--text-secondary);
             font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.3s;
+        }
+
+        .footer-link:hover {
+            color: var(--gradient-start);
+            text-decoration: underline;
+        }
+
+        .footer-separator {
+            color: var(--text-secondary);
+            opacity: 0.5;
+            font-size: 0.85rem;
         }
 
         .modal {
@@ -780,6 +807,11 @@
 
     <footer>
         <p id="footerText">© 2025 TechServJo. جميع الحقوق محفوظة | فريق هندسي معتمد</p>
+        <div class="footer-links">
+            <a href="https://techservjo.com/privacy.html" target="_blank" class="footer-link" id="footerPrivacy">سياسة الخصوصية</a>
+            <span class="footer-separator">|</span>
+            <a href="https://techservjo.com/privacy.html" target="_blank" class="footer-link" id="footerPrivacyEn">Privacy Policy</a>
+        </div>
     </footer>
 
     <div class="modal" id="modal">
@@ -824,6 +856,8 @@
                 ctaSubtitle: 'دعنا نناقش كيف يمكن لحلولنا تحسين عملياتك وتسريع النمو',
                 ctaButton: 'احجز استشارة مجانية',
                 footerText: '© 2025 TechServJo. جميع الحقوق محفوظة | فريق هندسي معتمد',
+                footerPrivacy: 'سياسة الخصوصية',
+                footerPrivacyEn: 'Privacy Policy',
                 renovationServices: [
                     {
                         icon: '🏗️',
@@ -953,6 +987,8 @@
                 ctaSubtitle: "Let's discuss how our solutions can optimize your operations and accelerate growth",
                 ctaButton: 'Book Free Consultation',
                 footerText: '© 2025 TechServJo. All rights reserved | Certified Engineering Team',
+                footerPrivacy: 'سياسة الخصوصية',
+                footerPrivacyEn: 'Privacy Policy',
                 renovationServices: [
                     {
                         icon: '🏗️',
@@ -1096,6 +1132,8 @@
             document.getElementById('ctaButton').textContent = t.ctaButton;
             
             document.getElementById('footerText').textContent = t.footerText;
+            document.getElementById('footerPrivacy').textContent = t.footerPrivacy;
+            document.getElementById('footerPrivacyEn').textContent = t.footerPrivacyEn;
 
             const renovationGrid = document.getElementById('renovationGrid');
             renovationGrid.innerHTML = t.renovationServices.map((service, index) => `
