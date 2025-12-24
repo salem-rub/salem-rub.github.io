@@ -243,10 +243,29 @@
             background: transparent;
         }
 
-        .pillar:hover .pillar-btn {
+        .pillar:hover .pillar-btn,
+        .pillar.active .pillar-btn {
             background: white;
             color: var(--gradient-start);
             transform: scale(1.05);
+        }
+
+        .pillar.active {
+            flex: 1.5;
+        }
+
+        .pillar.active .pillar-bg {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .pillar.active .pillar-overlay {
+            opacity: 0.4;
+        }
+
+        .pillar.active .pillar-desc {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .about-section {
@@ -599,6 +618,30 @@
 
             .pillar {
                 min-height: 400px;
+            }
+
+            .pillar:hover {
+                flex: 1;
+            }
+
+            .pillar:hover .pillar-bg {
+                filter: grayscale(100%);
+                transform: scale(1);
+            }
+
+            .pillar:hover .pillar-overlay {
+                opacity: 0.6;
+            }
+
+            .pillar:hover .pillar-desc {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            .pillar:hover .pillar-btn {
+                background: transparent;
+                color: white;
+                transform: scale(1);
             }
 
             .about-section {
@@ -1020,6 +1063,75 @@
             document.getElementById('themeToggle').addEventListener('click', toggleTheme);
             document.getElementById('langToggle').addEventListener('click', toggleLanguage);
             updateContent();
+            initScrollAnimations();
+        }
+
+        function initScrollAnimations() {
+            const pillars = document.querySelectorAll('.pillar');
+            
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    } else {
+                        entry.target.classList.remove('active');
+                    }
+                });
+            }, observerOptions);
+
+            pillars.forEach(pillar => {
+                observer.observe(pillar);
+            });
+
+            // Also observe stat cards for scroll animations
+            const statCards = document.querySelectorAll('.stat-card');
+            const statObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transform = 'translateY(-5px)';
+                        entry.target.style.boxShadow = '0 20px 40px var(--shadow-hover)';
+                        entry.target.style.borderColor = 'var(--gradient-start)';
+                    } else {
+                        entry.target.style.transform = '';
+                        entry.target.style.boxShadow = '';
+                        entry.target.style.borderColor = '';
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            statCards.forEach(card => {
+                statObserver.observe(card);
+            });
+
+            // Observe service cards for scroll animations
+            const serviceCards = document.querySelectorAll('.service-card');
+            const serviceObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.transform = 'translateY(-10px)';
+                        entry.target.style.borderColor = 'var(--gradient-start)';
+                        entry.target.style.boxShadow = '0 25px 50px var(--shadow-hover), 0 0 60px var(--accent-glow)';
+                        entry.target.querySelector('::before')?.style.setProperty('opacity', '1');
+                    } else {
+                        entry.target.style.transform = '';
+                        entry.target.style.borderColor = '';
+                        entry.target.style.boxShadow = '';
+                    }
+                });
+            }, {
+                threshold: 0.3
+            });
+
+            serviceCards.forEach(card => {
+                serviceObserver.observe(card);
+            });
         }
     </script>
 </body>
