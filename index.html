@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechServJo | Engineering Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #fafafa;
+            --bg-card: #ffffff;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --border-color: #e2e8f0;
+            --gradient-start: #14b8a6;
+            --gradient-mid: #06b6d4;
+            --gradient-end: #0891b2;
+            --accent-glow: rgba(20, 184, 166, 0.15);
+            --shadow: rgba(0, 0, 0, 0.05);
+            --shadow-hover: rgba(20, 184, 166, 0.2);
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --accent-light: #e0f7f5;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0a0f1e;
+            --bg-secondary: #0f1729;
+            --bg-card: #1a2332;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border-color: #1e293b;
+            --accent-glow: rgba(20, 184, 166, 0.2);
+            --shadow: rgba(0, 0, 0, 0.3);
+            --shadow-hover: rgba(20, 184, 166, 0.3);
+            --glass-bg: rgba(26, 35, 50, 0.6);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent-light: rgba(20, 184, 166, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+            transition: background 0.3s, color 0.3s;
+            overflow-x: hidden;
+        }
+
+        [lang="ar"] body, [dir="rtl"] body {
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        header {
+            background: var(--glass-bg);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        nav {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-right {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--gradient-start);
+        }
+
+        .controls {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .control-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .control-btn:hover {
+            background: var(--bg-secondary);
+            border-color: var(--gradient-start);
+            box-shadow: 0 0 20px var(--accent-glow);
+            transform: translateY(-2px);
+        }
+
+        .hero-pillars {
+            height: 85vh;
+            min-height: 600px;
+            display: flex;
+            margin-top: 0;
+        }
+
+        .pillar {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pillar:hover {
+            flex: 1.5;
+        }
+
+        .pillar-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            transition: all 0.7s;
+            filter: grayscale(100%);
+        }
+
+        .pillar:hover .pillar-bg {
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .pillar-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            transition: opacity 0.5s;
+        }
+
+        .pillar:hover .pillar-overlay {
+            opacity: 0.4;
+        }
+
+        .pillar-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 600px;
+        }
+
+        .pillar-label {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .pillar-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .pillar-desc {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s 0.1s;
+            margin-bottom: 2rem;
+        }
+
+        .pillar:hover .pillar-desc {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pillar-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border: 2px solid white;
+            border-radius: 50px;
+            color: white;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            background: transparent;
+        }
+
+        .pillar:hover .pillar-btn {
+            background: white;
+            color: var(--gradient-start);
+            transform: scale(1.05);
+        }
+
+        .about-section {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .stat-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow-hover);
+            border-color: var(--gradient-start);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .services-section {
+            background: var(--bg-secondary);
+            padding: 5rem 2rem;
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, var(--accent-glow), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gradient-start);
+            box-shadow: 0 25px 50px var(--shadow-hover), 0 0 60px var(--accent-glow);
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 12px var(--accent-glow));
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            padding: 5rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 100%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent 60%);
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-20px, -20px); }
+        }
+
+        .cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: white;
+            color: var(--gradient-start);
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        footer {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border-color);
+        }
+
+        footer p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-card);
+            border-radius: 1.5rem;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-color);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            color: white;
+            padding: 2.5rem;
+            border-radius: 1.5rem 1.5rem 0 0;
+        }
+
+        .modal-header h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.8rem;
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 2.5rem;
+        }
+
+        .modal-body h4 {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gradient-start);
+            margin: 2rem 0 1rem;
+        }
+
+        .modal-body ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-body li {
+            color: var(--text-secondary);
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .modal-body li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--gradient-start);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        [dir="rtl"] .modal-close {
+            right: auto;
+            left: 1rem;
+        }
+
+        [dir="rtl"] .modal-body li {
+            padding-left: 0;
+            padding-right: 2rem;
+        }
+
+        [dir="rtl"] .modal-body li::before {
+            left: auto;
+            right: 0;
+        }
+
+        @media (max-width: 1024px) {
+            .hero-pillars {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .pillar {
+                min-height: 400px;
+            }
+
+            .about-section {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem;
+            }
+
+            .nav-right {
+                width: 100%;
+                margin-top: 1rem;
+                justify-content: space-between;
+            }
+
+            .pillar-title {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo" id="logo">TechServJo</div>
+            <div class="nav-right">
+                <div class="nav-links">
+                    <a href="#about" id="navAbout">من أنا</a>
+                    <a href="#services" id="navServices">الخدمات</a>
+                    <a href="#contact" id="navContact">تواصل</a>
+                </div>
+                <div class="controls">
+                    <button class="control-btn" id="themeToggle">
+                        <span id="themeIcon">☀️</span>
+                        <span id="themeText">فاتح</span>
+                    </button>
+                    <button class="control-btn" id="langToggle">
+                        <span id="langFlag">🇯🇴</span>
+                        <span id="langText">AR</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero-pillars">
+        <div class="pillar" id="pillar-physical">
+            <div class="pillar-bg" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200');"></div>
+            <div class="pillar-overlay"></div>
+            <div class="pillar-content">
+                <div class="pillar-label" id="labelPhysical">البنية التحتية المادية</div>
+                <h1 class="pillar-title" id="titlePhysical">التشطيب<br/>والتجديد</h1>
+                <p class="pillar-desc" id="descPhysical">هندسة مساحات عمل عالية الأداء من خلال إدارة دقيقة للمشاريع والميزانيات</p>
+                <a href="#services" class="pillar-btn" id="btnPhysical">استكشف التشطيب</a>
+            </div>
+        </div>
+
+        <div class="pillar" id="pillar-digital">
+            <div class="pillar-bg" style="background-image: url('https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=1200');"></div>
+            <div class="pillar-overlay"></div>
+            <div class="pillar-content">
+                <div class="pillar-label" id="labelDigital">البنية التحتية الرقمية</div>
+                <h1 class="pillar-title" id="titleDigital">الذكاء الاصطناعي<br/>والأتمتة</h1>
+                <p class="pillar-desc" id="descDigital">تبسيط العمليات باستخدام عملاء الذكاء الاصطناعي وسير عمل n8n الخاص</p>
+                <a href="#services" class="pillar-btn" id="btnDigital">استكشف الذكاء الاصطناعي</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
+        <div class="about-text">
+            <h2 id="aboutTitle">عقلية هندسية<br/>نتائج قابلة للقياس</h2>
+            <p id="aboutText1">فريق هندسي مع سجل حافل في التصنيع والعمليات وادارة المشاريع. أدار فريقنا منشآت إنتاج ضخمة و قاد تحولات رقمية، نقوم ببناء بنية تحتية تحقق عائد استثمار قابل للقياس.</p>
+            <p id="aboutText2">من تشطيب المساحات المادية إلى بناء أنظمة الذكاء الاصطناعي - نحن متخصصون في هندسة الأنظمة التي تعمل بكفاءة وتقدم نتائج.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">7+</div>
+                <div class="stat-label" id="statYears">سنوات خبرة</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">100%</div>
+                <div class="stat-label" id="statNDA">آمن بالكامل</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">50+</div>
+                <div class="stat-label" id="statProjects">مشروع ناجح</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10+</div>
+                <div class="stat-label" id="statIndustries">قطاعات</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services-section" id="services">
+        <div class="services-container">
+            <h2 class="section-title" id="servicesTitle">الخدمات المتخصصة</h2>
+            <p class="section-subtitle" id="servicesSubtitle">حلول شاملة للبنية التحتية المادية والرقمية</p>
+
+            <div class="services-grid" id="servicesGrid"></div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="contact">
+        <div class="cta-content">
+            <h2 id="ctaTitle">هل أنت مستعد لتحويل عملك؟</h2>
+            <p id="ctaSubtitle">دعنا نناقش كيف يمكن لحلولنا تحسين عملياتك وتسريع النمو</p>
+            <a href="https://n8n.techservjo.com/form/26aea243-14f8-46e6-ad4c-e44b5e8395a8" target="_blank" class="cta-button" id="ctaButton">احجز استشارة مجانية</a>
+        </div>
+    </section>
+
+    <footer>
+        <p id="footerText">© 2025 TechServJo. جميع الحقوق محفوظة | فريق هندسي معتمد</p>
+    </footer>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">×</button>
+                <h3 id="modalTitle"></h3>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            ar: {
+                logo: 'TechServJo',
+                navAbout: 'من نحن',
+                navServices: 'الخدمات',
+                navContact: 'تواصل',
+                themeLight: 'فاتح',
+                themeDark: 'داكن',
+                labelPhysical: 'البنية التحتية المادية',
+                titlePhysical: 'التشطيب<br/>والتجديد',
+                descPhysical: 'هندسة مساحات عمل عالية الأداء من خلال إدارة دقيقة للمشاريع والميزانيات',
+                btnPhysical: 'استكشف التشطيب',
+                labelDigital: 'البنية التحتية الرقمية',
+                titleDigital: 'الذكاء الاصطناعي<br/>والأتمتة',
+                descDigital: 'تبسيط العمليات باستخدام عملاء الذكاء الاصطناعي وسير عمل n8n الخاص',
+                btnDigital: 'استكشف الذكاء الاصطناعي',
+                aboutTitle: 'عقلية هندسية<br/>نتائج قابلة للقياس',
+                aboutText1: 'فريق هندسي مع سجل حافل في التصنيع والعمليات وادارة المشاريع. أدار فريقنا منشآت إنتاج ضخمة و قاد تحولات رقمية، نقوم ببناء بنية تحتية تحقق عائد استثمار قابل للقياس.',
+                aboutText2: 'من تشطيب المساحات المادية إلى بناء أنظمة الذكاء الاصطناعي - نحن متخصصون في هندسة الأنظمة التي تعمل بكفاءة وتقدم نتائج.',
+                statYears: 'سنوات خبرة',
+                statNDA: 'آمن بالكامل',
+                statProjects: 'مشروع ناجح',
+                statIndustries: 'قطاعات',
+                servicesTitle: 'الخدمات المتخصصة',
+                servicesSubtitle: 'حلول شاملة للبنية التحتية المادية والرقمية',
+                ctaTitle: 'هل أنت مستعد لتحويل عملك؟',
+                ctaSubtitle: 'دعنا نناقش كيف يمكن لحلولنا تحسين عملياتك وتسريع النمو',
+                ctaButton: 'احجز استشارة مجانية',
+                footerText: '© 2025 TechServJo. جميع الحقوق محفوظة | فريق هندسي معتمد',
+                services: [
+                    {
+                        icon: '🏗️',
+                        title: 'إدارة مشاريع التشطيب',
+                        desc: 'إدارة شاملة للتشطيبات والتجديدات مع تحكم دقيق في الميزانية والجدول الزمني. من التخطيط إلى التنفيذ.',
+                        details: ['تخطيط وتصميم المساحات', 'إدارة الموردين والمقاولين', 'مراقبة الجودة والتسليم', 'تحسين التكاليف', 'إدارة الجداول الزمنية']
+                    },
+                    {
+                        icon: '🤖',
+                        title: 'عملاء الذكاء الاصطناعي',
+                        desc: 'بناء عملاء ذكاء اصطناعي مخصصة لأتمتة خدمة العملاء، المبيعات، والعمليات الداخلية على مدار 24/7.',
+                        details: ['روبوتات دردشة ذكية', 'تكامل WhatsApp', 'معالجة اللغة الطبيعية', 'تعلم مستمر', 'تحليل المشاعر']
+                    },
+                    {
+                        icon: '🎙️',
+                        title: 'عملاء الصوت الذكية',
+                        desc: 'عملاء صوتية ذكية للرد على المكالمات، حجز المواعيد، وإدارة الاستفسارات بشكل طبيعي ومحترف.',
+                        details: ['رد تلقائي على المكالمات', 'حجز مواعيد ذكي', 'تكامل مع التقويم', 'تسجيل ونسخ المكالمات', 'لغات متعددة']
+                    },
+                    {
+                        icon: '⚙️',
+                        title: 'أتمتة سير العمل',
+                        desc: 'أتمتة العمليات التجارية باستخدام n8n و Make و Zapier لتوفير الوقت وتقليل الأخطاء البشرية.',
+                        details: ['أتمتة n8n المخصصة', 'تكامل الأنظمة', 'معالجة البيانات', 'تقارير تلقائية', 'إشعارات ذكية']
+                    },
+                    {
+                        icon: '📊',
+                        title: 'تكامل CRM',
+                        desc: 'إعداد وتخصيص أنظمة CRM مع أتمتة كاملة لإدارة العملاء والمبيعات بكفاءة.',
+                        details: ['إعداد CRM', 'أتمتة المبيعات', 'تتبع العملاء', 'تقارير متقدمة', 'تكامل البريد الإلكتروني']
+                    },
+                    {
+                        icon: '🎓',
+                        title: 'برامج التدريب',
+                        desc: 'تدريب شامل للموظفين على استخدام الذكاء الاصطناعي في عملهم اليومي مع متابعة فردية.',
+                        details: ['تدريب مخصص', 'Prompt Engineering', 'تطبيقات عملية', 'متابعة فردية', 'شهادات معتمدة']
+                    },
+                    {
+                        icon: '📄',
+                        title: 'استخراج بيانات الفواتير',
+                        desc: 'حل ذكاء اصطناعي لاستخراج البيانات من الفواتير تلقائياً وتنظيمها في قواعد البيانات.',
+                        details: ['OCR متقدم', 'استخراج ذكي', 'تحقق تلقائي', 'تصنيف البيانات', 'تكامل مع المحاسبة']
+                    },
+                    {
+                        icon: '🏭',
+                        title: 'إدارة الإنتاج',
+                        desc: 'جداول إنتاج ذكية، صيانة تنبؤية، وتتبع KPI في الوقت الفعلي لتحسين الكفاءة التشغيلية.',
+                        details: ['جدولة ذكية', 'صيانة تنبؤية', 'تتبع الإنتاج', 'تحسين الموارد', 'لوحات معلومات']
+                    }
+                ]
+            },
+            en: {
+                logo: 'TechServJo',
+                navAbout: 'About Us',
+                navServices: 'Services',
+                navContact: 'Contact',
+                themeLight: 'Light',
+                themeDark: 'Dark',
+                labelPhysical: 'Physical Infrastructure',
+                titlePhysical: 'Fit-out &<br/>Renovation',
+                descPhysical: 'Engineering high-performance workspaces through precision project management and budgetary control',
+                btnPhysical: 'Explore Fit-out',
+                labelDigital: 'Digital Infrastructure',
+                titleDigital: 'AI &<br/>Automation',
+                descDigital: 'Streamlining operations with AI Agents and private n8n workflows to eliminate manual waste',
+                btnDigital: 'Explore AI',
+                aboutTitle: 'Engineering Mindset<br/>Measurable Results',
+                aboutText1: 'Engineering team with a proven track record in manufacturing and operations. Our team has managed massive production facilities and led digital transformations, we build infrastructure that drives measurable ROI.',
+                aboutText2: 'From fit-out of physical spaces to building AI systems - we specialize in engineering systems that work efficiently and deliver results.',
+                statYears: 'Years Experience',
+                statNDA: 'Fully Secure',
+                statProjects: 'Successful Projects',
+                statIndustries: 'Industries',
+                servicesTitle: 'Specialized Services',
+                servicesSubtitle: 'Comprehensive solutions for physical and digital infrastructure',
+                ctaTitle: 'Ready to Transform Your Business?',
+                ctaSubtitle: "Let's discuss how our solutions can optimize your operations and accelerate growth",
+                ctaButton: 'Book Free Consultation',
+                footerText: '© 2025 TechServJo. All rights reserved | Certified Engineering Team',
+                services: [
+                    {
+                        icon: '🏗️',
+                        title: 'Fit-out Project Management',
+                        desc: 'Comprehensive fit-out and renovation management with precise budget and timeline control. From planning to execution.',
+                        details: ['Space planning and design', 'Vendor and contractor management', 'Quality control and delivery', 'Cost optimization', 'Timeline management']
+                    },
+                    {
+                        icon: '🤖',
+                        title: 'AI Agents',
+                        desc: 'Build custom AI agents to automate customer service, sales, and internal operations 24/7 with intelligent responses.',
+                        details: ['Smart chatbots', 'WhatsApp integration', 'Natural language processing', 'Continuous learning', 'Sentiment analysis']
+                    },
+                    {
+                        icon: '🎙️',
+                        title: 'Voice Agents',
+                        desc: 'Intelligent voice agents to answer calls, book appointments, and handle inquiries naturally and professionally.',
+                        details: ['Automatic call answering', 'Smart appointment booking', 'Calendar integration', 'Call recording and transcription', 'Multi-language support']
+                    },
+                    {
+                        icon: '⚙️',
+                        title: 'Workflow Automation',
+                        desc: 'Automate business processes using n8n, Make, and Zapier to save time and reduce human error.',
+                        details: ['Custom n8n automation', 'System integration', 'Data processing', 'Automatic reports', 'Smart notifications']
+                    },
+                    {
+                        icon: '📊',
+                        title: 'CRM Integration',
+                        desc: 'Setup and customize CRM systems with complete automation to manage customers and sales efficiently.',
+                        details: ['CRM setup', 'Sales automation', 'Customer tracking', 'Advanced reports', 'Email integration']
+                    },
+                    {
+                        icon: '🎓',
+                        title: 'Training Programs',
+                        desc: 'Comprehensive employee training on using AI in their daily work with individual follow-up and assessments.',
+                        details: ['Custom training', 'Prompt Engineering', 'Practical applications', 'Individual follow-up', 'Certified programs']
+                    },
+                    {
+                        icon: '📄',
+                        title: 'Invoice Data Extraction',
+                        desc: 'AI solution to automatically extract data from invoices and organize it into databases with high accuracy.',
+                        details: ['Advanced OCR', 'Smart extraction', 'Automatic verification', 'Data classification', 'Accounting integration']
+                    },
+                    {
+                        icon: '🏭',
+                        title: 'Production Management',
+                        desc: 'Smart production scheduling, predictive maintenance, and real-time KPI tracking to optimize operational efficiency.',
+                        details: ['Smart scheduling', 'Predictive maintenance', 'Production tracking', 'Resource optimization', 'Dashboards']
+                    }
+                ]
+            }
+        };
+
+        let currentLang = 'ar';
+        let currentTheme = 'dark';
+
+        function updateContent() {
+            const t = translations[currentLang];
+            
+            document.getElementById('logo').textContent = t.logo;
+            document.getElementById('navAbout').textContent = t.navAbout;
+            document.getElementById('navServices').textContent = t.navServices;
+            document.getElementById('navContact').textContent = t.navContact;
+            
+            document.getElementById('labelPhysical').textContent = t.labelPhysical;
+            document.getElementById('titlePhysical').innerHTML = t.titlePhysical;
+            document.getElementById('descPhysical').textContent = t.descPhysical;
+            document.getElementById('btnPhysical').textContent = t.btnPhysical;
+            
+            document.getElementById('labelDigital').textContent = t.labelDigital;
+            document.getElementById('titleDigital').innerHTML = t.titleDigital;
+            document.getElementById('descDigital').textContent = t.descDigital;
+            document.getElementById('btnDigital').textContent = t.btnDigital;
+            
+            document.getElementById('aboutTitle').innerHTML = t.aboutTitle;
+            document.getElementById('aboutText1').textContent = t.aboutText1;
+            document.getElementById('aboutText2').textContent = t.aboutText2;
+            
+            document.getElementById('statYears').textContent = t.statYears;
+            document.getElementById('statNDA').textContent = t.statNDA;
+            document.getElementById('statProjects').textContent = t.statProjects;
+            document.getElementById('statIndustries').textContent = t.statIndustries;
+            
+            document.getElementById('servicesTitle').textContent = t.servicesTitle;
+            document.getElementById('servicesSubtitle').textContent = t.servicesSubtitle;
+            
+            document.getElementById('ctaTitle').textContent = t.ctaTitle;
+            document.getElementById('ctaSubtitle').textContent = t.ctaSubtitle;
+            document.getElementById('ctaButton').textContent = t.ctaButton;
+            
+            document.getElementById('footerText').textContent = t.footerText;
+
+            const servicesGrid = document.getElementById('servicesGrid');
+            servicesGrid.innerHTML = t.services.map((service, index) => `
+                <div class="service-card" onclick="showServiceDetails(${index})">
+                    <div class="service-icon">${service.icon}</div>
+                    <h3>${service.title}</h3>
+                    <p>${service.desc}</p>
+                </div>
+            `).join('');
+
+            document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.documentElement.setAttribute('lang', currentLang);
+        }
+
+        function showServiceDetails(index) {
+            const t = translations[currentLang];
+            const service = t.services[index];
+            const detailsLabel = currentLang === 'ar' ? 'التفاصيل:' : 'Details:';
+            
+            const content = `
+                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8; font-size: 1.1rem;">${service.desc}</p>
+                <h4>${detailsLabel}</h4>
+                <ul>${service.details.map(d => `<li>${d}</li>`).join('')}</ul>
+            `;
+            
+            openModal(service.title, content, service.icon);
+        }
+
+        function openModal(title, content, icon) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            modalTitle.innerHTML = icon ? `<span style="font-size: 2.5rem; margin-right: 0.5rem;">${icon}</span> ${title}` : title;
+            modalBody.innerHTML = content;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            const t = translations[currentLang];
+            document.getElementById('themeIcon').textContent = currentTheme === 'dark' ? '☀️' : '🌙';
+            document.getElementById('themeText').textContent = currentTheme === 'dark' ? t.themeLight : t.themeDark;
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            document.getElementById('langFlag').textContent = currentLang === 'ar' ? '🇯🇴' : '🇺🇸';
+            document.getElementById('langText').textContent = currentLang === 'ar' ? 'AR' : 'EN';
+            updateContent();
+        }
+
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        function init() {
+            document.getElementById('themeToggle').addEventListener('click', toggleTheme);
+            document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+            updateContent();
+        }
+    </script>
+</body>
+</html>
