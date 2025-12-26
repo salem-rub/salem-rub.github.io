@@ -119,4 +119,36 @@
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
+    
+    <!-- Services: Fit-out Renovation -->
+    <url>
+        <loc>https://techservjo.com/services/fit-out-renovation.html</loc>
+        <lastmod>2025-12-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Services: AI Automation -->
+    <url>
+        <loc>https://techservjo.com/services/ai-automation.html</loc>
+        <lastmod>2025-12-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Services: Voice Agents -->
+    <url>
+        <loc>https://techservjo.com/services/voice-agents.html</loc>
+        <lastmod>2025-12-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Services: Workflow Automation -->
+    <url>
+        <loc>https://techservjo.com/services/workflow-automation.html</loc>
+        <lastmod>2025-12-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.9</priority>
+    </url>
 </urlset>
