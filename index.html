@@ -603,6 +603,151 @@
             z-index: 1;
         }
 
+        .references-section {
+            background: var(--bg-secondary);
+            padding: 5rem 0;
+            overflow: hidden;
+        }
+
+        .references-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .references-carousel-wrapper {
+            position: relative;
+            margin-top: 3rem;
+            padding: 0 40px;
+        }
+
+        .references-carousel {
+            display: flex;
+            gap: 1.5rem;
+            transition: transform 0.5s ease;
+            overflow-x: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .references-carousel::-webkit-scrollbar {
+            display: none;
+        }
+
+        .reference-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            border-radius: 1.5rem;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            flex: 0 0 auto;
+            width: 280px;
+        }
+
+        .reference-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, var(--accent-glow), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .reference-card:hover::before {
+            opacity: 1;
+        }
+
+        .reference-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gradient-start);
+            box-shadow: 0 25px 50px var(--shadow-hover), 0 0 60px var(--accent-glow);
+        }
+
+        .reference-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            filter: drop-shadow(0 4px 12px var(--accent-glow));
+            position: relative;
+            z-index: 1;
+        }
+
+        .reference-card h3 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 1;
+        }
+
+        .reference-location {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 1;
+            font-weight: 600;
+        }
+
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .carousel-arrow:hover {
+            background: var(--gradient-start);
+            color: white;
+            border-color: var(--gradient-start);
+            box-shadow: 0 0 20px var(--accent-glow);
+        }
+
+        .carousel-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .carousel-arrow:disabled:hover {
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            border-color: var(--glass-border);
+            box-shadow: none;
+        }
+
+        .carousel-arrow-left {
+            left: 0;
+        }
+
+        .carousel-arrow-right {
+            right: 0;
+        }
+
+        [dir="rtl"] .carousel-arrow-left {
+            left: auto;
+            right: 0;
+        }
+
+        [dir="rtl"] .carousel-arrow-right {
+            right: auto;
+            left: 0;
+        }
+
         .cta-section {
             background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
             padding: 5rem 2rem;
@@ -980,6 +1125,18 @@
             </div>
         </section>
 
+        <section class="references-section" id="references" aria-labelledby="referencesTitle">
+            <div class="references-container">
+                <h2 class="section-title" id="referencesTitle">شركاء النجاح</h2>
+                <p class="section-subtitle" id="referencesSubtitle">نفتخر بالعمل مع الشركات الرائدة</p>
+                <div class="references-carousel-wrapper">
+                    <button class="carousel-arrow carousel-arrow-left" id="carouselPrev" aria-label="Previous references">‹</button>
+                    <div class="references-carousel" id="referencesCarousel" role="list"></div>
+                    <button class="carousel-arrow carousel-arrow-right" id="carouselNext" aria-label="Next references">›</button>
+                </div>
+            </div>
+        </section>
+
         <section class="cta-section" id="contact" aria-labelledby="ctaTitle">
         <div class="cta-content">
             <h2 id="ctaTitle">هل أنت مستعد لتحويل عملك؟</h2>
@@ -1046,6 +1203,8 @@
                 renovationSubtitle: 'حلول شاملة للبنية التحتية المادية',
                 aiTitle: 'الذكاء الاصطناعي والأتمتة',
                 aiSubtitle: 'حلول ذكية للبنية التحتية الرقمية',
+                referencesTitle: 'شركاء النجاح',
+                referencesSubtitle: 'نفتخر بالعمل مع الشركات الرائدة',
                 ctaTitle: 'هل أنت مستعد لتحويل عملك؟',
                 ctaSubtitle: 'دعنا نناقش كيف يمكن لحلولنا تحسين عملياتك وتسريع النمو',
                 ctaButton: 'احجز استشارة مجانية',
@@ -1151,6 +1310,14 @@
                         desc: 'أدوات ومنهجيات إدارة المشاريع المتقدمة لتنفيذ المشاريع بكفاءة وضمان النجاح.',
                         details: ['تخطيط المشاريع', 'تتبع المهام', 'إدارة الموارد', 'تقارير التقدم', 'إدارة المخاطر']
                     }
+                ],
+                references: [
+                    { icon: '🏭', name: 'Sukkara', location: 'KSA' },
+                    { icon: '🏢', name: 'Sibaway', location: 'Jordan' },
+                    { icon: '⚙️', name: 'Advanced Engineering Industrials', location: 'Jordan' },
+                    { icon: '📱', name: 'Whatsstore', location: 'KSA' },
+                    { icon: '👨‍⚕️', name: 'Dr Maher Yaghi', location: 'Jordan' },
+                    { icon: '🏠', name: 'Amman and Sharjah Real Estate', location: 'Jordan' }
                 ]
             },
             en: {
@@ -1175,14 +1342,26 @@
                 statNDA: 'Fully Secure',
                 statProjects: 'Successful Projects',
                 statIndustries: 'Industries',
-                servicesTitle: 'Specialized Services',
-                servicesSubtitle: 'Comprehensive solutions for physical and digital infrastructure',
+                renovationTitle: 'Fit-out & Renovation',
+                renovationSubtitle: 'Comprehensive solutions for physical infrastructure',
+                aiTitle: 'AI & Automation',
+                aiSubtitle: 'Smart solutions for digital infrastructure',
+                referencesTitle: 'Success Partners',
+                referencesSubtitle: 'Proud to work with leading companies',
                 ctaTitle: 'Ready to Transform Your Business?',
                 ctaSubtitle: "Let's discuss how our solutions can optimize your operations and accelerate growth",
                 ctaButton: 'Book Free Consultation',
                 footerText: '© 2025 TechServJo. All rights reserved | Certified Engineering Team',
                 footerPrivacy: 'سياسة الخصوصية',
                 footerPrivacyEn: 'Privacy Policy',
+                references: [
+                    { icon: '🏭', name: 'Sukkara', location: 'KSA' },
+                    { icon: '🏢', name: 'Sibaway', location: 'Jordan' },
+                    { icon: '⚙️', name: 'Advanced Engineering Industrials', location: 'Jordan' },
+                    { icon: '📱', name: 'Whatsstore', location: 'KSA' },
+                    { icon: '👨‍⚕️', name: 'Dr Maher Yaghi', location: 'Jordan' },
+                    { icon: '🏠', name: 'Amman and Sharjah Real Estate', location: 'Jordan' }
+                ],
                 renovationServices: [
                     {
                         icon: '🏗️',
@@ -1320,6 +1499,8 @@
             document.getElementById('renovationSubtitle').textContent = t.renovationSubtitle;
             document.getElementById('aiTitle').textContent = t.aiTitle;
             document.getElementById('aiSubtitle').textContent = t.aiSubtitle;
+            document.getElementById('referencesTitle').textContent = t.referencesTitle;
+            document.getElementById('referencesSubtitle').textContent = t.referencesSubtitle;
             
             document.getElementById('ctaTitle').textContent = t.ctaTitle;
             document.getElementById('ctaSubtitle').textContent = t.ctaSubtitle;
@@ -1346,6 +1527,18 @@
                     <p>${service.desc}</p>
                 </div>
             `).join('');
+
+            const referencesCarousel = document.getElementById('referencesCarousel');
+            referencesCarousel.innerHTML = t.references.map(ref => `
+                <div class="reference-card" role="listitem">
+                    <div class="reference-icon">${ref.icon}</div>
+                    <h3>${ref.name}</h3>
+                    <div class="reference-location">${ref.location}</div>
+                </div>
+            `).join('');
+            
+            // Initialize carousel
+            initCarousel();
 
             document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
             document.documentElement.setAttribute('lang', currentLang);
@@ -1425,6 +1618,89 @@
             init();
         }
 
+        let carouselPosition = 0;
+        const cardWidth = 310; // 280px + 30px gap
+        let maxScroll = 0;
+        let carouselInitialized = false;
+        
+        function initCarousel() {
+            const prevBtn = document.getElementById('carouselPrev');
+            const nextBtn = document.getElementById('carouselNext');
+            const wrapper = document.querySelector('.references-carousel-wrapper');
+            const carousel = document.getElementById('referencesCarousel');
+            
+            if (!prevBtn || !nextBtn || !wrapper || !carousel) {
+                console.log('Carousel elements not found');
+                return;
+            }
+            
+            // Calculate max scroll
+            const references = translations[currentLang].references;
+            const wrapperWidth = wrapper.offsetWidth - 80; // Subtract padding
+            const visibleCards = Math.max(1, Math.floor(wrapperWidth / cardWidth));
+            maxScroll = Math.max(0, (references.length - visibleCards) * cardWidth);
+            
+            console.log('Carousel init:', { wrapperWidth, visibleCards, maxScroll, referencesCount: references.length });
+            
+            // Reset position
+            carouselPosition = 0;
+            carousel.style.transform = 'translateX(0px)';
+            
+            // Add event listeners only once
+            if (!carouselInitialized) {
+                prevBtn.addEventListener('click', () => {
+                    console.log('Previous clicked, position:', carouselPosition, 'maxScroll:', maxScroll);
+                    if (currentLang === 'ar') {
+                        carouselPosition += cardWidth;
+                        if (carouselPosition > 0) carouselPosition = 0;
+                    } else {
+                        carouselPosition -= cardWidth;
+                        if (carouselPosition < -maxScroll) carouselPosition = -maxScroll;
+                    }
+                    updateCarouselPosition();
+                });
+                
+                nextBtn.addEventListener('click', () => {
+                    console.log('Next clicked, position:', carouselPosition, 'maxScroll:', maxScroll);
+                    if (currentLang === 'ar') {
+                        carouselPosition -= cardWidth;
+                        if (carouselPosition < -maxScroll) carouselPosition = -maxScroll;
+                    } else {
+                        carouselPosition += cardWidth;
+                        if (carouselPosition > 0) carouselPosition = 0;
+                    }
+                    updateCarouselPosition();
+                });
+                
+                carouselInitialized = true;
+                console.log('Carousel listeners added');
+            }
+            
+            updateCarouselPosition();
+        }
+        
+        function updateCarouselPosition() {
+            const carousel = document.getElementById('referencesCarousel');
+            const prevBtn = document.getElementById('carouselPrev');
+            const nextBtn = document.getElementById('carouselNext');
+            
+            if (!carousel || !prevBtn || !nextBtn) return;
+            
+            carousel.style.transform = `translateX(${carouselPosition}px)`;
+            
+            const isRTL = currentLang === 'ar';
+            
+            if (isRTL) {
+                prevBtn.disabled = carouselPosition >= 0;
+                nextBtn.disabled = carouselPosition <= -maxScroll;
+            } else {
+                prevBtn.disabled = carouselPosition <= -maxScroll;
+                nextBtn.disabled = carouselPosition >= 0;
+            }
+            
+            console.log('Carousel position updated:', { carouselPosition, maxScroll, prevDisabled: prevBtn.disabled, nextDisabled: nextBtn.disabled });
+        }
+        
         function init() {
             document.getElementById('themeToggle').addEventListener('click', toggleTheme);
             document.getElementById('langToggle').addEventListener('click', toggleLanguage);
