@@ -606,7 +606,6 @@
         .references-section {
             background: var(--bg-secondary);
             padding: 5rem 0;
-            overflow: hidden;
         }
 
         .references-container {
@@ -619,15 +618,14 @@
             position: relative;
             margin-top: 3rem;
             padding: 0 40px;
+            overflow: hidden;
         }
 
         .references-carousel {
             display: flex;
             gap: 1.5rem;
             transition: transform 0.5s ease;
-            overflow-x: auto;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            width: max-content;
         }
 
         .references-carousel::-webkit-scrollbar {
