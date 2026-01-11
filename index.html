@@ -1622,12 +1622,13 @@
         const cardWidth = 310; // 280px + 30px gap
         let maxScroll = 0;
         let carouselInitialized = false;
+        let prevBtn, nextBtn, carousel;
         
         function initCarousel() {
-            const prevBtn = document.getElementById('carouselPrev');
-            const nextBtn = document.getElementById('carouselNext');
+            prevBtn = document.getElementById('carouselPrev');
+            nextBtn = document.getElementById('carouselNext');
             const wrapper = document.querySelector('.references-carousel-wrapper');
-            const carousel = document.getElementById('referencesCarousel');
+            carousel = document.getElementById('referencesCarousel');
             
             if (!prevBtn || !nextBtn || !wrapper || !carousel) {
                 console.log('Carousel elements not found');
@@ -1646,59 +1647,48 @@
             carouselPosition = 0;
             carousel.style.transform = 'translateX(0px)';
             
-            // Add event listeners only once
-            if (!carouselInitialized) {
-                prevBtn.addEventListener('click', () => {
-                    console.log('Previous clicked, position:', carouselPosition, 'maxScroll:', maxScroll);
-                    if (currentLang === 'ar') {
-                        carouselPosition += cardWidth;
-                        if (carouselPosition > 0) carouselPosition = 0;
-                    } else {
-                        carouselPosition -= cardWidth;
-                        if (carouselPosition < -maxScroll) carouselPosition = -maxScroll;
-                    }
-                    updateCarouselPosition();
-                });
-                
-                nextBtn.addEventListener('click', () => {
-                    console.log('Next clicked, position:', carouselPosition, 'maxScroll:', maxScroll);
-                    if (currentLang === 'ar') {
-                        carouselPosition -= cardWidth;
-                        if (carouselPosition < -maxScroll) carouselPosition = -maxScroll;
-                    } else {
-                        carouselPosition += cardWidth;
-                        if (carouselPosition > 0) carouselPosition = 0;
-                    }
-                    updateCarouselPosition();
-                });
-                
-                carouselInitialized = true;
-                console.log('Carousel listeners added');
+            // Remove old event listeners if they exist
+            if (carouselInitialized) {
+                const newPrevBtn = prevBtn.cloneNode(true);
+                const newNextBtn = nextBtn.cloneNode(true);
+                prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
+                nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
+                prevBtn = newPrevBtn;
+                nextBtn = newNextBtn;
             }
+            
+            // Add event listeners
+            prevBtn.addEventListener('click', () => {
+                console.log('Previous clicked, position:', carouselPosition, 'maxScroll:', maxScroll, 'lang:', currentLang);
+                carouselPosition -= cardWidth;
+                if (carouselPosition < 0) carouselPosition = 0;
+                updateCarouselPosition();
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                console.log('Next clicked, position:', carouselPosition, 'maxScroll:', maxScroll, 'lang:', currentLang);
+                carouselPosition += cardWidth;
+                if (carouselPosition > maxScroll) carouselPosition = maxScroll;
+                updateCarouselPosition();
+            });
+            
+            carouselInitialized = true;
+            console.log('Carousel listeners added');
             
             updateCarouselPosition();
         }
         
         function updateCarouselPosition() {
-            const carousel = document.getElementById('referencesCarousel');
-            const prevBtn = document.getElementById('carouselPrev');
-            const nextBtn = document.getElementById('carouselNext');
-            
             if (!carousel || !prevBtn || !nextBtn) return;
             
-            carousel.style.transform = `translateX(${carouselPosition}px)`;
-            
             const isRTL = currentLang === 'ar';
+            const translateValue = isRTL ? -carouselPosition : carouselPosition;
+            carousel.style.transform = `translateX(${translateValue}px)`;
             
-            if (isRTL) {
-                prevBtn.disabled = carouselPosition >= 0;
-                nextBtn.disabled = carouselPosition <= -maxScroll;
-            } else {
-                prevBtn.disabled = carouselPosition <= -maxScroll;
-                nextBtn.disabled = carouselPosition >= 0;
-            }
+            prevBtn.disabled = carouselPosition <= 0;
+            nextBtn.disabled = carouselPosition >= maxScroll;
             
-            console.log('Carousel position updated:', { carouselPosition, maxScroll, prevDisabled: prevBtn.disabled, nextDisabled: nextBtn.disabled });
+            console.log('Carousel position updated:', { carouselPosition, maxScroll, translateValue, isRTL, prevDisabled: prevBtn.disabled, nextDisabled: nextBtn.disabled });
         }
         
         function init() {
