@@ -59,6 +59,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
+    <!-- Glide.js CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/css/glide.core.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/css/glide.theme.min.css">
+    
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
     {
@@ -614,25 +618,28 @@
             padding: 0 2rem;
         }
 
-        .references-carousel-wrapper {
-            position: relative;
+        /* Glide.js Custom Styling */
+        .glide {
             margin-top: 3rem;
-            padding: 0 40px;
+        }
+
+        .glide__track {
             overflow: hidden;
-            perspective: 1500px;
         }
 
-        .references-carousel {
-            display: flex;
-            gap: 1.5rem;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-style: preserve-3d;
-            width: max-content;
-            padding: 0 100px;
+        .glide__slides {
+            align-items: center;
         }
 
-        .references-carousel::-webkit-scrollbar {
-            display: none;
+        .glide__slide {
+            opacity: 0.3;
+            transition: all 0.4s ease;
+            transform: scale(0.85);
+        }
+
+        .glide__slide--active {
+            opacity: 1;
+            transform: scale(1);
         }
 
         .reference-card {
@@ -642,12 +649,14 @@
             border-radius: 1.5rem;
             padding: 2.5rem;
             text-align: center;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
-            flex: 0 0 auto;
             width: 280px;
-            transform-style: preserve-3d;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .reference-card::before {
@@ -659,12 +668,11 @@
             transition: opacity 0.4s;
         }
 
-        .reference-card:hover::before {
+        .glide__slide--active .reference-card::before {
             opacity: 1;
         }
 
-        .reference-card:hover {
-            transform: translateY(-10px);
+        .glide__slide--active .reference-card {
             border-color: var(--gradient-start);
             box-shadow: 0 25px 50px var(--shadow-hover), 0 0 60px var(--accent-glow);
         }
@@ -694,7 +702,8 @@
             font-weight: 600;
         }
 
-        .carousel-arrow {
+        /* Glide.js Arrow Styling */
+        .glide__arrow {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
@@ -711,41 +720,36 @@
             color: var(--text-primary);
             transition: all 0.3s;
             z-index: 10;
+            padding: 0;
         }
 
-        .carousel-arrow:hover {
+        .glide__arrow:hover {
             background: var(--gradient-start);
             color: white;
             border-color: var(--gradient-start);
             box-shadow: 0 0 20px var(--accent-glow);
         }
 
-        .carousel-arrow:disabled {
+        .glide__arrow--disabled {
             opacity: 0.3;
             cursor: not-allowed;
+            pointer-events: none;
         }
 
-        .carousel-arrow:disabled:hover {
-            background: var(--glass-bg);
-            color: var(--text-primary);
-            border-color: var(--glass-border);
-            box-shadow: none;
-        }
-
-        .carousel-arrow-left {
+        .glide__arrow--left {
             left: 0;
         }
 
-        .carousel-arrow-right {
+        .glide__arrow--right {
             right: 0;
         }
 
-        [dir="rtl"] .carousel-arrow-left {
+        [dir="rtl"] .glide__arrow--left {
             left: auto;
             right: 0;
         }
 
-        [dir="rtl"] .carousel-arrow-right {
+        [dir="rtl"] .glide__arrow--right {
             right: auto;
             left: 0;
         }
@@ -1131,10 +1135,14 @@
             <div class="references-container">
                 <h2 class="section-title" id="referencesTitle">شركاء النجاح</h2>
                 <p class="section-subtitle" id="referencesSubtitle">نفتخر بالعمل مع الشركات الرائدة</p>
-                <div class="references-carousel-wrapper">
-                    <button class="carousel-arrow carousel-arrow-left" id="carouselPrev" aria-label="Previous references">‹</button>
-                    <div class="references-carousel" id="referencesCarousel" role="list"></div>
-                    <button class="carousel-arrow carousel-arrow-right" id="carouselNext" aria-label="Next references">›</button>
+                <div class="glide" id="glide">
+                    <div data-glide-el="track" class="glide__track">
+                        <ul class="glide__slides" id="referencesCarousel"></ul>
+                    </div>
+                    <div class="glide__arrows" data-glide-el="controls">
+                        <button class="glide__arrow glide__arrow--left" data-glide-dir="<" aria-label="Previous references">‹</button>
+                        <button class="glide__arrow glide__arrow--right" data-glide-dir=">" aria-label="Next references">›</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1176,6 +1184,9 @@
             <div class="modal-body" id="modalBody"></div>
         </div>
     </div>
+
+    <!-- Glide.js Script -->
+    <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/glide.min.js"></script>
 
     <script>
         const translations = {
@@ -1532,15 +1543,17 @@
 
             const referencesCarousel = document.getElementById('referencesCarousel');
             referencesCarousel.innerHTML = t.references.map(ref => `
-                <div class="reference-card" role="listitem">
-                    <div class="reference-icon">${ref.icon}</div>
-                    <h3>${ref.name}</h3>
-                    <div class="reference-location">${ref.location}</div>
-                </div>
+                <li class="glide__slide">
+                    <div class="reference-card">
+                        <div class="reference-icon">${ref.icon}</div>
+                        <h3>${ref.name}</h3>
+                        <div class="reference-location">${ref.location}</div>
+                    </div>
+                </li>
             `).join('');
             
-            // Initialize carousel
-            initCarousel();
+            // Initialize Glide.js carousel
+            initGlide();
 
             document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
             document.documentElement.setAttribute('lang', currentLang);
@@ -1620,105 +1633,43 @@
             init();
         }
 
-        let carouselPosition = 0;
-        const cardWidth = 280;
-        const gapWidth = 30;
-        let maxScroll = 0;
-        let carouselInitialized = false;
-        let prevBtn, nextBtn, carousel;
+        let glideInstance = null;
         
-        function initCarousel() {
-            prevBtn = document.getElementById('carouselPrev');
-            nextBtn = document.getElementById('carouselNext');
-            const wrapper = document.querySelector('.references-carousel-wrapper');
-            carousel = document.getElementById('referencesCarousel');
-            
-            if (!prevBtn || !nextBtn || !wrapper || !carousel) {
-                console.log('Carousel elements not found');
+        function initGlide() {
+            const glideElement = document.getElementById('glide');
+            if (!glideElement) {
+                console.log('Glide element not found');
                 return;
             }
             
-            // Calculate max scroll
-            const references = translations[currentLang].references;
-            const wrapperWidth = wrapper.offsetWidth - 80; // Subtract padding
-            const visibleCards = Math.max(1, Math.floor(wrapperWidth / cardWidth));
-            maxScroll = Math.max(0, (references.length - visibleCards) * (cardWidth + gapWidth));
-            
-            console.log('Carousel init:', { wrapperWidth, visibleCards, maxScroll, referencesCount: references.length });
-            
-            // Reset position
-            carouselPosition = 0;
-            
-            // Remove old event listeners if they exist
-            if (carouselInitialized) {
-                const newPrevBtn = prevBtn.cloneNode(true);
-                const newNextBtn = nextBtn.cloneNode(true);
-                prevBtn.parentNode.replaceChild(newPrevBtn, prevBtn);
-                nextBtn.parentNode.replaceChild(newNextBtn, nextBtn);
-                prevBtn = newPrevBtn;
-                nextBtn = newNextBtn;
+            // Destroy existing instance if it exists
+            if (glideInstance) {
+                glideInstance.destroy();
             }
             
-            // Add event listeners
-            prevBtn.addEventListener('click', () => {
-                carouselPosition -= (cardWidth + gapWidth);
-                if (carouselPosition < 0) carouselPosition = 0;
-                updateCarouselPosition();
+            // Initialize Glide.js
+            glideInstance = new Glide('#glide', {
+                type: 'carousel',
+                startAt: 0,
+                perView: 3,
+                focusAt: 'center',
+                gap: 30,
+                hoverpause: true,
+                keyboard: true,
+                animationDuration: 400,
+                animationTimingFunc: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                breakpoints: {
+                    1024: {
+                        perView: 2
+                    },
+                    768: {
+                        perView: 1
+                    }
+                }
             });
             
-            nextBtn.addEventListener('click', () => {
-                carouselPosition += (cardWidth + gapWidth);
-                if (carouselPosition > maxScroll) carouselPosition = maxScroll;
-                updateCarouselPosition();
-            });
-            
-            carouselInitialized = true;
-            console.log('Carousel listeners added');
-            
-            updateCarouselPosition();
-        }
-        
-        function updateCarouselPosition() {
-            if (!carousel || !prevBtn || !nextBtn) return;
-            
-            const isRTL = currentLang === 'ar';
-            const references = translations[currentLang].references;
-            const cards = carousel.querySelectorAll('.reference-card');
-            
-            // Update button states
-            prevBtn.disabled = carouselPosition <= 0;
-            nextBtn.disabled = carouselPosition >= maxScroll;
-            
-            // Calculate center position
-            const wrapperWidth = carousel.parentElement.offsetWidth - 80;
-            const centerOffset = wrapperWidth / 2;
-            const scrollCenter = carouselPosition + centerOffset;
-            
-            // Apply curved effect to each card
-            cards.forEach((card, index) => {
-                const cardCenter = (index * (cardWidth + gapWidth)) + cardWidth / 2;
-                const distanceFromCenter = Math.abs(cardCenter - scrollCenter);
-                const normalizedDistance = distanceFromCenter / centerOffset;
-                
-                // Calculate scale (closer cards are larger)
-                const scale = Math.max(0.7, 1 - normalizedDistance * 0.3);
-                
-                // Calculate rotation (curved effect)
-                const rotation = (cardCenter - scrollCenter) * 0.03;
-                
-                // Calculate z-index (center cards on top)
-                const zIndex = Math.floor(100 - normalizedDistance * 50);
-                
-                // Calculate opacity (fading for distant cards)
-                const opacity = Math.max(0.5, 1 - normalizedDistance * 0.5);
-                
-                // Apply transforms
-                card.style.transform = `scale(${scale}) rotateY(${rotation}deg)`;
-                card.style.zIndex = zIndex;
-                card.style.opacity = opacity;
-            });
-            
-            console.log('Carousel position updated:', { carouselPosition, maxScroll, isRTL });
+            glideInstance.mount();
+            console.log('Glide carousel initialized');
         }
         
         function init() {
