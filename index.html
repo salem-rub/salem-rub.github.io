@@ -1185,7 +1185,7 @@
         </div>
     </div>
 
-    <!-- Glide.js Script -->
+    <!-- Glide.js Script (must load before main script) -->
     <script src="https://cdn.jsdelivr.net/npm/@glidejs/glide@3.6.0/dist/glide.min.js"></script>
 
     <script>
@@ -1636,6 +1636,14 @@
         let glideInstance = null;
         
         function initGlide() {
+            // Check if Glide is loaded
+            if (typeof Glide === 'undefined') {
+                console.error('Glide.js is not loaded');
+                // Retry after a short delay
+                setTimeout(initGlide, 100);
+                return;
+            }
+            
             const glideElement = document.getElementById('glide');
             if (!glideElement) {
                 console.log('Glide element not found');
@@ -1644,32 +1652,40 @@
             
             // Destroy existing instance if it exists
             if (glideInstance) {
-                glideInstance.destroy();
+                try {
+                    glideInstance.destroy();
+                } catch (e) {
+                    console.log('Error destroying previous instance:', e);
+                }
             }
             
             // Initialize Glide.js
-            glideInstance = new Glide('#glide', {
-                type: 'carousel',
-                startAt: 0,
-                perView: 3,
-                focusAt: 'center',
-                gap: 30,
-                hoverpause: true,
-                keyboard: true,
-                animationDuration: 400,
-                animationTimingFunc: 'cubic-bezier(0.4, 0, 0.2, 1)',
-                breakpoints: {
-                    1024: {
-                        perView: 2
-                    },
-                    768: {
-                        perView: 1
+            try {
+                glideInstance = new Glide('#glide', {
+                    type: 'carousel',
+                    startAt: 0,
+                    perView: 3,
+                    focusAt: 'center',
+                    gap: 30,
+                    hoverpause: true,
+                    keyboard: true,
+                    animationDuration: 400,
+                    animationTimingFunc: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                    breakpoints: {
+                        1024: {
+                            perView: 2
+                        },
+                        768: {
+                            perView: 1
+                        }
                     }
-                }
-            });
-            
-            glideInstance.mount();
-            console.log('Glide carousel initialized');
+                });
+                
+                glideInstance.mount();
+                console.log('Glide carousel initialized successfully');
+            } catch (e) {
+                console.error('Error initializing Glide:', e);
+            }
         }
         
         function init() {
