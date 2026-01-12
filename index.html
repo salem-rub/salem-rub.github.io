@@ -619,13 +619,16 @@
             margin-top: 3rem;
             padding: 0 40px;
             overflow: hidden;
+            perspective: 1500px;
         }
 
         .references-carousel {
             display: flex;
             gap: 1.5rem;
-            transition: transform 0.5s ease;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
             width: max-content;
+            padding: 0 100px;
         }
 
         .references-carousel::-webkit-scrollbar {
@@ -644,6 +647,7 @@
             overflow: hidden;
             flex: 0 0 auto;
             width: 280px;
+            transform-style: preserve-3d;
         }
 
         .reference-card::before {
@@ -1617,7 +1621,8 @@
         }
 
         let carouselPosition = 0;
-        const cardWidth = 310; // 280px + 30px gap
+        const cardWidth = 280;
+        const gapWidth = 30;
         let maxScroll = 0;
         let carouselInitialized = false;
         let prevBtn, nextBtn, carousel;
@@ -1637,13 +1642,12 @@
             const references = translations[currentLang].references;
             const wrapperWidth = wrapper.offsetWidth - 80; // Subtract padding
             const visibleCards = Math.max(1, Math.floor(wrapperWidth / cardWidth));
-            maxScroll = Math.max(0, (references.length - visibleCards) * cardWidth);
+            maxScroll = Math.max(0, (references.length - visibleCards) * (cardWidth + gapWidth));
             
             console.log('Carousel init:', { wrapperWidth, visibleCards, maxScroll, referencesCount: references.length });
             
             // Reset position
             carouselPosition = 0;
-            carousel.style.transform = 'translateX(0px)';
             
             // Remove old event listeners if they exist
             if (carouselInitialized) {
@@ -1657,15 +1661,13 @@
             
             // Add event listeners
             prevBtn.addEventListener('click', () => {
-                console.log('Previous clicked, position:', carouselPosition, 'maxScroll:', maxScroll, 'lang:', currentLang);
-                carouselPosition -= cardWidth;
+                carouselPosition -= (cardWidth + gapWidth);
                 if (carouselPosition < 0) carouselPosition = 0;
                 updateCarouselPosition();
             });
             
             nextBtn.addEventListener('click', () => {
-                console.log('Next clicked, position:', carouselPosition, 'maxScroll:', maxScroll, 'lang:', currentLang);
-                carouselPosition += cardWidth;
+                carouselPosition += (cardWidth + gapWidth);
                 if (carouselPosition > maxScroll) carouselPosition = maxScroll;
                 updateCarouselPosition();
             });
@@ -1680,13 +1682,43 @@
             if (!carousel || !prevBtn || !nextBtn) return;
             
             const isRTL = currentLang === 'ar';
-            const translateValue = isRTL ? -carouselPosition : carouselPosition;
-            carousel.style.transform = `translateX(${translateValue}px)`;
+            const references = translations[currentLang].references;
+            const cards = carousel.querySelectorAll('.reference-card');
             
+            // Update button states
             prevBtn.disabled = carouselPosition <= 0;
             nextBtn.disabled = carouselPosition >= maxScroll;
             
-            console.log('Carousel position updated:', { carouselPosition, maxScroll, translateValue, isRTL, prevDisabled: prevBtn.disabled, nextDisabled: nextBtn.disabled });
+            // Calculate center position
+            const wrapperWidth = carousel.parentElement.offsetWidth - 80;
+            const centerOffset = wrapperWidth / 2;
+            const scrollCenter = carouselPosition + centerOffset;
+            
+            // Apply curved effect to each card
+            cards.forEach((card, index) => {
+                const cardCenter = (index * (cardWidth + gapWidth)) + cardWidth / 2;
+                const distanceFromCenter = Math.abs(cardCenter - scrollCenter);
+                const normalizedDistance = distanceFromCenter / centerOffset;
+                
+                // Calculate scale (closer cards are larger)
+                const scale = Math.max(0.7, 1 - normalizedDistance * 0.3);
+                
+                // Calculate rotation (curved effect)
+                const rotation = (cardCenter - scrollCenter) * 0.03;
+                
+                // Calculate z-index (center cards on top)
+                const zIndex = Math.floor(100 - normalizedDistance * 50);
+                
+                // Calculate opacity (fading for distant cards)
+                const opacity = Math.max(0.5, 1 - normalizedDistance * 0.5);
+                
+                // Apply transforms
+                card.style.transform = `scale(${scale}) rotateY(${rotation}deg)`;
+                card.style.zIndex = zIndex;
+                card.style.opacity = opacity;
+            });
+            
+            console.log('Carousel position updated:', { carouselPosition, maxScroll, isRTL });
         }
         
         function init() {
