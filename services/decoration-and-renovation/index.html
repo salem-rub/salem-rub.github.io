@@ -10,6 +10,17 @@
       gtag('js', new Date());
 
       gtag('config', 'G-86BEY23V00');
+
+      // Analytics Tracking
+      function trackEvent(eventName, properties = {}) {
+        if (typeof gtag === 'function') {
+            gtag('event', eventName, {
+                ...properties,
+                'event_category': 'User Interaction'
+            });
+        }
+        console.log('Analytics Event:', eventName, properties);
+      }
     </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -110,6 +121,40 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Skip to content link for accessibility */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            z-index: 10000;
+            transition: top 0.3s;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
+
+        /* Focus indicators for accessibility */
+        :focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
         }
         
         body {
@@ -272,6 +317,133 @@
             padding: 2rem 0;
         }
         
+        /* Loading spinner */
+        .loading-spinner {
+            display: none;
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--bg-light);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Social sharing buttons */
+        .social-sharing {
+            background: var(--bg-light);
+            padding: 2rem 0;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .social-sharing h3 {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-dark);
+        }
+
+        .share-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .share-facebook {
+            background: #1877f2;
+            color: white;
+        }
+
+        .share-twitter {
+            background: #1da1f2;
+            color: white;
+        }
+
+        .share-linkedin {
+            background: #0a66c2;
+            color: white;
+        }
+
+        .share-whatsapp {
+            background: #25d366;
+            color: white;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(20, 184, 166, 0.2);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(20, 184, 166, 0.3);
+        }
+
+        .back-to-top:focus {
+            outline: 3px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        [dir="ltr"] .back-to-top {
+            right: 2rem;
+            left: auto;
+        }
+
+        [dir="rtl"] .back-to-top {
+            left: 2rem;
+            right: auto;
+        }
+
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8rem;
@@ -280,10 +452,25 @@
             .services-grid {
                 grid-template-columns: 1fr;
             }
+
+            .back-to-top {
+                width: 3rem;
+                height: 3rem;
+                bottom: 1.5rem;
+                right: 1.5rem;
+                left: 1.5rem;
+                font-size: 1.2rem;
+            }
+
+            .share-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
         }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-to-content">الانتقال إلى المحتوى الرئيسي</a>
     <header>
         <div class="container">
             <h1>خدمات التشطيب والتجديد</h1>
@@ -297,6 +484,7 @@
         </div>
     </div>
     
+    <main id="main-content">
     <section class="section">
         <div class="container">
             <h2>خدماتنا المتكاملة</h2>
@@ -425,12 +613,95 @@
             <a href="https://n8n.techservjo.com/form/26aea243-14f8-46e6-ad4c-e44b5e8395a8" target="_blank" class="cta-button">احجز استشارة مجانية</a>
         </div>
     </div>
+    </main>
     
-    <footer>
+    <footer role="contentinfo">
         <div class="container">
-            <p>© 2025 TechServJo. جميع الحقوق محفوظة</p>
-            <p><a href="/" style="color: white; text-decoration: none;">العودة للرئيسية</a></p>
+            <p>© 2026 TechServJo. جميع الحقوق محفوظة</p>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <a href="/" style="color: white; text-decoration: none;">العودة للرئيسية</a>
+                <span style="color: white; opacity: 0.5;">|</span>
+                <a href="/services/ai-automation/" style="color: white; text-decoration: none;">الذكاء الاصطناعي والأتمتة</a>
+                <span style="color: white; opacity: 0.5;">|</span>
+                <a href="https://techservjo.com/privacy.html" target="_blank" style="color: white; text-decoration: none;">سياسة الخصوصية</a>
+            </nav>
         </div>
     </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">↑</button>
+
+    <!-- Social Sharing Section -->
+    <section class="social-sharing">
+        <div class="container">
+            <h3>شارك هذه الصفحة</h3>
+            <div class="share-buttons">
+                <a href="https://www.facebook.com/sharer/sharer.php?u=https://techservjo.com/services/decoration-and-renovation/" 
+                   target="_blank" 
+                   class="share-btn share-facebook"
+                   onclick="trackEvent('social_share', {'platform': 'facebook', 'page': 'decoration-services'})">
+                    Facebook
+                </a>
+                <a href="https://twitter.com/intent/tweet?text=خدمات التشطيب والتجديد - TechServJo&url=https://techservjo.com/services/decoration-and-renovation/" 
+                   target="_blank" 
+                   class="share-btn share-twitter"
+                   onclick="trackEvent('social_share', {'platform': 'twitter', 'page': 'decoration-services'})">
+                    Twitter
+                </a>
+                <a href="https://www.linkedin.com/sharing/share-offsite/?url=https://techservjo.com/services/decoration-and-renovation/" 
+                   target="_blank" 
+                   class="share-btn share-linkedin"
+                   onclick="trackEvent('social_share', {'platform': 'linkedin', 'page': 'decoration-services'})">
+                    LinkedIn
+                </a>
+                <a href="https://api.whatsapp.com/send?text=خدمات التشطيب والتجديد - TechServJo: https://techservjo.com/services/decoration-and-renovation/" 
+                   target="_blank" 
+                   class="share-btn share-whatsapp"
+                   onclick="trackEvent('social_share', {'platform': 'whatsapp', 'page': 'decoration-services'})">
+                    WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Back to top button functionality
+        const backToTopBtn = document.getElementById('backToTop');
+        let backToTopShown = false;
+
+        function handleBackToTopVisibility() {
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            const shouldShow = scrollPercent > 20;
+            
+            if (shouldShow && !backToTopShown) {
+                backToTopBtn.classList.add('visible');
+                backToTopShown = true;
+            } else if (!shouldShow && backToTopShown) {
+                backToTopBtn.classList.remove('visible');
+                backToTopShown = false;
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            trackEvent('back_to_top_click', {
+                'page': 'decoration-services',
+                'scroll_position': window.scrollY
+            });
+        }
+
+        // Initialize
+        window.addEventListener('scroll', handleBackToTopVisibility);
+        backToTopBtn.addEventListener('click', scrollToTop);
+
+        // Track page view
+        trackEvent('page_view', {
+            'page_title': 'Decoration & Renovation Services',
+            'page_path': '/services/decoration-and-renovation/'
+        });
+    </script>
 </body>
 </html>

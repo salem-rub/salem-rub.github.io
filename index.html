@@ -233,6 +233,36 @@
             scroll-behavior: smooth;
         }
 
+        /* Skip to content link for accessibility */
+        .skip-to-content {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--gradient-start);
+            color: white;
+            padding: 8px 16px;
+            z-index: 10000;
+            transition: top 0.3s;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .skip-to-content:focus {
+            top: 0;
+        }
+
+        /* Focus indicators for accessibility */
+        :focus-visible {
+            outline: 3px solid var(--gradient-start);
+            outline-offset: 2px;
+        }
+
+        button:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--gradient-start);
+            outline-offset: 2px;
+        }
+
         body {
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
@@ -285,6 +315,63 @@
         .nav-links {
             display: flex;
             gap: 2rem;
+            align-items: center;
+        }
+
+        /* Mobile menu */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-card);
+                border-bottom: 1px solid var(--border-color);
+                padding: 1rem;
+                gap: 0.5rem;
+                box-shadow: 0 10px 30px var(--shadow);
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .dropdown-menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: none;
+                padding-left: 1rem;
+                background: var(--bg-secondary);
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .control-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.8rem;
+            }
         }
 
         .nav-links a {
@@ -298,6 +385,91 @@
 
         .nav-links a:hover {
             color: var(--gradient-start);
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            color: var(--text-secondary);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.95rem;
+            padding: 0;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .dropdown-btn:hover {
+            color: var(--gradient-start);
+        }
+
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.2s;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            min-width: 250px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            box-shadow: 0 10px 40px var(--shadow);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1001;
+            padding: 0.5rem 0;
+        }
+
+        .dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(5px);
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 0.75rem 1.25rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .dropdown-menu a:hover {
+            background: var(--bg-secondary);
+            color: var(--gradient-start);
+            padding-right: 1.5rem;
+        }
+
+        [dir="ltr"] .dropdown-menu {
+            right: auto;
+            left: 0;
+        }
+
+        [dir="ltr"] .dropdown-menu a:hover {
+            padding-right: 1.25rem;
+            padding-left: 1.5rem;
+        }
+
+        [dir="rtl"] .dropdown-menu a:hover {
+            padding-left: 1.25rem;
         }
 
         .controls {
@@ -752,6 +924,51 @@
             margin-bottom: 1rem;
         }
 
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3.5rem;
+            height: 3.5rem;
+            background: linear-gradient(135deg, var(--gradient-start), var(--gradient-mid), var(--gradient-end));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px var(--shadow-hover);
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px var(--shadow-hover);
+        }
+
+        .back-to-top:focus {
+            outline: 3px solid var(--gradient-start);
+            outline-offset: 2px;
+        }
+
+        [dir="rtl"] .back-to-top {
+            right: auto;
+            left: 2rem;
+        }
+
         .footer-links {
             display: flex;
             align-items: center;
@@ -959,17 +1176,42 @@
             .stats-grid {
                 grid-template-columns: 1fr;
             }
+
+            .back-to-top {
+                width: 3rem;
+                height: 3rem;
+                bottom: 1.5rem;
+                right: 1.5rem;
+                font-size: 1.2rem;
+            }
+
+            [dir="rtl"] .back-to-top {
+                right: auto;
+                left: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
+    <a href="#main-content" class="skip-to-content">الانتقال إلى المحتوى الرئيسي</a>
     <header>
         <nav>
             <div class="logo" id="logo">TechServJo</div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">☰</button>
             <div class="nav-right">
-                <div class="nav-links">
+                <div class="nav-links" id="navLinks">
                     <a href="#about" id="navAbout">من نحن</a>
-                    <a href="#renovation-services" id="navservices">الخدمات</a>
+                    <div class="dropdown">
+                        <button class="dropdown-btn" id="navservices">
+                            <span id="navservicesText">الخدمات</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="dropdown-menu">
+                            <a href="/services/decoration-and-renovation/" id="navRenovation">التشطيب والتجديد</a>
+                            <a href="/services/ai-automation/" id="navAI">الذكاء الاصطناعي والأتمتة</a>
+                        </div>
+                    </div>
+                    <a href="#references" id="navReferences">شركاء النجاح</a>
                     <a href="#contact" id="navContact">تواصل</a>
                 </div>
                 <div class="controls">
@@ -995,7 +1237,7 @@
                     <div class="pillar-label" id="labelPhysical">البنية التحتية المادية</div>
                     <h1 class="pillar-title" id="titlePhysical" itemprop="name">التشطيب<br/>والتجديد</h1>
                     <p class="pillar-desc" id="descPhysical" itemprop="description">هندسة مساحات عمل عالية الأداء من خلال إدارة دقيقة للمشاريع والميزانيات</p>
-                    <a href="#renovation-services" class="pillar-btn" id="btnPhysical" aria-label="Learn more about fit-out and renovation services">استكشف التشطيب</a>
+                    <a href="/services/decoration-and-renovation/" class="pillar-btn" id="btnPhysical" aria-label="Learn more about fit-out and renovation services">استكشف التشطيب</a>
                 </div>
             </article>
 
@@ -1006,7 +1248,7 @@
                     <div class="pillar-label" id="labelDigital">البنية التحتية الرقمية</div>
                     <h1 class="pillar-title" id="titleDigital" itemprop="name">الذكاء الاصطناعي<br/>والأتمتة</h1>
                     <p class="pillar-desc" id="descDigital" itemprop="description">تبسيط العمليات باستخدام عملاء الذكاء الاصطناعي وسير عمل n8n الخاص</p>
-                    <a href="#ai-services" class="pillar-btn" id="btnDigital" aria-label="Learn more about AI automation services">استكشف الذكاء الاصطناعي</a>
+                    <a href="/services/ai-automation/" class="pillar-btn" id="btnDigital" aria-label="Learn more about AI automation services">استكشف الذكاء الاصطناعي</a>
                 </div>
             </article>
         </section>
@@ -1038,22 +1280,6 @@
         </div>
     </section>
 
-        <section class="services-section" id="renovation-services" aria-labelledby="renovationTitle">
-            <div class="services-container">
-                <h2 class="section-title" id="renovationTitle">التشطيب والتجديد</h2>
-                <p class="section-subtitle" id="renovationSubtitle">حلول شاملة للبنية التحتية المادية</p>
-                <div class="services-grid" id="renovationGrid" role="list"></div>
-            </div>
-        </section>
-
-        <section class="services-section" id="ai-services" aria-labelledby="aiTitle">
-            <div class="services-container">
-                <h2 class="section-title" id="aiTitle">الذكاء الاصطناعي والأتمتة</h2>
-                <p class="section-subtitle" id="aiSubtitle">حلول ذكية للبنية التحتية الرقمية</p>
-                <div class="services-grid" id="aiGrid" role="list"></div>
-            </div>
-        </section>
-
         <section class="references-section" id="references" aria-labelledby="referencesTitle">
             <div class="references-container">
                 <h2 class="section-title" id="referencesTitle">شركاء النجاح</h2>
@@ -1076,9 +1302,9 @@
     <footer role="contentinfo">
         <p id="footerText">© 2025 TechServJo. جميع الحقوق محفوظة | فريق هندسي معتمد</p>
         <nav class="footer-links" aria-label="Footer navigation">
-            <a href="https://techservjo.com/services/fit-out-renovation.html" class="footer-link">Fit-out & Renovation</a>
+            <a href="https://techservjo.com/services/decoration-and-renovation/" class="footer-link">Fit-out & Renovation</a>
             <span class="footer-separator">|</span>
-            <a href="https://techservjo.com/services/ai-automation.html" class="footer-link">AI Automation</a>
+            <a href="https://techservjo.com/services/ai-automation/" class="footer-link">AI Automation</a>
             <span class="footer-separator">|</span>
             <a href="https://techservjo.com/services/voice-agents.html" class="footer-link">Voice Agents</a>
             <span class="footer-separator">|</span>
@@ -1090,22 +1316,77 @@
         </div>
     </footer>
 
-    <div class="modal" id="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="modal-close" id="modalClose">×</button>
-                <h3 id="modalTitle"></h3>
-            </div>
-            <div class="modal-body" id="modalBody"></div>
-        </div>
-    </div>
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">↑</button>
 
     <script>
+        // Analytics Tracking
+        function trackEvent(eventName, properties = {}) {
+            if (typeof gtag === 'function') {
+                gtag('event', eventName, {
+                    ...properties,
+                    'event_category': 'User Interaction'
+                });
+            }
+            console.log('Analytics Event:', eventName, properties);
+        }
+
+        function trackNavigation(linkName, linkUrl) {
+            trackEvent('navigation_click', {
+                'link_name': linkName,
+                'link_url': linkUrl
+            });
+        }
+
+        function trackServiceInteraction(serviceName, action) {
+            trackEvent('service_interaction', {
+                'service_name': serviceName,
+                'action': action
+            });
+        }
+
+        function trackMobileMenuToggle(isOpen) {
+            trackEvent('mobile_menu_toggle', {
+                'menu_state': isOpen ? 'opened' : 'closed'
+            });
+        }
+
+        function trackThemeToggle(newTheme) {
+            trackEvent('theme_change', {
+                'new_theme': newTheme
+            });
+        }
+
+        function trackLanguageToggle(newLang) {
+            trackEvent('language_change', {
+                'new_language': newLang
+            });
+        }
+
+        function trackScrollDepth(depth) {
+            trackEvent('scroll_depth', {
+                'depth': depth
+            });
+        }
+
+        // Initialize scroll depth tracking
+        let maxScrollDepth = 0;
+        window.addEventListener('scroll', () => {
+            const scrollPercent = Math.round((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100);
+            if (scrollPercent > maxScrollDepth && scrollPercent % 25 === 0) {
+                maxScrollDepth = scrollPercent;
+                trackScrollDepth(scrollPercent + '%');
+            }
+        });
+
         const translations = {
             ar: {
                 logo: 'TechServJo',
                 navAbout: 'من نحن',
                 navservices: 'الخدمات',
+                navRenovation: 'التشطيب والتجديد',
+                navAI: 'الذكاء الاصطناعي والأتمتة',
+                navReferences: 'شركاء النجاح',
                 navContact: 'تواصل',
                 themeLight: 'فاتح',
                 themeDark: 'داكن',
@@ -1133,7 +1414,7 @@
                 ctaTitle: 'هل أنت مستعد لتحويل عملك؟',
                 ctaSubtitle: 'دعنا نناقش كيف يمكن لحلولنا تحسين عملياتك وتسريع النمو',
                 ctaButton: 'احجز استشارة مجانية',
-                footerText: '© 2025 TechServJo. جميع الحقوق محفوظة | فريق هندسي معتمد',
+        footerText: '© 2026 TechServJo. جميع الحقوق محفوظة | فريق هندسي معتمد',
                 footerPrivacy: 'سياسة الخصوصية',
                 footerPrivacyEn: 'Privacy Policy',
                 renovationServices: [
@@ -1249,6 +1530,9 @@
                 logo: 'TechServJo',
                 navAbout: 'About Us',
                 navservices: 'Services',
+                navRenovation: 'Fit-out & Renovation',
+                navAI: 'AI & Automation',
+                navReferences: 'Success Partners',
                 navContact: 'Contact',
                 themeLight: 'Light',
                 themeDark: 'Dark',
@@ -1276,7 +1560,7 @@
                 ctaTitle: 'Ready to Transform Your Business?',
                 ctaSubtitle: "Let's discuss how our solutions can optimize your operations and accelerate growth",
                 ctaButton: 'Book Free Consultation',
-                footerText: '© 2025 TechServJo. All rights reserved | Certified Engineering Team',
+                footerText: '© 2026 TechServJo. All rights reserved | Certified Engineering Team',
                 footerPrivacy: 'سياسة الخصوصية',
                 footerPrivacyEn: 'Privacy Policy',
                 references: [
@@ -1398,7 +1682,10 @@
             
             document.getElementById('logo').textContent = t.logo;
             document.getElementById('navAbout').textContent = t.navAbout;
-            document.getElementById('navservices').textContent = t.navservices;
+            document.getElementById('navservicesText').textContent = t.navservices;
+            document.getElementById('navRenovation').textContent = t.navRenovation;
+            document.getElementById('navAI').textContent = t.navAI;
+            document.getElementById('navReferences').textContent = t.navReferences;
             document.getElementById('navContact').textContent = t.navContact;
             
             document.getElementById('labelPhysical').textContent = t.labelPhysical;
@@ -1420,10 +1707,6 @@
             document.getElementById('statProjects').textContent = t.statProjects;
             document.getElementById('statIndustries').textContent = t.statIndustries;
             
-            document.getElementById('renovationTitle').textContent = t.renovationTitle;
-            document.getElementById('renovationSubtitle').textContent = t.renovationSubtitle;
-            document.getElementById('aiTitle').textContent = t.aiTitle;
-            document.getElementById('aiSubtitle').textContent = t.aiSubtitle;
             document.getElementById('referencesTitle').textContent = t.referencesTitle;
             document.getElementById('referencesSubtitle').textContent = t.referencesSubtitle;
             
@@ -1434,24 +1717,6 @@
             document.getElementById('footerText').textContent = t.footerText;
             document.getElementById('footerPrivacy').textContent = t.footerPrivacy;
             document.getElementById('footerPrivacyEn').textContent = t.footerPrivacyEn;
-
-            const renovationGrid = document.getElementById('renovationGrid');
-            renovationGrid.innerHTML = t.renovationServices.map((service, index) => `
-                <div class="service-card" onclick="showRenovationServiceDetails(${index})">
-                    <div class="service-icon">${service.icon}</div>
-                    <h3>${service.title}</h3>
-                    <p>${service.desc}</p>
-                </div>
-            `).join('');
-
-            const aiGrid = document.getElementById('aiGrid');
-            aiGrid.innerHTML = t.aiServices.map((service, index) => `
-                <div class="service-card" onclick="showAIServiceDetails(${index})">
-                    <div class="service-icon">${service.icon}</div>
-                    <h3>${service.title}</h3>
-                    <p>${service.desc}</p>
-                </div>
-            `).join('');
 
             const referencesGrid = document.getElementById('referencesGrid');
             referencesGrid.innerHTML = t.references.map(ref => `
@@ -1466,57 +1731,13 @@
             document.documentElement.setAttribute('lang', currentLang);
         }
 
-        function showRenovationServiceDetails(index) {
-            const t = translations[currentLang];
-            const service = t.renovationServices[index];
-            const detailsLabel = currentLang === 'ar' ? 'التفاصيل:' : 'Details:';
-            
-            const content = `
-                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8; font-size: 1.1rem;">${service.desc}</p>
-                <h4>${detailsLabel}</h4>
-                <ul>${service.details.map(d => `<li>${d}</li>`).join('')}</ul>
-            `;
-            
-            openModal(service.title, content, service.icon);
-        }
-
-        function showAIServiceDetails(index) {
-            const t = translations[currentLang];
-            const service = t.aiServices[index];
-            const detailsLabel = currentLang === 'ar' ? 'التفاصيل:' : 'Details:';
-            
-            const content = `
-                <p style="color: var(--text-secondary); margin-bottom: 2rem; line-height: 1.8; font-size: 1.1rem;">${service.desc}</p>
-                <h4>${detailsLabel}</h4>
-                <ul>${service.details.map(d => `<li>${d}</li>`).join('')}</ul>
-            `;
-            
-            openModal(service.title, content, service.icon);
-        }
-
-        function openModal(title, content, icon) {
-            const modal = document.getElementById('modal');
-            const modalTitle = document.getElementById('modalTitle');
-            const modalBody = document.getElementById('modalBody');
-            
-            modalTitle.innerHTML = icon ? `<span style="font-size: 2.5rem; margin-right: 0.5rem;">${icon}</span> ${title}` : title;
-            modalBody.innerHTML = content;
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            const modal = document.getElementById('modal');
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
-
         function toggleTheme() {
             currentTheme = currentTheme === 'light' ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', currentTheme);
             const t = translations[currentLang];
             document.getElementById('themeIcon').textContent = currentTheme === 'dark' ? '☀️' : '🌙';
             document.getElementById('themeText').textContent = currentTheme === 'dark' ? t.themeLight : t.themeDark;
+            trackThemeToggle(currentTheme);
         }
 
         function toggleLanguage() {
@@ -1524,15 +1745,8 @@
             document.getElementById('langFlag').textContent = currentLang === 'ar' ? '🇯🇴' : '🇺🇸';
             document.getElementById('langText').textContent = currentLang === 'ar' ? 'AR' : 'EN';
             updateContent();
+            trackLanguageToggle(currentLang);
         }
-
-        document.getElementById('modalClose').addEventListener('click', closeModal);
-        document.getElementById('modal').addEventListener('click', function(e) {
-            if (e.target === this) closeModal();
-        });
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') closeModal();
-        });
 
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
@@ -1543,13 +1757,73 @@
         function init() {
             document.getElementById('themeToggle').addEventListener('click', toggleTheme);
             document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+            document.getElementById('mobileMenuBtn').addEventListener('click', toggleMobileMenu);
             updateContent();
             initScrollAnimations();
+        }
+
+        function toggleMobileMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+            trackMobileMenuToggle(navLinks.classList.contains('active'));
+        }
+
+        // Back to top button functionality
+        const backToTopBtn = document.getElementById('backToTop');
+        let backToTopShown = false;
+
+        function handleBackToTopVisibility() {
+            const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+            const shouldShow = scrollPercent > 20;
+            
+            if (shouldShow && !backToTopShown) {
+                backToTopBtn.classList.add('visible');
+                backToTopShown = true;
+            } else if (!shouldShow && backToTopShown) {
+                backToTopBtn.classList.remove('visible');
+                backToTopShown = false;
+            }
+        }
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+            trackEvent('back_to_top_click', {
+                'scroll_position': window.scrollY
+            });
         }
 
         function initScrollAnimations() {
             // Check if mobile view
             const isMobile = () => window.innerWidth <= 1024;
+            
+            // Back to top button visibility
+            window.addEventListener('scroll', handleBackToTopVisibility);
+            backToTopBtn.addEventListener('click', scrollToTop);
+            
+            // Lazy loading for background images
+            const lazyImages = document.querySelectorAll('.pillar-bg');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const bg = entry.target;
+                        const imageUrl = bg.getAttribute('data-bg');
+                        if (imageUrl) {
+                            bg.style.backgroundImage = `url('${imageUrl}')`;
+                            bg.removeAttribute('data-bg');
+                        }
+                        observer.unobserve(bg);
+                    }
+                });
+            }, {
+                rootMargin: '50px'
+            });
+
+            lazyImages.forEach(img => {
+                imageObserver.observe(img);
+            });
             
             // Pillar animations for mobile only
             const pillars = document.querySelectorAll('.pillar');
@@ -1599,29 +1873,6 @@
                 statObserver.observe(card);
             });
 
-            // Service cards scroll animations for mobile only
-            const serviceCards = document.querySelectorAll('.service-card');
-            const serviceObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (isMobile()) {
-                        if (entry.isIntersecting) {
-                            entry.target.style.transform = 'translateY(-10px)';
-                            entry.target.style.borderColor = 'var(--gradient-start)';
-                            entry.target.style.boxShadow = '0 25px 50px var(--shadow-hover), 0 0 60px var(--accent-glow)';
-                        } else {
-                            entry.target.style.transform = '';
-                            entry.target.style.borderColor = '';
-                            entry.target.style.boxShadow = '';
-                        }
-                    }
-                });
-            }, {
-                threshold: 0.3
-            });
-
-            serviceCards.forEach(card => {
-                serviceObserver.observe(card);
-            });
         }
     </script>
 </body>
