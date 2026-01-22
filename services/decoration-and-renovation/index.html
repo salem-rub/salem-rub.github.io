@@ -394,6 +394,267 @@
             color: white;
         }
 
+        /* Project cards grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .project-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border);
+            border-radius: 1.25rem;
+            padding: 2rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 12px 30px rgba(20, 184, 166, 0.15);
+        }
+
+        .project-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-icon {
+            font-size: 2.5rem;
+            flex-shrink: 0;
+        }
+
+        .project-industry {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border-radius: 1rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .project-card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+            line-height: 1.4;
+        }
+
+        .project-card p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-metric {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(20, 184, 166, 0.1);
+            border-radius: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-addons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .addon-badge {
+            padding: 0.35rem 0.75rem;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            white-space: nowrap;
+        }
+
+        .project-cta {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .project-cta::after {
+            content: '→';
+            transition: transform 0.3s;
+        }
+
+        .project-card:hover .project-cta::after {
+            transform: translateX(0.25rem);
+        }
+
+        [dir="rtl"] .project-cta::after {
+            content: '←';
+        }
+
+        [dir="rtl"] .project-card:hover .project-cta::after {
+            transform: translateX(-0.25rem);
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: var(--bg-white);
+            border-radius: 1.25rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 2rem;
+            border-radius: 1.25rem 1.25rem 0 0;
+            position: relative;
+        }
+
+        .modal-header h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .modal-body h4 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-body h4:first-child {
+            margin-top: 0;
+        }
+
+        .modal-body ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-body li {
+            color: var(--text-light);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .modal-body li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+        }
+
+        [dir="rtl"] .modal-close {
+            right: auto;
+            left: 1rem;
+        }
+
+        [dir="rtl"] .modal-body li {
+            padding-left: 0;
+            padding-right: 1.5rem;
+        }
+
+        [dir="rtl"] .modal-body li::before {
+            left: auto;
+            right: 0;
+        }
+
         /* Back to top button */
         .back-to-top {
             position: fixed;
@@ -453,6 +714,11 @@
                 grid-template-columns: 1fr;
             }
 
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
             .back-to-top {
                 width: 3rem;
                 height: 3rem;
@@ -465,6 +731,30 @@
             .share-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .modal {
+                padding: 1rem;
+            }
+
+            .modal-header {
+                padding: 1.5rem;
+            }
+
+            .modal-header h3 {
+                font-size: 1.5rem;
+            }
+
+            .modal-body {
+                padding: 1.25rem;
+            }
+
+            .modal-body h4 {
+                font-size: 1.1rem;
+            }
+
+            .modal-body li {
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -564,18 +854,72 @@
     
     <section class="section" style="background: var(--bg-light);">
         <div class="container">
-            <h2>دراسات الحالة</h2>
+            <h2>مشاريعنا الأخيرة</h2>
+            <p style="text-align: center; color: var(--text-light); margin-bottom: 3rem;">حلول مخصصة حققت نتائج حقيقية لعملائنا</p>
             
-            <div class="case-study">
-                <h3>تشطيب عيادة طبية في عمّان</h3>
-                <p>قمنا بتشطيب عيادة طبية متكاملة بمساحة 200 متر مربع. تضمن المشروع تصميم غرف الفحص بمواصفات طبية عالية، مع نظام تهوية متقدم وعزل صوتي متميز. تم إنجاز المشروع في غضون 6 أسابيع بتكلفة تقل عن الميزانية المحددة بنسبة 15%.</p>
-                <p><strong>النتائج:</strong> ارتفاع رضا المرضى بنسبة 40%، تحسين كفاءة سير العمل، وتقليل الضوضاء بنسبة 70%.</p>
-            </div>
-            
-            <div class="case-study">
-                <h3>تجديد مكتب شركة تقنية</h3>
-                <p>أعدنا تصميم مكتب شركة تقنية بمساحة 300 متر مربع. ركزنا على إنشاء مساحات عمل مفتوحة مع مناطق اجتماعات خاصة، ودمجنا أثاثاً مخصصاً وأنظمة إضاءة ذكية. تم إكمال المشروع في 8 أسابيع.</p>
-                <p><strong>النتائج:</strong> زيادة إنتاجية الموظفين بنسبة 35%， تحسين التواصل بين الفرق، وتوفير تكاليف الطاقة بنسبة 25%.</p>
+            <div class="projects-grid">
+                <div class="project-card" onclick="showProjectDetails(1)">
+                    <div class="project-header">
+                        <div class="project-icon">🤖</div>
+                        <span class="project-industry">البرمجيات والتجارة الإلكترونية</span>
+                    </div>
+                    <h3>وكيل دعم العملاء الذكي</h3>
+                    <p>وكيل خدمة عملاء مدعوم بالذكاء الاصطناعي يتعامل مع جميع استفسارات المتجر على مدار الساعة، مما يقلل وقت الاستجابة بنسبة 85٪.</p>
+                    <div class="project-metric">
+                        <span>📈</span>
+                        <span>استجابة أسرع بنسبة 85٪</span>
+                    </div>
+                    <div class="project-addons">
+                        <strong style="font-size: 0.85rem; color: var(--text-light); width: 100%;">إضافات مخصصة:</strong>
+                        <span class="addon-badge">ردود تلقائية</span>
+                        <span class="addon-badge">تتبع الطلبات</span>
+                        <span class="addon-badge">تحليل المشاعر</span>
+                        <span class="addon-badge">+2 المزيد</span>
+                    </div>
+                    <div class="project-cta">عرض المشروع كاملاً →</div>
+                </div>
+                
+                <div class="project-card" onclick="showProjectDetails(2)">
+                    <div class="project-header">
+                        <div class="project-icon">🎙️</div>
+                        <span class="project-industry">الخدمات التجارية</span>
+                    </div>
+                    <h3>تعرّف على دانا: مساعدتك الصوتية الذكية</h3>
+                    <p>دانا هي وكيل ذكاء اصطناعي صوتي يتعامل مع الاستفسارات، يؤهل العملاء المحتملين، ويحجز المواعيد تلقائياً—توفير أكثر من 20 ساعة أسبوعياً.</p>
+                    <div class="project-metric">
+                        <span>📈</span>
+                        <span>توفير أكثر من 20 ساعة أسبوعياً</span>
+                    </div>
+                    <div class="project-addons">
+                        <strong style="font-size: 0.85rem; color: var(--text-light); width: 100%;">إضافات مخصصة:</strong>
+                        <span class="addon-badge">تذكيرات المواعيد</span>
+                        <span class="addon-badge">تصنيف العملاء</span>
+                        <span class="addon-badge">عروض أسعار مخصصة</span>
+                        <span class="addon-badge">+3 المزيد</span>
+                    </div>
+                    <div class="project-cta">عرض المشروع كاملاً →</div>
+                </div>
+                
+                <div class="project-card" onclick="showProjectDetails(3)">
+                    <div class="project-header">
+                        <div class="project-icon">📄</div>
+                        <span class="project-industry">المالية والمحاسبة</span>
+                    </div>
+                    <h3>نظام معالجة الفواتير بالذكاء الاصطناعي</h3>
+                    <p>نظام آلي لاستخراج وإدارة بيانات الفواتير يعالج الفواتير بشكل أسرع بنسبة 95٪ بدقة 99٪، مما يلغي إدخال البيانات اليدوية.</p>
+                    <div class="project-metric">
+                        <span>📈</span>
+                        <span>معالجة أسرع بنسبة 95٪</span>
+                    </div>
+                    <div class="project-addons">
+                        <strong style="font-size: 0.85rem; color: var(--text-light); width: 100%;">إضافات مخصصة:</strong>
+                        <span class="addon-badge">لوحة تحليلات</span>
+                        <span class="addon-badge">تقارير أسبوعية</span>
+                        <span class="addon-badge">تنبيهات التكرار</span>
+                        <span class="addon-badge">+3 المزيد</span>
+                    </div>
+                    <div class="project-cta">عرض المشروع كاملاً →</div>
+                </div>
             </div>
         </div>
     </section>
@@ -664,7 +1008,171 @@
         </div>
     </section>
 
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" id="modalClose">×</button>
+                <h3 id="modalTitle"></h3>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
     <script>
+        // Projects data
+        const projects = [
+            {
+                id: 1,
+                industry: 'البرمجيات والتجارة الإلكترونية',
+                icon: '🤖',
+                title: 'وكيل دعم العملاء الذكي',
+                client: 'شركة ناشئة سعودية (متجر سلة)',
+                brief: 'وكيل خدمة عملاء مدعوم بالذكاء الاصطناعي يتعامل مع جميع استفسارات المتجر على مدار الساعة، مما يقلل وقت الاستجابة بنسبة 85٪.',
+                challenge: 'دعم العملاء اليدوي لم يستطع مواكبة نمو الأعمال، مما أدى إلى تأخر في الردود وضياع فرص المبيعات.',
+                solution: 'بناء وكيل واتساب ذكي متكامل مع متجر سلة وقاعدة معرفة مخصصة، مع نظام مصادقة كامل وأتمتة التسويق.',
+                coreFeatures: [
+                    'تسجيل دخول/اشتراك آمن مع صلاحيات',
+                    'تكامل واتساب عبر رمز QR',
+                    'التحكم في تشغيل/إيقاف البوت فوراً',
+                    'إدارة قاعدة المعرفة الديناميكية',
+                    'رسائل جماعية للحملات التسويقية',
+                    'لوحة تحليلات مع مقاييس الرسائل'
+                ],
+                addons: [
+                    'ردود تلقائية للأسئلة الشائعة',
+                    'تكامل تتبع الطلبات',
+                    'دعم متعدد اللغات',
+                    'تحليل المشاعر',
+                    'تقارير مخصصة'
+                ],
+                results: ['استجابة أسرع بنسبة 85٪', 'متاح 24/7', 'تقليل تكاليف الدعم بنسبة 60٪', 'زيادة رضا العملاء بنسبة 40٪'],
+                tech: ['WhatsApp API', 'Salla API', 'OpenAI', 'n8n', 'نظام المصادقة']
+            },
+            {
+                id: 2,
+                industry: 'الخدمات التجارية',
+                icon: '🎙️',
+                title: 'تعرّف على دانا: مساعدتك الصوتية الذكية',
+                client: 'شركة استشارية أردنية',
+                brief: 'دانا هي وكيل ذكاء اصطناعي صوتي يتعامل مع الاستفسارات، يؤهل العملاء المحتملين، ويحجز المواعيد تلقائياً—توفير أكثر من 20 ساعة أسبوعياً.',
+                challenge: 'فريق المبيعات مثقل بمكالمات التأهيل وجدولة المواعيد، مع فقدان عملاء محتملين خارج أوقات العمل.',
+                solution: 'تطوير دانا، وكيل ذكاء اصطناعي صوتي بقدرات محادثة طبيعية، التقاط العملاء المحتملين، وحجز المواعيد التلقائي المتكامل مع تقويم جوجل.',
+                coreFeatures: [
+                    'محادثات صوتية طبيعية بالعربية والإنجليزية',
+                    'معالجة ذكية للاستفسارات مع إدراك السياق',
+                    'التقاط معلومات العملاء (الاسم، الرقم، البريد)',
+                    'مزامنة تلقائية مع جداول جوجل CRM',
+                    'فحص توفر التقويم في الوقت الفعلي',
+                    'حجز استشارة 30 دقيقة مع التأكيد'
+                ],
+                addons: [
+                    'تذكيرات المواعيد التلقائية (SMS/واتساب)',
+                    'تصنيف وترتيب أولويات العملاء المحتملين',
+                    'إنشاء عروض أسعار مخصصة',
+                    'سلاسل متابعة البريد الإلكتروني',
+                    'تكامل CRM الكامل',
+                    'تسجيل المكالمات ونسخها'
+                ],
+                results: ['توفير أكثر من 20 ساعة أسبوعياً', 'معدل التقاط 95٪ للعملاء', '3 أضعاف المواعيد المؤهلة', 'صفر فرص ضائعة'],
+                tech: ['Voice AI', 'NLP', 'Google Calendar API', 'Google Sheets', 'WhatsApp', 'تكامل CRM']
+            },
+            {
+                id: 3,
+                industry: 'المالية والمحاسبة',
+                icon: '📄',
+                title: 'نظام معالجة الفواتير بالذكاء الاصطناعي',
+                client: 'أعمال تجزئة متعددة المواقع',
+                brief: 'نظام آلي لاستخراج وإدارة بيانات الفواتير يعالج الفواتير بشكل أسرع بنسبة 95٪ بدقة 99٪، مما يلغي إدخال البيانات اليدوية.',
+                challenge: 'معالجة مئات الفواتير شهرياً تتطلب إدخال بيانات يدوي، مما يؤدي إلى أخطاء وتأخيرات وصعوبة في إعداد التقارير المالية.',
+                solution: 'بناء وكيل ذكاء اصطناعي يقرأ صور الفواتير، يستخرج جميع البيانات الرئيسية، وينظمها في قاعدة بيانات علائقية لتقارير وتحليلات فورية.',
+                coreFeatures: [
+                    'تقنية التعرف على الصور بالذكاء الاصطناعي و OCR',
+                    'استخراج ذكي للبيانات (المورد، المبالغ، الضرائب، التواريخ)',
+                    'التصنيف والتحقق التلقائي',
+                    'قاعدة بيانات علائقية مع جداول الفواتير والبنود',
+                    'بحث وتصفية متقدمة',
+                    'تصدير إلى Excel أو PDF أو برامج المحاسبة'
+                ],
+                addons: [
+                    'لوحة تحليلات مخصصة',
+                    'تقارير نفقات أسبوعية تلقائية',
+                    'تنبيهات اكتشاف التكرار',
+                    'إشعارات حد الميزانية',
+                    'تتبع أداء الموردين',
+                    'تقارير الامتثال الضريبي'
+                ],
+                results: ['معالجة أسرع بنسبة 95٪', 'دقة 99٪', 'توفير أكثر من 30 ساعة شهرياً', 'توفير €15K سنوياً'],
+                tech: ['Computer Vision', 'OCR', 'OpenAI', 'PostgreSQL', 'n8n', 'لوحة مخصصة']
+            }
+        ];
+
+        // Modal functions
+        function openModal(title, content, icon) {
+            const modal = document.getElementById('modal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            modalTitle.innerHTML = icon ? `<span>${icon}</span> ${title}` : title;
+            modalBody.innerHTML = content;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            trackEvent('project_modal_open', {
+                'project_title': title,
+                'project_id': icon
+            });
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function showProjectDetails(id) {
+            const proj = projects.find(p => p.id === id);
+            if (!proj) return;
+            
+            const challengeLabel = 'التحدي';
+            const solutionLabel = 'الحل';
+            const featuresLabel = 'الميزات الأساسية';
+            const addonsLabel = 'إضافات مخصصة';
+            const resultsLabel = 'النتائج';
+            const techLabel = 'التقنيات المستخدمة';
+            
+            const content = `
+                <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6;">${proj.brief}</p>
+                
+                <h4>${challengeLabel}</h4>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6;">${proj.challenge}</p>
+                
+                <h4>${solutionLabel}</h4>
+                <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6;">${proj.solution}</p>
+                
+                <h4>${featuresLabel}</h4>
+                <ul>${proj.coreFeatures.map(f => `<li>${f}</li>`).join('')}</ul>
+                
+                <h4>${addonsLabel}</h4>
+                <ul>${proj.addons.map(a => `<li>${a}</li>`).join('')}</ul>
+                
+                <h4>${resultsLabel}</h4>
+                <ul>${proj.results.map(r => `<li>${r}</li>`).join('')}</ul>
+                
+                <h4>${techLabel}</h4>
+                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem;">
+                    ${proj.tech.map(t => `<span style="padding: 0.35rem 0.75rem; background: rgba(20, 184, 166, 0.1); border-radius: 0.5rem; font-size: 0.85rem; color: var(--primary); font-weight: 500;">${t}</span>`).join('')}
+                </div>
+            `;
+            openModal(proj.title, content, proj.icon);
+        }
+
+        // Modal event listeners
+        document.getElementById('modalClose').addEventListener('click', closeModal);
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
         // Back to top button functionality
         const backToTopBtn = document.getElementById('backToTop');
         let backToTopShown = false;
