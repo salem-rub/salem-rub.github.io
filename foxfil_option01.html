@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoxFil | Precision Filtration Solutions</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React & ReactDOM CDNs -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel CDN for JSX Parsing -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @keyframes spin-slow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin-slow {
+            animation: spin-slow 8s linear infinite;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1.1); }
+            50% { transform: scale(1.15); }
+        }
+        .animate-pulse-slow {
+            animation: pulse-slow 15s ease-in-out infinite;
+        }
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-[#0f1115] text-gray-100 selection:bg-orange-500 selection:text-white">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Simple Icon component to use Lucide names
+        const Icon = ({ name, className }) => {
+            useEffect(() => {
+                if (window.lucide) {
+                    window.lucide.createIcons();
+                }
+            }, [name]);
+            return <i data-lucide={name} className={className}></i>;
+        };
+
+        const App = () => {
+            const [isMenuOpen, setIsMenuOpen] = useState(false);
+            const [activeCategory, setActiveCategory] = useState('All');
+            const [scrolled, setScrolled] = useState(false);
+
+            useEffect(() => {
+                const handleScroll = () => {
+                    setScrolled(window.scrollY > 50);
+                };
+                window.addEventListener('scroll', handleScroll);
+                if (window.lucide) window.lucide.createIcons();
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+
+            const categories = [
+                { id: 'all', name: 'All Filters' },
+                { id: 'oil', name: 'Oil Filters', icon: 'droplets' },
+                { id: 'air', name: 'Air Filters', icon: 'wind' },
+                { id: 'fuel', name: 'Fuel Filters', icon: 'settings' },
+                { id: 'cabin', name: 'Cabin Filters', icon: 'shield-check' }
+            ];
+
+            const products = [
+                {
+                    id: 1,
+                    category: 'oil',
+                    name: 'FX-900 Ultra Spin-On',
+                    desc: 'High-efficiency oil filtration for heavy-duty engines.',
+                    specs: '99% efficiency at 20 microns',
+                    image: 'https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&q=80&w=800'
+                },
+                {
+                    id: 2,
+                    category: 'air',
+                    name: 'AeroMax Pro-Clean',
+                    desc: 'Advanced synthetic media for maximum airflow and protection.',
+                    specs: 'Low pressure drop, high dust capacity',
+                    image: 'https://images.unsplash.com/photo-1597843796381-12506e330584?auto=format&fit=crop&q=80&w=800'
+                },
+                {
+                    id: 3,
+                    category: 'fuel',
+                    name: 'DieselGuard G-Series',
+                    desc: 'Water-separating fuel filtration for modern common-rail systems.',
+                    specs: 'Micro-pore water separation technology',
+                    image: 'https://images.unsplash.com/photo-1619641782842-833be2dede91?auto=format&fit=crop&q=80&w=800'
+                },
+                {
+                    id: 4,
+                    category: 'cabin',
+                    name: 'PureFlow Bio-Active',
+                    desc: 'Activated carbon cabin filter with anti-allergen coating.',
+                    specs: 'Filters particles down to 0.3 microns',
+                    image: 'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&q=80&w=800'
+                }
+            ];
+
+            const filteredProducts = activeCategory === 'All' 
+                ? products 
+                : products.filter(p => p.category === activeCategory.toLowerCase().split(' ')[0]);
+
+            const stats = [
+                { label: 'Markets Served', value: '45+' },
+                { label: 'Annual Capacity', value: '12M+' },
+                { label: 'SKUs Produced', value: '3,200+' },
+                { label: 'Years Experience', value: '25' }
+            ];
+
+            return (
+                <div className="min-h-screen">
+                    {/* Navigation */}
+                    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-[#0f1115]/95 backdrop-blur-md py-4 shadow-2xl' : 'bg-transparent py-6'}`}>
+                        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+                            <div className="flex items-center gap-2">
+                                <div className="bg-orange-500 p-1 rounded-sm flex items-center justify-center">
+                                    <Icon name="settings" className="text-white w-6 h-6 animate-spin-slow" />
+                                </div>
+                                <span className="text-2xl font-black tracking-tighter uppercase">Fox<span className="text-orange-500">Fil</span></span>
+                            </div>
+
+                            {/* Desktop Nav */}
+                            <div className="hidden md:flex items-center space-x-10 text-xs font-bold tracking-widest uppercase">
+                                <a href="#home" className="hover:text-orange-500 transition-colors">Home</a>
+                                <a href="#products" className="hover:text-orange-500 transition-colors">Products</a>
+                                <a href="#about" className="hover:text-orange-500 transition-colors">Quality</a>
+                                <a href="#contact" className="hover:text-orange-500 transition-colors">Contact</a>
+                                <a href="#contact" className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-sm transition-all transform hover:-translate-y-1">
+                                    Request Quote
+                                </a>
+                            </div>
+
+                            {/* Mobile Menu Button */}
+                            <button className="md:hidden text-white" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                                <Icon name={isMenuOpen ? "x" : "menu"} className="w-6 h-6" />
+                            </button>
+                        </div>
+
+                        {/* Mobile Navigation Dropdown */}
+                        {isMenuOpen && (
+                            <div className="md:hidden bg-[#1a1d23] border-t border-gray-800 p-6 absolute w-full transition-all">
+                                <div className="flex flex-col space-y-4 text-sm font-bold tracking-widest uppercase">
+                                    <a href="#home" onClick={() => setIsMenuOpen(false)}>Home</a>
+                                    <a href="#products" onClick={() => setIsMenuOpen(false)}>Products</a>
+                                    <a href="#about" onClick={() => setIsMenuOpen(false)}>Quality</a>
+                                    <a href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
+                                </div>
+                            </div>
+                        )}
+                    </nav>
+
+                    {/* Hero Section */}
+                    <section id="home" className="relative h-screen flex items-center overflow-hidden">
+                        <div className="absolute inset-0 z-0">
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#0f1115] via-[#0f1115]/80 to-transparent z-10" />
+                            <img 
+                                src="https://images.unsplash.com/photo-1502404642581-79309265f0e1?auto=format&fit=crop&q=80&w=1920" 
+                                className="w-full h-full object-cover grayscale opacity-40 scale-110 animate-pulse-slow"
+                                alt="Manufacturing background"
+                            />
+                        </div>
+
+                        <div className="relative z-20 max-w-7xl mx-auto px-6 w-full">
+                            <div className="max-w-3xl">
+                                <div className="flex items-center gap-3 mb-6">
+                                    <div className="h-[1px] w-12 bg-orange-500" />
+                                    <span className="text-orange-500 text-xs font-black uppercase tracking-[0.3em]">Precision Manufacturing</span>
+                                </div>
+                                <h1 className="text-5xl md:text-8xl font-black leading-none mb-8 tracking-tight">
+                                    ENGINEERED TO <br />
+                                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500">OUTPERFORM.</span>
+                                </h1>
+                                <p className="text-lg md:text-xl text-gray-400 mb-10 max-w-xl leading-relaxed">
+                                    Global leaders in high-performance automotive filtration. Providing OEM-standard air, oil, fuel, and cabin filters for the world's most demanding fleets and distributors.
+                                </p>
+                                <div className="flex flex-wrap gap-4">
+                                    <a href="#products" className="bg-orange-600 hover:bg-orange-700 text-white px-10 py-5 font-black text-sm uppercase tracking-widest rounded-sm flex items-center gap-2 transition-all">
+                                        Explore Catalog <Icon name="chevron-right" className="w-4 h-4" />
+                                    </a>
+                                    <a href="#contact" className="border border-white/20 hover:border-orange-500 hover:text-orange-500 px-10 py-5 font-black text-sm uppercase tracking-widest rounded-sm transition-all">
+                                        Global Partnerships
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Stats Bar */}
+                    <section className="bg-white text-[#0f1115] py-12">
+                        <div className="max-w-7xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+                            {stats.map((stat, idx) => (
+                                <div key={idx} className="text-center md:text-left">
+                                    <div className="text-4xl font-black mb-1">{stat.value}</div>
+                                    <div className="text-xs font-bold uppercase tracking-widest text-gray-500">{stat.label}</div>
+                                </div>
+                            ))}
+                        </div>
+                    </section>
+
+                    {/* Product Categories */}
+                    <section id="products" className="py-24 bg-[#14161a]">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
+                                <div>
+                                    <h2 className="text-4xl font-black mb-4">PRODUCT RANGE</h2>
+                                    <p className="text-gray-400 max-w-md">Comprehensive filtration solutions engineered with advanced synthetic media for maximum engine longevity.</p>
+                                </div>
+                                
+                                <div className="flex flex-wrap gap-2">
+                                    {categories.map((cat) => (
+                                        <button
+                                            key={cat.id}
+                                            onClick={() => setActiveCategory(cat.name)}
+                                            className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest rounded-full transition-all flex items-center gap-2 border ${
+                                                activeCategory === cat.name 
+                                                ? 'bg-orange-600 border-orange-600 text-white' 
+                                                : 'border-white/10 hover:border-white/30 text-gray-400'
+                                            }`}
+                                        >
+                                            {cat.icon && <Icon name={cat.icon} className="w-3 h-3" />}
+                                            {cat.name}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                                {filteredProducts.map((product) => (
+                                    <div key={product.id} className="group relative bg-[#0f1115] rounded-sm overflow-hidden border border-white/5 hover:border-orange-500/50 transition-all">
+                                        <div className="aspect-square overflow-hidden relative">
+                                            <img 
+                                                src={product.image} 
+                                                alt={product.name}
+                                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
+                                            />
+                                            <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors" />
+                                            <div className="absolute top-4 right-4 bg-orange-600 text-[10px] font-black px-2 py-1 uppercase rounded-sm">
+                                                {product.category}
+                                            </div>
+                                        </div>
+                                        <div className="p-6">
+                                            <h3 className="text-xl font-bold mb-2 group-hover:text-orange-500 transition-colors">{product.name}</h3>
+                                            <p className="text-sm text-gray-500 mb-4">{product.desc}</p>
+                                            <div className="pt-4 border-t border-white/5 flex flex-col gap-1">
+                                                <span className="text-[10px] uppercase font-bold text-gray-600">Technical Spec</span>
+                                                <span className="text-xs font-mono text-gray-300">{product.specs}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            
+                            <div className="mt-16 text-center">
+                                <button className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] border-b border-orange-600 pb-1 hover:text-orange-500 transition-colors">
+                                    Download Full 2026 Catalog <Icon name="bar-chart-3" className="w-4 h-4" />
+                                </button>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* About Section */}
+                    <section id="about" className="py-24 relative overflow-hidden">
+                        <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                            <div className="relative">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=800" 
+                                    className="rounded-sm grayscale border border-white/10 relative z-10"
+                                    alt="Quality control"
+                                />
+                                <div className="absolute -bottom-6 -right-6 bg-orange-600 p-8 z-20 hidden md:block">
+                                    <Icon name="award" className="w-12 h-12 text-white mb-2" />
+                                    <div className="text-sm font-black uppercase tracking-widest text-white leading-tight">ISO 9001:2015 <br/> CERTIFIED</div>
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <span className="text-orange-500 text-xs font-black uppercase tracking-widest mb-4 block">Manufacturing Excellence</span>
+                                <h2 className="text-4xl md:text-5xl font-black mb-8 leading-tight">BUILT FOR THE MOST <br/> DEMANDING CONDITIONS.</h2>
+                                
+                                <div className="space-y-8">
+                                    <div className="flex gap-6">
+                                        <div className="flex-shrink-0 w-12 h-12 bg-[#1a1d23] flex items-center justify-center rounded-sm border border-white/5">
+                                            <Icon name="factory" className="text-orange-500 w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold mb-1">State-of-the-Art Production</h4>
+                                            <p className="text-sm text-gray-400">Our automated assembly lines utilize robotic precision to ensure zero-defect output across millions of units annually.</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex gap-6">
+                                        <div className="flex-shrink-0 w-12 h-12 bg-[#1a1d23] flex items-center justify-center rounded-sm border border-white/5">
+                                            <Icon name="globe" className="text-orange-500 w-6 h-6" />
+                                        </div>
+                                        <div>
+                                            <h4 className="font-bold mb-1">Global Logistics Network</h4>
+                                            <p className="text-sm text-gray-400">Strategically located hubs enable rapid delivery to distributors in Europe, Asia, and the Americas.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Contact Section */}
+                    <section id="contact" className="py-24 bg-white text-[#0f1115]">
+                        <div className="max-w-7xl mx-auto px-6">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                                <div>
+                                    <h2 className="text-4xl font-black mb-6 uppercase">Become a <span className="text-orange-600">Partner</span></h2>
+                                    <p className="text-gray-600 mb-10 text-lg">Interested in wholesale pricing or custom OEM manufacturing? Our team is ready to discuss your requirements.</p>
+                                    
+                                    <div className="space-y-6">
+                                        <div className="flex items-center gap-4">
+                                            <Icon name="mail" className="w-5 h-5 text-orange-600" />
+                                            <div>
+                                                <div className="text-[10px] font-bold uppercase text-gray-400">General Inquiries</div>
+                                                <div className="font-bold">contact@foxfil-auto.com</div>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-4">
+                                            <Icon name="phone" className="w-5 h-5 text-orange-600" />
+                                            <div>
+                                                <div className="text-[10px] font-bold uppercase text-gray-400">Sales Department</div>
+                                                <div className="font-bold">+44 (0) 20 7946 0123</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <form className="bg-gray-50 p-8 rounded-sm shadow-xl border border-gray-200" onSubmit={(e) => e.preventDefault()}>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                        <div>
+                                            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">Company Name</label>
+                                            <input type="text" className="w-full bg-white border border-gray-200 p-3 rounded-sm focus:outline-none focus:border-orange-500" placeholder="e.g. Global Parts Ltd" />
+                                        </div>
+                                        <div>
+                                            <label className="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">Interest Type</label>
+                                            <select className="w-full bg-white border border-gray-200 p-3 rounded-sm focus:outline-none focus:border-orange-500">
+                                                <option>Wholesale Distribution</option>
+                                                <option>Private Label (OEM)</option>
+                                                <option>Fleet Supply</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div className="mb-6">
+                                        <label className="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">Email Address</label>
+                                        <input type="email" className="w-full bg-white border border-gray-200 p-3 rounded-sm focus:outline-none focus:border-orange-500" placeholder="purchasing@company.com" />
+                                    </div>
+                                    <div className="mb-8">
+                                        <label className="block text-[10px] font-black uppercase tracking-widest text-gray-500 mb-2">Requirement Details</label>
+                                        <textarea rows="4" className="w-full bg-white border border-gray-200 p-3 rounded-sm focus:outline-none focus:border-orange-500" placeholder="Tell us about your estimated monthly volume..."></textarea>
+                                    </div>
+                                    <button className="w-full bg-[#0f1115] hover:bg-orange-600 text-white font-black py-4 uppercase tracking-[0.2em] transition-all rounded-sm shadow-lg hover:shadow-orange-500/20">
+                                        Submit Inquiry
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </section>
+
+                    {/* Footer */}
+                    <footer className="bg-[#0a0c0f] py-16 border-t border-white/5">
+                        <div className="max-w-7xl mx-auto px-6 text-center md:text-left">
+                            <div className="flex items-center justify-center md:justify-start gap-2 mb-6">
+                                <div className="bg-orange-500 p-1 rounded-sm">
+                                    <Icon name="settings" className="text-white w-5 h-5" />
+                                </div>
+                                <span className="text-xl font-black tracking-tighter uppercase">Fox<span className="text-orange-500">Fil</span></span>
+                            </div>
+                            <p className="text-gray-500 max-w-sm mb-6 mx-auto md:mx-0">Setting the global standard in filtration excellence since 2001.</p>
+                            <p className="text-gray-600 text-xs tracking-widest">© 2026 FOXFIL FILTRATION SOLUTIONS. ALL RIGHTS RESERVED.</p>
+                        </div>
+                    </footer>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
