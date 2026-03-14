@@ -1,0 +1,276 @@
+{
+  "name": "TechServJo Blog Publisher",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "publish-blog-post",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "id": "node_webhook",
+      "name": "Webhook: Receive Post Data",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [260, 300],
+      "webhookId": "techservjo-blog-publish"
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/post-template.html",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {
+          "response": {
+            "response": {
+              "fullResponse": false
+            }
+          }
+        }
+      },
+      "id": "node_get_template",
+      "name": "GitHub: Get Post Template",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [480, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "github_token_credential",
+          "name": "GitHub Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "// =============================================\n// STEP: Build the HTML post from the template\n// =============================================\nconst post = $('Webhook: Receive Post Data').first().json.body;\nconst templateBase64 = $input.first().json.content;\n\n// Decode the template\nlet html = Buffer.from(templateBase64, 'base64').toString('utf8');\n\n// --- Helper: Format date ---\nfunction formatDateAr(dateStr) {\n  const months = ['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];\n  const d = new Date(dateStr);\n  return `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`;\n}\nfunction formatDateEn(dateStr) {\n  const d = new Date(dateStr);\n  return d.toLocaleDateString('en-US', { year:'numeric', month:'long', day:'numeric' });\n}\n\n// --- Build tags HTML ---\nconst tags = Array.isArray(post.tags) ? post.tags : (post.tags || '').split(',').map(t => t.trim());\nconst tagsStr = tags.join(', ');\nconst tagsHtml = tags.map(tag => `<a href=\"/blog/?search=${encodeURIComponent(tag)}\">${tag}</a>`).join('\\n                ');\n\n// --- Slug: auto-generate if not provided ---\nconst slug = post.slug || post.title_en.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');\n\n// --- WhatsApp share text ---\nconst waText = encodeURIComponent(`${post.title_ar} - https://techservjo.com/blog/posts/${slug}.html`);\n\n// --- Replacements map ---\nconst replacements = {\n  SLUG: slug,\n  LANG: 'ar',\n  DIR: 'rtl',\n  TITLE_AR: post.title_ar || '',\n  TITLE_EN: post.title_en || '',\n  EXCERPT_AR: post.excerpt_ar || '',\n  EXCERPT_EN: post.excerpt_en || '',\n  CONTENT_AR: post.content_ar || '',\n  CONTENT_EN: post.content_en || '',\n  DATE: post.date || new Date().toISOString().split('T')[0],\n  DATE_FORMATTED_AR: formatDateAr(post.date),\n  DATE_FORMATTED_EN: formatDateEn(post.date),\n  IMAGE_URL: post.image_url || 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800',\n  AUTHOR: post.author || 'TechServJo Team',\n  CATEGORY: post.category || 'general',\n  CATEGORY_AR: post.category_ar || 'عام',\n  CATEGORY_EN: post.category_en || 'General',\n  READ_TIME_AR: String(post.read_time || 5),\n  READ_TIME_EN: String(post.read_time || 5),\n  TAGS: tagsStr,\n  TAGS_HTML: tagsHtml,\n  WHATSAPP_TEXT: waText\n};\n\n// Replace all placeholders\nfor (const [key, value] of Object.entries(replacements)) {\n  html = html.replaceAll(`{{${key}}}`, value);\n}\n\n// Base64 encode for GitHub API\nconst htmlBase64 = Buffer.from(html).toString('base64');\n\n// Build posts.json entry\nconst postEntry = {\n  slug,\n  title: { ar: post.title_ar, en: post.title_en },\n  excerpt: { ar: post.excerpt_ar, en: post.excerpt_en },\n  date: post.date || new Date().toISOString().split('T')[0],\n  author: post.author || 'TechServJo Team',\n  category: post.category || 'general',\n  tags: tags,\n  image: post.image_url || '',\n  lang: ['ar', 'en'],\n  readTime: { ar: post.read_time || 5, en: post.read_time || 5 }\n};\n\nreturn [{\n  json: {\n    slug,\n    htmlBase64,\n    postEntry,\n    commitMessage: `Add blog post: ${post.title_ar} | ${post.title_en}`\n  }\n}];"
+      },
+      "id": "node_process_template",
+      "name": "Code: Build HTML from Template",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [700, 300]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "=https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/{{ $json.slug }}.html",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "body": {
+          "mode": "json",
+          "jsonSchema": {},
+          "jsonBody": "={\n  \"message\": \"{{ $json.commitMessage }}\",\n  \"content\": \"{{ $json.htmlBase64 }}\",\n  \"branch\": \"main\"\n}"
+        },
+        "options": {}
+      },
+      "id": "node_create_post",
+      "name": "GitHub: Create Post HTML File",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [920, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "github_token_credential",
+          "name": "GitHub Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "GET",
+        "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "options": {}
+      },
+      "id": "node_get_posts_json",
+      "name": "GitHub: Get posts.json",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1140, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "github_token_credential",
+          "name": "GitHub Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "// =============================================\n// STEP: Prepend new post to posts.json index\n// =============================================\nconst postsJsonResponse = $input.first().json;\nconst sha = postsJsonResponse.sha;\n\n// Decode current posts.json\nconst currentContent = JSON.parse(\n  Buffer.from(postsJsonResponse.content, 'base64').toString('utf8')\n);\n\n// Get the new post entry from earlier step\nconst newPostEntry = $('Code: Build HTML from Template').first().json.postEntry;\n\n// Prepend new post to array (newest first)\ncurrentContent.posts.unshift(newPostEntry);\n\n// Re-encode\nconst updatedBase64 = Buffer.from(JSON.stringify(currentContent, null, 2)).toString('base64');\n\nreturn [{\n  json: {\n    sha,\n    updatedBase64,\n    slug: newPostEntry.slug\n  }\n}];"
+      },
+      "id": "node_update_posts_json",
+      "name": "Code: Prepend Post to posts.json",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1360, 300]
+    },
+    {
+      "parameters": {
+        "method": "PUT",
+        "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts.json",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "body": {
+          "mode": "json",
+          "jsonSchema": {},
+          "jsonBody": "={\n  \"message\": \"Update blog index: add {{ $json.slug }}\",\n  \"content\": \"{{ $json.updatedBase64 }}\",\n  \"sha\": \"{{ $json.sha }}\",\n  \"branch\": \"main\"\n}"
+        },
+        "options": {}
+      },
+      "id": "node_save_posts_json",
+      "name": "GitHub: Update posts.json",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1580, 300],
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "github_token_credential",
+          "name": "GitHub Token"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "={\n  \"success\": true,\n  \"slug\": \"{{ $('Code: Build HTML from Template').first().json.slug }}\",\n  \"url\": \"https://techservjo.com/blog/posts/{{ $('Code: Build HTML from Template').first().json.slug }}.html\",\n  \"message\": \"Post published successfully! Live in ~2 minutes.\"\n}",
+        "options": {
+          "responseHeaders": {
+            "entries": [
+              {
+                "name": "Content-Type",
+                "value": "application/json"
+              }
+            ]
+          }
+        }
+      },
+      "id": "node_respond",
+      "name": "Respond: Success",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [1800, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "check_slug",
+              "leftValue": "={{ $json.body.slug || $json.body.title_en }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "notEmpty"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "node_validate",
+      "name": "Validate: Check Required Fields",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [260, 500]
+    },
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"success\": false,\n  \"error\": \"Missing required fields: title_en (or slug), title_ar, content_ar, content_en, date\"\n}",
+        "options": {
+          "responseCode": 400
+        }
+      },
+      "id": "node_error",
+      "name": "Respond: Error - Missing Fields",
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.1,
+      "position": [480, 500]
+    }
+  ],
+  "connections": {
+    "Webhook: Receive Post Data": {
+      "main": [
+        [
+          { "node": "Validate: Check Required Fields", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Validate: Check Required Fields": {
+      "main": [
+        [
+          { "node": "GitHub: Get Post Template", "type": "main", "index": 0 }
+        ],
+        [
+          { "node": "Respond: Error - Missing Fields", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "GitHub: Get Post Template": {
+      "main": [
+        [
+          { "node": "Code: Build HTML from Template", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code: Build HTML from Template": {
+      "main": [
+        [
+          { "node": "GitHub: Create Post HTML File", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "GitHub: Create Post HTML File": {
+      "main": [
+        [
+          { "node": "GitHub: Get posts.json", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "GitHub: Get posts.json": {
+      "main": [
+        [
+          { "node": "Code: Prepend Post to posts.json", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "Code: Prepend Post to posts.json": {
+      "main": [
+        [
+          { "node": "GitHub: Update posts.json", "type": "main", "index": 0 }
+        ]
+      ]
+    },
+    "GitHub: Update posts.json": {
+      "main": [
+        [
+          { "node": "Respond: Success", "type": "main", "index": 0 }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "callerPolicy": "any",
+    "errorWorkflow": ""
+  },
+  "staticData": null,
+  "tags": ["blog", "github", "techservjo"],
+  "triggerCount": 0,
+  "updatedAt": "2026-03-15T01:44:00.000Z",
+  "versionId": "1"
+}
