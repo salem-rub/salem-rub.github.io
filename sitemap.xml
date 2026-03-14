@@ -3,151 +3,189 @@
     <!-- Main Homepage -->
     <url>
         <loc>https://techservjo.com/</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
-    
+
+    <!-- Blog Index -->
+    <url>
+        <loc>https://techservjo.com/blog/</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <!-- Blog Posts -->
+    <url>
+        <loc>https://techservjo.com/blog/posts/ai-automation-jordan-business.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://techservjo.com/blog/posts/n8n-workflow-automation-guide.html</loc>
+        <lastmod>2026-03-10</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://techservjo.com/blog/posts/office-fitout-guide-jordan.html</loc>
+        <lastmod>2026-03-05</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
     <!-- Privacy Policy -->
     <url>
         <loc>https://techservjo.com/privacy.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.5</priority>
     </url>
-    
+
+    <!-- FAQ Page -->
+    <url>
+        <loc>https://techservjo.com/faq.html</loc>
+        <lastmod>2026-03-15</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.85</priority>
+    </url>
+
     <!-- AI Automation Agency -->
     <url>
         <loc>https://techservjo.com/ai_automation_agency.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
+
     <!-- AI Automation Brochure -->
     <url>
         <loc>https://techservjo.com/ai_automation_brochure.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <!-- AI Business Training -->
     <url>
         <loc>https://techservjo.com/ai_business_training.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <!-- Dcorize AI Chat -->
     <url>
         <loc>https://techservjo.com/Dcorize_AI_chat.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <!-- Dr Maher Yaghi -->
     <url>
         <loc>https://techservjo.com/dr_maher_yaghi.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <!-- Dr Rawan Clinic -->
     <url>
         <loc>https://techservjo.com/dr_rawan_clinic.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <!-- Dr Rawan -->
     <url>
         <loc>https://techservjo.com/drrawan.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <!-- N8N Course Salem -->
     <url>
         <loc>https://techservjo.com/n8n_course_salem.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <!-- N8N Course -->
     <url>
         <loc>https://techservjo.com/n8n_course.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <!-- Pharma Steel AI Training -->
     <url>
         <loc>https://techservjo.com/Pharma_Steel_AI_Training.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <!-- SEC Voice Agent -->
     <url>
         <loc>https://techservjo.com/sec_voice_agent.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <!-- SEC Widget -->
     <url>
         <loc>https://techservjo.com/sec_widget.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.7</priority>
     </url>
-    
+
     <!-- Voice Agent Demo -->
     <url>
         <loc>https://techservjo.com/voice_agent_demo.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
-    
+
     <!-- Services: Fit-out Renovation -->
     <url>
-        <loc>https://techservjo.com/services/fit-out-renovation.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <loc>https://techservjo.com/services/decoration-and-renovation/</loc>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
+
     <!-- Services: AI Automation -->
     <url>
-        <loc>https://techservjo.com/services/ai-automation.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <loc>https://techservjo.com/services/ai-automation/</loc>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
+
     <!-- Services: Voice Agents -->
     <url>
         <loc>https://techservjo.com/services/voice-agents.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
-    
+
     <!-- Services: Workflow Automation -->
     <url>
         <loc>https://techservjo.com/services/workflow-automation.html</loc>
-        <lastmod>2025-12-26</lastmod>
+        <lastmod>2026-03-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>

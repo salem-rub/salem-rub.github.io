@@ -1,0 +1,64 @@
+{
+  "posts": [
+    {
+      "slug": "ai-automation-jordan-business",
+      "title": {
+        "ar": "كيف يمكن للذكاء الاصطناعي تحويل أعمالك في الأردن",
+        "en": "How AI Can Transform Your Business in Jordan"
+      },
+      "excerpt": {
+        "ar": "تعرف على كيفية استخدام أتمتة الذكاء الاصطناعي لتحسين الكفاءة التشغيلية وتوفير الوقت والموارد للشركات الأردنية.",
+        "en": "Learn how AI automation can improve operational efficiency and save time and resources for Jordanian businesses."
+      },
+      "date": "2026-03-15",
+      "author": "TechServJo Team",
+      "category": "ai-automation",
+      "tags": ["AI", "Automation", "Jordan", "Business", "n8n"],
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
+      "lang": ["ar", "en"],
+      "readTime": { "ar": 5, "en": 5 }
+    },
+    {
+      "slug": "n8n-workflow-automation-guide",
+      "title": {
+        "ar": "دليل شامل لأتمتة سير العمل باستخدام n8n",
+        "en": "Complete Guide to Workflow Automation with n8n"
+      },
+      "excerpt": {
+        "ar": "اكتشف كيف تستخدم منصة n8n لأتمتة عمليات عملك وربط التطبيقات المختلفة بدون خبرة برمجية عميقة.",
+        "en": "Discover how to use n8n to automate business operations and connect different applications without deep programming experience."
+      },
+      "date": "2026-03-10",
+      "author": "TechServJo Team",
+      "category": "workflow-automation",
+      "tags": ["n8n", "Workflow", "Automation", "No-Code"],
+      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
+      "lang": ["ar", "en"],
+      "readTime": { "ar": 7, "en": 7 }
+    },
+    {
+      "slug": "office-fitout-guide-jordan",
+      "title": {
+        "ar": "تشطيب المكاتب في الأردن: دليلك الشامل لمساحة عمل منتجة",
+        "en": "Office Fit-out in Jordan: Your Complete Guide to a Productive Workspace"
+      },
+      "excerpt": {
+        "ar": "تعلم أسرار تصميم مساحات العمل المنتجة وإدارة مشاريع التشطيب بنجاح مع نصائح خبراء TechServJo.",
+        "en": "Learn the secrets of designing productive workspaces and managing fit-out projects successfully with TechServJo expert tips."
+      },
+      "date": "2026-03-05",
+      "author": "TechServJo Team",
+      "category": "fit-out",
+      "tags": ["Fit-out", "Office Design", "Jordan", "Renovation"],
+      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
+      "lang": ["ar", "en"],
+      "readTime": { "ar": 6, "en": 6 }
+    }
+  ],
+  "categories": [
+    { "slug": "ai-automation", "name": { "ar": "أتمتة الذكاء الاصطناعي", "en": "AI Automation" } },
+    { "slug": "workflow-automation", "name": { "ar": "أتمتة سير العمل", "en": "Workflow Automation" } },
+    { "slug": "fit-out", "name": { "ar": "التشطيب والتجديد", "en": "Fit-out & Renovation" } },
+    { "slug": "digital-transformation", "name": { "ar": "التحول الرقمي", "en": "Digital Transformation" } }
+  ]
+}

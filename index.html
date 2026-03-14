@@ -60,14 +60,41 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
     <!-- Schema.org Structured Data -->
+
+    <!-- WebSite Schema: enables Google Sitelinks Search Box -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "TechServJo",
+        "url": "https://techservjo.com",
+        "description": "Leading engineering solutions provider in Jordan. Expert fit-out, renovation, AI automation, and digital transformation services.",
+        "inLanguage": ["ar", "en"],
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://techservjo.com/blog/?search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Organization Schema (fixed PostalAddress type) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Organization",
         "name": "TechServJo",
+        "alternateName": "تك سيرف جو",
         "url": "https://techservjo.com",
-        "logo": "https://techservjo.com/logo.png",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://techservjo.com/favicon-32x32.png",
+            "width": 32,
+            "height": 32
+        },
         "description": "Leading engineering solutions provider in Jordan specializing in fit-out, renovation, AI automation, and digital transformation services.",
+        "foundingDate": "2017",
+        "numberOfEmployees": { "@type": "QuantitativeValue", "value": 10 },
         "sameAs": [
             "https://www.linkedin.com/company/techservjo"
         ],
@@ -79,7 +106,8 @@
             "availableLanguage": ["Arabic", "English"]
         },
         "address": {
-            "@type": "Amman, Jordan",
+            "@type": "PostalAddress",
+            "addressLocality": "Amman",
             "addressCountry": "JO",
             "addressRegion": "Amman"
         },
@@ -90,16 +118,20 @@
         }
     }
     </script>
-    
+
+    <!-- LocalBusiness Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
         "name": "TechServJo",
-        "image": "https://techservjo.com/logo.png",
+        "image": "https://techservjo.com/og-image.jpg",
         "priceRange": "$$",
+        "telephone": "+962-797970257",
+        "url": "https://techservjo.com",
         "address": {
             "@type": "PostalAddress",
+            "addressLocality": "Amman",
             "addressCountry": "JO",
             "addressRegion": "Amman"
         },
@@ -110,80 +142,167 @@
         },
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Sunday"
-            ],
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Sunday"],
             "opens": "09:00",
             "closes": "18:00"
+        },
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "TechServJo Services",
+            "itemListElement": [
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fit-out and Renovation" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "AI Automation" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Voice Agents" } },
+                { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Workflow Automation" } }
+            ]
         }
     }
     </script>
-    
+
+    <!-- Fit-out Service Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Service",
         "name": "Fit-out and Renovation Services",
-        "provider": {
-            "@type": "Organization",
-            "name": "TechServJo"
-        },
-        "description": "Professional fit-out and renovation management with precise budget and timeline control for offices, clinics, and commercial spaces.",
-        "areaServed": {
-            "@type": "Country",
-            "name": "Jordan"
-        }
+        "provider": { "@type": "Organization", "name": "TechServJo" },
+        "description": "Professional fit-out and renovation management with precise budget and timeline control for offices, clinics, and commercial spaces in Jordan.",
+        "serviceType": "Construction and Renovation",
+        "areaServed": { "@type": "Country", "name": "Jordan" },
+        "url": "https://techservjo.com/services/decoration-and-renovation/"
     }
     </script>
-    
+
+    <!-- AI Automation Service Schema -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "Service",
         "name": "AI Automation and Workflow Services",
-        "provider": {
-            "@type": "Organization",
-            "name": "TechServJo"
-        },
-        "description": "Custom AI agents, voice agents, workflow automation using n8n, CRM integration, and digital transformation solutions.",
-        "areaServed": {
-            "@type": "Country",
-            "name": "Jordan"
-        }
+        "provider": { "@type": "Organization", "name": "TechServJo" },
+        "description": "Custom AI agents, voice agents, workflow automation using n8n, CRM integration, and digital transformation solutions for businesses in Jordan.",
+        "serviceType": "Technology and Automation",
+        "areaServed": { "@type": "Country", "name": "Jordan" },
+        "url": "https://techservjo.com/services/ai-automation/"
     }
     </script>
-    
+
+    <!-- HowTo Schema: How to automate your business workflow with AI (AEO) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "How to Automate Your Business Workflow with AI",
+        "description": "A step-by-step guide to implementing AI workflow automation for your business with TechServJo.",
+        "estimatedCost": { "@type": "MonetaryAmount", "currency": "JOD", "value": "500" },
+        "totalTime": "P14D",
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "Free Consultation",
+                "text": "Book a free consultation with TechServJo to assess your current workflows and identify automation opportunities.",
+                "position": 1
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Process Mapping",
+                "text": "Our engineers map your existing business processes and identify which tasks can be automated using AI and n8n workflows.",
+                "position": 2
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Custom AI Solution Design",
+                "text": "We design a custom AI automation solution including AI agents, voice agents, and workflow integrations tailored to your business.",
+                "position": 3
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Implementation and Testing",
+                "text": "TechServJo implements and tests all automations, integrates with your existing CRM and tools, ensuring reliability.",
+                "position": 4
+            },
+            {
+                "@type": "HowToStep",
+                "name": "Training and Handover",
+                "text": "Your team receives full training on the new AI systems. We provide ongoing support and optimization.",
+                "position": 5
+            }
+        ]
+    }
+    </script>
+
+    <!-- Expanded FAQPage Schema (AEO-optimized for featured snippets and AI answers) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "FAQPage",
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": [".faq-answer", "h1", "h2"]
+        },
         "mainEntity": [
             {
                 "@type": "Question",
                 "name": "What services does TechServJo provide?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "TechServJo provides comprehensive engineering solutions including fit-out, decoration and renovation for offices and clinics, AI automation with custom AI agents and voice agents, workflow automation using n8n, CRM integration, and digital transformation services."
+                    "text": "TechServJo provides two core service categories: (1) Physical Infrastructure — including professional fit-out, decoration, and renovation for offices, clinics, and commercial spaces in Amman and across Jordan. (2) Digital Infrastructure — including custom AI automation agents, voice agents, n8n workflow automation, CRM integration, and digital transformation consulting."
                 }
             },
             {
                 "@type": "Question",
-                "name": "How many years of experience does TechServJo have?",
+                "name": "How does TechServJo use AI automation for businesses?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "TechServJo has over 10 years of experience in engineering solutions and digital transformation, with more than 50 successful projects completed across various industries."
+                    "text": "TechServJo builds custom AI automation systems using tools like n8n, OpenAI, and voice agent platforms. We automate repetitive business tasks such as customer follow-ups, appointment booking, lead qualification, document processing, and CRM data entry. This helps businesses in Jordan save time, reduce errors, and scale faster without hiring more staff."
                 }
             },
             {
                 "@type": "Question",
-                "name": "Does TechServJo provide training services?",
+                "name": "What is n8n workflow automation and how does TechServJo use it?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Yes, TechServJo offers comprehensive training programs for employees on using AI in their daily work, including prompt engineering and practical applications with individual follow-up."
+                    "text": "n8n is an open-source workflow automation platform that connects different apps and services. TechServJo uses n8n to build powerful automation workflows for businesses: connecting WhatsApp, CRMs, ERPs, email systems, and AI models. Unlike off-the-shelf solutions, our custom n8n workflows are tailored specifically to each client's unique business processes."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does TechServJo serve businesses outside of Amman?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes. While TechServJo is based in Amman, Jordan, we serve clients across Jordan and can deliver AI automation and digital transformation services remotely to clients throughout the Middle East region."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much does office fit-out renovation cost in Jordan?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Office fit-out renovation costs in Jordan vary depending on size, materials, and complexity. TechServJo provides precise budget control and timeline management from the initial consultation. We work with clients across different budget ranges and provide transparent pricing. Contact us for a free consultation and quote tailored to your specific space and requirements."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What industries does TechServJo work with?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "TechServJo has completed over 50 successful projects across 10+ industries including: healthcare (clinics and hospitals), pharmaceutical companies, retail and commercial spaces, corporate offices, educational institutions, and technology companies. We bring an engineering mindset to every project, ensuring measurable ROI."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Does TechServJo provide AI training for employees?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Yes, TechServJo offers comprehensive AI training programs for business teams. Our training covers practical AI tools, prompt engineering, workflow automation basics, and how to integrate AI into daily operations. Training is available in Arabic and English with hands-on exercises and individual follow-up support."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I contact TechServJo to start a project?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "You can contact TechServJo by calling or messaging +962-797970257, or by booking a free consultation through our website at techservjo.com. Our team is available Sunday through Thursday from 9am to 6pm (Jordan time). We respond to all inquiries within 24 hours."
                 }
             }
         ]
@@ -1212,6 +1331,8 @@
                         </div>
                     </div>
                     <a href="#references" id="navReferences">شركاء النجاح</a>
+                    <a href="/blog/" id="navBlog">المدونة</a>
+                    <a href="/faq.html" id="navFaq">الأسئلة الشائعة</a>
                     <a href="#contact" id="navContact">تواصل</a>
                 </div>
                 <div class="controls">
@@ -1387,6 +1508,8 @@
                 navRenovation: 'التشطيب والتجديد',
                 navAI: 'الذكاء الاصطناعي والأتمتة',
                 navReferences: 'شركاء النجاح',
+                navBlog: 'المدونة',
+                navFaq: 'الأسئلة الشائعة',
                 navContact: 'تواصل',
                 themeLight: 'فاتح',
                 themeDark: 'داكن',
@@ -1533,6 +1656,8 @@
                 navRenovation: 'Fit-out & Renovation',
                 navAI: 'AI & Automation',
                 navReferences: 'Success Partners',
+                navBlog: 'Blog',
+                navFaq: 'FAQ',
                 navContact: 'Contact',
                 themeLight: 'Light',
                 themeDark: 'Dark',
@@ -1686,6 +1811,8 @@
             document.getElementById('navRenovation').textContent = t.navRenovation;
             document.getElementById('navAI').textContent = t.navAI;
             document.getElementById('navReferences').textContent = t.navReferences;
+            document.getElementById('navBlog').textContent = t.navBlog;
+            document.getElementById('navFaq').textContent = t.navFaq;
             document.getElementById('navContact').textContent = t.navContact;
             
             document.getElementById('labelPhysical').textContent = t.labelPhysical;
