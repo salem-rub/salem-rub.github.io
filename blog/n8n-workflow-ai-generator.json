@@ -1,0 +1,220 @@
+{
+  "name": "TechServJo — AI Blog Generator (Telegram)",
+  "nodes": [
+    {
+      "parameters": {
+        "updates": ["message"],
+        "additionalFields": {}
+      },
+      "id": "n_tg_trigger",
+      "name": "Telegram: Receive Idea",
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [0, 300],
+      "webhookId": "techservjo-tg-blog-idea",
+      "credentials": {
+        "telegramApi": { "id": "telegram_credential", "name": "Telegram Bot" }
+      }
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "// Extract the post idea and sender info from Telegram message\nconst msg = $json.message || $json.edited_message || {};\nconst text = msg.text || '';\nconst chatId = String(msg.chat?.id || '');\nconst username = msg.from?.first_name || msg.from?.username || 'عزيزي';\n\n// Strip bot commands like /blog /post /write\nconst idea = text.replace(/^\\/\\w+\\s*/,'').trim();\n\n// Reject empty messages\nif (!idea) {\n  return [{json:{ skip: true, chatId, username, idea:'' }}];\n}\n\nreturn [{json:{ idea, chatId, username, skip: false }}];"
+      },
+      "id": "n_extract_idea",
+      "name": "Code: Extract Idea & Sender",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [220, 300]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "conditions": [
+            {
+              "id": "c_skip",
+              "leftValue": "={{ $json.skip }}",
+              "rightValue": true,
+              "operator": { "type": "boolean", "operation": "notTrue" }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "n_check_empty",
+      "name": "IF: Has Idea?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.1,
+      "position": [440, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chatId }}",
+        "text": "=أرسل لي فكرة أو عنوانًا لمقالك، مثال:\n\n<i>أتمتة الفواتير باستخدام n8n</i>\n<i>تشطيب مكاتب عمَّان 2026</i>",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "n_tg_prompt",
+      "name": "Telegram: Ask for Idea",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [660, 480],
+      "credentials": {
+        "telegramApi": { "id": "telegram_credential", "name": "Telegram Bot" }
+      }
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chatId }}",
+        "text": "=⏳ <b>ممتاز {{ $json.username }}!</b>\n\nجاري توليد مقال احترافي عن:\n<i>\"{{ $json.idea }}\"</i>\n\n🤖 يعمل الذكاء الاصطناعي الآن...",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "n_tg_ack",
+      "name": "Telegram: Acknowledge — Generating",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [660, 300],
+      "credentials": {
+        "telegramApi": { "id": "telegram_credential", "name": "Telegram Bot" }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "text",
+        "operation": "message",
+        "modelId": { "__rl": true, "value": "gpt-4o", "mode": "list" },
+        "messages": {
+          "values": [
+            {
+              "role": "system",
+              "content": "You are a professional bilingual content writer for TechServJo — a company in Jordan offering AI automation, n8n workflow automation, voice agents, and office fit-out/renovation services. Your job is to write high-quality, SEO-optimized blog posts useful for businesses in Jordan and the MENA region.\n\nRules:\n- Write substantial, valuable content (min 400 words per language).\n- Arabic content should be in Modern Standard Arabic (فصحى), professional and clear.\n- Include practical examples, numbered lists, and actionable advice.\n- Content must be relevant to TechServJo's services: AI, automation, n8n, office design, digital transformation.\n- Return ONLY a valid JSON object. No markdown, no code blocks, no explanation outside the JSON.\n\nJSON schema to return:\n{\n  \"title_ar\": \"عنوان المقال بالعربي\",\n  \"title_en\": \"Post title in English\",\n  \"slug\": \"url-friendly-slug-in-english\",\n  \"excerpt_ar\": \"2-3 sentences summary in Arabic\",\n  \"excerpt_en\": \"2-3 sentences summary in English\",\n  \"content_ar\": \"Full HTML content. Use <h2>, <h3>, <p>, <ul>, <li>, <strong>. Min 400 words.\",\n  \"content_en\": \"Full HTML content. Use <h2>, <h3>, <p>, <ul>, <li>, <strong>. Min 400 words.\",\n  \"category\": \"ai-automation OR fit-out OR workflow-automation OR digital-transformation\",\n  \"category_ar\": \"اسم الفئة بالعربي\",\n  \"category_en\": \"Category Name\",\n  \"tags\": [\"tag1\", \"tag2\", \"tag3\", \"tag4\"],\n  \"read_time\": 5,\n  \"image_url\": \"https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800\"\n}\n\nUse a relevant Unsplash URL from this list based on category:\n- AI/Tech: https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800\n- Automation/Workflow: https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800\n- Office/Fitout: https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800\n- Business/Strategy: https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=800"
+            },
+            {
+              "role": "user",
+              "content": "=اكتب مقال بالعربي والإنجليزي عن: \"{{ $('Code: Extract Idea & Sender').first().json.idea }}\"\n\nتأكد من أن المقال مناسب لجمهور الأردن والمنطقة العربية، ومرتبط بخدمات TechServJo."
+            }
+          ]
+        },
+        "options": {
+          "maxTokens": 4000,
+          "temperature": 0.7
+        }
+      },
+      "id": "n_openai",
+      "name": "OpenAI: Generate Bilingual Post",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1.3,
+      "position": [880, 300],
+      "credentials": {
+        "openAiApi": { "id": "openai_credential", "name": "OpenAI Account" }
+      }
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "// Parse the AI response and structure it for the publisher workflow\nconst aiText = $input.first().json.message?.content || $input.first().json.choices?.[0]?.message?.content || '';\nconst chatId = $('Code: Extract Idea & Sender').first().json.chatId;\n\nlet post;\ntry {\n  // Handle response with or without code fences\n  const clean = aiText.replace(/^```(?:json)?\\n?/,'').replace(/\\n?```$/,'').trim();\n  post = JSON.parse(clean);\n} catch(e) {\n  // Try to extract JSON object from response\n  const match = aiText.match(/\\{[\\s\\S]*\\}/);\n  if (match) { post = JSON.parse(match[0]); }\n  else { throw new Error('AI did not return valid JSON: ' + aiText.substring(0,200)); }\n}\n\n// Auto-generate slug if missing\nif (!post.slug) {\n  post.slug = (post.title_en||'post').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/(^-|-$)/g,'');\n}\n\n// Add metadata\npost.date = new Date().toISOString().split('T')[0];\npost.author = 'TechServJo Team';\npost.chatId = chatId;\n\nreturn [{json: post}];"
+      },
+      "id": "n_parse_ai",
+      "name": "Code: Parse AI Response",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chatId }}",
+        "text": "=✍️ <b>تم توليد المقال!</b>\n\n📰 <b>{{ $json.title_ar }}</b>\n🏷 {{ $json.category_ar }} | ⏱ {{ $json.read_time }} دقائق\n\n🔄 جاري النشر على الموقع...",
+        "additionalFields": { "parse_mode": "HTML" }
+      },
+      "id": "n_tg_generated",
+      "name": "Telegram: Status — Content Ready",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1320, 300],
+      "credentials": {
+        "telegramApi": { "id": "telegram_credential", "name": "Telegram Bot" }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://YOUR-N8N-DOMAIN/webhook/publish-blog-post",
+        "sendBody": true,
+        "body": {
+          "mode": "json",
+          "jsonBody": "={{ JSON.stringify($('Code: Parse AI Response').first().json) }}"
+        },
+        "options": { "timeout": 60000 }
+      },
+      "id": "n_call_publisher",
+      "name": "HTTP: Trigger Publisher Workflow",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1540, 300]
+    },
+    {
+      "parameters": {
+        "language": "javaScript",
+        "jsCode": "// Check publisher response and prepare final message\nconst result = $input.first().json;\nconst post = $('Code: Parse AI Response').first().json;\nconst chatId = post.chatId;\n\nif (result.success) {\n  return [{json:{\n    chatId,\n    success: true,\n    message: `✅ *تم نشر المقال بنجاح!*\\n\\n📰 *${post.title_ar}*\\n🔗 ${result.url}\\n\\n⏱ سيكون متاحاً على الموقع خلال ~2 دقيقة`,\n    url: result.url\n  }}];\n} else {\n  return [{json:{\n    chatId,\n    success: false,\n    message: `❌ *حدث خطأ أثناء النشر*\\n\\n${result.error || 'Unknown error'}\\n\\nحاول مرة أخرى أو تواصل مع المطور.`\n  }}];\n}"
+      },
+      "id": "n_check_result",
+      "name": "Code: Check Publish Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1760, 300]
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $json.chatId }}",
+        "text": "={{ $json.message }}",
+        "additionalFields": {
+          "parse_mode": "Markdown",
+          "disable_web_page_preview": false
+        }
+      },
+      "id": "n_tg_final",
+      "name": "Telegram: Final Result",
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [1980, 300],
+      "credentials": {
+        "telegramApi": { "id": "telegram_credential", "name": "Telegram Bot" }
+      }
+    }
+  ],
+  "connections": {
+    "Telegram: Receive Idea": {
+      "main": [[{ "node": "Code: Extract Idea & Sender", "type": "main", "index": 0 }]]
+    },
+    "Code: Extract Idea & Sender": {
+      "main": [[{ "node": "IF: Has Idea?", "type": "main", "index": 0 }]]
+    },
+    "IF: Has Idea?": {
+      "main": [
+        [{ "node": "Telegram: Acknowledge — Generating", "type": "main", "index": 0 }],
+        [{ "node": "Telegram: Ask for Idea", "type": "main", "index": 0 }]
+      ]
+    },
+    "Telegram: Acknowledge — Generating": {
+      "main": [[{ "node": "OpenAI: Generate Bilingual Post", "type": "main", "index": 0 }]]
+    },
+    "OpenAI: Generate Bilingual Post": {
+      "main": [[{ "node": "Code: Parse AI Response", "type": "main", "index": 0 }]]
+    },
+    "Code: Parse AI Response": {
+      "main": [[{ "node": "Telegram: Status — Content Ready", "type": "main", "index": 0 }]]
+    },
+    "Telegram: Status — Content Ready": {
+      "main": [[{ "node": "HTTP: Trigger Publisher Workflow", "type": "main", "index": 0 }]]
+    },
+    "HTTP: Trigger Publisher Workflow": {
+      "main": [[{ "node": "Code: Check Publish Result", "type": "main", "index": 0 }]]
+    },
+    "Code: Check Publish Result": {
+      "main": [[{ "node": "Telegram: Final Result", "type": "main", "index": 0 }]]
+    }
+  },
+  "active": false,
+  "settings": { "executionOrder": "v1", "saveManualExecutions": true },
+  "tags": ["blog", "telegram", "openai", "techservjo", "ai-generator"],
+  "versionId": "1"
+}
