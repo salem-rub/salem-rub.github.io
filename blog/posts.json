@@ -1,6 +1,60 @@
 {
   "posts": [
     {
+      "slug": "How to Use ChatGPT to Filter CVs and Prepare Interview Questions",
+      "title": {
+        "ar": "حيل الموارد البشرية: كيف تستخدم ChatGPT لفرز السير الذاتية وإعداد أسئلة المقابلات",
+        "en": "HR Hacks: How to Use ChatGPT to Filter CVs and Prepare Interview Questions"
+      },
+      "excerpt": {
+        "ar": "فرز مئات السير الذاتية يدوياً مهمة شاقة. تعلم كيف تستخدم ChatGPT لتلخيص خبرات المرشحين وتجهيز أسئلة مقابلة مخصصة في ثوانٍ.",
+        "en": "Manually filtering hundreds of CVs is a daunting task. Learn how to use ChatGPT to summarize candidate experiences and prepare custom interview questions in seconds."
+      },
+      "date": "2024-06-05",
+      "author": "TechServJo Team",
+      "category": "ai-training",
+      "tags": ["ChatGPT", "HR", "Recruitment", "AI", "Productivity"],
+      "image": "https://techservjo.com/blog/images/hr-chatgpt-cvs.jpg",
+      "lang": ["ar", "en"],
+      "readTime": { "ar": 5, "en": 5 }
+    },
+    {
+      "slug": "How to Use ChatGPT to Write Winning Business Proposals",
+      "title": {
+        "ar": "كيف تستخدم ChatGPT لكتابة عروض عمل تجارية رابحة",
+        "en": "How to Use ChatGPT to Write Winning Business Proposals"
+      },
+      "excerpt": {
+        "ar": "كتابة عرض عمل (Proposal) لكل عميل يستغرق ساعات. تعلم كيف تُعد عرضاً مخصصاً ومقنعاً في دقائق باستخدام الذكاء الاصطناعي.",
+        "en": "Writing a proposal for every client takes hours. Learn how to prepare a customized, persuasive proposal in minutes using AI."
+      },
+      "date": "2024-06-03",
+      "author": "TechServJo Team",
+      "category": "ai-training",
+      "tags": ["ChatGPT", "Sales", "Proposals", "AI", "Business"],
+      "image": "https://techservjo.com/blog/images/chatgpt-proposals.jpg",
+      "lang": ["ar", "en"],
+      "readTime": { "ar": 4, "en": 4 }
+    },
+    {
+      "slug": "How to Write Perfect ChatGPT Prompts in Arabic",
+      "title": {
+        "ar": "كيف تكتب أوامر (Prompts) مثالية لـ ChatGPT بالعربية",
+        "en": "How to Write Perfect ChatGPT Prompts in Arabic"
+      },
+      "excerpt": {
+        "ar": "الفرق بين إجابة \"عادية\" وإجابة \"مبهرة\" من ChatGPT يكمن في كيفية صياغة سؤالك. إليك قواعد \"هندسة الأوامر\" للغة العربية.",
+        "en": "The difference between an \"okay\" answer and an \"amazing\" answer from ChatGPT lies in how you phrase your question. Here are the Prompt Engineering rules for Arabic."
+      },
+      "date": "2024-06-02",
+      "author": "TechServJo Team",
+      "category": "ai-training",
+      "tags": ["ChatGPT", "Prompt Engineering", "Arabic", "AI", "How-To"],
+      "image": "https://techservjo.com/blog/images/chatgpt-prompts-arabic.jpg",
+      "lang": ["ar", "en"],
+      "readTime": { "ar": 5, "en": 5 }
+    },
+    {
       "slug": "ai-automation-jordan-business",
       "title": {
         "ar": "كيف يمكن للذكاء الاصطناعي تحويل أعمالك في الأردن",
@@ -57,6 +111,7 @@
   ],
   "categories": [
     { "slug": "ai-automation", "name": { "ar": "أتمتة الذكاء الاصطناعي", "en": "AI Automation" } },
+    { "slug": "ai-training", "name": { "ar": "تدريب الذكاء الاصطناعي", "en": "AI Training & Tools" } },
     { "slug": "workflow-automation", "name": { "ar": "أتمتة سير العمل", "en": "Workflow Automation" } },
     { "slug": "fit-out", "name": { "ar": "التشطيب والتجديد", "en": "Fit-out & Renovation" } },
     { "slug": "digital-transformation", "name": { "ar": "التحول الرقمي", "en": "Digital Transformation" } }
