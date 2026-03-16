@@ -1,38 +1,38 @@
 {
-  "name": "technology-evolution-jordan-opportunities-challenges.html",
-  "path": "blog/posts/technology-evolution-jordan-opportunities-challenges.html",
-  "sha": "e55c9a498787fa152a09df77e3d71bfd99ac24a6",
-  "size": 36046,
-  "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/technology-evolution-jordan-opportunities-challenges.html?ref=main",
-  "html_url": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/technology-evolution-jordan-opportunities-challenges.html",
-  "git_url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/e55c9a498787fa152a09df77e3d71bfd99ac24a6",
-  "download_url": "https://raw.githubusercontent.com/salem-rub/salem-rub.github.io/main/blog/posts/technology-evolution-jordan-opportunities-challenges.html",
+  "name": "comparison-between-notion-and-clickup-for-business-users.html",
+  "path": "blog/posts/comparison-between-notion-and-clickup-for-business-users.html",
+  "sha": "ccc5ffa9b1670660fb74f5533474329705f90ada",
+  "size": 38298,
+  "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/comparison-between-notion-and-clickup-for-business-users.html?ref=main",
+  "html_url": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/comparison-between-notion-and-clickup-for-business-users.html",
+  "git_url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/ccc5ffa9b1670660fb74f5533474329705f90ada",
+  "download_url": "https://raw.githubusercontent.com/salem-rub/salem-rub.github.io/main/blog/posts/comparison-between-notion-and-clickup-for-business-users.html",
   "type": "file",
   "_links": {
-    "self": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/technology-evolution-jordan-opportunities-challenges.html?ref=main",
-    "git": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/e55c9a498787fa152a09df77e3d71bfd99ac24a6",
-    "html": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/technology-evolution-jordan-opportunities-challenges.html"
+    "self": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/comparison-between-notion-and-clickup-for-business-users.html?ref=main",
+    "git": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/ccc5ffa9b1670660fb74f5533474329705f90ada",
+    "html": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/comparison-between-notion-and-clickup-for-business-users.html"
   },
   "posts": [
     {
-      "slug": "technology-evolution-jordan-opportunities-challenges",
+      "slug": "comparison-between-notion-and-clickup-for-business-users",
       "title": {
-        "ar": "تطور التكنولوجيا في الأردن: فرص وتحديات مستقبلية",
-        "en": "The Evolution of Technology in Jordan: Future Opportunities and Challenges"
+        "ar": "مقارنة بين نوتيون و كليك أب لمستخدمي الأعمال",
+        "en": "Comparison Between Notion and ClickUp for Business Users"
       },
       "excerpt": {
-        "ar": "شهد الأردن طفرة كبيرة في قطاع التكنولوجيا خلال السنوات الأخيرة، مع ظهور شركات ناشئة ومبادرات حكومية لدعم الابتكار. سنتناول في هذا المقال فرص النمو والتحديات التي تواجهها التكنولوجيا في الأردن.",
-        "en": "Jordan has witnessed a significant boom in the technology sector in recent years, with emerging startups and government initiatives supporting innovation. This article explores the growth opportunities and challenges faced by technology in Jordan."
+        "ar": "في عالم الشركات الناشئة والمؤسسات الصغيرة، تعد أدوات إدارة المشاريع مثل نوتيون وكليك أب من بين الخيارات الأكثر استخداماً. نستعرض في هذا المقال مقارنة بينهما لتحديد أيهما أفضل لمستخدمي الأعمال.",
+        "en": "In the world of startups and small businesses, project management tools like Notion and ClickUp are among the most popular choices. This article reviews a comparison between them to help business users decide which suits them better."
       },
       "date": "2026-03-16",
       "author": "TechServJo Team",
       "category": "technology",
       "tags": [
-        "technology",
-        "jordan tech",
-        "innovation",
-        "startups",
-        "digital transformation"
+        "productivity",
+        "project-management",
+        "notion",
+        "clickup",
+        "business-tools"
       ],
       "image": "",
       "lang": [
