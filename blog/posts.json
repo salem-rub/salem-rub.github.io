@@ -1,45 +1,45 @@
 {
   "content": {
-    "name": "importance-of-digital-transformation-jordan.html",
-    "path": "blog/posts/importance-of-digital-transformation-jordan.html",
-    "sha": "97a0e54395e7a759df1cb8450cc4e91084ea1865",
-    "size": 37018,
-    "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/importance-of-digital-transformation-jordan.html?ref=main",
-    "html_url": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/importance-of-digital-transformation-jordan.html",
-    "git_url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/97a0e54395e7a759df1cb8450cc4e91084ea1865",
-    "download_url": "https://raw.githubusercontent.com/salem-rub/salem-rub.github.io/main/blog/posts/importance-of-digital-transformation-jordan.html",
+    "name": "modern-technologies-role-developing-services-sector-jordan.html",
+    "path": "blog/posts/modern-technologies-role-developing-services-sector-jordan.html",
+    "sha": "47a327718bc1036c1eb6edb16606bcb77000194e",
+    "size": 36104,
+    "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/modern-technologies-role-developing-services-sector-jordan.html?ref=main",
+    "html_url": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/modern-technologies-role-developing-services-sector-jordan.html",
+    "git_url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/47a327718bc1036c1eb6edb16606bcb77000194e",
+    "download_url": "https://raw.githubusercontent.com/salem-rub/salem-rub.github.io/main/blog/posts/modern-technologies-role-developing-services-sector-jordan.html",
     "type": "file",
     "_links": {
-      "self": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/importance-of-digital-transformation-jordan.html?ref=main",
-      "git": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/97a0e54395e7a759df1cb8450cc4e91084ea1865",
-      "html": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/importance-of-digital-transformation-jordan.html"
+      "self": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/modern-technologies-role-developing-services-sector-jordan.html?ref=main",
+      "git": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/47a327718bc1036c1eb6edb16606bcb77000194e",
+      "html": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/modern-technologies-role-developing-services-sector-jordan.html"
     }
   },
   "commit": {
-    "sha": "fe44a4a7f9057e1a46ea9e9051db8232b5fd5d9c",
-    "node_id": "C_kwDOPMRJ_NoAKGZlNDRhNGE3ZjkwNTdlMWE0NmVhOWU5MDUxZGI4MjMyYjVmZDVkOWM",
-    "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/commits/fe44a4a7f9057e1a46ea9e9051db8232b5fd5d9c",
-    "html_url": "https://github.com/salem-rub/salem-rub.github.io/commit/fe44a4a7f9057e1a46ea9e9051db8232b5fd5d9c",
+    "sha": "5b3e2aad74bb6682bef0ae56a07c29de09ba9811",
+    "node_id": "C_kwDOPMRJ_NoAKDViM2UyYWFkNzRiYjY2ODJiZWYwYWU1NmEwN2MyOWRlMDliYTk4MTE",
+    "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/commits/5b3e2aad74bb6682bef0ae56a07c29de09ba9811",
+    "html_url": "https://github.com/salem-rub/salem-rub.github.io/commit/5b3e2aad74bb6682bef0ae56a07c29de09ba9811",
     "author": {
       "name": "Salem",
       "email": "54493027+salem-rub@users.noreply.github.com",
-      "date": "2026-03-16T00:00:10Z"
+      "date": "2026-03-16T00:03:31Z"
     },
     "committer": {
       "name": "Salem",
       "email": "54493027+salem-rub@users.noreply.github.com",
-      "date": "2026-03-16T00:00:10Z"
+      "date": "2026-03-16T00:03:31Z"
     },
     "tree": {
-      "sha": "93bc3a9a3fddacd25b02d35950c45968b6e665c1",
-      "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/trees/93bc3a9a3fddacd25b02d35950c45968b6e665c1"
+      "sha": "9ea585a3e864f7e83b20a400c15218126f13603c",
+      "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/trees/9ea585a3e864f7e83b20a400c15218126f13603c"
     },
-    "message": "Add blog post: The Importance of Digital Transformation in Jordan: The Future of Business and Technology",
+    "message": "Add blog post: Modern Technologies and Their Role in Developing the Services Sector in Jordan",
     "parents": [
       {
-        "sha": "4339a0d2c571b376a28775cad133f87f02e462f7",
-        "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/commits/4339a0d2c571b376a28775cad133f87f02e462f7",
-        "html_url": "https://github.com/salem-rub/salem-rub.github.io/commit/4339a0d2c571b376a28775cad133f87f02e462f7"
+        "sha": "8fc292acda949db207c8918bfa72ec689ddd3a69",
+        "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/commits/8fc292acda949db207c8918bfa72ec689ddd3a69",
+        "html_url": "https://github.com/salem-rub/salem-rub.github.io/commit/8fc292acda949db207c8918bfa72ec689ddd3a69"
       }
     ],
     "verification": {
@@ -52,24 +52,24 @@
   },
   "posts": [
     {
-      "slug": "importance-of-digital-transformation-jordan",
+      "slug": "modern-technologies-role-developing-services-sector-jordan",
       "title": {
-        "ar": "أهمية التحول الرقمي في الأردن: مستقبل الأعمال والتكنولوجيا",
-        "en": "The Importance of Digital Transformation in Jordan: The Future of Business and Technology"
+        "ar": "التقنيات الحديثة ودورها في تطوير قطاع الخدمات في الأردن",
+        "en": "Modern Technologies and Their Role in Developing the Services Sector in Jordan"
       },
       "excerpt": {
-        "ar": "يُعد التحول الرقمي ركيزة أساسية لتطوير الأعمال والتكنولوجيا في الأردن، حيث يساهم في تحسين الكفاءة والتنافسية في الأسواق المحلية والعالمية. في هذا المقال نستعرض تأثير التحول الرقمي والتحديات والفرص التي تواجهها الشركات الأردنية.",
-        "en": "Digital transformation is a cornerstone for advancing business and technology in Jordan, helping to improve efficiency and competitiveness in both local and global markets. This article explores the impact of digital transformation, along with the challenges and opportunities facing Jordanian companies."
+        "ar": "تتناول هذه المقالة أهمية التقنيات الحديثة في دفع عجلة التطور لخدمات الأعمال في الأردن، مع التركيز على الحلول الرقمية والذكاء الاصطناعي. نتحدث عن تأثير هذه التقنيات على تحسين الكفاءة وزيادة رضا العملاء.",
+        "en": "This article explores the importance of modern technologies in advancing the service sector in Jordan, focusing on digital solutions and artificial intelligence. It discusses the impact of these technologies on improving efficiency and boosting customer satisfaction."
       },
       "date": "2026-03-16",
       "author": "TechServJo Team",
       "category": "technology",
       "tags": [
-        "digital-transformation",
-        "jordan-tech",
-        "innovation",
-        "technology-trends",
-        "business-growth"
+        "technology",
+        "AI",
+        "digital transformation",
+        "Jordan",
+        "services sector"
       ],
       "image": "",
       "lang": [
