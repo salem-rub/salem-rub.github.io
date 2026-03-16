@@ -1,119 +1,85 @@
 {
+  "content": {
+    "name": "importance-of-digital-transformation-jordan.html",
+    "path": "blog/posts/importance-of-digital-transformation-jordan.html",
+    "sha": "97a0e54395e7a759df1cb8450cc4e91084ea1865",
+    "size": 37018,
+    "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/importance-of-digital-transformation-jordan.html?ref=main",
+    "html_url": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/importance-of-digital-transformation-jordan.html",
+    "git_url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/97a0e54395e7a759df1cb8450cc4e91084ea1865",
+    "download_url": "https://raw.githubusercontent.com/salem-rub/salem-rub.github.io/main/blog/posts/importance-of-digital-transformation-jordan.html",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/salem-rub/salem-rub.github.io/contents/blog/posts/importance-of-digital-transformation-jordan.html?ref=main",
+      "git": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/blobs/97a0e54395e7a759df1cb8450cc4e91084ea1865",
+      "html": "https://github.com/salem-rub/salem-rub.github.io/blob/main/blog/posts/importance-of-digital-transformation-jordan.html"
+    }
+  },
+  "commit": {
+    "sha": "fe44a4a7f9057e1a46ea9e9051db8232b5fd5d9c",
+    "node_id": "C_kwDOPMRJ_NoAKGZlNDRhNGE3ZjkwNTdlMWE0NmVhOWU5MDUxZGI4MjMyYjVmZDVkOWM",
+    "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/commits/fe44a4a7f9057e1a46ea9e9051db8232b5fd5d9c",
+    "html_url": "https://github.com/salem-rub/salem-rub.github.io/commit/fe44a4a7f9057e1a46ea9e9051db8232b5fd5d9c",
+    "author": {
+      "name": "Salem",
+      "email": "54493027+salem-rub@users.noreply.github.com",
+      "date": "2026-03-16T00:00:10Z"
+    },
+    "committer": {
+      "name": "Salem",
+      "email": "54493027+salem-rub@users.noreply.github.com",
+      "date": "2026-03-16T00:00:10Z"
+    },
+    "tree": {
+      "sha": "93bc3a9a3fddacd25b02d35950c45968b6e665c1",
+      "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/trees/93bc3a9a3fddacd25b02d35950c45968b6e665c1"
+    },
+    "message": "Add blog post: The Importance of Digital Transformation in Jordan: The Future of Business and Technology",
+    "parents": [
+      {
+        "sha": "4339a0d2c571b376a28775cad133f87f02e462f7",
+        "url": "https://api.github.com/repos/salem-rub/salem-rub.github.io/git/commits/4339a0d2c571b376a28775cad133f87f02e462f7",
+        "html_url": "https://github.com/salem-rub/salem-rub.github.io/commit/4339a0d2c571b376a28775cad133f87f02e462f7"
+      }
+    ],
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
   "posts": [
     {
-      "slug": "How to Use ChatGPT to Filter CVs and Prepare Interview Questions",
+      "slug": "importance-of-digital-transformation-jordan",
       "title": {
-        "ar": "حيل الموارد البشرية: كيف تستخدم ChatGPT لفرز السير الذاتية وإعداد أسئلة المقابلات",
-        "en": "HR Hacks: How to Use ChatGPT to Filter CVs and Prepare Interview Questions"
+        "ar": "أهمية التحول الرقمي في الأردن: مستقبل الأعمال والتكنولوجيا",
+        "en": "The Importance of Digital Transformation in Jordan: The Future of Business and Technology"
       },
       "excerpt": {
-        "ar": "فرز مئات السير الذاتية يدوياً مهمة شاقة. تعلم كيف تستخدم ChatGPT لتلخيص خبرات المرشحين وتجهيز أسئلة مقابلة مخصصة في ثوانٍ.",
-        "en": "Manually filtering hundreds of CVs is a daunting task. Learn how to use ChatGPT to summarize candidate experiences and prepare custom interview questions in seconds."
+        "ar": "يُعد التحول الرقمي ركيزة أساسية لتطوير الأعمال والتكنولوجيا في الأردن، حيث يساهم في تحسين الكفاءة والتنافسية في الأسواق المحلية والعالمية. في هذا المقال نستعرض تأثير التحول الرقمي والتحديات والفرص التي تواجهها الشركات الأردنية.",
+        "en": "Digital transformation is a cornerstone for advancing business and technology in Jordan, helping to improve efficiency and competitiveness in both local and global markets. This article explores the impact of digital transformation, along with the challenges and opportunities facing Jordanian companies."
       },
-      "date": "2024-06-05",
+      "date": "2026-03-16",
       "author": "TechServJo Team",
-      "category": "ai-training",
-      "tags": ["ChatGPT", "HR", "Recruitment", "AI", "Productivity"],
-      "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=800",
-      "lang": ["ar", "en"],
-      "readTime": { "ar": 5, "en": 5 }
-    },
-    {
-      "slug": "How to Use ChatGPT to Write Winning Business Proposals",
-      "title": {
-        "ar": "كيف تستخدم ChatGPT لكتابة عروض عمل تجارية رابحة",
-        "en": "How to Use ChatGPT to Write Winning Business Proposals"
-      },
-      "excerpt": {
-        "ar": "كتابة عرض عمل (Proposal) لكل عميل يستغرق ساعات. تعلم كيف تُعد عرضاً مخصصاً ومقنعاً في دقائق باستخدام الذكاء الاصطناعي.",
-        "en": "Writing a proposal for every client takes hours. Learn how to prepare a customized, persuasive proposal in minutes using AI."
-      },
-      "date": "2024-06-03",
-      "author": "TechServJo Team",
-      "category": "ai-training",
-      "tags": ["ChatGPT", "Sales", "Proposals", "AI", "Business"],
-      "image": "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800",
-      "lang": ["ar", "en"],
-      "readTime": { "ar": 4, "en": 4 }
-    },
-    {
-      "slug": "How to Write Perfect ChatGPT Prompts in Arabic",
-      "title": {
-        "ar": "كيف تكتب أوامر (Prompts) مثالية لـ ChatGPT بالعربية",
-        "en": "How to Write Perfect ChatGPT Prompts in Arabic"
-      },
-      "excerpt": {
-        "ar": "الفرق بين إجابة \"عادية\" وإجابة \"مبهرة\" من ChatGPT يكمن في كيفية صياغة سؤالك. إليك قواعد \"هندسة الأوامر\" للغة العربية.",
-        "en": "The difference between an \"okay\" answer and an \"amazing\" answer from ChatGPT lies in how you phrase your question. Here are the Prompt Engineering rules for Arabic."
-      },
-      "date": "2024-06-02",
-      "author": "TechServJo Team",
-      "category": "ai-training",
-      "tags": ["ChatGPT", "Prompt Engineering", "Arabic", "AI", "How-To"],
-      "image": "https://images.unsplash.com/photo-1655393001768-d946c97d6fd1?auto=format&fit=crop&q=80&w=800",
-      "lang": ["ar", "en"],
-      "readTime": { "ar": 5, "en": 5 }
-    },
-    {
-      "slug": "ai-automation-jordan-business",
-      "title": {
-        "ar": "كيف يمكن للذكاء الاصطناعي تحويل أعمالك في الأردن",
-        "en": "How AI Can Transform Your Business in Jordan"
-      },
-      "excerpt": {
-        "ar": "تعرف على كيفية استخدام أتمتة الذكاء الاصطناعي لتحسين الكفاءة التشغيلية وتوفير الوقت والموارد للشركات الأردنية.",
-        "en": "Learn how AI automation can improve operational efficiency and save time and resources for Jordanian businesses."
-      },
-      "date": "2026-03-15",
-      "author": "TechServJo Team",
-      "category": "ai-automation",
-      "tags": ["AI", "Automation", "Jordan", "Business", "n8n"],
-      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&q=80&w=800",
-      "lang": ["ar", "en"],
-      "readTime": { "ar": 5, "en": 5 }
-    },
-    {
-      "slug": "n8n-workflow-automation-guide",
-      "title": {
-        "ar": "دليل شامل لأتمتة سير العمل باستخدام n8n",
-        "en": "Complete Guide to Workflow Automation with n8n"
-      },
-      "excerpt": {
-        "ar": "اكتشف كيف تستخدم منصة n8n لأتمتة عمليات عملك وربط التطبيقات المختلفة بدون خبرة برمجية عميقة.",
-        "en": "Discover how to use n8n to automate business operations and connect different applications without deep programming experience."
-      },
-      "date": "2026-03-10",
-      "author": "TechServJo Team",
-      "category": "workflow-automation",
-      "tags": ["n8n", "Workflow", "Automation", "No-Code"],
-      "image": "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=800",
-      "lang": ["ar", "en"],
-      "readTime": { "ar": 7, "en": 7 }
-    },
-    {
-      "slug": "office-fitout-guide-jordan",
-      "title": {
-        "ar": "تشطيب المكاتب في الأردن: دليلك الشامل لمساحة عمل منتجة",
-        "en": "Office Fit-out in Jordan: Your Complete Guide to a Productive Workspace"
-      },
-      "excerpt": {
-        "ar": "تعلم أسرار تصميم مساحات العمل المنتجة وإدارة مشاريع التشطيب بنجاح مع نصائح خبراء TechServJo.",
-        "en": "Learn the secrets of designing productive workspaces and managing fit-out projects successfully with TechServJo expert tips."
-      },
-      "date": "2026-03-05",
-      "author": "TechServJo Team",
-      "category": "fit-out",
-      "tags": ["Fit-out", "Office Design", "Jordan", "Renovation"],
-      "image": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=800",
-      "lang": ["ar", "en"],
-      "readTime": { "ar": 6, "en": 6 }
+      "category": "technology",
+      "tags": [
+        "digital-transformation",
+        "jordan-tech",
+        "innovation",
+        "technology-trends",
+        "business-growth"
+      ],
+      "image": "",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 7,
+        "en": 7
+      }
     }
-  ],
-  "categories": [
-    { "slug": "ai-automation", "name": { "ar": "أتمتة الذكاء الاصطناعي", "en": "AI Automation" } },
-    { "slug": "ai-training", "name": { "ar": "تدريب الذكاء الاصطناعي", "en": "AI Training & Tools" } },
-    { "slug": "workflow-automation", "name": { "ar": "أتمتة سير العمل", "en": "Workflow Automation" } },
-    { "slug": "fit-out", "name": { "ar": "التشطيب والتجديد", "en": "Fit-out & Renovation" } },
-    { "slug": "digital-transformation", "name": { "ar": "التحول الرقمي", "en": "Digital Transformation" } }
   ]
 }
