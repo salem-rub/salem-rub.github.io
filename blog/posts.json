@@ -1,1 +1,34 @@
-{"posts":[]}
+{
+  "posts": [
+    {
+      "slug": "comparison-between-chatgpt-and-gemini-for-business-users",
+      "title": {
+        "ar": "مقارنة بين ChatGPT و Gemini لمستخدمي الأعمال",
+        "en": "Comparison Between ChatGPT and Gemini for Business Users"
+      },
+      "excerpt": {
+        "ar": "يستعرض هذا المقال مقارنة شاملة بين ChatGPT و Gemini من حيث القدرات والخدمات التي يقدمونها لمستخدمي الأعمال في مجال التكنولوجيا، مع التركيز على احتياجات السوق الأردني والعربي.",
+        "en": "This article provides a comprehensive comparison between ChatGPT and Gemini, focusing on their capabilities and services for business users, with special emphasis on the needs of the Jordanian and Arab technology market."
+      },
+      "date": "2026-03-16",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "chatgpt",
+        "gemini",
+        "business-ai",
+        "artificial-intelligence",
+        "technology-jordan"
+      ],
+      "image": "",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 7,
+        "en": 7
+      }
+    }
+  ]
+}
