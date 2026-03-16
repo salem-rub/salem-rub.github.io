@@ -1,24 +1,24 @@
 {
   "posts": [
     {
-      "slug": "comparison-between-chatgpt-and-gemini-for-business-users",
+      "slug": "uses-of-artificial-intelligence-in-factories",
       "title": {
-        "ar": "مقارنة بين ChatGPT و Gemini لمستخدمي الأعمال",
-        "en": "Comparison Between ChatGPT and Gemini for Business Users"
+        "ar": "استخدامات الذكاء الاصطناعي في المصانع",
+        "en": "Uses of Artificial Intelligence in Factories"
       },
       "excerpt": {
-        "ar": "يستعرض هذا المقال مقارنة شاملة بين ChatGPT و Gemini من حيث القدرات والخدمات التي يقدمونها لمستخدمي الأعمال في مجال التكنولوجيا، مع التركيز على احتياجات السوق الأردني والعربي.",
-        "en": "This article provides a comprehensive comparison between ChatGPT and Gemini, focusing on their capabilities and services for business users, with special emphasis on the needs of the Jordanian and Arab technology market."
+        "ar": "يُعَد الذكاء الاصطناعي من التقنيات الرائدة التي أحدثت تحولات جذرية في صناعة المصانع. يساهم في تحسين الإنتاجية، تقليل التكاليف، وتعزيز جودة المنتجات بشكل كبير.",
+        "en": "Artificial intelligence is a leading technology that has brought radical transformations to the manufacturing industry. It helps improve productivity, reduce costs, and significantly enhance product quality."
       },
       "date": "2026-03-16",
       "author": "TechServJo Team",
       "category": "technology",
       "tags": [
-        "chatgpt",
-        "gemini",
-        "business-ai",
-        "artificial-intelligence",
-        "technology-jordan"
+        "Artificial Intelligence",
+        "Factories",
+        "Industry 4.0",
+        "Jordan Tech",
+        "Smart Manufacturing"
       ],
       "image": "",
       "lang": [
