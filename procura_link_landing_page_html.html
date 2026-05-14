@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ProcuraLink | B2B Procurement Marketplace</title>
+  <style>
+    :root {
+      --navy: #0f172a;
+      --navy-2: #1e293b;
+      --green: #10b981;
+      --green-dark: #059669;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --soft-green: #ecfdf5;
+      --shadow: 0 20px 45px rgba(15, 23, 42, 0.10);
+      --radius: 28px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, "Tahoma", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 99;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--green), var(--navy));
+      color: white;
+      font-weight: 900;
+      box-shadow: 0 12px 28px rgba(16, 185, 129, 0.25);
+    }
+
+    .brand-title {
+      font-weight: 900;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .brand-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: -3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      color: var(--green-dark);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button, .btn {
+      border: 0;
+      cursor: pointer;
+      font-weight: 900;
+      border-radius: 999px;
+      padding: 12px 20px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: 0.2s ease;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background: var(--green);
+      color: white;
+      box-shadow: 0 12px 25px rgba(16, 185, 129, 0.24);
+    }
+
+    .btn-primary:hover {
+      background: var(--green-dark);
+      transform: translateY(-1px);
+    }
+
+    .btn-dark {
+      background: var(--navy);
+      color: white;
+    }
+
+    .btn-light {
+      background: white;
+      border: 1px solid var(--border);
+      color: var(--navy);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 88px 0 72px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 18% 20%, rgba(16, 185, 129, 0.16), transparent 30%),
+        radial-gradient(circle at 82% 0%, rgba(15, 23, 42, 0.12), transparent 35%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      padding: 9px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 900;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+    }
+
+    h1 {
+      margin: 26px 0 18px;
+      font-size: clamp(38px, 5vw, 68px);
+      line-height: 1.05;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 20px;
+      max-width: 720px;
+      margin: 0;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 30px;
+    }
+
+    .proof-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .rfq-card {
+      position: relative;
+      background: white;
+      border: 1px solid white;
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .rfq-card::before {
+      content: "";
+      position: absolute;
+      inset: -16px;
+      z-index: -1;
+      border-radius: 38px;
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.25), rgba(15, 23, 42, 0.14));
+      filter: blur(24px);
+    }
+
+    .card-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .rfq-number {
+      color: var(--green-dark);
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .rfq-title {
+      font-weight: 900;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .icon-box {
+      min-width: 54px;
+      height: 54px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: var(--soft-green);
+      color: var(--green-dark);
+      font-size: 24px;
+    }
+
+    .info-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      background: #f8fafc;
+      border: 1px solid #f1f5f9;
+      border-radius: 18px;
+      padding: 15px 16px;
+      margin-top: 10px;
+    }
+
+    .info-row span:first-child {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .info-row span:last-child {
+      font-weight: 900;
+      text-align: end;
+    }
+
+    .outcome {
+      margin-top: 18px;
+      background: var(--navy);
+      border-radius: 20px;
+      padding: 20px;
+      color: white;
+    }
+
+    .outcome-title {
+      color: #86efac;
+      font-weight: 900;
+      margin-bottom: 14px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      background: rgba(255, 255, 255, 0.10);
+      border-radius: 14px;
+      padding: 12px;
+      text-align: center;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .stat small {
+      color: #cbd5e1;
+      font-size: 12px;
+    }
+
+    section {
+      padding: 72px 0;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border-radius: var(--radius);
+      padding: 34px;
+      box-shadow: var(--shadow);
+    }
+
+    .panel-dark {
+      background: var(--navy);
+      color: white;
+    }
+
+    .panel-white {
+      background: white;
+      border: 1px solid var(--border);
+    }
+
+    h2 {
+      margin: 0 0 24px;
+      font-size: clamp(28px, 3vw, 42px);
+      line-height: 1.14;
+      letter-spacing: -1px;
+    }
+
+    .list-card {
+      display: flex;
+      gap: 12px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      padding: 16px;
+      margin-top: 13px;
+      color: #e2e8f0;
+    }
+
+    .panel-white .list-card {
+      background: #f8fafc;
+      color: var(--muted);
+      border: 1px solid #f1f5f9;
+    }
+
+    .num {
+      width: 36px;
+      min-width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      background: #d1fae5;
+      color: #047857;
+      border-radius: 12px;
+      font-weight: 900;
+    }
+
+    .list-card strong {
+      display: block;
+      color: inherit;
+      margin-bottom: 4px;
+      font-size: 17px;
+    }
+
+    .panel-white .list-card strong {
+      color: var(--navy);
+    }
+
+    .section-title {
+      max-width: 760px;
+      text-align: center;
+      margin: 0 auto 42px;
+    }
+
+    .section-title p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.05);
+      font-weight: 900;
+    }
+
+    .step-num {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      background: var(--green);
+      color: white;
+      border-radius: 16px;
+      font-size: 18px;
+    }
+
+    .chip-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .chip {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 14px;
+      border-radius: 16px;
+      background: #f8fafc;
+      font-weight: 800;
+      color: var(--navy-2);
+    }
+
+    .green-check {
+      color: var(--green-dark);
+      font-weight: 900;
+    }
+
+    .dark-section {
+      background: var(--navy);
+      color: white;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .feature {
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 24px;
+      padding: 26px;
+    }
+
+    .feature-icon {
+      font-size: 28px;
+      color: #86efac;
+      margin-bottom: 14px;
+    }
+
+    .feature h3 {
+      font-size: 20px;
+      margin: 0 0 8px;
+    }
+
+    .feature p {
+      color: #cbd5e1;
+      margin: 0;
+    }
+
+    .pilot-card {
+      background: linear-gradient(135deg, var(--green), var(--navy));
+      color: white;
+    }
+
+    .pilot-card p {
+      color: #dcfce7;
+    }
+
+    .mini-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .mini {
+      background: rgba(255, 255, 255, 0.13);
+      border-radius: 16px;
+      padding: 14px;
+      font-weight: 900;
+    }
+
+    .revenue-item {
+      display: flex;
+      gap: 14px;
+      background: #f8fafc;
+      border-radius: 18px;
+      padding: 17px;
+      margin-top: 12px;
+    }
+
+    .revenue-item strong {
+      display: block;
+      color: var(--navy);
+      margin-bottom: 3px;
+    }
+
+    .contact {
+      background: white;
+    }
+
+    .contact-box {
+      display: grid;
+      grid-template-columns: 1fr 0.88fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .contact-copy {
+      background: var(--navy);
+      color: white;
+      border-radius: var(--radius);
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-copy p {
+      color: #cbd5e1;
+      font-size: 18px;
+    }
+
+    .form-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 32px;
+      box-shadow: var(--shadow);
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: white;
+      border-radius: 18px;
+      padding: 15px 16px;
+      margin-bottom: 12px;
+      font-size: 15px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    input:focus, textarea:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.12);
+    }
+
+    footer {
+      padding: 28px 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      text-align: center;
+      font-weight: 800;
+    }
+
+    [dir="rtl"] .hero-actions,
+    [dir="rtl"] .proof-row,
+    [dir="rtl"] .brand,
+    [dir="rtl"] .nav-actions,
+    [dir="rtl"] .card-head,
+    [dir="rtl"] .list-card,
+    [dir="rtl"] .revenue-item,
+    [dir="rtl"] .chip {
+      flex-direction: row-reverse;
+    }
+
+    [dir="rtl"] .info-row span:last-child {
+      text-align: start;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .two-col,
+      .contact-box {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid,
+      .feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .container {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .hero {
+        padding: 56px 0;
+      }
+
+      .steps-grid,
+      .feature-grid,
+      .chip-grid,
+      .mini-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-actions .btn-dark {
+        display: none;
+      }
+
+      .panel,
+      .contact-copy,
+      .form-card,
+      .rfq-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a class="brand" href="#top">
+        <div class="logo">PL</div>
+        <div>
+          <div class="brand-title">ProcuraLink</div>
+          <div class="brand-subtitle">B2B Procurement Marketplace</div>
+        </div>
+      </a>
+
+      <nav class="nav-links">
+        <a href="#problem" data-i18n="navProblem">Problem</a>
+        <a href="#solution" data-i18n="navSolution">Solution</a>
+        <a href="#how" data-i18n="navHow">How It Works</a>
+        <a href="#pilot" data-i18n="navPilot">Pilot</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="btn btn-light" id="langBtn">عربي</button>
+        <a class="btn btn-dark" href="#contact" data-i18n="bookMeeting">Book a Meeting</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="badge" data-i18n="badge">Jordan-first B2B Procurement Marketplace</div>
+          <h1 data-i18n="headline">Get multiple verified supplier quotes faster — with a documented RFQ workflow.</h1>
+          <p data-i18n="subheadline">ProcuraLink helps procurement teams in pharma, labs, schools, hospitals, and factories receive competitive quotations from trusted suppliers through one structured platform.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#contact" data-i18n="bookMeeting">Book a Meeting</a>
+            <a class="btn btn-light" href="#how" data-i18n="seeHow">See How It Works</a>
+          </div>
+          <div class="proof-row">
+            <span class="badge" data-i18n="proof1">Built for local procurement</span>
+            <span class="badge" data-i18n="proof2">Verified suppliers</span>
+            <span class="badge" data-i18n="proof3">RFQ audit trail</span>
+          </div>
+        </div>
+
+        <div class="rfq-card">
+          <div class="card-head">
+            <div>
+              <div class="rfq-number">PROC-RFQ-001</div>
+              <div class="rfq-title" data-i18n="heroCardTitle">RFQ Snapshot</div>
+            </div>
+            <div class="icon-box">📋</div>
+          </div>
+          <div class="info-row"><span data-i18n="cardLabel1">Category</span><span data-i18n="cardValue1">Lab Consumables</span></div>
+          <div class="info-row"><span data-i18n="cardLabel2">Suppliers Invited</span><span data-i18n="cardValue2">5 verified vendors</span></div>
+          <div class="info-row"><span data-i18n="cardLabel3">Quotes Received</span><span data-i18n="cardValue3">4 sealed quotes</span></div>
+          <div class="info-row"><span data-i18n="cardLabel4">Buyer Action</span><span data-i18n="cardValue4">Compare & award</span></div>
+          <div class="outcome">
+            <div class="outcome-title" data-i18n="outcome">Procurement outcome</div>
+            <div class="stats">
+              <div class="stat"><strong>24h</strong><small data-i18n="response">Response</small></div>
+              <div class="stat"><strong>4</strong><small data-i18n="quotes">Quotes</small></div>
+              <div class="stat"><strong>1</strong><small data-i18n="award">Award</small></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="problem">
+      <div class="container two-col">
+        <div class="panel panel-dark">
+          <h2 data-i18n="problemTitle">The current procurement process is slow and scattered.</h2>
+          <div class="list-card">⚡ <span data-i18n="problem1">RFQs are shared through WhatsApp, phone calls, and emails.</span></div>
+          <div class="list-card">⚡ <span data-i18n="problem2">Quotes arrive in different formats and are hard to compare.</span></div>
+          <div class="list-card">⚡ <span data-i18n="problem3">Procurement teams need faster access to trusted suppliers.</span></div>
+          <div class="list-card">⚡ <span data-i18n="problem4">Supplier performance, response time, and deal history are not tracked.</span></div>
+        </div>
+
+        <div id="solution" class="panel panel-white">
+          <h2 data-i18n="solutionTitle">One platform for RFQs, supplier matching, quotation comparison, and deal tracking.</h2>
+          <div class="list-card"><span class="num">1</span><div><strong data-i18n="solution1Title">Submit RFQ</strong><span data-i18n="solution1Text">Buyers submit purchase requirements with specs, quantity, deadline, and attachments.</span></div></div>
+          <div class="list-card"><span class="num">2</span><div><strong data-i18n="solution2Title">Match Suppliers</strong><span data-i18n="solution2Text">The platform routes the RFQ to relevant verified suppliers by category.</span></div></div>
+          <div class="list-card"><span class="num">3</span><div><strong data-i18n="solution3Title">Compare Quotes</strong><span data-i18n="solution3Text">Buyers compare sealed quotations by price, delivery, terms, and rating.</span></div></div>
+          <div class="list-card"><span class="num">4</span><div><strong data-i18n="solution4Title">Track Performance</strong><span data-i18n="solution4Text">Every RFQ, quote, award, review, and commission is documented.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" style="background:white;">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="howTitle">How ProcuraLink works</h2>
+        </div>
+        <div class="steps-grid">
+          <div class="step"><div class="step-num">1</div><span data-i18n="step1">Buyer submits RFQ</span></div>
+          <div class="step"><div class="step-num">2</div><span data-i18n="step2">Verified suppliers quote</span></div>
+          <div class="step"><div class="step-num">3</div><span data-i18n="step3">Buyer compares offers</span></div>
+          <div class="step"><div class="step-num">4</div><span data-i18n="step4">Deal is awarded</span></div>
+          <div class="step"><div class="step-num">5</div><span data-i18n="step5">Supplier performance improves</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container two-col">
+        <div class="panel panel-white">
+          <h2 data-i18n="buyersTitle">Built for institutional buyers</h2>
+          <div class="chip-grid">
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="buyer1">Pharma factories</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="buyer2">Analytical labs</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="buyer3">Schools & universities</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="buyer4">Hospitals</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="buyer5">Industrial factories</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="buyer6">Engineering & maintenance teams</span></div>
+          </div>
+        </div>
+
+        <div class="panel panel-white">
+          <h2 data-i18n="suppliersTitle">Built for trusted suppliers</h2>
+          <div class="chip-grid">
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="supplier1">Chemicals</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="supplier2">Lab supplies</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="supplier3">Consumables</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="supplier4">HPLC columns</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="supplier5">Calibration & validation</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="supplier6">Maintenance</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="supplier7">PPE & safety</span></div>
+            <div class="chip"><span class="green-check">✓</span><span data-i18n="supplier8">Engineering services</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="dark-section">
+      <div class="container">
+        <div class="section-title">
+          <h2 data-i18n="featuresTitle">Why prospects should take the meeting</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature"><div class="feature-icon">⚡</div><h3 data-i18n="feature1Title">Fast quotation collection</h3><p data-i18n="feature1Text">Receive multiple quotations without chasing suppliers manually.</p></div>
+          <div class="feature"><div class="feature-icon">🛡️</div><h3 data-i18n="feature2Title">Verified supplier network</h3><p data-i18n="feature2Text">Work with categorized, reviewed, and approved suppliers.</p></div>
+          <div class="feature"><div class="feature-icon">📄</div><h3 data-i18n="feature3Title">Sealed-bid RFQ model</h3><p data-i18n="feature3Text">Suppliers compete fairly without seeing each other’s prices.</p></div>
+          <div class="feature"><div class="feature-icon">📋</div><h3 data-i18n="feature4Title">Compliance-ready records</h3><p data-i18n="feature4Text">Keep RFQ history, comparison notes, and award justification.</p></div>
+          <div class="feature"><div class="feature-icon">⭐</div><h3 data-i18n="feature5Title">Supplier ratings</h3><p data-i18n="feature5Text">Build a performance profile based on response, delivery, and quality.</p></div>
+          <div class="feature"><div class="feature-icon">✨</div><h3 data-i18n="feature6Title">Future AI insights</h3><p data-i18n="feature6Text">Use accumulated data for price benchmarking and supplier recommendations.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pilot">
+      <div class="container two-col">
+        <div class="panel pilot-card">
+          <h2 data-i18n="pilotTitle">Pilot proposal for early clients</h2>
+          <p data-i18n="pilotText">We start with a focused pilot: selected buyer organizations, verified suppliers, and real RFQs in high-repeat categories like consumables, chemicals, filters, calibration, and maintenance.</p>
+          <div class="mini-grid">
+            <div class="mini" data-i18n="pilot1">3–5 buyer organizations</div>
+            <div class="mini" data-i18n="pilot2">20–30 verified suppliers</div>
+            <div class="mini" data-i18n="pilot3">50 RFQs target</div>
+            <div class="mini" data-i18n="pilot4">3-month validation period</div>
+          </div>
+        </div>
+
+        <div class="panel panel-white">
+          <h2 data-i18n="revenueTitle">Simple business model</h2>
+          <div class="revenue-item">👥 <div><strong data-i18n="revenue1Title">Buyers</strong><span data-i18n="revenue1Text">Free access during launch to encourage RFQ volume.</span></div></div>
+          <div class="revenue-item">🤝 <div><strong data-i18n="revenue2Title">Suppliers</strong><span data-i18n="revenue2Text">Commission on won deals, then optional subscription plans.</span></div></div>
+          <div class="revenue-item">📈 <div><strong data-i18n="revenue3Title">Premium</strong><span data-i18n="revenue3Text">Future Pro tools: analytics, priority visibility, templates, and reports.</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="container contact-box">
+        <div class="contact-copy">
+          <h2 data-i18n="finalCtaTitle">Ready to test a smarter procurement workflow?</h2>
+          <p data-i18n="finalCtaText">Let’s run a short pilot and measure RFQ speed, supplier response, quotation quality, and savings opportunities.</p>
+          <div class="proof-row">
+            <span class="badge">hello@procuralink.com</span>
+            <span class="badge">ProcuraLink.com</span>
+          </div>
+        </div>
+
+        <form class="form-card" onsubmit="sendMeetingRequest(event)">
+          <h2 data-i18n="formTitle">Meeting request</h2>
+          <input id="name" data-placeholder="name" placeholder="Name" required />
+          <input id="company" data-placeholder="company" placeholder="Company" required />
+          <input id="contactInfo" data-placeholder="emailPhone" placeholder="Email or phone" required />
+          <textarea id="need" data-placeholder="sourceNeed" placeholder="What do you want to source?"></textarea>
+          <button class="btn btn-primary" type="submit" data-i18n="formButton">Request Meeting</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" data-i18n="footer">ProcuraLink — Linking Buyers with Trusted Suppliers</div>
+  </footer>
+
+  <script>
+    const translations = {
+      en: {
+        dir: "ltr",
+        langButton: "عربي",
+        navProblem: "Problem",
+        navSolution: "Solution",
+        navHow: "How It Works",
+        navPilot: "Pilot",
+        navContact: "Contact",
+        bookMeeting: "Book a Meeting",
+        seeHow: "See How It Works",
+        badge: "Jordan-first B2B Procurement Marketplace",
+        headline: "Get multiple verified supplier quotes faster — with a documented RFQ workflow.",
+        subheadline: "ProcuraLink helps procurement teams in pharma, labs, schools, hospitals, and factories receive competitive quotations from trusted suppliers through one structured platform.",
+        proof1: "Built for local procurement",
+        proof2: "Verified suppliers",
+        proof3: "RFQ audit trail",
+        heroCardTitle: "RFQ Snapshot",
+        cardLabel1: "Category",
+        cardValue1: "Lab Consumables",
+        cardLabel2: "Suppliers Invited",
+        cardValue2: "5 verified vendors",
+        cardLabel3: "Quotes Received",
+        cardValue3: "4 sealed quotes",
+        cardLabel4: "Buyer Action",
+        cardValue4: "Compare & award",
+        outcome: "Procurement outcome",
+        response: "Response",
+        quotes: "Quotes",
+        award: "Award",
+        problemTitle: "The current procurement process is slow and scattered.",
+        problem1: "RFQs are shared through WhatsApp, phone calls, and emails.",
+        problem2: "Quotes arrive in different formats and are hard to compare.",
+        problem3: "Procurement teams need faster access to trusted suppliers.",
+        problem4: "Supplier performance, response time, and deal history are not tracked.",
+        solutionTitle: "One platform for RFQs, supplier matching, quotation comparison, and deal tracking.",
+        solution1Title: "Submit RFQ",
+        solution1Text: "Buyers submit purchase requirements with specs, quantity, deadline, and attachments.",
+        solution2Title: "Match Suppliers",
+        solution2Text: "The platform routes the RFQ to relevant verified suppliers by category.",
+        solution3Title: "Compare Quotes",
+        solution3Text: "Buyers compare sealed quotations by price, delivery, terms, and rating.",
+        solution4Title: "Track Performance",
+        solution4Text: "Every RFQ, quote, award, review, and commission is documented.",
+        howTitle: "How ProcuraLink works",
+        step1: "Buyer submits RFQ",
+        step2: "Verified suppliers quote",
+        step3: "Buyer compares offers",
+        step4: "Deal is awarded",
+        step5: "Supplier performance improves",
+        buyersTitle: "Built for institutional buyers",
+        buyer1: "Pharma factories",
+        buyer2: "Analytical labs",
+        buyer3: "Schools & universities",
+        buyer4: "Hospitals",
+        buyer5: "Industrial factories",
+        buyer6: "Engineering & maintenance teams",
+        suppliersTitle: "Built for trusted suppliers",
+        supplier1: "Chemicals",
+        supplier2: "Lab supplies",
+        supplier3: "Consumables",
+        supplier4: "HPLC columns",
+        supplier5: "Calibration & validation",
+        supplier6: "Maintenance",
+        supplier7: "PPE & safety",
+        supplier8: "Engineering services",
+        featuresTitle: "Why prospects should take the meeting",
+        feature1Title: "Fast quotation collection",
+        feature1Text: "Receive multiple quotations without chasing suppliers manually.",
+        feature2Title: "Verified supplier network",
+        feature2Text: "Work with categorized, reviewed, and approved suppliers.",
+        feature3Title: "Sealed-bid RFQ model",
+        feature3Text: "Suppliers compete fairly without seeing each other’s prices.",
+        feature4Title: "Compliance-ready records",
+        feature4Text: "Keep RFQ history, comparison notes, and award justification.",
+        feature5Title: "Supplier ratings",
+        feature5Text: "Build a performance profile based on response, delivery, and quality.",
+        feature6Title: "Future AI insights",
+        feature6Text: "Use accumulated data for price benchmarking and supplier recommendations.",
+        pilotTitle: "Pilot proposal for early clients",
+        pilotText: "We start with a focused pilot: selected buyer organizations, verified suppliers, and real RFQs in high-repeat categories like consumables, chemicals, filters, calibration, and maintenance.",
+        pilot1: "3–5 buyer organizations",
+        pilot2: "20–30 verified suppliers",
+        pilot3: "50 RFQs target",
+        pilot4: "3-month validation period",
+        revenueTitle: "Simple business model",
+        revenue1Title: "Buyers",
+        revenue1Text: "Free access during launch to encourage RFQ volume.",
+        revenue2Title: "Suppliers",
+        revenue2Text: "Commission on won deals, then optional subscription plans.",
+        revenue3Title: "Premium",
+        revenue3Text: "Future Pro tools: analytics, priority visibility, templates, and reports.",
+        finalCtaTitle: "Ready to test a smarter procurement workflow?",
+        finalCtaText: "Let’s run a short pilot and measure RFQ speed, supplier response, quotation quality, and savings opportunities.",
+        formTitle: "Meeting request",
+        formButton: "Request Meeting",
+        footer: "ProcuraLink — Linking Buyers with Trusted Suppliers",
+        name: "Name",
+        company: "Company",
+        emailPhone: "Email or phone",
+        sourceNeed: "What do you want to source?"
+      },
+      ar: {
+        dir: "rtl",
+        langButton: "EN",
+        navProblem: "المشكلة",
+        navSolution: "الحل",
+        navHow: "آلية العمل",
+        navPilot: "التجربة",
+        navContact: "تواصل",
+        bookMeeting: "احجز اجتماع",
+        seeHow: "شاهد آلية العمل",
+        badge: "منصة مشتريات B2B تبدأ من الأردن",
+        headline: "احصل على عدة عروض أسعار من موردين موثوقين بسرعة — ضمن نظام RFQ منظم وموثق.",
+        subheadline: "ProcuraLink تساعد أقسام المشتريات في مصانع الأدوية، المختبرات، المدارس، المستشفيات، والمصانع على استلام عروض أسعار منافسة من موردين معتمدين عبر منصة واحدة.",
+        proof1: "مصممة للمشتريات المحلية",
+        proof2: "موردون موثوقون",
+        proof3: "سجل RFQ موثق",
+        heroCardTitle: "مثال طلب RFQ",
+        cardLabel1: "الفئة",
+        cardValue1: "مستهلكات مختبر",
+        cardLabel2: "الموردون",
+        cardValue2: "5 موردين موثقين",
+        cardLabel3: "العروض",
+        cardValue3: "4 عروض مغلقة",
+        cardLabel4: "الإجراء",
+        cardValue4: "مقارنة واختيار",
+        outcome: "نتيجة عملية الشراء",
+        response: "سرعة الرد",
+        quotes: "عروض",
+        award: "اختيار",
+        problemTitle: "عملية الشراء الحالية بطيئة ومبعثرة.",
+        problem1: "طلبات الأسعار تتم عبر واتساب، اتصالات، وإيميلات متفرقة.",
+        problem2: "العروض تصل بصيغ مختلفة ويصعب مقارنتها.",
+        problem3: "أقسام المشتريات تحتاج وصول أسرع لموردين موثوقين.",
+        problem4: "أداء الموردين وسرعة الرد وسجل الصفقات غير موثق بشكل واضح.",
+        solutionTitle: "منصة واحدة لإدارة RFQ، مطابقة الموردين، مقارنة العروض، وتتبع الصفقات.",
+        solution1Title: "إرسال الطلب",
+        solution1Text: "المشتري يرسل المتطلبات مع المواصفات، الكمية، الموعد، والمرفقات.",
+        solution2Title: "مطابقة الموردين",
+        solution2Text: "النظام يرسل الطلب للموردين المناسبين حسب التصنيف.",
+        solution3Title: "مقارنة العروض",
+        solution3Text: "المشتري يقارن العروض حسب السعر، التسليم، الشروط، والتقييم.",
+        solution4Title: "تتبع الأداء",
+        solution4Text: "كل طلب، عرض، اختيار، تقييم، وعمولة يتم توثيقه.",
+        howTitle: "كيف تعمل ProcuraLink؟",
+        step1: "المشتري يرسل RFQ",
+        step2: "الموردون يقدمون عروض",
+        step3: "المشتري يقارن",
+        step4: "يتم اختيار المورد",
+        step5: "يتحسن أداء الموردين",
+        buyersTitle: "مصممة للمشترين المؤسسيين",
+        buyer1: "مصانع الأدوية",
+        buyer2: "المختبرات التحليلية",
+        buyer3: "المدارس والجامعات",
+        buyer4: "المستشفيات",
+        buyer5: "المصانع",
+        buyer6: "أقسام الهندسة والصيانة",
+        suppliersTitle: "مصممة للموردين الموثوقين",
+        supplier1: "كيماويات",
+        supplier2: "مستلزمات مختبر",
+        supplier3: "Consumables",
+        supplier4: "HPLC Columns",
+        supplier5: "Calibration & Validation",
+        supplier6: "صيانة",
+        supplier7: "PPE وسلامة",
+        supplier8: "خدمات هندسية",
+        featuresTitle: "لماذا العميل المحتمل سيقبل الاجتماع؟",
+        feature1Title: "سرعة جمع العروض",
+        feature1Text: "استلام عدة عروض بدون ملاحقة الموردين يدويًا.",
+        feature2Title: "شبكة موردين موثوقين",
+        feature2Text: "التعامل مع موردين مصنفين ومراجعين ومعتمدين.",
+        feature3Title: "نظام عروض مغلقة",
+        feature3Text: "الموردون يتنافسون بشكل عادل بدون رؤية أسعار بعضهم.",
+        feature4Title: "توثيق مناسب للتدقيق",
+        feature4Text: "حفظ سجل الطلبات، المقارنات، ومبررات الاختيار.",
+        feature5Title: "تقييم الموردين",
+        feature5Text: "بناء سجل أداء حسب سرعة الرد، التسليم، والجودة.",
+        feature6Title: "ذكاء اصطناعي لاحقًا",
+        feature6Text: "تحليل الأسعار وترشيح الموردين اعتمادًا على البيانات المتراكمة.",
+        pilotTitle: "اقتراح تجربة Pilot للعملاء الأوائل",
+        pilotText: "نبدأ بتجربة مركزة مع مؤسسات مختارة، موردين موثقين، وطلبات RFQ حقيقية في فئات متكررة مثل المستهلكات، الكيماويات، الفلاتر، المعايرة، والصيانة.",
+        pilot1: "3–5 مؤسسات مشترية",
+        pilot2: "20–30 مورد موثق",
+        pilot3: "هدف 50 RFQ",
+        pilot4: "مدة اختبار 3 أشهر",
+        revenueTitle: "نموذج ربحي بسيط",
+        revenue1Title: "المشترون",
+        revenue1Text: "دخول مجاني في مرحلة الإطلاق لزيادة حجم الطلبات.",
+        revenue2Title: "الموردون",
+        revenue2Text: "عمولة على الصفقات الناجحة، ثم اشتراكات اختيارية.",
+        revenue3Title: "Premium",
+        revenue3Text: "أدوات لاحقة: تحليلات، ظهور أعلى، قوالب عروض، وتقارير.",
+        finalCtaTitle: "جاهز تختبر طريقة أذكى للمشتريات؟",
+        finalCtaText: "نبدأ Pilot قصير ونقيس سرعة RFQ، استجابة الموردين، جودة العروض، وفرص التوفير.",
+        formTitle: "طلب اجتماع",
+        formButton: "اطلب اجتماع",
+        footer: "ProcuraLink — ربط المشترين بالموردين الموثوقين",
+        name: "الاسم",
+        company: "الشركة",
+        emailPhone: "الإيميل أو الهاتف",
+        sourceNeed: "ما الذي تريد توريده؟"
+      }
+    };
+
+    let currentLang = "en";
+
+    function applyLanguage(lang) {
+      currentLang = lang;
+      const t = translations[lang];
+      document.documentElement.lang = lang;
+      document.documentElement.dir = t.dir;
+      document.getElementById("langBtn").textContent = t.langButton;
+
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (t[key]) el.textContent = t[key];
+      });
+
+      document.querySelectorAll("[data-placeholder]").forEach((el) => {
+        const key = el.getAttribute("data-placeholder");
+        if (t[key]) el.placeholder = t[key];
+      });
+    }
+
+    document.getElementById("langBtn").addEventListener("click", () => {
+      applyLanguage(currentLang === "en" ? "ar" : "en");
+    });
+
+    function sendMeetingRequest(event) {
+      event.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const company = document.getElementById("company").value.trim();
+      const contact = document.getElementById("contactInfo").value.trim();
+      const need = document.getElementById("need").value.trim();
+
+      const subject = encodeURIComponent("ProcuraLink Meeting Request");
+      const body = encodeURIComponent(
+        `Name: ${name}\nCompany: ${company}\nContact: ${contact}\nNeed: ${need}`
+      );
+
+      window.location.href = `mailto:hello@procuralink.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+</body>
+</html>
