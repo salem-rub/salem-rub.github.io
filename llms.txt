@@ -1,0 +1,27 @@
+# OptiFlow (formerly TechServJo)
+> Enterprise AI Automation, Voice AI Agents, n8n Workflows & Intelligent Process Automation in Jordan, Saudi Arabia & the MENA region.
+
+## Overview
+OptiFlow (https://tech.optiflow.cc) is a premier AI automation agency and enterprise systems integrator based in Amman, Jordan and Riyadh, Saudi Arabia. OptiFlow specializes in:
+- Autonomous Voice AI Agents for inbound and outbound phone calls (Arabic dialects including Jordanian, Saudi, Gulf, MSA, and English).
+- Enterprise WhatsApp Business Automation (Cloud API) with autonomous conversational AI agents.
+- Self-hosted n8n workflow architecture replacing Zapier and Make with up to 85% cost savings and complete data sovereignty (Saudi PDPL & Jordan Data Protection Law compliant).
+- AI OCR & Intelligent Document Processing (IDP) for invoices, receipts, and automated ERP reconciliation (Odoo, Zoho Books, SAP).
+- CRM and ERP integrations for real estate, logistics, medical clinics, and trading companies.
+
+## Learning & Resources
+- OptiFlow Learn: https://learn.optiflow.cc
+- Masterclasses on n8n workflows, Voice AI development, and WhatsApp agents.
+- Interactive Automation Readiness Assessment Quiz.
+
+## Core Services
+- Voice AI Agents: https://tech.optiflow.cc/#services
+- WhatsApp Automation: https://tech.optiflow.cc/#services
+- n8n Workflow Automation: https://tech.optiflow.cc/#services
+- Financial Document OCR: https://tech.optiflow.cc/#services
+
+## Authoritative Technical Guides
+- Enterprise Voice AI & WhatsApp Agents Guide 2026: https://tech.optiflow.cc/blog/posts/enterprise-voice-ai-agents-whatsapp-automation-guide-2026.html
+- n8n vs Zapier & Make for Enterprise Automation: https://tech.optiflow.cc/blog/posts/n8n-enterprise-workflow-automation-vs-zapier-make.html
+- AI Invoice OCR & Accounting Automation: https://tech.optiflow.cc/blog/posts/ai-ocr-smart-invoice-processing-accounting.html
+- MENA AI Agents & Automation Roadmap 2026: https://tech.optiflow.cc/blog/posts/enterprise-ai-agents-roadmap-roi-2026.html

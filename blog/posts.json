@@ -1,24 +1,706 @@
 {
   "posts": [
     {
-      "slug": "uses-of-artificial-intelligence-in-factories",
+      "slug": "enterprise-voice-ai-agents-whatsapp-automation-guide-2026",
       "title": {
-        "ar": "استخدامات الذكاء الاصطناعي في المصانع",
-        "en": "Uses of Artificial Intelligence in Factories"
+        "ar": "الدليل الشامل لتفعيل وكلاء الذكاء الاصطناعي للمكالمات الصوتية والواتساب في الشركات 2026 (Voice AI & WhatsApp Agents)",
+        "en": "Complete Enterprise Guide to Voice AI & WhatsApp Agents in 2026"
       },
       "excerpt": {
-        "ar": "يُعَد الذكاء الاصطناعي من التقنيات الرائدة التي أحدثت تحولات جذرية في صناعة المصانع. يساهم في تحسين الإنتاجية، تقليل التكاليف، وتعزيز جودة المنتجات بشكل كبير.",
-        "en": "Artificial intelligence is a leading technology that has brought radical transformations to the manufacturing industry. It helps improve productivity, reduce costs, and significantly enhance product quality."
+        "ar": "دليل هندسي استراتيجي يوضح كيفية بناء ودمج وكلاء الذكاء الاصطناعي للمكالمات الهاتفية ورسائل واتساب لفهم اللهجات العربية وتنفيذ الإجراءات في أنظمة CRM تلقائياً.",
+        "en": "An engineering blueprint for deploying Voice AI and WhatsApp agents that understand Arabic dialects, execute CRM actions, and handle 24/7 business operations."
       },
-      "date": "2026-03-16",
+      "date": "2026-10-12 09:00:00",
+      "author": "OptiFlow Engineering Team",
+      "category": "technology",
+      "tags": [
+        "Voice AI Agents",
+        "أتمتة الواتساب للشركات",
+        "خدمة العملاء الذكية",
+        "Vapi",
+        "Retell AI",
+        "Twilio",
+        "n8n",
+        "أتمتة الأعمال الأردن السعودية"
+      ],
+      "image": "https://images.unsplash.com/photo-1534972195531-a756b1126975?auto=format&fit=crop&w=1200&q=80",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 9,
+        "en": 9
+      }
+    },
+    {
+      "slug": "n8n-enterprise-workflow-automation-vs-zapier-make",
+      "title": {
+        "ar": "أتمتة العمليات للشركات باستخدام n8n: كيف تخفض 80% من تكاليف Zapier وتحقق سيادة وأمان البيانات؟",
+        "en": "Enterprise Workflow Automation with n8n: Cut 80% of Zapier Costs & Ensure Data Sovereignty"
+      },
+      "excerpt": {
+        "ar": "مقارنة تقنية ومالية شاملة بين n8n وZapier وMake للشركات المتوسطة والكبيرة. كيف تحمي بياناتك الحساسة داخل سيرفراتك وتتحكم بميزانيتك التشغيلية.",
+        "en": "A deep-dive technical and financial comparison of n8n, Zapier, and Make for enterprise teams seeking data sovereignty and cost predictability."
+      },
+      "date": "2026-10-12 09:30:00",
+      "author": "OptiFlow Engineering Team",
+      "category": "automation",
+      "tags": [
+        "n8n للشركات",
+        "بديل Zapier",
+        "أتمتة العمليات n8n",
+        "أمن البيانات",
+        "تكامل ERP",
+        "استضافة ذاتية Self-hosted",
+        "Saudi PDPL"
+      ],
+      "image": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "ai-ocr-smart-invoice-processing-accounting",
+      "title": {
+        "ar": "أتمتة معالجة الفواتير والمستندات المالية بالذكاء الاصطناعي (AI OCR): من PDF إلى القيود المحاسبية وتكامل ERP",
+        "en": "AI-Powered Invoice & Financial Document Automation (OCR): From PDF to Accounting Entries & ERP"
+      },
+      "excerpt": {
+        "ar": "دليل شامل لكيفية تحويل الفواتير الورقية والممسوحة ضوئياً ومستندات PDF إلى بيانات مهيكلة وقيود محاسبية آلية في Odoo وZoho وERP مع نسبة خطأ تقترب من الصفر.",
+        "en": "Learn how to automate invoice extraction, receipt parsing, and 3-way matching directly into your ERP system using Vision LLMs and workflow orchestration."
+      },
+      "date": "2026-10-12 10:00:00",
+      "author": "OptiFlow Engineering Team",
+      "category": "fintech_automation",
+      "tags": [
+        "أتمتة الفواتير بالذكاء الاصطناعي",
+        "AI OCR",
+        "استخراج البيانات المالية",
+        "تكامل ERP",
+        "Odoo",
+        "Zoho Books",
+        "محاسبة ذكية"
+      ],
+      "image": "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=1200&q=80",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 7,
+        "en": 7
+      }
+    },
+    {
+      "slug": "enterprise-ai-agents-roadmap-roi-2026",
+      "title": {
+        "ar": "خارطة طريق تبني وكلاء الذكاء الاصطناعي والأتمتة في شركات الأردن والخليج 2026: قياس العائد وتفادي الإخفاق",
+        "en": "MENA Enterprise AI Agents & Automation Roadmap 2026: ROI Metrics & Implementation Blueprint"
+      },
+      "excerpt": {
+        "ar": "خطة عمل تنفيذية خطوة بخطوة للرؤساء التنفيذيين ومديري العمليات لبناء ثقافة أتمتة مستدامة، واختيار العمليات ذات العائد المالي الأعلى، وتفادي فخ التجارب العشوائية.",
+        "en": "A step-by-step executive implementation framework for MENA leaders to deploy AI agents, measure real ROI, and avoid common digital transformation pitfalls."
+      },
+      "date": "2026-10-12 10:30:00",
+      "author": "OptiFlow Strategy Team",
+      "category": "digital_transformation",
+      "tags": [
+        "التحول الرقمي 2026",
+        "استراتيجية الأتمتة",
+        "عائد الاستثمار للأتمتة",
+        "الذكاء الاصطناعي للأعمال",
+        "شركات الأردن والخليج"
+      ],
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "claude-code-impact-jordan-arab-world",
+      "title": {
+        "ar": "كلود كود: التقنية الحديثة وتأثيرها في الأردن والعالم العربي",
+        "en": "Claude Code: Modern Technology and Its Impact in Jordan and the Arab World"
+      },
+      "excerpt": {
+        "ar": "كلود كود هو أحدث تقنيات البرمجة التي تشهد تبنيًا متزايدًا في الأردن والعالم العربي. يستعرض المقال دور كلود كود وتأثيرها في تطوير حلول تقنية للأعمال في المنطقة.",
+        "en": "Claude Code is one of the latest programming technologies gaining adoption in Jordan and the Arab world. This article explores Claude Code's role and impact in developing tech solutions for businesses across the region."
+      },
+      "date": "2026-06-27 13:42:32",
       "author": "TechServJo Team",
       "category": "technology",
       "tags": [
-        "Artificial Intelligence",
-        "Factories",
-        "Industry 4.0",
+        "Claude Code",
+        "Jordan tech market",
+        "digital transformation",
+        "MENA startups",
+        "ICT adoption"
+      ],
+      "image": "https://images.pexels.com/photos/270632/pexels-photo-270632.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "comparing-cline-kilo-code-extensions-vscode",
+      "title": {
+        "ar": "مقارنة بين إضافة Cline وKilo Code مع VSCode في السوق الأردني والعربي",
+        "en": "Comparing Cline and Kilo Code Extensions with VSCode in Jordan and the Arab Market"
+      },
+      "excerpt": {
+        "ar": "تتناول هذه المقالة مقارنة بين إضافة Cline وKilo Code مع محرر VSCode، وتأثيرها في تحسين البرمجة بالسوق الأردني والعربي.",
+        "en": "This article compares Cline and Kilo Code extensions with VSCode, analyzing their impact on coding in Jordanian and Arab markets."
+      },
+      "date": "2026-06-04 11:51:15",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "VSCode",
+        "Cline",
+        "Kilo Code",
+        "digital transformation",
+        "Jordan tech"
+      ],
+      "image": "https://images.pexels.com/photos/37010902/pexels-photo-37010902.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 7,
+        "en": 7
+      }
+    },
+    {
+      "slug": "clickup-vs-trello-comparison-jordan",
+      "title": {
+        "ar": "مقارنة بين ClickUp و Trello: أيهما الأفضل لإدارة المشاريع في الأردن؟",
+        "en": "Comparing ClickUp vs Trello: Which Is Better for Project Management in Jordan?"
+      },
+      "excerpt": {
+        "ar": "تُعتبر مقارنة بين ClickUp و Trello محورًا مهمًا لفهم أفضل أدوات إدارة المشاريع في الأردن والسوق العربي، مع ازدياد أهمية التحول الرقمي.",
+        "en": "ClickUp vs Trello comparison is essential to identify the best project management tools for Jordan amid growing digital transformation."
+      },
+      "date": "2026-06-01 18:53:41",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "ClickUp",
+        "Trello",
+        "إدارة المشاريع",
+        "إدارة المهام",
+        "تحول رقمي في الأردن"
+      ],
+      "image": "https://images.pexels.com/photos/7581003/pexels-photo-7581003.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "claude-code-vs-codex-technology",
+      "title": {
+        "ar": "مقارنة تقنية Claude Code vs Codex: أيهما الأفضل في الذكاء الاصطناعي؟",
+        "en": "Claude Code vs Codex Technology: Which is Better in AI?"
+      },
+      "excerpt": {
+        "ar": "مقارنة تقنية Claude Code vs Codex وتأثيرها على التحول الرقمي في الأردن والعالم العربي وفرص الابتكار.",
+        "en": "Comparison of Claude Code vs Codex technology and their impact on digital transformation in Jordan and the Arab world."
+      },
+      "date": "2026-06-01 18:49:57",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "Claude Code",
+        "Codex",
+        "AI technology",
+        "digital transformation",
+        "Jordan tech"
+      ],
+      "image": "https://images.pexels.com/photos/34804024/pexels-photo-34804024.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "ai-tools-in-business-operations-middle-east",
+      "title": {
+        "ar": "كيف أثرت أدوات الذكاء الاصطناعي في الأعمال على عمليات الأعمال في الشرق الأوسط",
+        "en": "How AI Tools in Business Operations Have Impacted the Middle East"
+      },
+      "excerpt": {
+        "ar": "يلعب أدوات الذكاء الاصطناعي في الأعمال دوراً محورياً في تحسين عمليات الأعمال في الشرق الأوسط، مع تبني متزايد في الأردن والعالم العربي يدعم التحول الرقمي ونمو الشركات الصغيرة والمتوسطة.",
+        "en": "AI tools in business operations are transforming processes across the Middle East, with growing adoption in Jordan and the Arab region fueling digital transformation and SME growth."
+      },
+      "date": "2026-05-16 15:10:30",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "AI tools in business operations",
+        "digital transformation",
+        "SMEs",
+        "Jordan",
+        "Middle East",
+        "technology adoption"
+      ],
+      "image": "https://images.pexels.com/photos/34804018/pexels-photo-34804018.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "vscode-vs-cursor-comparison-jordan-arab",
+      "title": {
+        "ar": "مقارنة بين VSCode وCursor: أيهما أفضل للمطورين في الأردن والعالم العربي؟",
+        "en": "VSCode vs Cursor comparison: Which is Better for Developers in Jordan and the Arab World?"
+      },
+      "excerpt": {
+        "ar": "في ظل نمو السوق التقني في الأردن والعالم العربي، نقدم مقارنة بين VSCode وCursor كمنصتين تطويريتين تؤثران على التحول الرقمي والابتكار.",
+        "en": "With the growing tech market in Jordan and the Arab world, this VSCode vs Cursor comparison highlights their impact on digital transformation and innovation."
+      },
+      "date": "2026-05-11 02:43:04",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "VSCode",
+        "Cursor",
+        "digital transformation Jordan",
+        "تقنية في الأردن",
+        "التحول الرقمي في العالم العربي"
+      ],
+      "image": "https://images.pexels.com/photos/37010902/pexels-photo-37010902.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 7,
+        "en": 7
+      }
+    },
+    {
+      "slug": "optiflowcc-digital-transformation-jordan-arab",
+      "title": {
+        "ar": "Optiflow.cc: منصة التحول الرقمي الريادية في الأردن والعالم العربي",
+        "en": "Optiflow.cc: A Leading Digital Transformation Platform in Jordan and the Arab World"
+      },
+      "excerpt": {
+        "ar": "تعتبر Optiflow.cc منصة رائدة في مجال التحول الرقمي في الأردن والعالم العربي، معززة بدعم التكنولوجيا الحديثة واتجاهات الابتكار المحلية.",
+        "en": "Optiflow.cc is a pioneering digital transformation platform in Jordan and the Arab world, empowered by cutting-edge technology and local innovation trends."
+      },
+      "date": "2026-04-11 18:24:10",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "optiflow.cc",
+        "digital transformation",
+        "Jordan tech",
+        "Arab startups",
+        "digital innovation"
+      ],
+      "image": "",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "importance-ai-tools-in-business-jordan-arab-world",
+      "title": {
+        "ar": "أهمية أدوات الذكاء الاصطناعي في الأعمال في الأردن والعالم العربي",
+        "en": "The Importance of AI Tools in Business in Jordan and the Arab World"
+      },
+      "excerpt": {
+        "ar": "تُعد أدوات الذكاء الاصطناعي في الأعمال حجر الزاوية في التحول الرقمي للشركات في الأردن والعالم العربي، حيث تساعد في تحسين الكفاءة وتعزيز الأمن السيبراني.",
+        "en": "AI tools in business are central to digital transformation in Jordan and the Arab world, helping companies improve efficiency and boost cybersecurity."
+      },
+      "date": "2026-04-06 21:53:02",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "الذكاء الاصطناعي",
+        "التحول الرقمي",
+        "أدوات الذكاء الاصطناعي",
+        "الشركات الصغيرة والمتوسطة",
+        "الأمن السيبراني"
+      ],
+      "image": "https://images.pexels.com/photos/31652486/pexels-photo-31652486.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "roi-calculator-automation-profitability",
+      "title": {
+        "ar": "حاسبة العائد على الاستثمار: هل الأتمتة مربحة لعملك؟",
+        "en": "ROI Calculator: Is Automation Profitable for Your Business?"
+      },
+      "excerpt": {
+        "ar": "تعتبر حاسبة العائد على الاستثمار أداة حاسمة لتقييم ربحية الأتمتة في الأعمال، خصوصًا في الأردن والعالم العربي حيث يزداد الاستثمار في التقنية.",
+        "en": "The ROI calculator is a crucial tool to assess automation profitability in business, especially in Jordan and the Arab world with rising tech investments."
+      },
+      "date": "2026-03-31 06:11:04",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "التحول الرقمي",
+        "الأتمتة",
+        "العائد على الاستثمار",
+        "الشركات الصغيرة",
+        "الأدوات الرقمية"
+      ],
+      "image": "https://images.pexels.com/photos/33175658/pexels-photo-33175658.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 9,
+        "en": 9
+      }
+    },
+    {
+      "slug": "voice-ai-agents-how-ai-responds-to-customers",
+      "title": {
+        "ar": "وكلاء الذكاء الاصطناعي الصوتيون: كيف يرد الذكاء الاصطناعي على عملائك بدلاً منك؟",
+        "en": "Voice AI Agents: How Artificial Intelligence Responds to Your Customers Instead of You"
+      },
+      "excerpt": {
+        "ar": "تشرح المقالة دور وكلاء الذكاء الاصطناعي الصوتيون في تحسين تجربة العملاء وتعزيز كفاءة الأعمال.",
+        "en": "This article explains how voice AI agents improve customer experience and boost business efficiency."
+      },
+      "date": "2026-03-31 02:28:13",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "الذكاء الاصطناعي",
+        "الذكاء الاصطناعي الصوتي",
+        "تحول رقمي للأعمال",
+        "تقنية في الأردن",
+        "Voice AI",
+        "Digital Transformation",
         "Jordan Tech",
-        "Smart Manufacturing"
+        "Arab Tech"
+      ],
+      "image": "https://images.pexels.com/photos/8849295/pexels-photo-8849295.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "n8n-vs-zapier-vs-make-jordan-smbs",
+      "title": {
+        "ar": "n8n مقابل Zapier مقابل Make: أيهم الأنسب للشركات الصغيرة والمتوسطة في الأردن؟",
+        "en": "n8n vs Zapier vs Make in Jordan: Which Is Best for Small and Medium Businesses?"
+      },
+      "excerpt": {
+        "ar": "اختيار منصة الأتمتة المناسبة مثل n8n مقابل Zapier مقابل Make في الأردن ضروري للشركات الصغيرة والمتوسطة لتحسين الكفاءة.",
+        "en": "Choosing the right automation platform like n8n vs Zapier vs Make in Jordan is key for small and medium businesses to boost efficiency."
+      },
+      "date": "2026-03-31 02:27:06",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "n8n",
+        "Zapier",
+        "Make",
+        "automation",
+        "SMBs",
+        "digital transformation",
+        "Jordan",
+        "Arab world"
+      ],
+      "image": "https://images.pexels.com/photos/33705551/pexels-photo-33705551.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "applications-artificial-intelligence-business-management-jordan-arab",
+      "title": {
+        "ar": "استخدامات الذكاء الاصطناعي في إدارة الأعمال في الأردن والعالم العربي",
+        "en": "Applications of Artificial Intelligence in Business Management in Jordan and the Arab World"
+      },
+      "excerpt": {
+        "ar": "تستعرض هذه المقالة استخدامات الذكاء الاصطناعي في إدارة الأعمال مع التركيز على التحول الرقمي في الأردن والشركات الناشئة العربية.",
+        "en": "This article explores the applications of artificial intelligence in business management, focusing on digital transformation in Jordan and Arab tech startups."
+      },
+      "date": "2026-03-31 02:26:20",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "الذكاء الاصطناعي",
+        "التحول الرقمي",
+        "الشركات الناشئة",
+        "تكنولوجيا الأعمال",
+        "Jordan AI",
+        "digital transformation",
+        "Arab tech startups"
+      ],
+      "image": "https://images.pexels.com/photos/31652486/pexels-photo-31652486.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 7,
+        "en": 7
+      }
+    },
+    {
+      "slug": "how-we-transformed-data-entry-from-8-hours-to-20-minutes-automation",
+      "title": {
+        "ar": "كيف حوّلنا إدخال البيانات من 8 ساعات عمل إلى 20 دقيقة بالأتمتة (دراسة حالة)",
+        "en": "How We Transformed Data Entry From 8 Hours to 20 Minutes Using Automation (Case Study)"
+      },
+      "excerpt": {
+        "ar": "في هذه دراسة الحالة، نستعرض كيف أتمتة إدخال البيانات قلّلت الوقت من 8 ساعات إلى 20 دقيقة، وتأثير الأتمتة في السوق الأردني والعربي.",
+        "en": "This case study examines how data entry automation cut time from 8 hours to 20 minutes and its impact on Jordanian and Arab markets."
+      },
+      "date": "2026-03-21 06:10:26",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "أتمتة",
+        "إدخال البيانات",
+        "التحول الرقمي",
+        "تكنولوجيا الأردن",
+        "Data Entry Automation",
+        "Digital Transformation",
+        "Jordan Tech",
+        "Automation"
+      ],
+      "image": "https://images.pexels.com/photos/6711832/pexels-photo-6711832.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 7,
+        "en": 7
+      }
+    },
+    {
+      "slug": "digital-transformation-mistakes-medium-businesses-jordan",
+      "title": {
+        "ar": "أخطاء التحول الرقمي التي تقع فيها الشركات المتوسطة وكيف تتجنبها",
+        "en": "Common Digital Transformation Mistakes Made by Medium-Sized Businesses and How to Avoid Them"
+      },
+      "excerpt": {
+        "ar": "التحول الرقمي أصبح حاجة ملحة للشركات المتوسطة في الأردن. نناقش أهم أخطاء التحول الرقمي وكيف يمكن تجنبها لضمان نجاح العملية.",
+        "en": "Digital transformation mistakes are critical for medium businesses in Jordan. Learn common mistakes and how to avoid them for successful digital transformation."
+      },
+      "date": "2026-03-20 00:46:29",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "التحول الرقمي",
+        "تكنولوجيا الأعمال في الأردن",
+        "أخطاء تقنية",
+        "digital transformation",
+        "business technology Jordan",
+        "local tech tools Middle East"
+      ],
+      "image": "https://images.pexels.com/photos/2882549/pexels-photo-2882549.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "difference-between-automation-and-ai-agents-for-business",
+      "title": {
+        "ar": "ما الفرق بين الأتمتة ووكيل الذكاء الاصطناعي؟ وأيهما يحتاج عملك؟",
+        "en": "What Is the Difference Between Automation and AI Agents? Which Does Your Business Need?"
+      },
+      "excerpt": {
+        "ar": "استكشاف الفرق بين الأتمتة ووكيل الذكاء الاصطناعي وأهميتهما لعملك في ظل التحول الرقمي في الأردن والعالم العربي.",
+        "en": "Explore the difference between automation and AI agents and their importance for your business amid digital transformation in Jordan and the Arab world."
+      },
+      "date": "2026-03-19 22:34:16",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "الأتمتة",
+        "ذكاء اصطناعي",
+        "التحول الرقمي",
+        "الشركات الناشئة",
+        "الأردن",
+        "التقنية الرقمية"
+      ],
+      "image": "https://images.pexels.com/photos/6153354/pexels-photo-6153354.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "5-processes-you-can-automate-next-week",
+      "title": {
+        "ar": "5 عمليات يمكن أتمتتها في شركتك الأسبوع القادم (مع أمثلة حقيقية)",
+        "en": "5 Processes You Can Automate in Your Company Next Week (with Real Examples)"
+      },
+      "excerpt": {
+        "ar": "اكتشف 5 عمليات يمكن أتمتتها في شركتك الأسبوع القادم لتعزيز الكفاءة مع أمثلة حقيقية من الأردن والوطن العربي.",
+        "en": "Discover 5 processes you can automate next week in your company to boost efficiency, with real examples from Jordan and the Arab region."
+      },
+      "date": "2026-03-19 06:11:07",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "أتمتة العمليات",
+        "التحول الرقمي",
+        "الأعمال الرقمية",
+        "digital transformation",
+        "process automation",
+        "Jordan tech"
+      ],
+      "image": "https://images.pexels.com/photos/3758159/pexels-photo-3758159.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 6,
+        "en": 6
+      }
+    },
+    {
+      "slug": "digital-transformation-guide-jordanian-companies",
+      "title": {
+        "ar": "دليل التحول الرقمي للشركات الأردنية: من أين تبدأ؟",
+        "en": "Digital Transformation Guide for Jordanian Companies: Where to Start?"
+      },
+      "excerpt": {
+        "ar": "يستعرض هذا المقال أهمية استخراج الأفكار من الكود في تسريع التحول الرقمي للشركات الأردنية وتعزيز التواصل الآلي بينها وبين عملائها.",
+        "en": "This article highlights the importance of code idea extraction in accelerating digital transformation for Jordanian companies and enhancing automated business communication."
+      },
+      "date": "2026-03-18 11:22:50",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "استخراج الأفكار من الكود",
+        "تقنية استخراج المرسل",
+        "الأتمتة في الأعمال الأردنية",
+        "code idea extraction",
+        "sender identification technology",
+        "business communication automation Jordan",
+        "Arab world tech solutions"
+      ],
+      "image": "https://images.pexels.com/photos/3758159/pexels-photo-3758159.jpeg?auto=compress&cs=tinysrgb&h=650&w=940",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
+      }
+    },
+    {
+      "slug": "optiflow-cc-project-management-jordan",
+      "title": {
+        "ar": "استخدام برمجية optiflow.cc لإدارة المشاريع في الأردن",
+        "en": "Using optiflow.cc Project Management Software in Jordan"
+      },
+      "excerpt": {
+        "ar": "برمجية optiflow.cc لإدارة المشاريع توفر حلول متقدمة لتحسين تواصل فرق العمل وزيادة الإنتاجية في السوق الأردني.",
+        "en": "optiflow.cc project management software offers advanced solutions to improve team communication and productivity in Jordan."
+      },
+      "date": "2026-03-17 23:13:59",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "project management",
+        "optiflow.cc",
+        "AI in Jordan",
+        "business communication"
+      ],
+      "image": "",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 6,
+        "en": 6
+      }
+    },
+    {
+      "slug": "save-time-using-ai-in-data-entry",
+      "title": {
+        "ar": "كيف نوفر الوقت باستخدام الذكاء الاصطناعي في إدخال البيانات؟",
+        "en": "How Can We Save Time Using AI in Data Entry?"
+      },
+      "excerpt": {
+        "ar": "الذكاء الاصطناعي في إدخال البيانات يسرّع العمليات ويزيد الإنتاجية. اكتشف كيف توفر تقنيات استخراج الأفكار والإرسال الوقت في الشركات العربية.",
+        "en": "AI in data entry speeds up workflows and boosts productivity. Discover how idea extraction and sender technologies save time for Arab businesses."
+      },
+      "date": "2026-03-17 21:59:07",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "AI in data entry",
+        "idea extraction",
+        "digital innovation",
+        "Jordan tech"
       ],
       "image": "",
       "lang": [
@@ -28,6 +710,66 @@
       "readTime": {
         "ar": 7,
         "en": 7
+      }
+    },
+    {
+      "slug": "chatgpt-vs-gemini-for-engineers",
+      "title": {
+        "ar": "مقارنة بين ChatGPT مقابل Gemini للمهندسين: أيهما الأفضل في التحليل والتطوير؟",
+        "en": "ChatGPT vs Gemini for Engineers: Which Is Better for Analysis and Development?"
+      },
+      "excerpt": {
+        "ar": "مقارنة بين ChatGPT مقابل Gemini للمهندسين في الأردن والعالم العربي لتحليل البيانات وتطوير الحلول الذكية بفعالية.",
+        "en": "Comparison of ChatGPT vs Gemini for engineers in Jordan and the Arab world to analyze data and develop smart solutions effectively."
+      },
+      "date": "2026-03-17 21:26:30",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "ChatGPT",
+        "Gemini",
+        "AI for engineers",
+        "idea extraction",
+        "Jordan AI"
+      ],
+      "image": "",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 7,
+        "en": 7
+      }
+    },
+    {
+      "slug": "zoho-forms-vs-google-forms-factories-supply-chains",
+      "title": {
+        "ar": "استخدامات Zoho Forms وGoogle Forms في المصانع وسلاسل الإمداد",
+        "en": "Zoho Forms vs Google Forms in Factories and Supply Chains"
+      },
+      "excerpt": {
+        "ar": "استعرض استخدامات Zoho Forms وGoogle Forms في المصانع وسلاسل الإمداد مع التركيز على أتمتة البيانات وتحسين العمليات الصناعية.",
+        "en": "Explore Zoho Forms vs Google Forms in factories and supply chains, focusing on data automation and industrial process optimization."
+      },
+      "date": "2026-03-17 21:13:14",
+      "author": "TechServJo Team",
+      "category": "technology",
+      "tags": [
+        "Zoho Forms",
+        "Google Forms",
+        "factory automation",
+        "supply chain management",
+        "AI in Jordan"
+      ],
+      "image": "",
+      "lang": [
+        "ar",
+        "en"
+      ],
+      "readTime": {
+        "ar": 8,
+        "en": 8
       }
     }
   ]
