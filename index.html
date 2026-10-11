@@ -2829,12 +2829,28 @@
                 }
 
                 const formData = new FormData();
-                formData.append('الاسم', (document.getElementById('bookName').value || '').trim());
-                formData.append('اسم الشركة', (document.getElementById('bookCompany').value || '').trim());
-                formData.append('رقم الهاتف', (document.getElementById('bookPhone').value || '').trim());
-                formData.append('البريد الإلكتروني', (document.getElementById('bookEmail').value || '').trim());
-                formData.append('نوع المشروع', document.getElementById('bookService').value);
-                formData.append('وصف مختصر للمشروع', (document.getElementById('bookNotes').value || '').trim());
+                const serviceSelect = document.getElementById('bookService');
+                const selectedServiceText = serviceSelect.options[serviceSelect.selectedIndex]?.text || '';
+                const userNotes = (document.getElementById('bookNotes').value || '').trim();
+                const rawPhone = (document.getElementById('bookPhone').value || '').trim().replace(/[^0-9]/g, '');
+
+                // Map category to n8n dropdown options: "الذكاء الاصطناعي والأتمتة", "التدريب", "البرمجة"
+                let n8nCategory = 'الذكاء الاصطناعي والأتمتة';
+                if (serviceSelect.value === 'team_training') {
+                    n8nCategory = 'التدريب';
+                } else if (serviceSelect.value === 'voice_agents' || serviceSelect.value === 'whatsapp_ai' || serviceSelect.value === 'n8n_workflows' || serviceSelect.value === 'invoice_ocr') {
+                    n8nCategory = 'الذكاء الاصطناعي والأتمتة';
+                } else {
+                    n8nCategory = 'البرمجة';
+                }
+
+                // Append with internal n8n form field keys: field-0 to field-5
+                formData.append('field-0', (document.getElementById('bookName').value || '').trim());
+                formData.append('field-1', (document.getElementById('bookCompany').value || '').trim());
+                formData.append('field-2', rawPhone);
+                formData.append('field-3', (document.getElementById('bookEmail').value || '').trim());
+                formData.append('field-4', n8nCategory);
+                formData.append('field-5', (selectedServiceText ? 'الخدمة المطلوبة: ' + selectedServiceText + '\n' : '') + (userNotes ? 'تفاصيل المشروع: ' + userNotes : ''));
 
                 try {
                     const res = await fetch('/form/26aea243-14f8-46e6-ad4c-e44b5e8395a8', {
